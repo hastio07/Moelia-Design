@@ -1,0 +1,13 @@
+.manage-akun .table {
+    margin-top: 10px;
+    /* background-color: blue; */
+}
+
+.manage-akun .title h5 {
+    margin: 0px 0 10px 10px;
+}
+
+.login-form .btn-primary {
+    margin-top: 15px;
+    width: 150px;
+}

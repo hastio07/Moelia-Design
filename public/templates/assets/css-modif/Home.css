@@ -1,0 +1,325 @@
+.carousel-home {
+    margin-top: 65px;
+}
+
+.carousel-item img {
+    transform: scale(1);
+    transition: all 10s ease;
+}
+
+.carousel-item.active img {
+    transform: scale(1.2);
+}
+
+.carousel-caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-caption h5 {
+    /* font-family: 'EB Garamond', serif; */
+    font-family: 'Inspiration', cursive;
+    font-size: 7vw;
+    letter-spacing: 2px;
+    margin-top: 25px;
+}
+
+.carousel-caption h4 {
+    font-family: 'Roboto Slab', serif;
+}
+
+.carousel-caption p {
+    font-family: 'Suwannaphum', serif;
+    font-size: 18px;
+    line-height: 1.9;
+    text-transform: capitalize;
+}
+
+.carousel-caption .btn {
+    background-color: #a39300;
+    color: #FFF;
+    transition: all 0.3s ease-in-out;
+}
+
+
+.carousel-inner .carousel-item img {
+    max-height: 890px !important;
+    object-fit: cover;
+    filter: brightness(60%);
+}
+
+@media screen and (max-width: 428px) {
+    .carousel-caption h5 {
+        font-family: 'EB Garamond', serif;
+        font-weight: 900;
+        font-size: 50px;
+        letter-spacing: 2px;
+        margin-top: 25px;
+
+    }
+
+    .carousel-caption i {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 319px) {
+    .carousel-caption {
+        display: none;
+
+    }
+}
+
+@media screen and (max-width: 656px) {
+    .carousel-caption {
+        display: none;
+
+    }
+
+}
+
+/* css konten 2 */
+.second-konten {
+    padding-top: 30px;
+    margin-bottom: 20px;
+    padding-bottom: 40px;
+    border-bottom: 2px solid #a39300;
+}
+
+.image-konten-dua {
+    width: 100%;
+    height: 100%;
+    border-top-right-radius: 20%;
+    border-bottom-left-radius: 20%;
+    object-fit: cover;
+}
+
+.card-perusahaan {
+    color: #a39300;
+    font-family: 'Inspiration', cursive;
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+.card-subtitle {
+    font-family: 'Suwannaphum', serif;
+    font-weight: bold;
+    font-size: larger;
+    text-transform: capitalize;
+    margin: 30px;
+}
+
+.second-konten .card {
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+@media screen and (max-width: 767px) {
+    .cover-img-dua {
+        margin-top: 20px;
+    }
+}
+
+/*akhir css konten 2 */
+
+/* KONTEN 3 LAYANAN */
+.slide-container {
+    max-width: 1120px;
+    width: 100%;
+    padding: 40px 0;
+    margin-top: 50px;
+}
+
+.slide-content {
+    margin: 0 40px;
+    overflow: hidden;
+    border-radius: 25px;
+}
+
+.card {
+    border-radius: 25px;
+    background-color: #FFF;
+}
+
+.image-content,
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 14px;
+}
+
+.image-content {
+    position: relative;
+    row-gap: 5px;
+    padding: 25px 0;
+}
+
+.card-image {
+    position: relative;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    background: #FFF;
+    padding: 3px;
+}
+
+.name {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+}
+
+.description {
+    font-size: 14px;
+    color: #707070;
+    text-align: center;
+}
+
+.button {
+    border: none;
+    font-size: 16px;
+    color: #FFF;
+    padding: 8px 16px;
+    background-color: #a39300;
+    border-radius: 6px;
+    margin: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    background: #a39300;
+    transform: scale(1.15);
+}
+
+
+.swiper-pagination-bullet {
+    background-color: #a39300;
+    opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: #a39300 !important;
+}
+
+@media screen and (max-width: 768px) {
+    .slide-content {
+        margin: 0 10px;
+    }
+
+    .swiper-navBtn {
+        display: none !important;
+    }
+
+}
+
+/* KONTEN 3 LAYANAN */
+
+/* KONTEN 4 VIDIO PROMOSI */
+.image-garis {
+    height: 100px;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/*AKHIR KONTEN 4 VIDIO PROMOSI */
+
+/* konten 5 produk terbaru */
+.new-product {
+    border-bottom: 1px solid #a39300;
+    padding-bottom: 70px;
+}
+
+.card-new-prdct {
+    border-radius: 30px;
+}
+
+.card-new-prdct .btn {
+    background-color: #a39300;
+    color: #FFF;
+    transition: transform 0.2s ease-out;
+}
+
+.btn:hover {
+    transform: scale(1.15);
+}
+
+.card-new-prdct .card-body {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.card-new-prdct img {
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+}
+
+.kategori {
+    font-family: 'Suwannaphum', serif;
+    font-size: smaller;
+    margin-bottom: 10px;
+    color: #8f8f8f;
+}
+
+.kategori i {
+    font-style: normal;
+    margin-right: 5px;
+}
+
+.kategori p {
+    margin: -2px;
+}
+
+@media screen and (max-width: 767px) {
+    .card-new-prdct {
+        margin-top: 20px;
+    }
+}
+
+/* Akhir konten 5 produk terbaru */
+
+/* konten 6 gallery */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.item {
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.item:hover img {
+    transform: scale(1.1);
+}
+
+/* akhir konten 6 gallery */

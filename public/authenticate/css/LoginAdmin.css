@@ -1,0 +1,101 @@
+* {
+    font-family: 'Nunito', sans-serif;
+}
+
+.header h1 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 3vh;
+    line-height: 48px;
+    color: black;
+    /* margin-bottom: 80px; */
+}
+
+.in-form label {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: black;
+    margin-top: 10px;
+}
+
+.in-form input {
+    background: #FFFFFF;
+    border: 1px solid #bcbcbc;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+.in-form a {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: #737373;
+    display: block;
+    margin: 20px 0;
+}
+
+.in-form .signin {
+    width: 100%;
+    border-radius: 8px;
+    height: 42px;
+    margin: 10px 0 20px 0;
+}
+
+.in-form span {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: #737373;
+}
+
+.in-form span a {
+    font-weight: 600;
+}
+
+.in-form .btn {
+    background-color: rgb(180, 153, 0);
+    color: white;
+}
+
+/* .carousel-inner img {
+    height: 80vh;
+} */
+
+.input-group .input-group-text .form-control {
+    border: none !important;
+    background-color: rgba(197, 197, 197, 0.171) !important;
+}
+
+@media (max-width: 977px) {
+    .login-right {
+        display: none;
+    }
+
+    .login-left {
+        width: 100% !important;
+    }
+
+    .login {
+        background: linear-gradient(#fffefe, #ffe15e50) !important;
+    }
+
+    .register {
+        background: linear-gradient(#fffefe, #ffe15e50) !important;
+    }
+}
+
+/* @media (max-width: 577px) {
+    .login {
+        height: 100vh;
+    }
+} */
+
+/* @media (max-width: 575px) {
+    .login-left {
+        margin: 0 3% 0 3%;
+    }
+} */
