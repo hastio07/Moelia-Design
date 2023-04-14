@@ -24,12 +24,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Suwannaphum:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200&display=swap" rel="stylesheet">
 
-    <!-- Swiper CSS -->
-    <link href="{{ asset('templates') }}/assets/css/swiper-bundle.min.css" rel="stylesheet">
+    @stack('styles')
 
-    <!-- CSS swiper card -->
-    {{-- <link href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script> --}}
     <title>Moelia | @yield('title')</title>
 </head>
 
