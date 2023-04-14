@@ -2,6 +2,7 @@
 @section('title', 'Home')
 
 @push('styles')
+    <link href="{{ asset('templates') }}/assets/css-modif/Home.css" rel="stylesheet">
     <!-- Swiper CSS -->
     <link href="{{ asset('templates') }}/assets/css/swiper-bundle.min.css" rel="stylesheet">
     <!-- CSS swiper card -->
