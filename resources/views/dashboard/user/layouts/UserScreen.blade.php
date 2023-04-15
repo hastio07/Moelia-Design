@@ -18,10 +18,8 @@
     <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;1,700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inspiration&family=Lobster&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Suwannaphum:wght@300&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;1,700&family=Inspiration&family=Lobster&family=Suwannaphum:wght@300&family=Roboto+Slab:wght@200&display=swap" rel="stylesheet">
+
 
     @stack('styles')
 

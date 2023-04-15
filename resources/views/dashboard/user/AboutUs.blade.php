@@ -24,6 +24,7 @@
             </div>
             <div class="col-md-5" data-aos="fade-down">
                 <h5 class="text-center">Moelia Design</h5>
+                <div class="line"></div><br>
                 <h6 class="card-subtitle">
                     Apa saja yang akan anda dapatkan dari kami?
                 </h6>
