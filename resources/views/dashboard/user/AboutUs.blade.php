@@ -1,6 +1,10 @@
 @extends('dashboard.user.layouts.UserScreen')
 @section('title','About Us')
 
+@push('styles')
+<link href="{{ asset('templates') }}/assets/css-modif/AboutUs.css" rel="stylesheet">
+@endpush
+
 @section('konten')
 <section>
     <!-- konten 1 about us -->
