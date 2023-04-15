@@ -5,6 +5,7 @@ use App\Http\Controllers\ManageAkunController;
 use App\Http\Controllers\ManageGalleryController;
 use App\Http\Controllers\ManagePerusahaanController;
 use App\Http\Controllers\ManageProdukController;
+use App\Http\Controllers\user\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,9 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('/', function () {
-    return view('dashboard.user.home');
-})->middleware(['guest:admins', 'prevent-back-history']);
+Route::get('/', [HomeController::class, 'index'])->middleware(['guest:admins', 'prevent-back-history']);
 
 Route::get('/aboutus', function () {
     return view('dashboard.user.aboutus');
@@ -29,7 +28,6 @@ Route::get('/aboutus', function () {
 Route::get('/maintenance', function () {
     return view('dashboard.user.maintenance');
 })->middleware(['guest:admins', 'prevent-back-history']);
-
 
 // Route::get('/maintenance', function () {
 //     return view('dashboard.user.maintenance');
