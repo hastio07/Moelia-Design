@@ -8,6 +8,12 @@
     <!-- CSS swiper card -->
 @endpush
 
+@push('navbar-brand')
+    <a class="navbar-brand" href="/">
+        <img alt="{{ $companies->nama_perusahaan ?? 'logo' }}" class="d-inline-block align-text-top rounded-circle me-3" src="/storage/{{ $companies->logo_perusahaan ?? '#' }}" width="30">{{ $companies->nama_perusahaan ?? 'Moelia Design' }}
+    </a>
+@endpush
+
 @section('konten')
     <section>
         <!-- bagian carousel -->
@@ -20,7 +26,7 @@
                 </div>
                 <div class="carousel-inner">
                     <div class="carousel-item active" data-aos="fade-up">
-                        <img alt="..." class="d-block w-100 h-100" src="https://raw.githubusercontent.com/hastio07/Project_WO/main/public/img/cover-1.jpg">
+                        <img alt="..." class="d-block w-100 h-100" src="">
                         <div class="carousel-caption">
                             <h5>Moelia Design</h5>
                             <h4>Wedding Organizer</h4>
@@ -29,7 +35,7 @@
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img alt="..." class="d-block w-100 h-100" src="https://raw.githubusercontent.com/hastio07/Project_WO/main/public/img/cover-2.jpg">
+                        <img alt="..." class="d-block w-100 h-100" src="">
                         <div class="carousel-caption">
                             <h5>Moelia Design</h5>
                             <h4>Wedding Organizer</h4>
@@ -38,7 +44,7 @@
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img alt="..." class="d-block w-100 h-100" src="https://raw.githubusercontent.com/hastio07/Project_WO/main/public/img/cover-3.jpg">
+                        <img alt="..." class="d-block w-100 h-100" src="">
                         <div class="carousel-caption">
                             <h5>Moelia Design</h5>
                             <h4>Wedding Organizer</h4>
@@ -72,7 +78,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card bg-transparent border border-0 h-100 image-konten-dua cover-img-dua" data-aos="flip-up">
-                        <img alt="" class="image-konten-dua" src=" https://raw.githubusercontent.com/hastio07/Project_WO/main/public/img/cover-3.jpg">
+                        <img alt="" class="image-konten-dua" src=" ">
                     </div>
                 </div>
             </div>
@@ -89,7 +95,7 @@
                     <div class="card swiper-slide">
                         <div class="image-content">
                             <div class="card-image">
-                                <img alt="" class="card-img" src="img/wedding.png">
+                                <img alt="wedding" class="card-img" src="img/wedding.png">
                             </div>
                         </div>
                         <div class="card-content">
@@ -101,7 +107,7 @@
                     <div class="card swiper-slide">
                         <div class="image-content">
                             <div class="card-image">
-                                <img alt="" class="card-img" src="img/couple.png">
+                                <img alt="couple" class="card-img" src="img/couple.png">
                             </div>
                         </div>
                         <div class="card-content">
@@ -113,7 +119,7 @@
                     <div class="card swiper-slide">
                         <div class="image-content">
                             <div class="card-image">
-                                <img alt="" class="card-img" src="img/wedding-arch.png">
+                                <img alt="wedding-arch" class="card-img" src="img/wedding-arch.png">
                             </div>
                         </div>
                         <div class="card-content">
@@ -125,7 +131,7 @@
                     <div class="card swiper-slide">
                         <div class="image-content">
                             <div class="card-image">
-                                <img alt="" class="card-img" src="img/makeover.png">
+                                <img alt="makeover" class="card-img" src="img/makeover.png">
                             </div>
                         </div>
                         <div class="card-content">
@@ -165,7 +171,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="card card-new-prdct" data-aos="fade-down">
-                        <img alt="..." class="card-img-top" src="https://raw.githubusercontent.com/hastio07/Project_WO/main/public/img/cover-1.jpg">
+                        <img alt="..." class="card-img-top" src="">
                         <div class="card-body">
                             <div class="kategori d-flex">
                                 <i class="bi bi-calendar-event d-flex me-2">
@@ -183,7 +189,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card card-new-prdct" data-aos="fade-down">
-                        <img alt="..." class="card-img-top" src="https://raw.githubusercontent.com/hastio07/Project_WO/main/public/img/cover-2.jpg">
+                        <img alt="..." class="card-img-top" src="">
                         <div class="card-body">
                             <div class="kategori d-flex">
                                 <i class="bi bi-calendar-event d-flex me-2">
@@ -201,7 +207,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card card-new-prdct" data-aos="fade-down">
-                        <img alt="..." class="card-img-top" src="https://raw.githubusercontent.com/hastio07/Project_WO/main/public/img/cover-3.jpg">
+                        <img alt="..." class="card-img-top" src="">
                         <div class="card-body">
                             <div class="kategori d-flex">
                                 <i class="bi bi-calendar-event d-flex me-2">
@@ -225,14 +231,14 @@
             <h5 class="text-center card-perusahaan">Moelia Design</h5>
             <h6 class="text-center card-subtitle">Foto Kami</h6>
             <div class="gallery container">
-                <div class="item" data-aos="fade-down"><img alt="" src="https://raw.githubusercontent.com/hastio07/Project_WO/main/public/img/cover-3.jpg"></div>
-                <div class="item" data-aos="fade-down"><img alt="" src="https://raw.githubusercontent.com/hastio07/Project_WO/main/public/img/cover-1.jpg"></div>
-                <div class="item" data-aos="fade-down"><img alt="" src="https://raw.githubusercontent.com/hastio07/Project_WO/main/public/img/cover-3.jpg"></div>
-                <div class="item" data-aos="fade-down"><img alt="" src="https://raw.githubusercontent.com/hastio07/Project_WO/main/public/img/cover-2.jpg"></div>
-                <div class="item" data-aos="fade-down"><img alt="" src="https://raw.githubusercontent.com/hastio07/Project_WO/main/public/img/cover-3.jpg"></div>
-                <div class="item" data-aos="fade-down"><img alt="" src="https://raw.githubusercontent.com/hastio07/Project_WO/main/public/img/cover-1.jpg"></div>
-                <div class="item" data-aos="fade-down"><img alt="" src="https://raw.githubusercontent.com/hastio07/Project_WO/main/public/img/cover-3.jpg"></div>
-                <div class="item" data-aos="fade-down"><img alt="" src="https://raw.githubusercontent.com/hastio07/Project_WO/main/public/img/cover-2.jpg"></div>
+                <div class="item" data-aos="fade-down"><img alt="" src=""></div>
+                <div class="item" data-aos="fade-down"><img alt="" src=""></div>
+                <div class="item" data-aos="fade-down"><img alt="" src=""></div>
+                <div class="item" data-aos="fade-down"><img alt="" src=""></div>
+                <div class="item" data-aos="fade-down"><img alt="" src=""></div>
+                <div class="item" data-aos="fade-down"><img alt="" src=""></div>
+                <div class="item" data-aos="fade-down"><img alt="" src=""></div>
+                <div class="item" data-aos="fade-down"><img alt="" src=""></div>
             </div>
         </div>
 
