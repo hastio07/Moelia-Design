@@ -22,6 +22,19 @@ Route::get('/', function () {
     return view('dashboard.user.home');
 })->middleware(['guest:admins', 'prevent-back-history']);
 
+Route::get('/aboutus', function () {
+    return view('dashboard.user.aboutus');
+})->middleware(['guest:admins', 'prevent-back-history']);
+
+Route::get('/maintenance', function () {
+    return view('dashboard.user.maintenance');
+})->middleware(['guest:admins', 'prevent-back-history']);
+
+
+// Route::get('/maintenance', function () {
+//     return view('dashboard.user.maintenance');
+// })->middleware(['guest:admins', 'prevent-back-history']);
+
 /** Awal kode untuk rute super_admin & admin**/
 Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
     Route::get('dashboard', [DashboardAdminsController::class, 'index']);

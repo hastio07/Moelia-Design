@@ -16,6 +16,7 @@
     <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" referrerpolicy="no-referrer" rel="stylesheet" />
     <link href="{{ asset('templates') }}/assets/css-modif/LayoutScreen.css" rel="stylesheet">
     <link href="{{ asset('templates') }}/assets/css-modif/Home.css" rel="stylesheet">
+    <link href="{{ asset('templates') }}/assets/css-modif/AboutUs.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
@@ -47,7 +48,7 @@
         <nav class="navbar navbar-expand-lg bg-white shadow-sm rounded-bottom fixed-top">
             <div class="container">
                 <a class="navbar-brand" href="#">
-                    <img alt="Logo" class="d-inline-block align-text-top rounded-circle me-3" src="template/assets/images/logomulia.jpg" width="30">Moelia Design
+                    <img alt="Logo" class="d-inline-block align-text-top rounded-circle me-3" src="img/logoMulia.jpg" width="30">Moelia Design
                 </a>
                 <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler border-0" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button">
                     <span class="navbar-toggler-icon"></span>
@@ -55,19 +56,22 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
                         <li class="nav-item">
-                            <a aria-current="page" class="nav-link active" href="#">Home</a>
+                            <a aria-current="page" class="nav-link active" href="/">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Gallery</a>
+                            <a class="nav-link" href="/maintenance">Produk</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Wedding Calculator</a>
+                            <a class="nav-link" href="/maintenance">Gallery</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Tentang Kami</a>
+                            <a class="nav-link" href="/maintenance">Wedding Calculator</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Pembayaran</a>
+                            <a class="nav-link" href="/aboutus">Tentang Kami</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/maintenance">Pembayaran</a>
                         </li>
                     </ul>
                     <div class="d-flex center">
