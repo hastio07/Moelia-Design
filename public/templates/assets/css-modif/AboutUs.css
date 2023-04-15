@@ -1,0 +1,257 @@
+.first-content {
+    padding-top: 20px;
+    margin: 65px 0 10px 0;
+    height: 15vh;
+    background-color: #a39300b0;
+    color: #fff;
+}
+
+.first-content h1 {
+    font-family: 'Roboto Slab', serif;
+    font-weight: bold;
+}
+
+.second-contents h5 {
+    color: #a39300;
+    font-family: 'Inspiration', cursive;
+    font-size: xx-large;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+@media screen and (max-width: 767px) {
+    .second-contents h5 {
+        margin-top: 30px
+    }
+}
+
+/* konten 3 */
+.owner-profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 100px 0 100px 0;
+}
+
+.owner-profile .card {
+    position: relative;
+    width: 800px;
+    height: 300px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 15px 80px rgba(0, 0, 0, 0.35);
+    transition: 0.5s;
+}
+
+.owner-profile .card:hover {
+    height: 450px;
+}
+
+.imgBX {
+    position: absolute;
+    left: 50%;
+    top: -50px;
+    transform: translateX(-50%);
+    width: 250px;
+    height: 250px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+    transition: 0.5s;
+}
+
+.owner-profile .card:hover .imgBX {
+    width: 300px;
+    height: 300px;
+}
+
+.imgBX img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card .content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    overflow: hidden;
+}
+
+.card .content .details {
+    padding: 40px;
+    text-align: center;
+    width: 100%;
+    transition: 0.5s;
+    transform: translateY(100px);
+}
+
+.card .content .details h2 {
+    font-size: 1.25em;
+    font-weight: 600;
+    color: #555;
+    line-height: 1.2em;
+    text-transform: capitalize;
+}
+
+.card:hover .content .details {
+    transform: translateY(0px);
+}
+
+.card .content .details h2 span {
+    font-size: 0.75em;
+    font-weight: 500;
+    opacity: 0.5;
+}
+
+@media screen and (max-width: 580px) {
+    .owner-profile .card {
+        width: 600px;
+        height: 200px;
+    }
+
+    .card .content .details {
+        transform: translateY(125px);
+    }
+
+    .owner-profile .card:hover .imgBX {
+        width: 250px;
+        height: 250px;
+    }
+
+    .imgBX {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+@media screen and (max-width: 451px) {
+    .owner-profile .card {
+        width: 600px;
+        height: 200px;
+    }
+
+    .card .content .details {
+        transform: translateY(150px);
+    }
+}
+
+@media screen and (max-width: 351px) {
+    .card .content .details {
+        transform: translateY(175px);
+    }
+}
+
+@media screen and (max-width: 289px) {
+    .card .content .data {
+        display: none;
+    }
+
+    .card .content .details {
+        transform: translateY(30px);
+    }
+
+    .owner-profile .card:hover {
+        height: 350px;
+    }
+}
+
+.body-ourt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.head-ourt {
+    font-family: 'Roboto Slab', serif;
+}
+
+.line {
+    width: 100px;
+    height: 2px;
+    background-color: burlywood;
+    margin: auto;
+}
+
+.our-team {
+    position: relative;
+    width: 1100px;
+    display: flex;
+    justify-content: center;
+    align-items: center !important;
+    flex-wrap: wrap;
+    padding: 3px;
+    margin-top: 28px;
+}
+
+.our-team .card {
+    position: relative;
+    max-width: 300px;
+    height: 150px;
+    background: white;
+    margin: 30px 10px;
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    transition: 0.3s ease-in-out;
+    border: 0px;
+}
+
+.our-team .card:hover {
+    height: 250px;
+}
+
+.our-team .card .imgOT {
+    position: relative;
+    width: 260px;
+    top: -60px;
+    left: 5px;
+    z-index: 1;
+    box-shadow: 0 5px 202px rgba(0, 0, 0, 0.2);
+}
+
+.our-team .card .imgOT img {
+    max-width: 100%;
+    border-radius: 4px;
+}
+
+.our-team .card .content-ourt {
+    position: relative;
+    margin-top: -140px;
+    padding: 10px 15px;
+    text-align: center;
+    color: #111;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s ease-in-out;
+}
+
+.our-team .card:hover .content-ourt {
+    visibility: visible;
+    opacity: 1;
+    margin-top: -40px;
+}
+
+.content-ourt h2 {
+    font-size: 1.25em;
+    font-weight: 600;
+    color: #555;
+    line-height: 1.2em;
+    text-transform: capitalize;
+}
+
+
+.content-ourt p {
+    font-style: italic;
+    text-transform: capitalize;
+    color: #acacacb4;
+}
+
+/* konten 4 */
