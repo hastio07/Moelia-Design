@@ -1,6 +1,13 @@
 @extends('dashboard.user.layouts.UserScreen')
 @section('title', 'Home')
 
+@push('styles')
+<link href="{{ asset('templates') }}/assets/css-modif/Home.css" rel="stylesheet">
+<!-- Swiper CSS -->
+<link href="{{ asset('templates') }}/assets/css/swiper-bundle.min.css" rel="stylesheet">
+<!-- CSS swiper card -->
+@endpush
+
 @section('konten')
 <section>
     <!-- bagian carousel -->
@@ -245,7 +252,7 @@
 </section>
 @endsection
 
-@push('swiper')
+@push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 <script>
     var swiper = new Swiper(".slide-content", {
