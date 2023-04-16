@@ -13,6 +13,7 @@ class HomeController extends Controller
     {
         $companies = Company::first();
         $galleries = Photo::inRandomOrder()->limit(3)->get();
-        return view('dashboard.user.home', compact('companies', 'galleries'));
+        $photos = Photo::all('photo_name', 'photo_path');
+        return view('dashboard.user.home', compact('companies', 'galleries', 'photos'));
     }
 }

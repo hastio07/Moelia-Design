@@ -231,14 +231,9 @@
             <h5 class="text-center card-perusahaan">Moelia Design</h5>
             <h6 class="text-center card-subtitle">Foto Kami</h6>
             <div class="gallery container">
-                <div class="item" data-aos="fade-down"><img alt="" src=""></div>
-                <div class="item" data-aos="fade-down"><img alt="" src=""></div>
-                <div class="item" data-aos="fade-down"><img alt="" src=""></div>
-                <div class="item" data-aos="fade-down"><img alt="" src=""></div>
-                <div class="item" data-aos="fade-down"><img alt="" src=""></div>
-                <div class="item" data-aos="fade-down"><img alt="" src=""></div>
-                <div class="item" data-aos="fade-down"><img alt="" src=""></div>
-                <div class="item" data-aos="fade-down"><img alt="" src=""></div>
+                @foreach ($photos as $value)
+                    <div class="item" data-aos="fade-down"><img alt="{{ $value->photo_name }}" src="/storage/{{ $value->photo_path }}"></div>
+                @endforeach
             </div>
         </div>
 
