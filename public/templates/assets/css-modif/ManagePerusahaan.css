@@ -4,7 +4,8 @@
 }
 
 .card .card-body p {
-    margin-top: 20px
+    margin-left: 10px;
+    margin-top: -7px
 }
 
 .card .card-body h4 {
@@ -12,7 +13,7 @@
 }
 
 .card .card-body i {
-    margin-top: 20px
+    margin-top: 5px;
 }
 
 .img-owner {
@@ -50,7 +51,6 @@
 
 form.formstyle {
     width: 100%;
-    display: flex;
     align-items: center;
 }
 
@@ -62,3 +62,7 @@ form.formstyle {
 .flex-item.button {
     margin: 10px;
 }
+
+/* .left{
+    height: 100vh !important;
+} */
