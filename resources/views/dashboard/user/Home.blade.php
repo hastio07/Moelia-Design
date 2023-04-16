@@ -22,7 +22,7 @@
                     <div class="carousel-item active" data-aos="fade-up">
                         <img alt="{{ $galleries[0]->photo_name ?? null }}" class="d-block w-100 h-100" src="/storage/{{ $galleries[0]->photo_path ?? '#' }}">
                         <div class="carousel-caption">
-                            <h5>Moelia Design</h5>
+                            <h5>{{ $companies->nama_perusahaan }}</h5>
                             <h4>Wedding Organizer</h4>
                             <p>Bersama Kami mewujudkan impian pernikahan anda</p>
                             <button class="mt-3 px-5 btn btn fw-bold">About Us <i class="bi bi-box-arrow-up-right ms-2"></i></button>
@@ -31,7 +31,7 @@
                     <div class="carousel-item">
                         <img alt="{{ $galleries[1]->photo_name ?? null }}" class="d-block w-100 h-100" src="/storage/{{ $galleries[1]->photo_path ?? '#' }}">
                         <div class="carousel-caption">
-                            <h5>Moelia Design</h5>
+                            <h5>{{ $companies->nama_perusahaan }}</h5>
                             <h4>Wedding Organizer</h4>
                             <p>Bersama Kami mewujudkan impian pernikahan anda</p>
                             <button class="mt-3 px-5 btn btn fw-bold">About Us<i class="bi bi-box-arrow-up-right ms-2"></i></button>
@@ -40,7 +40,7 @@
                     <div class="carousel-item">
                         <img alt="{{ $galleries[2]->photo_name ?? null }}" class="d-block w-100 h-100" src="/storage/{{ $galleries[2]->photo_path ?? '#' }}">
                         <div class="carousel-caption">
-                            <h5>Moelia Design</h5>
+                            <h5>{{ $companies->nama_perusahaan }}</h5>
                             <h4>Wedding Organizer</h4>
                             <p>Bersama Kami mewujudkan impian pernikahan anda</p>
                             <button class="mt-3 px-5 btn btn fw-bold">About Us<i class="bi bi-box-arrow-up-right ms-2"></i></button>
