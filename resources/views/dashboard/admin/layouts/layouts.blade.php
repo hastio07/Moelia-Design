@@ -238,12 +238,12 @@
                         </a>
                     </li>
                     @can('view', App\Models\Admin::class)
-                    <li class="{{ Request::is('dashboard/manage-akun') || Request::is('dashboard/manage-akun/*/edit') ? 'active' : '' }}">
-                        <a class="link" href="/dashboard/manage-akun">
-                            <i class="ti-id-badge"></i>
-                            <span>Manage Akun</span>
-                        </a>
-                    </li>
+                        <li class="{{ Request::is('dashboard/manage-akun') || Request::is('dashboard/manage-akun/*/edit') ? 'active' : '' }}">
+                            <a class="link" href="/dashboard/manage-akun">
+                                <i class="ti-id-badge"></i>
+                                <span>Manage Akun</span>
+                            </a>
+                        </li>
                     @endcan
                     <li>
                         <a class="link" href="/dashboard/manage-perusahaan">
@@ -335,7 +335,7 @@
     <script>
         Main.init()
     </script>
-
+    @stack('scripts')
 </body>
 
 </html>

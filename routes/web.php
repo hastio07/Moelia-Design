@@ -3,9 +3,9 @@
 use App\Http\Controllers\DashboardAdminsController;
 use App\Http\Controllers\ManageAkunController;
 use App\Http\Controllers\ManageGalleryController;
+use App\Http\Controllers\ManageLayananController;
 use App\Http\Controllers\ManagePerusahaanController;
 use App\Http\Controllers\ManageProdukController;
-use App\Http\Controllers\ManageLayananController;
 use App\Http\Controllers\user\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -70,9 +70,7 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
             Route::post('manage-perusahaan/updateorcreatcontact', 'updateorcreatcontact')->name('manage-perusahaan.updateorcreatcontact');
             Route::delete('manage-perusahaan/deletecontact/{id}', 'deletecontact')->name('manage-perusahaan.deletecontact');
         });
-        Route::controller(ManageLayananController::class)->group(function () {
-            Route::get('manage-layanan', 'index')->name('manage-layanan.index');
-        });
+        Route::resource('manage-layanan', ManageLayananController::class)->except(['create', 'show', 'edit']);
     });
 });
 /** Akhir kode **/
