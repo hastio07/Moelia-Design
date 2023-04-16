@@ -41,7 +41,9 @@
         <!-- navbar -->
         <nav class="navbar navbar-expand-lg bg-white shadow-sm rounded-bottom fixed-top">
             <div class="container">
-                @stack('navbar-brand')
+                <a class="navbar-brand" href="/">
+                    <img alt="{{ $companies->nama_perusahaan ?? 'logo' }}" class="d-inline-block align-text-top rounded-circle me-3" src="/storage/{{ $companies->logo_perusahaan ?? '#' }}" width="30">{{ $companies->nama_perusahaan ?? 'Moelia Design' }}
+                </a>
                 <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler border-0" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button">
                     <span class="navbar-toggler-icon"></span>
                 </button>

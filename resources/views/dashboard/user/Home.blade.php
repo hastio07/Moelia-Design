@@ -8,12 +8,6 @@
     <!-- CSS swiper card -->
 @endpush
 
-@push('navbar-brand')
-    <a class="navbar-brand" href="/">
-        <img alt="{{ $companies->nama_perusahaan ?? 'logo' }}" class="d-inline-block align-text-top rounded-circle me-3" src="/storage/{{ $companies->logo_perusahaan ?? '#' }}" width="30">{{ $companies->nama_perusahaan ?? 'Moelia Design' }}
-    </a>
-@endpush
-
 @section('konten')
     <section>
         <!-- bagian carousel -->
