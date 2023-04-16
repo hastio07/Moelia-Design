@@ -1,0 +1,28 @@
+.link-png {
+    background-color: #c4ffc485;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #c4ffc485;
+}
+
+.link-png p {
+    color: #a3a3a3;
+    margin: 0;
+    text-align: center;
+}
+
+.link-png a {
+    color: #2f00ff;
+    text-decoration: underline;
+    text-decoration: none;
+}
+
+@media only screen and (max-width: 768px) {
+    .link-png {
+        padding: 5px;
+    }
+
+    .link-png p {
+        font-size: 14px;
+    }
+}

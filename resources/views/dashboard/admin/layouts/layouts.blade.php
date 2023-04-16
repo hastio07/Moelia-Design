@@ -27,6 +27,7 @@
     <link href="{{ asset('templates') }}/assets/css-modif/ManageProduk.css" rel="stylesheet">
     <link href="{{ asset('templates') }}/assets/css-modif/ManagePerusahaan.css" rel="stylesheet">
     <link href="{{ asset('templates') }}/assets/css-modif/Gallery.css" rel="stylesheet">
+    <link href="{{ asset('templates') }}/assets/css-modif/ManageLayanan.css" rel="stylesheet">
     <!-- end css -->
 
     <link href="{{ asset('templates') }}/assets/css/style.min.css" rel="stylesheet">
@@ -237,12 +238,12 @@
                         </a>
                     </li>
                     @can('view', App\Models\Admin::class)
-                        <li class="{{ Request::is('dashboard/manage-akun') || Request::is('dashboard/manage-akun/*/edit') ? 'active' : '' }}">
-                            <a class="link" href="/dashboard/manage-akun">
-                                <i class="ti-id-badge"></i>
-                                <span>Manage Akun</span>
-                            </a>
-                        </li>
+                    <li class="{{ Request::is('dashboard/manage-akun') || Request::is('dashboard/manage-akun/*/edit') ? 'active' : '' }}">
+                        <a class="link" href="/dashboard/manage-akun">
+                            <i class="ti-id-badge"></i>
+                            <span>Manage Akun</span>
+                        </a>
+                    </li>
                     @endcan
                     <li>
                         <a class="link" href="/dashboard/manage-perusahaan">
@@ -278,7 +279,14 @@
                             <span>Manage Gallery</span>
                         </a>
                     </li>
+                    <li class="{{ Request::is('dashboard/manage-layanan*') ? 'active' : '' }}">
+                        <a class="link" href="/dashboard/manage-layanan">
+                            <i class="ti-bookmark-alt"></i>
+                            <span>Manage Layanan</span>
+                        </a>
+                    </li>
                 </ul>
+
             </div>
         </nav>
         <div class="main-content">
