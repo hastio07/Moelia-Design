@@ -158,7 +158,7 @@
             </div>
             <div class="col-md-6" data-aos="fade-down">
                 <div class="embed-responsive embed-responsive-16by9 video-container">
-                    <iframe allowfullscreen class="embed-responsive-item" src="https://www.youtube.com/embed/1-GLrbJzG3A"></iframe>
+                    <iframe allowfullscreen class="embed-responsive-item" src="https://www.youtube-nocookie.com/embed/1-GLrbJzG3A"></iframe>
                 </div>
             </div>
         </div>
@@ -169,60 +169,27 @@
             <h5 class="text-center card-perusahaan">Moelia Design</h5>
             <h6 class="text-center card-subtitle">Produk Terbaru Kami</h6>
             <div class="row">
-                <div class="col-md-4">
-                    <div class="card card-new-prdct" data-aos="fade-down">
-                        <img alt="..." class="card-img-top" src="">
-                        <div class="card-body">
-                            <div class="kategori d-flex">
-                                <i class="bi bi-calendar-event d-flex me-2">
-                                    <p class="ms-1">20/01/23</p>
-                                </i>
-                                <i class="bi bi-tag-fill ms-2 d-flex">
-                                    <p class="ms-1">Dekorasi</p>
-                                </i>
+                @foreach ($products as $value)
+                    <div class="col-md-4">
+                        <div class="card card-new-prdct" data-aos="fade-down">
+                            <img alt="{{ $value->nama_produk }}" class="card-img-top" src="/storage/post-images{{ $value->gambar }}">
+                            <div class="card-body">
+                                <div class="kategori d-flex">
+                                    <i class="bi bi-calendar-event d-flex me-2">
+                                        <p class="ms-1">{{ $value->created_at->format('d/m/y') }}</p>
+                                    </i>
+                                    <i class="bi bi-tag-fill ms-2 d-flex">
+                                        <p class="ms-1">{{ $value->category->nama_kategori }}</p>
+                                    </i>
+                                </div>
+                                <h6 class="card-title fw-bold">{{ $value->nama_produk }}</h6>
+                                <p class="card-text text-center">{{ $value->deskripsi }}</p>
+                                <a class="btn" href="#">Selengkapnya</a>
                             </div>
-                            <h6 class="card-title fw-bold">Paket 1 Make Up</h6>
-                            <p class="card-text text-center">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a class="btn" href="#">Selengkapnya</a>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card card-new-prdct" data-aos="fade-down">
-                        <img alt="..." class="card-img-top" src="">
-                        <div class="card-body">
-                            <div class="kategori d-flex">
-                                <i class="bi bi-calendar-event d-flex me-2">
-                                    <p class="ms-1">20/01/23</p>
-                                </i>
-                                <i class="bi bi-tag-fill ms-2 d-flex">
-                                    <p class="ms-1">Dekorasi</p>
-                                </i>
-                            </div>
-                            <h6 class="card-title fw-bold">Gedung A</h6>
-                            <p class="card-text text-center">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a class="btn" href="#">Selengkapnya</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card card-new-prdct" data-aos="fade-down">
-                        <img alt="..." class="card-img-top" src="">
-                        <div class="card-body">
-                            <div class="kategori d-flex">
-                                <i class="bi bi-calendar-event d-flex me-2">
-                                    <p class="ms-1">20/01/23</p>
-                                </i>
-                                <i class="bi bi-tag-fill ms-2 d-flex">
-                                    <p class="ms-1">Dekorasi</p>
-                                </i>
-                            </div>
-                            <h6 class="card-title fw-bold">Paket 1000</h6>
-                            <p class="card-text text-center">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a class="btn" href="#">Selengkapnya</a>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
+
             </div>
         </div>
         <!-- akhir konte 5 -->
