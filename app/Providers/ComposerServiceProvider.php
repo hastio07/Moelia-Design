@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\Company;
+use App\Http\View\Composers\CompanyComposer;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,8 +25,6 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer('dashboard.user.layouts.UserScreen', function ($view) {
-            $view->with('companies', Company::first());
-        });
+        View::composer('dashboard.user.layouts.UserScreen', CompanyComposer::class);
     }
 }
