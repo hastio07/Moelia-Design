@@ -86,54 +86,20 @@
         <div class="slide-container swiper">
             <div class="slide-content" data-aos="fade-up">
                 <div class="card-wrapper swiper-wrapper">
-                    <div class="card swiper-slide">
-                        <div class="image-content">
-                            <div class="card-image">
-                                <img alt="wedding" class="card-img" src="img/wedding.png">
+                    @foreach ($services as $value)
+                        <div class="card swiper-slide">
+                            <div class="image-content">
+                                <div class="card-image">
+                                    <img alt="{{ $value->tipe_layanan }}" class="card-img" src="/storage/service-images/{{ $value->gambar }}">
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <h6 class="name fw-bold">{{ $value->tipe_layanan }}</h6>
+                                <p class="description">{{ $value->deskripsi }}</p>
+                                <button class="button">Selengkapnya</button>
                             </div>
                         </div>
-                        <div class="card-content">
-                            <h6 class="name fw-bold">Rias Pengantin</h6>
-                            <p class="description">The lorem text the section that contains header with having open functionality. Lorem dolor sit amet consectetur adipisicing elit.</p>
-                            <button class="button">Selengkapnya</button>
-                        </div>
-                    </div>
-                    <div class="card swiper-slide">
-                        <div class="image-content">
-                            <div class="card-image">
-                                <img alt="couple" class="card-img" src="img/couple.png">
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <h6 class="name fw-bold">Rias Make Up</h6>
-                            <p class="description">The lorem text the section that contains header with having open functionality. Lorem dolor sit amet consectetur adipisicing elit.</p>
-                            <button class="button">Selengkapnya</button>
-                        </div>
-                    </div>
-                    <div class="card swiper-slide">
-                        <div class="image-content">
-                            <div class="card-image">
-                                <img alt="wedding-arch" class="card-img" src="img/wedding-arch.png">
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <h6 class="name fw-bold">Katering</h6>
-                            <p class="description">The lorem text the section that contains header with having open functionality. Lorem dolor sit amet consectetur adipisicing elit.</p>
-                            <button class="button">Selengkapnya</button>
-                        </div>
-                    </div>
-                    <div class="card swiper-slide">
-                        <div class="image-content">
-                            <div class="card-image">
-                                <img alt="makeover" class="card-img" src="img/makeover.png">
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <h6 class="name fw-bold">Make Up</h6>
-                            <p class="description">The lorem text the section that contains header with having open functionality. Lorem dolor sit amet consectetur adipisicing elit.</p>
-                            <button class="button">Selengkapnya</button>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
             <br>
