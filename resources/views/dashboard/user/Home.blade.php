@@ -26,7 +26,7 @@
                 </div>
                 <div class="carousel-inner">
                     <div class="carousel-item active" data-aos="fade-up">
-                        <img alt="..." class="d-block w-100 h-100" src="">
+                        <img alt="{{ $galleries[0]->photo_name }}" class="d-block w-100 h-100" src="/storage/{{ $galleries[0]->photo_path }}">
                         <div class="carousel-caption">
                             <h5>Moelia Design</h5>
                             <h4>Wedding Organizer</h4>
@@ -35,7 +35,7 @@
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img alt="..." class="d-block w-100 h-100" src="">
+                        <img alt="{{ $galleries[1]->photo_name }}" class="d-block w-100 h-100" src="/storage/{{ $galleries[1]->photo_path }}">
                         <div class="carousel-caption">
                             <h5>Moelia Design</h5>
                             <h4>Wedding Organizer</h4>
@@ -44,7 +44,7 @@
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img alt="..." class="d-block w-100 h-100" src="">
+                        <img alt="{{ $galleries[2]->photo_name }}" class="d-block w-100 h-100" src="/storage/{{ $galleries[2]->photo_path }}">
                         <div class="carousel-caption">
                             <h5>Moelia Design</h5>
                             <h4>Wedding Organizer</h4>
