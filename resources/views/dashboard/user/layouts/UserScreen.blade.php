@@ -55,8 +55,14 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/maintenance">Produk</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/maintenance">Gallery</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Gallery
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/maintenance">Foto</a></li>
+                                <li><a class="dropdown-item" href="/maintenance">Vidio</a></li>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/maintenance">Wedding Calculator</a>
