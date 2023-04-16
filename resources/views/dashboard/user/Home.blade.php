@@ -209,9 +209,9 @@
         <!-- konten 7 alamat-->
         <div class="row same-height mt-5" data-aos="fade-up">
             <div class="text-center align-self-center">
-                <h5 class="card-title card-perusahaan">Moelia Design</h5>
+                <h5 class="card-title card-perusahaan">{{ $companies->nama_perusahaan ?? null }}</h5>
                 <h6 class="card-subtitle">
-                    Gg. Cinta Damai No.31, Tj. Baru, Kec. Sukabumi, Kota Bandar Lampung, Lampung 35122
+                    {{ $addresses->alamat_perusahaan ?? null }}
                 </h6>
             </div>
         </div>
