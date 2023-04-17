@@ -114,3 +114,9 @@ a:hover {
 form#CUForm>div.modal-body label>span.text-danger {
     font-size: 20px;
 }
+
+@media screen and (max-width:767px) {
+    .add-categories {
+        margin-top: 30px;
+    }
+}

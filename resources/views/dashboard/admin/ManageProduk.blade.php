@@ -9,56 +9,92 @@
     <div class="title">
         <h5>Manage Produk</h5>
     </div>
-    <div class="content-wrapper">
-        <div class="same-height"></div>
-        <div class="card">
-            <div class="card-header">
-                <h4>List Produk</h4>
-            </div>
-            <div class="card-body">
-                <div class="btn-modal">
-                    <button class="btn mb-2 icon-left  btn-success" data-bs-route="{{ route('manage-produk.store') }}" data-bs-target="#CUModal" data-bs-toggle="modal" id="btnCreateModal" type="button"><i class="bi bi-plus-lg"></i>Tambah Produk</i></button>
+    <div class="row same-height">
+        <div class="col-md-9">
+            <div class="content-wrapper">
+                <div class="same-height"></div>
+                <div class="card">
+                    <div class="card-header">
+                        <h4>List Produk</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="btn-modal">
+                            <button class="btn mb-2 icon-left  btn-success" data-bs-route="{{ route('manage-produk.store') }}" data-bs-target="#CUModal" data-bs-toggle="modal" id="btnCreateModal" type="button"><i class="bi bi-plus-lg"></i>Tambah Produk</i></button>
+                        </div>
+                        <table class="table display" id="example2">
+                            <thead>
+                                <tr>
+                                    <th>Nama Produk</th>
+                                    <th>Kategori</th>
+                                    <th>Harga Sewa</th>
+                                    <th>Rincian Produk</th>
+                                    <th>Deskripsi</th>
+                                    <th>Gambar</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($get_products as $value)
+                                <tr>
+                                    <td>{{ $value->nama_produk }}</td>
+                                    <td>{{ $value->category->nama_kategori }}</td>
+                                    <td>{{ $value->formatRupiah('harga_sewa') }}</td>
+                                    <td>{!! $value->rincian_produk !!}</td>
+                                    <td>{{ $value->deskripsi }}</td>
+                                    <td>
+                                        @if ($value->gambar)
+                                        <img alt="{{ $value->nama_produk }}" height="150" src="/storage/compressed{{ $value->gambar }}" width="180">
+                                        @else
+                                        <img alt="{{ $value->nama_produk }}" height="150" src="https://dummyimage.com/180x150.png" width="180">
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                                            <button class="btn btn-warning" data-bs-product="{{ $value }}" data-bs-route="{{ route('manage-produk.update', $value->id) }}" data-bs-target="#CUModal" data-bs-toggle="modal" id="btnUpdateModal" type="button"><i class="bi bi-pencil-square"></i></button>
+                                            <button class="btn btn-danger" data-bs-route="{{ route('manage-produk.destroy', $value->id) }}" data-bs-target="#DeleteModal" data-bs-toggle="modal" id="btnDeleteModal" type="button"><i class="bi bi-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <table class="table display" id="example2">
-                    <thead>
-                        <tr>
-                            <th>Nama Produk</th>
-                            <th>Kategori</th>
-                            <th>Harga Sewa</th>
-                            <th>Rincian Produk</th>
-                            <th>Deskripsi</th>
-                            <th>Gambar</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($get_products as $value)
-                        <tr>
-                            <td>{{ $value->nama_produk }}</td>
-                            <td>{{ $value->category->nama_kategori }}</td>
-                            <td>{{ $value->formatRupiah('harga_sewa') }}</td>
-                            <td>{!! $value->rincian_produk !!}</td>
-                            <td>{{ $value->deskripsi }}</td>
-                            <td>
-                                @if ($value->gambar)
-                                <img alt="{{ $value->nama_produk }}" height="150" src="/storage/compressed{{ $value->gambar }}" width="180">
-                                @else
-                                <img alt="{{ $value->nama_produk }}" height="150" src="https://dummyimage.com/180x150.png" width="180">
-                                @endif
-                            </td>
-                            <td>
-                                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                                    <button class="btn btn-warning" data-bs-product="{{ $value }}" data-bs-route="{{ route('manage-produk.update', $value->id) }}" data-bs-target="#CUModal" data-bs-toggle="modal" id="btnUpdateModal" type="button"><i class="bi bi-pencil-square"></i></button>
-                                    <button class="btn btn-danger" data-bs-route="{{ route('manage-produk.destroy', $value->id) }}" data-bs-target="#DeleteModal" data-bs-toggle="modal" id="btnDeleteModal" type="button"><i class="bi bi-trash"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="content-wrapper add-categories">
+                <div class="same-height">
+                    <div class="card">
+                        <div class="card-header text-center">
+                            <h4>Tambah Kategori</h4>
+                        </div>
+                        <div class="card-body text-center">
+                            <input class="form-control mb-3" type="text" placeholder="Default input" aria-label="default input example">
+                            <button class="btn btn-success">Tambah</button>
+                            <div class="list-kategori mt-4">
+                                <table class="table mt-3 caption-top border">
+                                    <caption class="text-center fw-bold">List Kategori</caption>
+                                    <tbody>
+                                        <tr>
+                                            <td>Make Up</td>
+                                            <td><button class="btn btn-danger" data-bs-route="" id="btnDeleteModal" type="button"><i class="bi bi-trash"></i></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Decoration</td>
+                                            <td><button class="btn btn-danger" data-bs-route="" id="btnDeleteModal" type="button"><i class="bi bi-trash"></i></button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- modal add and update product -->
     <div aria-hidden="true" aria-labelledby="cuModalLabel" class="modal fade" id="CUModal" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -113,6 +149,8 @@
             </div>
         </div>
     </div>
+
+    <!-- modal delete product -->
     <div aria-hidden="true" aria-labelledby="deleteModalLabel" class="modal fade" id="DeleteModal" tabindex="-1">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
