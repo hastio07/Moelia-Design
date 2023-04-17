@@ -149,7 +149,7 @@
                 </div>
                 <div class="copyright-wrapper">
                     <p>
-                        Copyright © 2023 &nbsp <a class="ml-1" href="https://www.instagram.com/moeliadesign/" target="_blank">Moelia Design</a> <span> . All rights Reserved</span>
+                        Copyright © 2023 &nbsp<a class="ml-1" href="https://www.instagram.com/moeliadesign/" target="_blank">Moelia Design</a> <span> . All rights Reserved</span>
                     </p>
                 </div>
             </div>
