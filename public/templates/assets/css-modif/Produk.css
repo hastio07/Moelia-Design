@@ -42,6 +42,10 @@
     width: 52.33333333% !important;
 }
 
+.btn {
+    background-color: #a39300b0;
+    color: #fff;
+}
 
 @media only screen and (max-width: 1078px) {
     .col-md-8 {

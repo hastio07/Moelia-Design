@@ -26,7 +26,7 @@
                                 <h5 class="card-title">Ervin Howell</h5>
                                 <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, est?</p>
                             </div>
-                            <div class="btn btn-primary ms-3 mt-3">selengkapnnya</div>
+                            <div class="btn btn ms-3 mt-3">selengkapnnya</div>
                         </div>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                                 <h5 class="card-title">Ervin Howell</h5>
                                 <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, est?</p>
                             </div>
-                            <div class="btn btn-primary ms-3 mt-3">selengkapnnya</div>
+                            <div class="btn btn ms-3 mt-3">selengkapnnya</div>
                         </div>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                                 <h5 class="card-title">Ervin Howell</h5>
                                 <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, est?</p>
                             </div>
-                            <div class="btn btn-primary ms-3 mt-3">selengkapnnya</div>
+                            <div class="btn btn ms-3 mt-3">selengkapnnya</div>
                         </div>
                     </div>
                 </div>
@@ -74,11 +74,14 @@
                                 <h5 class="card-title">Ervin Howell</h5>
                                 <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, est?</p>
                             </div>
-                            <div class="btn btn-primary ms-3 mt-3">selengkapnnya</div>
+                            <div class="btn btn ms-3 mt-3">selengkapnnya</div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="text-center">
+            <button class="btn btn" id="load-more">Load More</button>
         </div>
     </div>
 </section>
