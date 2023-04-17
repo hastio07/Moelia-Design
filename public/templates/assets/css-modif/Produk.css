@@ -47,6 +47,15 @@
     color: #fff;
 }
 
+.category {
+    color: rgb(182, 182, 182);
+    font-size: smaller;
+}
+
+.category p {
+    margin-top: -2px;
+}
+
 @media only screen and (max-width: 1078px) {
     .col-md-8 {
         left: 0px;
