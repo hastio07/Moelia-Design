@@ -53,7 +53,7 @@
                             <a aria-current="page" class="nav-link active" href="/">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/maintenance">Produk</a>
+                            <a class="nav-link" href="/produk">Produk</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -149,7 +149,7 @@
                 </div>
                 <div class="copyright-wrapper">
                     <p>
-                        Copyright © 2023 &nbsp <a class="ml-1" href="https://www.instagram.com/moeliadesign/" target="_blank">Moelia Design</a> <span> . All rights Reserved</span>
+                        Copyright © 2023 &nbsp<a class="ml-1" href="https://www.instagram.com/moeliadesign/" target="_blank">Moelia Design</a> <span> . All rights Reserved</span>
                     </p>
                 </div>
             </div>
