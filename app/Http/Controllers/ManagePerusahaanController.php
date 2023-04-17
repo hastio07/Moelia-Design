@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\About;
 use App\Models\Address;
 use App\Models\Company;
 use App\Models\Contact;
+use App\Models\Offer;
 use App\Models\Owner;
 use App\Models\Sosmed;
 use Illuminate\Http\Request;
@@ -18,14 +20,18 @@ class ManagePerusahaanController extends Controller
     protected $sosmeds;
     protected $owners;
     protected $addresses;
+    protected $abouts;
+    protected $offers;
 
-    public function __construct(Company $companies, Contact $contacts, Sosmed $sosmeds, Owner $owners, Address $addresses)
+    public function __construct(Company $companies, Contact $contacts, Sosmed $sosmeds, Owner $owners, Address $addresses, About $abouts, Offer $offers)
     {
         $this->companies = $companies;
         $this->contacts = $contacts;
         $this->sosmeds = $sosmeds;
         $this->owners = $owners;
         $this->addresses = $addresses;
+        $this->abouts = $abouts;
+        $this->offers = $offers;
 
     }
     public function index()
@@ -36,6 +42,8 @@ class ManagePerusahaanController extends Controller
             'sosmeds' => $this->sosmeds->first(),
             'owners' => $this->owners->first(),
             'addresses' => $this->addresses->first(),
+            'abouts' => $this->abouts->first(),
+            'offers' => $this->offers->first(),
         ];
         return view('dashboard.admin.manageperusahaan', $data);
     }
@@ -110,6 +118,7 @@ class ManagePerusahaanController extends Controller
 
         $rules = [
             'nama_owner' => 'nullable|string|max:255',
+            'kata_sambutan' => 'nullable|string',
             'foto_owner' => 'nullable|file|image|mimetypes:image/jpeg,image/jpg,image/png|max:2048',
             'oldfoto_owner' => [
                 'nullable',
@@ -138,9 +147,10 @@ class ManagePerusahaanController extends Controller
         }
         $validatedData = $validator->validated();
         // dd($validatedData);
-        if ($request->has('nama_owner')) {
-            $filterData['nama_owner'] = $validatedData['nama_owner'];
-        }
+
+        $filterData['nama_owner'] = $validatedData['nama_owner'];
+        $filterData['kata_sambutan'] = $validatedData['kata_sambutan'];
+
         if ($request->hasFile('foto_owner')) {
             if ($validatedData['oldfoto_owner']) {
                 $path = $validatedData['oldfoto_owner'];
@@ -166,7 +176,11 @@ class ManagePerusahaanController extends Controller
             $path = $db->foto_owner;
             Storage::delete($path);
         }
-        $data = ['nama_owner' => null, 'foto_owner' => null];
+        $data = [
+            'nama_owner' => null,
+            'kata_sambutan' => null,
+            'foto_owner' => null,
+        ];
         $db->update($data);
         return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil DiHapus!');
     }
@@ -175,6 +189,7 @@ class ManagePerusahaanController extends Controller
     {
         $rules = [
             'alamat_perusahaan' => 'nullable|string',
+            'link_gmap' => 'nullable|string',
         ];
         $massages = [
             'string' => ':attribute harus berupa teks.',
@@ -197,57 +212,18 @@ class ManagePerusahaanController extends Controller
     {
         $data = [
             'alamat_perusahaan' => null,
+            'link_gmap' => null,
         ];
 
         $this->addresses->findOrFail($id)->update($data);
         return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil DiHapus!');
     }
 
-    public function updateorcreatsosmed(Request $request)
+    public function updateorcreatecontact(Request $request)
     {
         $rules = [
-            'instagram' => 'nullable|string|max:255',
-            'facebook' => 'nullable|string|max:255',
-            'twitter' => 'nullable|string|max:255',
-            'youtube' => 'nullable|string|max:255',
-        ];
-        $massages = [
-            'max' => ':attribute harus diisi maksimal :max karakter.',
-            'string' => ':attribute harus berupa teks.',
-        ];
-        //Validasi
-        $validator = Validator::make($request->all(), $rules, $massages);
-        //Jika gagal
-        if ($validator->fails()) {
-            return dd(back()->withErrors($validator)->withInput()); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
-        }
-        $validatedData = $validator->validated();
-        $id = (int) $request->input('id_sosmed');
-        // dd($id);
-        // update atau create record dengan data yang diberikan
-        $this->sosmeds->updateOrCreate(['id' => $id], $validatedData);
-        return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil Disimpan');
-    }
-
-    public function deletesosmed($id)
-    {
-        $data = [
-            'instagram' => null,
-            'facebook' => null,
-            'twitter' => null,
-            'youtube' => null,
-        ];
-        $this->sosmeds->findOrFail($id)->update($data);
-        return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil DiHapus!');
-    }
-
-    public function updateorcreatcontact(Request $request)
-    {
-        $rules = [
-            'telephone_1' => 'nullable|string|max:255',
-            'telephone_2' => 'nullable|string|max:255',
-            'whatsapp_1' => 'nullable|string|max:255',
-            'whatsapp_2' => 'nullable|string|max:255',
+            'telephone' => 'nullable|string|max:255',
+            'whatsapp' => 'nullable|string|max:255',
             'email' => 'nullable|email|max:255',
         ];
         $massages = [
@@ -272,13 +248,184 @@ class ManagePerusahaanController extends Controller
     public function deletecontact($id)
     {
         $data = [
-            'telephone_1' => null,
-            'telephone_2' => null,
-            'whatsapp_1' => null,
-            'whatsapp_2' => null,
+            'telephone' => null,
+            'whatsapp' => null,
             'email' => null,
         ];
         $this->contacts->findOrFail($id)->update($data);
+        return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil DiHapus!');
+    }
+
+    public function updateorcreatesosmed(Request $request)
+    {
+        $rules = [
+            'u_instagram' => 'nullable|string|max:255',
+            'l_instagram' => 'nullable|string|max:255',
+            'u_facebook' => 'nullable|string|max:255',
+            'l_facebook' => 'nullable|string|max:255',
+            'u_twitter' => 'nullable|string|max:255',
+            'l_twitter' => 'nullable|string|max:255',
+            'u_youtube' => 'nullable|string|max:255',
+            'l_youtube' => 'nullable|string|max:255',
+        ];
+        $massages = [
+            'max' => ':attribute harus diisi maksimal :max karakter.',
+            'string' => ':attribute harus berupa teks.',
+        ];
+        //Validasi
+        $validator = Validator::make($request->all(), $rules, $massages);
+        //Jika gagal
+        if ($validator->fails()) {
+            return dd(back()->withErrors($validator)->withInput()); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
+        }
+        $validatedData = $validator->validated();
+        $id = (int) $request->input('id_sosmed');
+        // dd($id);
+        // update atau create record dengan data yang diberikan
+        $this->sosmeds->updateOrCreate(['id' => $id], $validatedData);
+        return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil Disimpan');
+    }
+
+    public function deletesosmed($id)
+    {
+        $data = [
+            'u_instagram' => null,
+            'l_instagram' => null,
+            'u_facebook' => null,
+            'l_facebook' => null,
+            'u_twitter' => null,
+            'l_twitter' => null,
+            'u_youtube' => null,
+            'l_youtube' => null,
+        ];
+        $this->sosmeds->findOrFail($id)->update($data);
+        return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil DiHapus!');
+    }
+
+    public function updateorcreateabout(Request $request)
+    {
+        $rules = [
+            'katasambutan' => 'nullable|string',
+            'fotobersama' => 'nullable|file|image|mimetypes:image/jpeg,image/jpg,image/png|max:2048',
+            'oldfotobersama' => ['nullable', 'string', function ($attribute, $value, $fail) {
+                if (!empty($value)) {
+                    $about = $this->abouts->where('fotobersama', $value)->first();
+                    if (!$about) {
+                        $fail("nilai tidak valid");
+                    }
+                }
+            }],
+        ];
+        $massages = [
+            'max' => ':attribute harus diisi maksimal :max karakter.',
+            'string' => ':attribute harus berupa teks.',
+        ];
+        //Validasi
+        $validator = Validator::make($request->all(), $rules, $massages);
+        //Jika gagal
+        if ($validator->fails()) {
+            return dd(back()->withErrors($validator)->withInput()); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
+        }
+        $validatedData = $validator->validated();
+        $filterData['katasambutan'] = $validatedData['katasambutan'];
+        if ($request->hasFile('fotobersama')) {
+            if ($validatedData['oldfotobersama']) {
+                $path = $validatedData['oldfotobersama'];
+                Storage::delete($path);
+            }
+
+            $imagefile = $validatedData['fotobersama'];
+            $imageFileName = date("Y-m-d", time()) . '-' . $imagefile->getClientOriginalName();
+            $oriPath = $imagefile->storeAs('fotobersama', $imageFileName); // -> owner-images/<nama_files.ext>
+            $filterData['fotobersama'] = $oriPath;
+        }
+
+        $id = (int) $request->input('id_about');
+        // dd($id);
+        // update atau create record dengan data yang diberikan
+        $this->abouts->updateOrCreate(['id' => $id], $filterData);
+        return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil Disimpan');
+    }
+
+    public function deleteabout($id)
+    {
+        $db = $this->abouts->findOrFail($id);
+        $data = [
+            'katasambutan' => null,
+            'fotobersama' => null,
+        ];
+
+        if ($db->fotobersama !== null) {
+            $path = $db->fotobersama;
+            Storage::delete($path);
+        }
+
+        $db->update($data);
+        return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil DiHapus!');
+    }
+
+    public function updateorcreateoffer(Request $request)
+    {
+        $rules = [
+            'penawaran' => 'nullable|string',
+            'foto_bersama' => 'nullable|file|image|mimetypes:image/jpeg,image/jpg,image/png|max:2048',
+            'oldfoto_bersama' => ['nullable', 'string', function ($attribute, $value, $fail) {
+                if (!empty($value)) {
+                    $about = $this->abouts->where('foto_bersama', $value)->first();
+                    if (!$about) {
+                        $fail("nilai tidak valid");
+                    }
+                }
+            }],
+        ];
+        $massages = [
+            'max' => ':attribute harus diisi maksimal :max karakter.',
+            'string' => ':attribute harus berupa teks.',
+        ];
+        //Validasi
+        $validator = Validator::make($request->all(), $rules, $massages);
+        //Jika gagal
+        if ($validator->fails()) {
+            return dd(back()->withErrors($validator)->withInput()); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
+        }
+        $validatedData = $validator->validated();
+
+        $filterData['penawaran'] = $validatedData['penawaran'];
+
+        if ($request->hasFile('foto_bersama')) {
+            if ($validatedData['oldfoto_bersama']) {
+                $path = $validatedData['oldfoto_bersama'];
+                Storage::delete($path);
+            }
+
+            $imagefile = $validatedData['foto_bersama'];
+            $imageFileName = 'offers' . '-' . date("Y-m-d", time()) . '-' . $imagefile->getClientOriginalName();
+            $oriPath = $imagefile->storeAs('fotobersama', $imageFileName); // -> fotobersama/<nama_files.ext>
+            // dd($oriPath);
+            $filterData['foto_bersama'] = $oriPath;
+        }
+
+        $id = (int) $request->input('id_offer');
+        // dd($filterData);
+        // update atau create record dengan data yang diberikan
+        $this->offers->updateOrCreate(['id' => $id], $filterData);
+        return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil Disimpan');
+    }
+
+    public function deleteoffer($id)
+    {
+        $db = $this->offers->findOrFail($id);
+        $data = [
+            'penawaran' => null,
+            'foto_bersama' => null,
+        ];
+
+        if ($db->foto_bersama !== null) {
+            $path = $db->foto_bersama;
+            Storage::delete($path);
+        }
+
+        $db->update($data);
         return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil DiHapus!');
     }
 }
