@@ -133,8 +133,8 @@
                                                     <input class="form-control" id="twitter" name="twitter" placeholder="Masukkan username twitter" type="text" value="{{ $sosmeds->twitter ?? '' }}">
                                                     <input class="form-control mt-1" id="itwitter" name="instagram" placeholder="Masukkan link twitter" type="text" value="">
                                                     <label class="form-label mt-2" for="youtube">Youtube</label>
-                                                    <input class="form-control" id="youtube" name="youtube" placeholder="Masukkan link channel youtube" type="text" value="{{ $sosmeds->youtube ?? '' }}">
-                                                    <input class="form-control mt-1" id="instagram" name="youtube" placeholder="Masukkan link youtube" type="text" value="">
+                                                    <input class="form-control" id="instagram" name="youtube" placeholder="Masukkan Nama youtube" type="text" value="">
+                                                    <input class="form-control mt-1" id="youtube" name="youtube" placeholder="Masukkan link channel youtube" type="text" value="{{ $sosmeds->youtube ?? '' }}">
                                                 </div>
                                                 <div class="flex-item button">
                                                     <div class="d-grid gap-2 d-md-flex justify-content-md-center">
