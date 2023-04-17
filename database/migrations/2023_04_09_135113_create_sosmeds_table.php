@@ -15,10 +15,14 @@ return new class extends Migration
     {
         Schema::create('sosmeds', function (Blueprint $table) {
             $table->id();
-            $table->string('instagram')->nullable();
-            $table->string('facebook')->nullable();
-            $table->string('twitter')->nullable();
-            $table->string('youtube')->nullable();
+            $table->string('u_instagram')->nullable();
+            $table->string('l_instagram')->nullable();
+            $table->string('u_facebook')->nullable();
+            $table->string('l_facebook')->nullable();
+            $table->string('u_twitter')->nullable();
+            $table->string('l_twitter')->nullable();
+            $table->string('u_youtube')->nullable();
+            $table->string('l_youtube')->nullable();
             $table->timestamps();
         });
     }

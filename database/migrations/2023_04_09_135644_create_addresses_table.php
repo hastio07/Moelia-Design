@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
             $table->text('alamat_perusahaan')->nullable();
+            $table->text('link_gmap')->nullable();
             $table->timestamps();
         });
     }

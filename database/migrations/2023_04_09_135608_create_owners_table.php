@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('owners', function (Blueprint $table) {
             $table->id();
             $table->string('nama_owner')->nullable();
+            $table->text('kata_sambutan')->nullable();
             $table->string('foto_owner')->nullable();
             $table->timestamps();
         });
