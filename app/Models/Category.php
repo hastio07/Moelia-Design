@@ -2,18 +2,24 @@
 
 namespace App\Models;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    use HasFactory;
+    use HasFactory, Sluggable;
 
-    protected $tabel = 'categories';
-    protected $primaryKey = 'id';
     protected $fillable = ['nama_kategori', 'slug_kategori'];
-    protected $hidden = ['id'];
-
+    protected $primaryKey = 'id';
+    public function sluggable(): array
+    {
+        return [
+            'slug_kategori' => [
+                'source' => 'nama_kategori',
+            ],
+        ];
+    }
     /**
      * Relasi database table categories ke table products (one-to-many)
      */

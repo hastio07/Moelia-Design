@@ -38,7 +38,6 @@ Route::get('/produk', function () {
     return view('dashboard.user.produk');
 })->middleware(['guest:admins', 'prevent-back-history']);
 
-
 /** Awal kode untuk rute super_admin & admin**/
 Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
     Route::get('dashboard', [DashboardAdminsController::class, 'index']);
@@ -46,7 +45,14 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
         Route::resource('manage-akun', ManageAkunController::class)->except('create');
     });
     Route::middleware(['role:super_admin,admin'])->prefix('dashboard')->group(function () {
-        Route::resource('manage-produk', ManageProdukController::class)->except(['create', 'show', 'edit']);
+        Route::controller(ManageProdukController::class)->group(function () {
+            Route::get('manage-produk', 'index')->name('manage-produk.index');
+            Route::post('manage-produk', 'store')->name('manage-produk.store');
+            Route::put('manage-produk/{id}', 'update')->name('manage-produk.update');
+            Route::delete('manage-produk/{id}', 'destroy')->name('manage-produk.destroy');
+            Route::post('manage-produk/kategori', 'createcategory')->name('manage-produk.createcategory');
+            Route::delete('manage-produk/kategori/{id}', 'destroycategory')->name('manage-produk.destroycategory');
+        });
         // Route::resource('manage-gallery', ManageGalleryController::class);
         Route::controller(ManageGalleryController::class)->group(function () {
             Route::get('manage-gallery', 'index')->name('manage-gallery.index');
