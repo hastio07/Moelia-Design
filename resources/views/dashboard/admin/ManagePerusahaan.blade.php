@@ -74,7 +74,7 @@
                                                 <form action="{{ route('manage-perusahaan.updateorcreateaddress') }}" class="formstyle" enctype="multipart/form-data" id="formAlamat" method="POST">
                                                     <div class="flex-item form">
                                                         @csrf
-                                                        <label class="form-label" for="telephone_1">Alamat</label>
+                                                        <label class="form-label" for="alamat_perusahaan">Alamat</label>
                                                         <input name="id_alamat" type="hidden" value="{{ $addresses->id ?? '' }}">
                                                         <input class="form-control" id="alamat_perusahaan" name="alamat_perusahaan" placeholder="Masukkan alamat perusahaan" type="text" value="{{ $addresses->alamat_perusahaan ?? '' }}">
                                                         <label class="form-label" for="link_gmap">Link Google Maps</label>
@@ -125,16 +125,16 @@
                                                         <input name="id_sosmed" type="hidden" value="{{ $sosmeds->id ?? '' }}">
                                                         <label class="form-label mt-2" for="instagram">Instagram</label>
                                                         <input class="form-control" id="instagram" name="u_instagram" placeholder="Masukkan username instagram" type="text" value="{{ $sosmeds->instagram ?? '' }}">
-                                                        <input class="form-control mt-1" id="instagram" name="l_instagram" placeholder="Masukkan link instagram" type="text" value="">
+                                                        <input class="form-control mt-1" id="l_instagram" name="l_instagram" placeholder="Masukkan link instagram" type="text" value="">
                                                         <label class="form-label mt-2" for="facebook">Facebook</label>
                                                         <input class="form-control" id="facebook" name="u_facebook" placeholder="Masukkan username facebook" type="text" value="{{ $sosmeds->facebook ?? '' }}">
-                                                        <input class="form-control mt-1" id="facebook" name="l_instagram" placeholder="Masukkan link Facebook" type="text" value="">
+                                                        <input class="form-control mt-1" id="l_facebook" name="l_facebook" placeholder="Masukkan link Facebook" type="text" value="">
                                                         <label class="form-label mt-2" for="twitter">Twitter</label>
                                                         <input class="form-control" id="twitter" name="u_twitter" placeholder="Masukkan username twitter" type="text" value="{{ $sosmeds->twitter ?? '' }}">
-                                                        <input class="form-control mt-1" id="twitter" name="l_instagram" placeholder="Masukkan link twitter" type="text" value="">
+                                                        <input class="form-control mt-1" id="l_twitter" name="l_twitter" placeholder="Masukkan link twitter" type="text" value="">
                                                         <label class="form-label mt-2" for="youtube">Youtube</label>
                                                         <input class="form-control" id="youtube" name="u_youtube" placeholder="Masukkan link channel youtube" type="text" value="{{ $sosmeds->youtube ?? '' }}">
-                                                        <input class="form-control mt-1" id="instagram" name="l_youtube" placeholder="Masukkan link youtube" type="text" value="">
+                                                        <input class="form-control mt-1" id="l_youtube" name="l_youtube" placeholder="Masukkan link youtube" type="text" value="">
                                                     </div>
                                                     <div class="flex-item button">
                                                         <div class="d-grid gap-2 d-md-flex justify-content-md-center">
