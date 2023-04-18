@@ -78,12 +78,12 @@
                                                         <input name="id_alamat" type="hidden" value="{{ $addresses->id ?? null }}">
                                                         <input class="form-control" id="alamat_perusahaan" name="alamat_perusahaan" placeholder="Masukkan alamat perusahaan" type="text" value="{{ $addresses->alamat_perusahaan ?? null }}">
                                                         <label class="form-label" for="link_gmap">Link Google Maps</label>
-                                                        <input aria-label="default input example" class="form-control" id="link_gmap" name="link_gmap" placeholder="Link Google Maps" type="text">
+                                                        <input aria-label="default input example" class="form-control" id="link_gmap" name="link_gmap" placeholder="Link Google Maps" type="text" value="{{ $addresses->link_gmap ?? null }}">
                                                     </div>
                                                     <div class="flex-item button">
                                                         <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                                                             <button class="btn btn-success" type="submit">Upload</button>
-                                                            @if (!empty($addresses) && $addresses->alamat_perusahaan)
+                                                            @if ((!empty($addresses) && $addresses->alamat_perusahaan) || $addresses->link_gmap)
                                                                 <button class="btn btn-danger" data-bs-route="{{ route('manage-perusahaan.deleteaddress', $addresses->id) }}" id="btnDelete" type="submit">Hapus</i></button>
                                                             @endif
                                                         </div>
@@ -99,16 +99,16 @@
                                                         @csrf
                                                         <input name="id_contact" type="hidden" value="{{ $contacts->id ?? null }}">
                                                         <label class="form-label" for="telephone">Telephone</label>
-                                                        <input class="form-control" id="telephone" name="telephone" placeholder="Masukkan nomor telephone" type="text" value="{{ $contacts->telephone_1 ?? null }}">
+                                                        <input class="form-control" id="telephone" name="telephone" placeholder="Masukkan nomor telephone" type="text" value="{{ $contacts->telephone ?? null }}">
                                                         <label class="form-label" for="whatsapp">Whatsapp</label>
-                                                        <input class="form-control" id="whatsapp" name="whatsapp" placeholder="Masukkan nomor whatsapp" type="text" value="{{ $contacts->whatsapp_1 ?? null }}">
+                                                        <input class="form-control" id="whatsapp" name="whatsapp" placeholder="Masukkan nomor whatsapp" type="text" value="{{ $contacts->whatsapp ?? null }}">
                                                         <label class="form-label" for="email">Email</label>
                                                         <input class="form-control" id="email" name="email" placeholder="Masukkan email" type="email" value="{{ $contacts->email ?? null }}">
                                                     </div>
                                                     <div class="flex-item button">
                                                         <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                                                             <button class="btn btn-success" type="submit">Upload</button>
-                                                            @if (!empty($contacts) && ($contacts->telephone_1 || $contacts->telephone_2 || $contacts->whatsapp_1 || $contacts->whatsapp_2 || $contacts->email))
+                                                            @if (!empty($contacts) && ($contacts->telephone || $contacts->whatsapp || $contacts->email))
                                                                 <button class="btn btn-danger" data-bs-route="{{ route('manage-perusahaan.deletecontact', $contacts->id) }}" id="btnDelete" type="submit">Hapus</button>
                                                             @endif
                                                         </div>
@@ -139,7 +139,17 @@
                                                     <div class="flex-item button">
                                                         <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                                                             <button class="btn btn-success" type="submit">Upload</i></button>
-                                                            @if (!empty($sosmeds) && ($sosmeds->instagram || $sosmeds->facebook || $sosmeds->twitter || $sosmeds->youtube))
+                                                            @php
+                                                                $social_media = ['u_instagram', 'l_instagram', 'u_facebook', 'l_facebook', 'u_twitter', 'l_twitter', 'u_youtube', 'l_youtube'];
+                                                                $show_button = false;
+                                                                foreach ($social_media as $media) {
+                                                                    if (!empty($sosmeds->$media)) {
+                                                                        $show_button = true;
+                                                                        break;
+                                                                    }
+                                                                }
+                                                            @endphp
+                                                            @if (!empty($sosmeds) && $show_button)
                                                                 <button class="btn btn-danger" data-bs-route="{{ route('manage-perusahaan.deletesosmed', $sosmeds->id) }}" id="btnDelete" type="submit">Hapus</button>
                                                             @endif
                                                         </div>
