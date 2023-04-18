@@ -196,7 +196,7 @@
                                                         <img alt="{{ $owners->nama_owner }}" class="rounded img-owner" src="/storage/{{ $owners->foto_owner }}">
                                                     @endif
                                                 </div>
-                                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sunt, minus sint eveniet maiores nobis laudantium vel obcaecati aliquam consequuntur amet ab similique fugiat placeat? Ullam, iure ducimus. Eius, id sunt.</p>
+                                                <p>{{ $owners->kata_sambutan }}</p>
                                                 <h6 class="fw-bolder text-capitalize">{{ $owners->nama_owner }}</h6>
                                             @endif
                                         </div>
@@ -242,18 +242,24 @@
                                             </div>
                                         </div>
                                         <div class="left border text-center bg-white shadow p-3 mb-5 bg-body rounded">
-                                            <h4 class="card-title text-center">Siapa Kami?</h4>
-                                            @if (!empty($abouts->fotobersama))
-                                                <img alt="fotobersama" class="rounded img-owner" src="/storage/{{ $abouts->fotobersama }}">
+                                            {{-- perhatikan tanda (!) pembalik logika --}}
+                                            {{-- empty aslinya menghasilkan nilai false jika sebuah variabel telah diisi, dan bernilai true jika variabel tersebut belum diisi.  --}}
+                                            @if (!empty($abouts) && ($abouts->katasambutan || $abouts->fotobersama))
+                                                <h4 class="card-title text-center">Siapa Kami?</h4>
+                                                @if (!empty($abouts->fotobersama))
+                                                    <img alt="fotobersama" class="rounded img-owner" src="/storage/{{ $abouts->fotobersama }}">
+                                                @endif
+                                                <p>{{ $abouts->katasambutan }}</p>
                                             @endif
-                                            <p>{{ $abouts->katasambutan }}</p>
                                         </div>
                                         <div class="left border text-center bg-white shadow p-3 mb-5 bg-body rounded">
-                                            <h4 class="card-title text-center">Apa saja yang didapatkan?</h4>
-                                            @if (!empty($offers->foto_bersama))
-                                                <img alt="fotobersama" class="rounded img-owner" src="/storage/{{ $offers->foto_bersama }}">
+                                            @if (!empty($offers) && ($offers->penawaran || $offers->foto_bersama))
+                                                <h4 class="card-title text-center">Apa saja yang didapatkan?</h4>
+                                                @if (!empty($offers->foto_bersama))
+                                                    <img alt="fotobersama" class="rounded img-owner" src="/storage/{{ $offers->foto_bersama }}">
+                                                @endif
+                                                <p>{{ $offers->penawaran }}</p>
                                             @endif
-                                            <p>{{ $offers->penawaran }}</p>
                                         </div>
                                     </div>
                                 </div>
