@@ -231,28 +231,28 @@
             </div>
             <div class="sidebar-content">
                 <ul>
-                    <li class="{{ Request::is('dashboard') ? 'active' : '' }}">
-                        <a class="link" href="/dashboard">
+                    <li class="{{ Route::is('dashboard') ? 'active' : '' }}">
+                        <a class="link" href="{{ route('dashboard') }}">
                             <i class="ti-home"></i>
                             <span>Dashboard</span>
                         </a>
                     </li>
                     @can('view', App\Models\Admin::class)
-                        <li class="{{ Request::is('dashboard/manage-akun') || Request::is('dashboard/manage-akun/*/edit') ? 'active' : '' }}">
-                            <a class="link" href="/dashboard/manage-akun">
+                        <li class="{{ Route::is('manage-akun.*') ? 'active' : '' }}">
+                            <a class="link" href="{{ route('manage-akun.index') }}">
                                 <i class="ti-id-badge"></i>
                                 <span>Manage Akun</span>
                             </a>
                         </li>
                     @endcan
-                    <li>
-                        <a class="link" href="/dashboard/manage-perusahaan">
+                    <li class="{{ Route::is('manage-perusahaan.*') ? 'active' : '' }}">
+                        <a class="link" href="{{ route('manage-perusahaan.index') }}">
                             <i class="ti-home"></i>
                             <span>Manage Perusahaan</span>
                         </a>
                     </li>
-                    <li>
-                        <a class="link" href="/dashboard/manage-produk">
+                    <li class="{{ Route::is('manage-produk.*') ? 'active' : '' }}">
+                        <a class="link" href="{{ route('manage-produk.index') }}">
                             <i class="ti-view-grid"></i>
                             <span>Manage Produk</span>
                         </a>
@@ -273,14 +273,14 @@
                             <li><a class="link" href="/manage-pesanan"><span>Belum Dikerjakan</span></a></li>
                         </ul>
                     </li>
-                    <li class="{{ Request::is('dashboard/manage-gallery*') ? 'active' : '' }}">
-                        <a class="link" href="/dashboard/manage-gallery">
+                    <li class="{{ Route::is('manage-gallery.*') ? 'active' : '' }}">
+                        <a class="link" href="{{ route('manage-gallery.index') }}">
                             <i class="ti-gallery"></i>
                             <span>Manage Gallery</span>
                         </a>
                     </li>
-                    <li class="{{ Request::is('dashboard/manage-layanan*') ? 'active' : '' }}">
-                        <a class="link" href="/dashboard/manage-layanan">
+                    <li class="{{ Route::is('manage-layanan.*') ? 'active' : '' }}">
+                        <a class="link" href="{{ route('manage-layanan.index') }}">
                             <i class="ti-bookmark-alt"></i>
                             <span>Manage Layanan</span>
                         </a>
