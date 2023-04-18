@@ -38,6 +38,14 @@ Route::get('/produk', function () {
     return view('dashboard.user.produk');
 })->middleware(['guest:admins', 'prevent-back-history']);
 
+Route::get('/foto', function () {
+    return view('dashboard.user.foto');
+})->middleware(['guest:admins', 'prevent-back-history']);
+
+Route::get('/vidio', function () {
+    return view('dashboard.user.vidio');
+})->middleware(['guest:admins', 'prevent-back-history']);
+
 /** Awal kode untuk rute super_admin & admin**/
 Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
     Route::get('dashboard', [DashboardAdminsController::class, 'index']);
