@@ -9,5 +9,5 @@ class Owner extends Model
 {
     use HasFactory;
     protected $primaryKey = 'id';
-    protected $fillable = ['nama_owner', 'foto_owner'];
+    protected $fillable = ['nama_owner', 'kata_sambutan', 'foto_owner'];
 }

@@ -9,5 +9,5 @@ class Address extends Model
 {
     use HasFactory;
     protected $primaryKey = 'id';
-    protected $fillable = ['alamat_perusahaan'];
+    protected $fillable = ['alamat_perusahaan', 'link_gmap'];
 }
