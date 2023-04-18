@@ -18,7 +18,7 @@ class ManageGalleryController extends Controller
     }
     public function phototab()
     {
-        $photos = Photo::latest()->paginate($perPage = 6, $columns = ['*'], $pageName = 'photo');
+        $photos = Photo::latest()->paginate($perPage = 14, $columns = ['*'], $pageName = 'photo');
         $activeTab = 'photo-tab';
         return view('dashboard.admin.managegallery', compact('photos', 'activeTab'));
     }
@@ -51,7 +51,6 @@ class ManageGalleryController extends Controller
             $oriPath = $imagefile->storeAs('gallery-images', $imageFileName); // -> gallery-images/<nama_files.ext>
             $data['photo_path'] = $oriPath;
             Photo::create($data);
-
         }
         return redirect('dashboard/manage-gallery/photo-tab')->with('success', 'data berhasil disimpan');
     }
@@ -86,7 +85,6 @@ class ManageGalleryController extends Controller
         }
 
         return view('dashboard.admin.managegallery', compact('activeTab'));
-
     }
     public function createvideo(Request $request)
     {
@@ -128,7 +126,6 @@ class ManageGalleryController extends Controller
 
         Video::create($data);
         return redirect('dashboard/manage-gallery/video-tab')->with('success', 'data berhasil disimpan');
-
     }
 
     public function destroyvideo($id)
