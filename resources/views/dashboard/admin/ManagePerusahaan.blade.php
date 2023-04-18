@@ -26,10 +26,10 @@
                                                 <form action="{{ route('manage-perusahaan.updateorcreateowner') }}" class="formstyle" enctype="multipart/form-data" id="formOwner" method="POST">
                                                     <div class="flex-item form">
                                                         @csrf
-                                                        <input name="id_owner" type="hidden" value="{{ $owners->id ?? '' }}">
-                                                        <input name="oldfoto_owner" type="hidden" value="{{ $owners->foto_owner ?? '' }}">
+                                                        <input name="id_owner" type="hidden" value="{{ $owners->id ?? null }}">
+                                                        <input name="oldfoto_owner" type="hidden" value="{{ $owners->foto_owner ?? null }}">
                                                         <label class="form-label" for="nama_owner">Nama Owner</label>
-                                                        <input class="form-control" id="nama_owner" name="nama_owner" placeholder="Masukkan nama owner" type="text" value="{{ $owners->nama_owner ?? '' }}">
+                                                        <input class="form-control" id="nama_owner" name="nama_owner" placeholder="Masukkan nama owner" type="text" value="{{ $owners->nama_owner ?? null }}">
                                                         <label class="form-label" for="kata_sambutan">Kata Sambutan</label>
                                                         <textarea class="form-control" id="kata_sambutan" name="kata_sambutan" rows="3">{{ $abouts->kata_sambutan ?? null }}</textarea>
                                                         <label class="form-label" for="foto_owner">Foto Owner</label>
@@ -52,10 +52,10 @@
                                                 <form action="{{ route('manage-perusahaan.updateorcreatecompany') }}" class="formstyle" enctype="multipart/form-data" id="formCompany" method="POST">
                                                     <div class="flex-item form">
                                                         @csrf
-                                                        <input name="id_perusahaan" type="hidden" value="{{ $companies->id ?? '' }}">
-                                                        <input name="oldlogo_perusahaan" type="hidden" value="{{ $companies->logo_perusahaan ?? '' }}">
+                                                        <input name="id_perusahaan" type="hidden" value="{{ $companies->id ?? null }}">
+                                                        <input name="oldlogo_perusahaan" type="hidden" value="{{ $companies->logo_perusahaan ?? null }}">
                                                         <label class="form-label" for="nama_perusahaan">Nama Perusahaan</label>
-                                                        <input class="form-control" id="nama_perusahaan" name="nama_perusahaan" placeholder="Masukkan nama perusahaan" type="text" value="{{ old('username', $companies->nama_perusahaan ?? '') }}">
+                                                        <input class="form-control" id="nama_perusahaan" name="nama_perusahaan" placeholder="Masukkan nama perusahaan" type="text" value="{{ old('username', $companies->nama_perusahaan ?? null) }}">
                                                         <label class="form-label" for="logo">Logo Perusahaan</label>
                                                         <input accept="image/jpg, image/png, image/jpeg" class="form-control" id="logo" name="logo_perusahaan" type="file">
                                                     </div>
@@ -75,8 +75,8 @@
                                                     <div class="flex-item form">
                                                         @csrf
                                                         <label class="form-label" for="alamat_perusahaan">Alamat</label>
-                                                        <input name="id_alamat" type="hidden" value="{{ $addresses->id ?? '' }}">
-                                                        <input class="form-control" id="alamat_perusahaan" name="alamat_perusahaan" placeholder="Masukkan alamat perusahaan" type="text" value="{{ $addresses->alamat_perusahaan ?? '' }}">
+                                                        <input name="id_alamat" type="hidden" value="{{ $addresses->id ?? null }}">
+                                                        <input class="form-control" id="alamat_perusahaan" name="alamat_perusahaan" placeholder="Masukkan alamat perusahaan" type="text" value="{{ $addresses->alamat_perusahaan ?? null }}">
                                                         <label class="form-label" for="link_gmap">Link Google Maps</label>
                                                         <input aria-label="default input example" class="form-control" id="link_gmap" name="link_gmap" placeholder="Link Google Maps" type="text">
                                                     </div>
@@ -97,13 +97,13 @@
                                                 <form action="{{ route('manage-perusahaan.updateorcreatecontact') }}" class="formstyle" enctype="multipart/form-data" id="formContact" method="POST">
                                                     <div class="flex-item form">
                                                         @csrf
-                                                        <input name="id_contact" type="hidden" value="{{ $contacts->id ?? '' }}">
+                                                        <input name="id_contact" type="hidden" value="{{ $contacts->id ?? null }}">
                                                         <label class="form-label" for="telephone">Telephone</label>
-                                                        <input class="form-control" id="telephone" name="telephone" placeholder="Masukkan nomor telephone" type="text" value="{{ $contacts->telephone_1 ?? '' }}">
+                                                        <input class="form-control" id="telephone" name="telephone" placeholder="Masukkan nomor telephone" type="text" value="{{ $contacts->telephone_1 ?? null }}">
                                                         <label class="form-label" for="whatsapp">Whatsapp</label>
-                                                        <input class="form-control" id="whatsapp" name="whatsapp" placeholder="Masukkan nomor whatsapp" type="text" value="{{ $contacts->whatsapp_1 ?? '' }}">
+                                                        <input class="form-control" id="whatsapp" name="whatsapp" placeholder="Masukkan nomor whatsapp" type="text" value="{{ $contacts->whatsapp_1 ?? null }}">
                                                         <label class="form-label" for="email">Email</label>
-                                                        <input class="form-control" id="email" name="email" placeholder="Masukkan email" type="email" value="{{ $contacts->email ?? '' }}">
+                                                        <input class="form-control" id="email" name="email" placeholder="Masukkan email" type="email" value="{{ $contacts->email ?? null }}">
                                                     </div>
                                                     <div class="flex-item button">
                                                         <div class="d-grid gap-2 d-md-flex justify-content-md-center">
@@ -122,19 +122,19 @@
                                                 <form action="{{ route('manage-perusahaan.updateorcreatesosmed') }}" class="formstyle" enctype="multipart/form-data" id="formSosmed" method="POST">
                                                     <div class="flex-item form">
                                                         @csrf
-                                                        <input name="id_sosmed" type="hidden" value="{{ $sosmeds->id ?? '' }}">
+                                                        <input name="id_sosmed" type="hidden" value="{{ $sosmeds->id ?? null }}">
                                                         <label class="form-label mt-2" for="instagram">Instagram</label>
-                                                        <input class="form-control" id="instagram" name="u_instagram" placeholder="Masukkan username instagram" type="text" value="{{ $sosmeds->instagram ?? '' }}">
-                                                        <input class="form-control mt-1" id="l_instagram" name="l_instagram" placeholder="Masukkan link instagram" type="text" value="">
+                                                        <input class="form-control" id="instagram" name="u_instagram" placeholder="Masukkan username instagram" type="text" value="{{ $sosmeds->u_instagram ?? null }}">
+                                                        <input class="form-control mt-1" id="l_instagram" name="l_instagram" placeholder="Masukkan link instagram" type="text" value="{{ $sosmeds->l_instagram ?? null }}">
                                                         <label class="form-label mt-2" for="facebook">Facebook</label>
-                                                        <input class="form-control" id="facebook" name="u_facebook" placeholder="Masukkan username facebook" type="text" value="{{ $sosmeds->facebook ?? '' }}">
-                                                        <input class="form-control mt-1" id="l_facebook" name="l_facebook" placeholder="Masukkan link Facebook" type="text" value="">
+                                                        <input class="form-control" id="facebook" name="u_facebook" placeholder="Masukkan username facebook" type="text" value="{{ $sosmeds->u_facebook ?? null }}">
+                                                        <input class="form-control mt-1" id="l_facebook" name="l_facebook" placeholder="Masukkan link Facebook" type="text" value="{{ $sosmeds->l_facebook ?? null }}">
                                                         <label class="form-label mt-2" for="twitter">Twitter</label>
-                                                        <input class="form-control" id="twitter" name="u_twitter" placeholder="Masukkan username twitter" type="text" value="{{ $sosmeds->twitter ?? '' }}">
-                                                        <input class="form-control mt-1" id="l_twitter" name="l_twitter" placeholder="Masukkan link twitter" type="text" value="">
+                                                        <input class="form-control" id="twitter" name="u_twitter" placeholder="Masukkan username twitter" type="text" value="{{ $sosmeds->u_twitter ?? null }}">
+                                                        <input class="form-control mt-1" id="l_twitter" name="l_twitter" placeholder="Masukkan link twitter" type="text" value="{{ $sosmeds->l_twitter ?? null }}">
                                                         <label class="form-label mt-2" for="youtube">Youtube</label>
-                                                        <input class="form-control" id="youtube" name="u_youtube" placeholder="Masukkan link channel youtube" type="text" value="{{ $sosmeds->youtube ?? '' }}">
-                                                        <input class="form-control mt-1" id="l_youtube" name="l_youtube" placeholder="Masukkan link youtube" type="text" value="">
+                                                        <input class="form-control" id="youtube" name="u_youtube" placeholder="Masukkan link channel youtube" type="text" value="{{ $sosmeds->u_youtube ?? null }}">
+                                                        <input class="form-control mt-1" id="l_youtube" name="l_youtube" placeholder="Masukkan link youtube" type="text" value="{{ $sosmeds->l_youtube ?? null }}">
                                                     </div>
                                                     <div class="flex-item button">
                                                         <div class="d-grid gap-2 d-md-flex justify-content-md-center">
@@ -152,10 +152,10 @@
                                                 </h5>
                                                 <form action="{{ route('manage-perusahaan.updateorcreateabout') }}" class="formstyle" enctype="multipart/form-data" id="formAbout" method="POST">
                                                     @csrf
-                                                    <input name="id_about" type="hidden" value="{{ $abouts->id ?? '' }}">
-                                                    <input name="oldfotobersama" type="hidden" value="{{ $abouts->fotobersama ?? '' }}">
+                                                    <input name="id_about" type="hidden" value="{{ $abouts->id ?? null }}">
+                                                    <input name="oldfotobersama" type="hidden" value="{{ $abouts->fotobersama ?? null }}">
                                                     <label class="form-label" for="katasambutan">Kata Sambutan</label>
-                                                    <textarea class="form-control" id="katasambutan" name="katasambutan" rows="3">{{ $abouts->katasambutan }}</textarea>
+                                                    <textarea class="form-control" id="katasambutan" name="katasambutan" rows="3">{{ $abouts->katasambutan ?? null }}</textarea>
                                                     <label class="form-label" for="fotobersama">Foto Bersama</label>
                                                     <input accept="image/jpg, image/png, image/jpeg" class="form-control" id="fotobersama" name="fotobersama" type="file">
                                                     <div class="mt-2 text-center">
@@ -172,8 +172,8 @@
                                                 </h5>
                                                 <form action="{{ route('manage-perusahaan.updateorcreateoffer') }}" class="formstyle" enctype="multipart/form-data" id="formOffer" method="POST">
                                                     @csrf
-                                                    <input name="id_offer" type="hidden" value="{{ $offers->id ?? '' }}">
-                                                    <input name="oldfoto_bersama" type="hidden" value="{{ $offers->foto_bersama ?? '' }}">
+                                                    <input name="id_offer" type="hidden" value="{{ $offers->id ?? null }}">
+                                                    <input name="oldfoto_bersama" type="hidden" value="{{ $offers->foto_bersama ?? null }}">
                                                     <label class="form-label" for="foto_bersama">Foto Bersama</label>
                                                     <input accept="image/jpg, image/png, image/jpeg" class="form-control mb-3" id="foto_bersama" name="foto_bersama" type="file">
                                                     <textarea id="penawaran" name="penawaran">{{ $offers->penawaran ?? null }}</textarea>
@@ -215,41 +215,45 @@
                                             <h4 class="card-title text-center">Alamat, Kontak & Sosial Media Perusahaan</h4>
                                             <div class="d-flex mt-3">
                                                 <i class="fa-sharp fa-solid fa-map-location-dot fa-2xl"></i>
-                                                <p>{{ $addresses->alamat_perusahaan ?? '' }}</p>
+                                                <p>{{ $addresses->alamat_perusahaan ?? null }}</p>
                                             </div>
                                             <div class="d-flex mt-3">
                                                 <i class="fa-solid fa-phone-volume fa-2xl"></i>
-                                                <p>{{ $contacts->telephone ?? '' }}</p>
+                                                <p>{{ $contacts->telephone ?? null }}</p>
                                             </div>
                                             <div class="d-flex mt-3">
                                                 <i class="fa-brands fa-whatsapp fa-2xl"></i>
-                                                <p>{{ $contacts->whatsapp ?? '' }}</p>
+                                                <p>{{ $contacts->whatsapp ?? null }}</p>
                                             </div>
                                             <div class="d-flex mt-3"> <i class="fa-brands fa-instagram fa-2xl"></i>
-                                                <p>{{ $sosmeds->u_instagram ?? '' }}</p>
+                                                <p>{{ $sosmeds->u_instagram ?? null }}</p>
                                             </div>
                                             <div class="d-flex mt-3">
                                                 <i class="fa-brands fa-facebook fa-2xl"></i>
-                                                <p>{{ $sosmeds->u_facebook ?? '' }}</p>
+                                                <p>{{ $sosmeds->u_facebook ?? null }}</p>
                                             </div>
                                             <div class="d-flex mt-3">
                                                 <i class="fa-brands fa-twitter fa-2xl"></i>
-                                                <p>{{ $sosmeds->u_twitter ?? '' }}</p>
+                                                <p>{{ $sosmeds->u_twitter ?? null }}</p>
                                             </div>
                                             <div class="d-flex mt-3">
                                                 <i class="fa-brands fa-youtube fa-2xl"></i>
-                                                <p>{{ $sosmeds->u_youtube ?? '' }}</p>
+                                                <p>{{ $sosmeds->u_youtube ?? null }}</p>
                                             </div>
                                         </div>
                                         <div class="left border text-center bg-white shadow p-3 mb-5 bg-body rounded">
                                             <h4 class="card-title text-center">Siapa Kami?</h4>
-                                            <img alt="img/cover-2.jpg" class="rounded img-owner" src="">
-                                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sunt, minus sint eveniet maiores nobis laudantium vel obcaecati aliquam consequuntur amet ab similique fugiat placeat? Ullam, iure ducimus. Eius, id sunt.</p>
+                                            @if (!empty($abouts->fotobersama))
+                                                <img alt="fotobersama" class="rounded img-owner" src="/storage/{{ $abouts->fotobersama }}">
+                                            @endif
+                                            <p>{{ $abouts->katasambutan }}</p>
                                         </div>
                                         <div class="left border text-center bg-white shadow p-3 mb-5 bg-body rounded">
                                             <h4 class="card-title text-center">Apa saja yang didapatkan?</h4>
-                                            <img alt="img/cover-2.jpg" class="rounded img-owner" src="">
-                                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sunt, minus sint eveniet maiores nobis laudantium vel obcaecati aliquam consequuntur amet ab similique fugiat placeat? Ullam, iure ducimus. Eius, id sunt.</p>
+                                            @if (!empty($offers->foto_bersama))
+                                                <img alt="fotobersama" class="rounded img-owner" src="/storage/{{ $offers->foto_bersama }}">
+                                            @endif
+                                            <p>{{ $offers->penawaran }}</p>
                                         </div>
                                     </div>
                                 </div>
