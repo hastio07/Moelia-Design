@@ -1,0 +1,11 @@
+.head-gallery {
+    padding-top: 20px;
+    margin: 65px 0 10px 0;
+    height: 15vh;
+    background-color: #a39300b0;
+    color: #fff;
+}
+
+.gallery {
+    height: 100vh;
+}

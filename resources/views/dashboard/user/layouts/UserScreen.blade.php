@@ -60,8 +60,8 @@
                                 Gallery
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/maintenance">Foto</a></li>
-                                <li><a class="dropdown-item" href="/maintenance">Vidio</a></li>
+                                <li><a class="dropdown-item" href="/foto">Foto</a></li>
+                                <li><a class="dropdown-item" href="/vidio">Vidio</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
