@@ -31,7 +31,7 @@
                                                         <label class="form-label" for="nama_owner">Nama Owner</label>
                                                         <input class="form-control" id="nama_owner" name="nama_owner" placeholder="Masukkan nama owner" type="text" value="{{ $owners->nama_owner ?? '' }}">
                                                         <label class="form-label" for="kata_sambutan">Kata Sambutan</label>
-                                                        <textarea class="form-control" id="kata_sambutan" name="kata_sambutan" rows="3">{{ $abouts->kata_sambutan }}</textarea>
+                                                        <textarea class="form-control" id="kata_sambutan" name="kata_sambutan" rows="3">{{ $abouts->kata_sambutan ?? null }}</textarea>
                                                         <label class="form-label" for="foto_owner">Foto Owner</label>
                                                         <input class="form-control" id="foto_owner" name="foto_owner" type="file">
                                                     </div>
