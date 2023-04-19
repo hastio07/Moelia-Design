@@ -8,7 +8,9 @@
     <section>
         <div class="head-gallery text-center align-self-center">
             <h1>Gallery Foto</h1>
-            <p> Home/Gallery/Foto</p>
+            <div class="d-flex justify-content-center">
+                {{ Breadcrumbs::render('foto') }}
+            </div>
         </div>
         <div class="container mt-5 mb-5">
             <div class="row g-2">
