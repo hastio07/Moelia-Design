@@ -9,7 +9,9 @@
     <section>
         <div class="head-product text-center align-self-center">
             <h1>Product</h1>
-            <p> Home/Product</p>
+            <div class="d-flex justify-content-center">
+                {{ Breadcrumbs::render('produk') }}
+            </div>
         </div>
         <div class="container  py-5">
             <h1 class="text-center">Make Up</h1>
