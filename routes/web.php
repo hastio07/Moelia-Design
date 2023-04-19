@@ -9,6 +9,7 @@ use App\Http\Controllers\ManageProdukController;
 use App\Http\Controllers\user\FotoController;
 use App\Http\Controllers\user\HomeController;
 use App\Http\Controllers\user\ProdukController;
+use App\Http\Controllers\user\VideoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,11 +23,11 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('/', [HomeController::class, 'index'])->middleware(['guest:admins', 'prevent-back-history']);
+Route::get('/', [HomeController::class, 'index'])->middleware(['guest:admins', 'prevent-back-history'])->name('home');
 
 Route::get('/aboutus', function () {
     return view('dashboard.user.aboutus');
-})->middleware(['guest:admins', 'prevent-back-history']);
+})->middleware(['guest:admins', 'prevent-back-history'])->name('aboutus');
 
 Route::get('/maintenance', function () {
     return view('dashboard.user.maintenance');
@@ -40,9 +41,7 @@ Route::resource('/produk', ProdukController::class)->middleware(['guest:admins',
 
 Route::get('/foto', [FotoController::class, 'index'])->middleware(['guest:admins', 'prevent-back-history'])->name('foto');
 
-Route::get('/vidio', function () {
-    return view('dashboard.user.vidio');
-})->middleware(['guest:admins', 'prevent-back-history']);
+Route::get('/vidio', [VideoController::class, 'index'])->middleware(['guest:admins', 'prevent-back-history'])->name('vidio');
 
 /** Awal kode untuk rute super_admin & admin**/
 Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
