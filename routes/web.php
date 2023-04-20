@@ -6,6 +6,7 @@ use App\Http\Controllers\ManageGalleryController;
 use App\Http\Controllers\ManageLayananController;
 use App\Http\Controllers\ManagePerusahaanController;
 use App\Http\Controllers\ManageProdukController;
+use App\Http\Controllers\user\AboutController;
 use App\Http\Controllers\user\FotoController;
 use App\Http\Controllers\user\HomeController;
 use App\Http\Controllers\user\ProdukController;
@@ -25,9 +26,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->middleware(['guest:admins', 'prevent-back-history'])->name('home');
 
-Route::get('/aboutus', function () {
-    return view('dashboard.user.aboutus');
-})->middleware(['guest:admins', 'prevent-back-history'])->name('aboutus');
+Route::get('/aboutus', [AboutController::class, 'index'])->middleware(['guest:admins', 'prevent-back-history'])->name('aboutus');
 
 Route::get('/maintenance', function () {
     return view('dashboard.user.maintenance');
