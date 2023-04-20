@@ -43,15 +43,15 @@
             <div class="owner-profile">
                 <div class="card">
                     <div class="imgBX">
-                        <img alt="" src="img/cover-2.jpg">
+                        @if (!empty($owners->foto_owner))
+                            <img alt="{{ $owners->nama_owner }}" class="rounded img-owner" src="/storage/{{ $owners->foto_owner }}">
+                        @endif
                     </div>
                     <div class="content">
                         <div class="details">
-                            <h2>hastio wahyu utomo <br><span>owner</span></h2>
+                            <h2>{{ $owners->nama_owner }}<br><span>owner</span></h2>
                             <div class="data">
-                                <p>
-                                    "Bride and Groom tidak perlu khawatir karena Mawar Wedding Service eksibel dan dapat menyesuaikan dengan budget dan kebutuhan kamu"
-                                </p>
+                                <p>{{ $owners->kata_sambutan }}</p>
                             </div>
                         </div>
                     </div>

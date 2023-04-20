@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Address;
 use App\Models\Contact;
 use App\Models\Offer;
+use App\Models\Owner;
 
 class AboutController extends Controller
 {
@@ -17,7 +18,8 @@ class AboutController extends Controller
         $addresses = Address::first();
         //Contact
         $contacts = Contact::first();
-
-        return view('dashboard.user.aboutus', compact('offers', 'addresses', 'contacts'));
+        //Owner
+        $owners = Owner::first();
+        return view('dashboard.user.aboutus', compact('offers', 'addresses', 'contacts', 'owners'));
     }
 }
