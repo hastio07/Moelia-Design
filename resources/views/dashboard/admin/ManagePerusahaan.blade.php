@@ -262,13 +262,17 @@
                                                 <p>{{ $abouts->katasambutan }}</p>
                                             @endif
                                         </div>
-                                        <div class="left border text-center bg-white shadow p-3 mb-5 bg-body rounded">
+                                        <div class="left border bg-white shadow p-3 mb-5 bg-body rounded">
                                             @if (!empty($offers) && ($offers->penawaran || $offers->foto_bersama))
-                                                <h4 class="card-title text-center">Apa saja yang didapatkan?</h4>
-                                                @if (!empty($offers->foto_bersama))
-                                                    <img alt="fotobersama" class="rounded img-owner" src="/storage/{{ $offers->foto_bersama }}">
-                                                @endif
-                                                <p>{{ $offers->penawaran }}</p>
+                                                <div class="text-center">
+                                                    <h4 class="card-title text-center">Apa saja yang didapatkan?</h4>
+                                                    @if (!empty($offers->foto_bersama))
+                                                        <img alt="fotobersama" class="rounded img-owner" src="/storage/{{ $offers->foto_bersama }}">
+                                                    @endif
+                                                </div>
+                                                <div class="p-2">
+                                                    {!! $offers->penawaran !!}
+                                                </div>
                                             @endif
                                         </div>
                                     </div>
