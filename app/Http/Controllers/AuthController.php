@@ -33,7 +33,7 @@ class AuthController extends Controller
             // if (Auth::guard('admins')->user()->role_id === 1) {
             //     return redirect()->intended('/dashboard');
             // }
-            return redirect()->intended('/dashboard');
+            return redirect()->intended('dashboard');
         }
         if (Auth::guard('web')->attempt($credentials)) {
             $request->session()->regenerate();
