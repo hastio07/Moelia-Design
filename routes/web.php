@@ -24,23 +24,19 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('/', [HomeController::class, 'index'])->middleware(['guest:admins', 'prevent-back-history'])->name('home');
-
-Route::get('/aboutus', [AboutController::class, 'index'])->middleware(['guest:admins', 'prevent-back-history'])->name('aboutus');
-
-Route::get('/maintenance', function () {
-    return view('dashboard.user.maintenance');
-})->middleware(['guest:admins', 'prevent-back-history']);
-
-// Route::get('/details', function () {
-//     return view('dashboard.user.detailitem');
-// })->middleware(['guest:admins', 'prevent-back-history']);
-
-Route::resource('/produk', ProdukController::class)->middleware(['guest:admins', 'prevent-back-history'])->except(['create', 'store', 'edit', 'update', 'destroy']);
-
-Route::get('/foto', [FotoController::class, 'index'])->middleware(['guest:admins', 'prevent-back-history'])->name('foto');
-
-Route::get('/vidio', [VideoController::class, 'index'])->middleware(['guest:admins', 'prevent-back-history'])->name('vidio');
+Route::middleware(['no-redirect-if-authenticated:admins', 'prevent-back-history'])->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/aboutus', [AboutController::class, 'index'])->name('aboutus');
+    Route::get('/maintenance', function () {
+        return view('dashboard.user.maintenance');
+    });
+    // Route::get('/details', function () {
+    //     return view('dashboard.user.detailitem');
+    // });
+    Route::resource('/produk', ProdukController::class)->except(['create', 'store', 'edit', 'update', 'destroy']);
+    Route::get('/foto', [FotoController::class, 'index'])->name('foto');
+    Route::get('/vidio', [VideoController::class, 'index'])->name('vidio');
+});
 
 /** Awal kode untuk rute super_admin & admin**/
 Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
