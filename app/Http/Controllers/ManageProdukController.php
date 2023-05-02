@@ -8,16 +8,42 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image as ImageResize;
+use Yajra\DataTables\Facades\DataTables;
 
 class ManageProdukController extends Controller
 {
     public function index()
     {
         //
-        $get_products = Product::with('category')->latest()->get();
         $get_categories = Category::latest()->get();
-        return view('dashboard.admin.manageproduk', compact('get_products', 'get_categories'));
+        if (request()->ajax()) {
+            $get_products = Product::with('category')->latest()->get();
+            return DataTables::of($get_products)->addColumn('kategori_id', function ($value) {
+                return $value->category->nama_kategori;
+            })->addColumn('harga_sewa', function ($value) {
+                return $value->formatRupiah('harga_sewa');
+            })->addColumn('rincian_produk', function ($value) {
+                return Str::words(strip_tags($value->rincian_produk), 5);
+            })->addColumn('deskripsi', function ($value) {
+                return Str::words($value->deskripsi, 5);
+            })->addColumn('gambar', function ($value) {
+                if ($value->gambar) {
+                    return '<img alt="' . $value->nama_produk . '" height="150" src="/storage/compressed' . $value->gambar . '" width="180">';
+                } else {
+                    return '<img alt="' . $value->nama_produk . '" height="150" src="https://dummyimage.com/180x150.png" width="180">';
+                }
+            })->addColumn('aksi', function ($value) {
+                $json = htmlspecialchars(json_encode($value), ENT_QUOTES, 'UTF-8');
+
+                return ' <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                            <button class="btn btn-warning" data-bs-product="' . $json . '" data-bs-route="' . route('manage-produk.update', $value->id) . '" data-bs-target="#CUModal" data-bs-toggle="modal" id="btnUpdateModal" type="button"><i class="bi bi-pencil-square"></i></button>
+                            <button class="btn btn-danger" data-bs-route="' . route('manage-produk.destroy', $value->id) . '" data-bs-target="#DeleteModal" data-bs-toggle="modal" id="btnDeleteModal" type="button"><i class="bi bi-trash"></i></button>
+                         </div>';
+            })->rawColumns(['kategori_id', 'harga_sewa', 'rincian_produk', 'deskripsi', 'gambar', 'aksi'])->make();
+        }
+        return view('dashboard.admin.manageproduk', compact('get_categories'));
     }
 
     public function store(Request $request)
