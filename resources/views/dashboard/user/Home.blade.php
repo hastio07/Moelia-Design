@@ -143,7 +143,7 @@
                                     </i>
                                 </div>
                                 <h6 class="card-title fw-bold">{{ Str::words($value->nama_produk, 5) }}</h6>
-                                <p class="card-text text-center">{!! Str::words($value->deskripsi, 30) !!}</p>
+                                <p class="card-text text-center">{!! Str::words($value->deskripsi, 15) !!}</p>
                                 <a class="btn" href={{ route('produk.show', $value->id) }}>Selengkapnya</a>
                             </div>
                         </div>
