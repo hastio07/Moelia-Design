@@ -371,8 +371,8 @@ class ManagePerusahaanController extends Controller
             'foto_bersama' => 'nullable|file|image|mimetypes:image/jpeg,image/jpg,image/png|max:2048',
             'oldfoto_bersama' => ['nullable', 'string', function ($attribute, $value, $fail) {
                 if (!empty($value)) {
-                    $about = $this->abouts->where('foto_bersama', $value)->first();
-                    if (!$about) {
+                    $offers = $this->offers->where('foto_bersama', $value)->first();
+                    if (!$offers) {
                         $fail("nilai tidak valid");
                     }
                 }
