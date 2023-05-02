@@ -56,7 +56,7 @@
                             <a class="nav-link" href="/produk">Produk</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button">
                                 Gallery
                             </a>
                             <ul class="dropdown-menu">
@@ -75,9 +75,13 @@
                         </li>
                     </ul>
                     <div class="d-flex center">
-                        <a href="/login">
-                            <button class="btn btn-color" type="submit">Login <i class="fa-solid fa-right-to-bracket"></i></button>
-                        </a>
+                        @auth
+                            <div><a href="/dashboard">{{ auth()->user()->nama_depan . ' ' . auth()->user()->nama_belakang }}</a></div>
+                        @else
+                            <a href="/login">
+                                <button class="btn btn-color" type="submit">Login <i class="fa-solid fa-right-to-bracket"></i></button>
+                            </a>
+                        @endauth
                     </div>
                 </div>
             </div>
