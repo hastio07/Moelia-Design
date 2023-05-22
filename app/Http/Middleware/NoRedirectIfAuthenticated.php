@@ -6,8 +6,13 @@ use Closure;
 use Illuminate\Contracts\Auth\Factory as Auth;
 use Illuminate\Http\Request;
 
-class AllowNoRedirectIfAuthenticated
+class NoRedirectIfAuthenticated
 {
+    /* Middleware ini adalah untuk kasus jika pengguna login atau tidak maka masih bisa menampilkan halaman.
+     * Middleware ini juga adalah kasus untuk pengguna login maka data informasi si pengguna login bisa di akses di halaman.
+     * Middleware ini juga tidak redirect ke halaman tertentu.
+     */
+
     /**
      * Instansi factory Authentikasi.
      *
@@ -47,6 +52,7 @@ class AllowNoRedirectIfAuthenticated
                 $this->auth->shouldUse($guard);
                 return $next($request);
             }
+            return $next($request);
         }
 
     }
