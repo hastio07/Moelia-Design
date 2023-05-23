@@ -21,25 +21,6 @@
         <div class="row same-height mt-3 p-3">
             <div class="col-md-7 text-center align-self-center" data-aos="fade-up">
                 <div class="card bg-transparent border border-0 h-100" data-aos="flip-up">
-                    <img alt="foto_bersama" class="left-image" src="/storage/{{ $offers->foto_bersama }}">
-                </div>
-            </div>
-            <div class="col-md-5" data-aos="fade-down">
-                <h5 class="text-center">Moelia Design</h5>
-                <div class="line"></div><br>
-                <h6 class="card-subtitle">
-                    Apa saja yang akan anda dapatkan dari kami?
-                </h6>
-                {!! $offers->penawaran !!}
-            </div>
-        </div>
-    </div>
-    <!-- end konten -->
-    <!-- konten2 -->
-    <div class="div second-contents container">
-        <div class="row same-height mt-3 p-3">
-            <div class="col-md-7 text-center align-self-center" data-aos="fade-up">
-                <div class="card bg-transparent border border-0 h-100" data-aos="flip-up">
                     @if (!empty($offers->foto_bersama))
                     <img alt="foto_bersama" class="left-image" src="/storage/{{ $offers->foto_bersama }}">
                     @endif
@@ -63,25 +44,33 @@
     <div class="third-content mt-5">
         <h1 class="text-center head-ourt fw-bold">Our Team</h1>
         <div class="line"></div>
-        <div class="owner-profile">
-            <div class="card">
-                <div class="imgBX">
-                    @if (!empty($owners->foto_owner))
-                    <img alt="{{ $owners->nama_owner }}" class="rounded img-owner" src="/storage/{{ $owners->foto_owner }}">
-                    @endif
-                </div>
+        <div class="owner-profile mt-5">
+            <div class="container four-content mb-5" data-aos="fade-down">
                 <div class="content">
-                    <div class="details">
-                        @if (!empty($owners->nama_owner))
-                        <h2>{{ $owners->nama_owner }}<br><span>owner</span></h2>
-                        @endif
-                        <div class="data">
-                            @if (!empty($owners->kata_sambutan))
-                            <p>{{ $owners->kata_sambutan }}</p>
+                    <div class="left-side">
+                        <div class="address details">
+                            @if (!empty($owners->foto_owner))
+                            <img alt="{{ $owners->nama_owner }}" class="rounded img-fluid" src="/storage/{{ $owners->foto_owner }}">
                             @endif
+                            <div class="mt-3">
+                                @if (!empty($owners->nama_owner))
+                                <h5 class="fw-bold">{{ $owners->nama_owner }}</h5>
+                                <p>Owner</p>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right-side">
+                        <div class="details text-center">
+                            <div class="data p-3">
+                                @if (!empty($owners->kata_sambutan))
+                                <p>{{ $owners->kata_sambutan }}</p>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
