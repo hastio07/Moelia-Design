@@ -6,6 +6,7 @@ use App\Http\Controllers\ManageGalleryController;
 use App\Http\Controllers\ManageLayananController;
 use App\Http\Controllers\ManagePerusahaanController;
 use App\Http\Controllers\ManageProdukController;
+use App\Http\Controllers\ManageJadwalController;
 use App\Http\Controllers\user\AboutController;
 use App\Http\Controllers\user\FotoController;
 use App\Http\Controllers\user\HomeController;
@@ -52,6 +53,10 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
             Route::delete('manage-produk/{id}', 'destroy')->name('manage-produk.destroy');
             Route::post('manage-produk/kategori', 'createcategory')->name('manage-produk.createcategory');
             Route::delete('manage-produk/kategori/{id}', 'destroycategory')->name('manage-produk.destroycategory');
+        });
+        Route::controller(ManageJadwalController::class)->group(function () {
+            Route::get('managejadwal', 'index')->name('manage-jadwal.index');
+            Route::post('managejadwal', 'store')->name('manage-jadwal.store');
         });
         // Route::resource('manage-gallery', ManageGalleryController::class);
         Route::controller(ManageGalleryController::class)->group(function () {

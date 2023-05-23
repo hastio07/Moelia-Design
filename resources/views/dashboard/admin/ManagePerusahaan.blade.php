@@ -14,11 +14,15 @@
                     <div aria-labelledby="home-tab" class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" tabindex="0">
                         <div class="content-wrapper">
                             <div class="row same-height">
+
+                                <!-- left content -->
                                 <div class="col-md-8">
                                     <div class="wrapper-list">
                                         <div class="flex-header text-center border">
                                             <h5 class="fw-bold">Manage Perusahaan</h5>
                                         </div>
+
+                                        <!-- foto owner -->
                                         <div class="container border mt-3 shadow p-3 mb-5 bg-body rounded">
                                             <h5 class="text-center">
                                                 Foto & Nama Owner
@@ -45,6 +49,8 @@
                                                 </div>
                                             </form>
                                         </div>
+
+                                        <!-- logo dan nama perusahaan -->
                                         <div class="container border mt-3 shadow p-3 mb-5 bg-body rounded">
                                             <h5 class="text-center">
                                                 Logo & Nama Perusahaan
@@ -69,6 +75,8 @@
                                                 </div>
                                             </form>
                                         </div>
+
+                                        <!-- alamat perusahaan -->
                                         <div class="container border mt-3 shadow p-3 mb-5 bg-body rounded">
                                             <div class="flex-item label">Alamat Perusahaan</div>
                                             <form action="{{ route('manage-perusahaan.updateorcreateaddress') }}" class="formstyle" enctype="multipart/form-data" id="formAlamat" method="POST">
@@ -90,6 +98,8 @@
                                                 </div>
                                             </form>
                                         </div>
+
+                                        <!-- telephone dan whatsapp perusahaan -->
                                         <div class="container border mt-3 shadow p-3 mb-5 bg-body rounded">
                                             <h5 class="text-center">
                                                 Kontak
@@ -98,12 +108,32 @@
                                                 <div class="flex-item form">
                                                     @csrf
                                                     <input name="id_contact" type="hidden" value="{{ $contacts->id ?? null }}">
-                                                    <label class="form-label" for="telephone">Telephone</label>
-                                                    <input class="form-control" id="telephone" name="telephone" placeholder="Masukkan nomor telephone" type="text" value="{{ $contacts->telephone ?? null }}">
-                                                    <label class="form-label" for="whatsapp">Whatsapp</label>
-                                                    <input class="form-control" id="whatsapp" name="whatsapp" placeholder="Masukkan nomor whatsapp" type="text" value="{{ $contacts->whatsapp ?? null }}">
-                                                    <label class="form-label" for="email">Email</label>
-                                                    <input class="form-control" id="email" name="email" placeholder="Masukkan email" type="email" value="{{ $contacts->email ?? null }}">
+                                                    <label class="form-label fw-bold" for="telephone">Telephone 1</label>
+                                                    <input class="form-control" id="telephone" name="telephone" placeholder="Nama nomor telephone 1" type="text" value="">
+                                                    <input class="form-control mt-2" id="telephone" name="telephone" placeholder="Masukkan nomor telephone 1" type="text" value="{{ $contacts->telephone ?? null }}">
+
+                                                    <label class="form-label mt-3 fw-bold" for="telephone">Telephone 2</label>
+                                                    <input class="form-control" id="telephone" name="telephone" placeholder="Nama nomor telephone 2" type="text" value="">
+                                                    <input class="form-control mt-2" id="telephone" name="telephone" placeholder="Masukkan nomor telephone 2" type="text" value="">
+
+                                                    <label class="form-label mt-4 fw-bold" for="whatsapp">Whatsapp 1</label>
+                                                    <input class="form-control" id="telephone" name="telephone" placeholder="Nama Whatsapp 1" type="text" value="">
+                                                    <input class="form-control mt-2" id="whatsapp" name="whatsapp" placeholder="Masukkan nomor whatsapp 1" type="text" value="{{ $contacts->whatsapp ?? null }}">
+
+                                                    <label class="form-label mt-3 fw-bold" for="whatsapp">Whatsapp 2</label>
+                                                    <input class="form-control" id="telephone" name="telephone" placeholder="Nama Whatsapp 2" type="text" value="">
+                                                    <input class="form-control mt-2" id="whatsapp" name="whatsapp" placeholder="Masukkan nomor whatsapp 2" type="text" value="">
+
+                                                    <label class="form-label mt-3 fw-bold" for="whatsapp">Whatsapp 3</label>
+                                                    <input class="form-control" id="telephone" name="telephone" placeholder="Nama Whatsapp 3" type="text" value="">
+                                                    <input class="form-control mt-2" id="whatsapp" name="whatsapp" placeholder="Masukkan nomor whatsapp 3" type="text" value="">
+
+                                                    <label class="form-label mt-3 fw-bold" for="whatsapp">Whatsapp 4</label>
+                                                    <input class="form-control" id="telephone" name="telephone" placeholder="Nama Whatsapp 4" type="text" value="">
+                                                    <input class="form-control mt-2" id="whatsapp" name="whatsapp" placeholder="Masukkan nomor whatsapp 4" type="text" value="">
+
+                                                    <label class="form-label mt-3 fw-bold" for="email">Email</label>
+                                                    <input class="form-control mt-2" id="email" name="email" placeholder="Masukkan email" type="email" value="{{ $contacts->email ?? null }}">
                                                 </div>
                                                 <div class="flex-item button">
                                                     <div class="d-grid gap-2 d-md-flex justify-content-md-center">
@@ -115,6 +145,8 @@
                                                 </div>
                                             </form>
                                         </div>
+
+                                        <!-- sosial media -->
                                         <div class="container border mt-3 shadow p-3 mb-5 bg-body rounded">
                                             <h5 class="text-center">
                                                 Social Media
@@ -156,6 +188,8 @@
                                                 </div>
                                             </form>
                                         </div>
+
+                                        <!-- konten siapa kami -->
                                         <div class="container border mt-3 shadow p-3 mb-5 bg-body rounded">
                                             <h5 class="text-center">
                                                 Siapa Kami?
@@ -178,6 +212,8 @@
                                                 </div>
                                             </form>
                                         </div>
+
+                                        <!-- keunggulan perusahaan -->
                                         <div class="container border mt-3 shadow p-3 mb-5 bg-body rounded">
                                             <h5 class="text-center">
                                                 Apa Saja Yang Didapatkan?
@@ -199,6 +235,8 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <!-- right konten -->
                                 <div class="col-md-4">
                                     <div class="left border text-center bg-white shadow p-3 mb-5 bg-body rounded">
                                         <h4>Owner Perusahaan</h4>
@@ -229,15 +267,29 @@
                                             <i class="fa-sharp fa-solid fa-map-location-dot fa-2xl"></i>
                                             <p>{{ $addresses->alamat_perusahaan ?? null }}</p>
                                         </div>
-                                        <div class="d-flex mt-3">
-                                            <i class="fa-solid fa-phone-volume fa-2xl"></i>
-                                            <p>{{ $contacts->telephone ?? null }}</p>
+                                        <div class="mt-3">
+                                            <div class="d-flex">
+                                                <i class="fa-solid fa-phone-volume fa-2xl"></i>
+                                                <p>Telephone</p>
+                                            </div>
+                                            <ol class="ms-3">
+                                                <li>{{ $contacts->telephone ?? null }} (nama)</li>
+                                                <li>{{ $contacts->telephone ?? null }} (nama)</li>
+                                            </ol>
                                         </div>
-                                        <div class="d-flex mt-3">
-                                            <i class="fa-brands fa-whatsapp fa-2xl"></i>
-                                            <p>{{ $contacts->whatsapp ?? null }}</p>
+                                        <div class="mt-5">
+                                            <div class=" d-flex">
+                                                <i class="fa-brands fa-whatsapp fa-2xl"></i>
+                                                <p>Whatsapp</p>
+                                            </div>
+                                            <ol class="ms-3">
+                                                <li>{{ $contacts->whatsapp ?? null }} (nama)</li>
+                                                <li>{{ $contacts->whatsapp ?? null }} (nama)</li>
+                                                <li>{{ $contacts->whatsapp ?? null }} (nama)</li>
+                                                <li>{{ $contacts->whatsapp ?? null }} (nama)</li>
+                                            </ol>
                                         </div>
-                                        <div class="d-flex mt-3"> <i class="fa-brands fa-instagram fa-2xl"></i>
+                                        <div class="d-flex mt-4"> <i class="fa-brands fa-instagram fa-2xl"></i>
                                             <p>{{ $sosmeds->u_instagram ?? null }}</p>
                                         </div>
                                         <div class="d-flex mt-3">

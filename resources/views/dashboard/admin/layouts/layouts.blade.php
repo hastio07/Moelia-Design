@@ -29,6 +29,7 @@
     <link href="{{ asset('templates') }}/assets/css-modif/Gallery.css" rel="stylesheet">
     <link href="{{ asset('templates') }}/assets/css-modif/ManageLayanan.css" rel="stylesheet">
     <link href="{{ asset('templates') }}/assets/css-modif/Dashboard.css" rel="stylesheet">
+    <link href="{{ asset('templates') }}/assets/css-modif/LayoutAdmins.css" rel="stylesheet">
     <!-- end css -->
 
     <link href="{{ asset('templates') }}/assets/css/style.min.css" rel="stylesheet">
@@ -39,6 +40,7 @@
     <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" referrerpolicy="no-referrer" rel="stylesheet" />
 
     @stack('head-scripts')
+
 </head>
 
 <body>
@@ -48,7 +50,9 @@
             <div class="toggle-mobile action-toggle"><i class="fas fa-bars"></i></div>
             <div class="header-wrapper">
                 <div class="header-left pt-2 text-capitalize">
-                    <h6>Selamat Datang {{ auth()->user()->nama_depan . ' ' . auth()->user()->nama_belakang }}!</h6>
+                    <marquee behavior="" direction="right">
+                        <h6 class="text-success">Selamat Datang {{ auth()->user()->nama_depan . ' ' . auth()->user()->nama_belakang }}!</h6>
+                    </marquee>
                 </div>
                 <div class="header-content">
                     <div class="notification dropdown">
@@ -158,7 +162,7 @@
                 <ul>
                     <li class="{{ Route::is('dashboard') ? 'active' : '' }}">
                         <a class="link" href="{{ route('dashboard') }}">
-                            <i class="ti-home"></i>
+                            <i class="ti-dashboard"></i>
                             <span>Dashboard</span>
                         </a>
                     </li>
@@ -183,7 +187,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="link" href="/dashboard/manage-jadwal">
+                        <a class="link" href="/dashboard/managejadwal">
                             <i class="ti-agenda"></i>
                             <span>Manage Jadwal</span>
                         </a>
@@ -208,6 +212,12 @@
                         <a class="link" href="{{ route('manage-layanan.index') }}">
                             <i class="ti-bookmark-alt"></i>
                             <span>Manage Layanan</span>
+                        </a>
+                    </li>
+                    <li class="{{ Route::is('pembayaran.*') ? 'active' : '' }}">
+                        <a class="link" href="">
+                            <i class="ti-money"></i>
+                            <span>Pembayaran</span>
                         </a>
                     </li>
                 </ul>
@@ -258,6 +268,7 @@
         Main.init()
     </script>
     @stack('scripts')
+
 </body>
 
 </html>
