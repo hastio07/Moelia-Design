@@ -2,7 +2,7 @@
 @section('title','Manage Jadwal')
 
 @section('content')
-<section class="manage-akun">
+<section class="manage-akun container">
     <div class="title">
         <h5>Manage Jadwal</h5>
     </div>
@@ -24,15 +24,6 @@
         {{ session()->get('success') }}
     </div>
     @endif
-    <div class="form-inpt">
-        <label for="datepicker-icon" class="form-label">Tentukan Tanggal</label>
-        <div class="input-group input-append date" data-date-format="dd-mm-yyyy">
-            <input class="form-control" type="text" readonly="" autocomplete="off" placeholder="Masukan Tanggal" id="tanggal" name="tanggal" value="{{ Session::get('tanggal') }}">
-            <button class="btn btn-outline-secondary" type="button">
-                <i class="far fa-calendar-alt"></i>
-            </button>
-        </div>
-    </div>
     <div class="content-wrapper">
         <div class="row same-height">
             <div class="modal fade" id="largeModal" tabindex="-1" aria-labelledby="largeModalLabel" aria-hidden="true">
