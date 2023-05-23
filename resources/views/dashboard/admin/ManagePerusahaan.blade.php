@@ -267,15 +267,29 @@
                                             <i class="fa-sharp fa-solid fa-map-location-dot fa-2xl"></i>
                                             <p>{{ $addresses->alamat_perusahaan ?? null }}</p>
                                         </div>
-                                        <div class="d-flex mt-3">
-                                            <i class="fa-solid fa-phone-volume fa-2xl"></i>
-                                            <p>{{ $contacts->telephone ?? null }}</p>
+                                        <div class="mt-3">
+                                            <div class="d-flex">
+                                                <i class="fa-solid fa-phone-volume fa-2xl"></i>
+                                                <p>Telephone</p>
+                                            </div>
+                                            <ol class="ms-3">
+                                                <li>{{ $contacts->telephone ?? null }} (nama)</li>
+                                                <li>{{ $contacts->telephone ?? null }} (nama)</li>
+                                            </ol>
                                         </div>
-                                        <div class="d-flex mt-3">
-                                            <i class="fa-brands fa-whatsapp fa-2xl"></i>
-                                            <p>{{ $contacts->whatsapp ?? null }}</p>
+                                        <div class="mt-5">
+                                            <div class=" d-flex">
+                                                <i class="fa-brands fa-whatsapp fa-2xl"></i>
+                                                <p>Whatsapp</p>
+                                            </div>
+                                            <ol class="ms-3">
+                                                <li>{{ $contacts->whatsapp ?? null }} (nama)</li>
+                                                <li>{{ $contacts->whatsapp ?? null }} (nama)</li>
+                                                <li>{{ $contacts->whatsapp ?? null }} (nama)</li>
+                                                <li>{{ $contacts->whatsapp ?? null }} (nama)</li>
+                                            </ol>
                                         </div>
-                                        <div class="d-flex mt-3"> <i class="fa-brands fa-instagram fa-2xl"></i>
+                                        <div class="d-flex mt-4"> <i class="fa-brands fa-instagram fa-2xl"></i>
                                             <p>{{ $sosmeds->u_instagram ?? null }}</p>
                                         </div>
                                         <div class="d-flex mt-3">
