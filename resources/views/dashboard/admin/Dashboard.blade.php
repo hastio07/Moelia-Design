@@ -191,13 +191,15 @@
                                                 <p>24-01-2024</p>
                                             </li>
                                             <li class="events">
-                                                <ul class="events-detail">
+                                                <ul class="events-detail text-capitalize">
                                                     <li>
                                                         <a href="#">
                                                             <span class="event-time">2:00pm - </span>
                                                             <span class="event-name">Kickoff Ceremony</span>
                                                             <br />
-                                                            <span class="event-location">Headquarters</span>
+                                                            <span class="event-owner">akhbarona</span>
+                                                            <br />
+                                                            <span class="event-location">jl. purnawirawan</span>
                                                         </a>
                                                     </li>
 
