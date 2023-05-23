@@ -1,7 +1,7 @@
 @extends('dashboard.admin.layouts.layouts')
 @section('title', 'Manage Gallery')
 @section('content')
-<section>
+<section class="container">
     <div class="content-wrapper">
         <div class="card">
             <div class="card-header">
