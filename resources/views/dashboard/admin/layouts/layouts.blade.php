@@ -52,86 +52,9 @@
                 </div>
                 <div class="header-content">
                     <div class="notification dropdown">
-                        <a aria-expanded="false" data-bs-toggle="dropdown" href="#" style="left: 200px;">
-                            <i class="far fa-envelope"></i>
+                        <a aria-expanded="false" href="/" style="left: 200px;">
+                            <i class="fa-solid fa-tv"></i>
                         </a>
-                        <ul class="dropdown-menu medium">
-                            <li class="menu-header">
-                                <a class="dropdown-item" href="#">Message</a>
-                            </li>
-                            <li class="menu-content ps-menu">
-                                <a href="#">
-                                    <div class="message-image">
-                                        <img alt="user1" class="rounded-circle w-100" src="{{ asset('templates') }}/assets/images/avatar1.png">
-                                    </div>
-                                    <div class="message-content read">
-                                        <div class="subject">
-                                            John
-                                        </div>
-                                        <div class="body">
-                                            Please call me at 9pm
-                                        </div>
-                                        <div class="time">Just now</div>
-                                    </div>
-                                </a>
-                                <a href="#">
-                                    <div class="message-image">
-                                        <img alt="user1" class="rounded-circle w-100" src="{{ asset('templates') }}/assets/images/avatar2.png">
-                                    </div>
-                                    <div class="message-content">
-                                        <div class="subject">
-                                            Michele
-                                        </div>
-                                        <div class="body">
-                                            Please come to my party
-                                        </div>
-                                        <div class="time">3 hours ago</div>
-                                    </div>
-                                </a>
-                                <a href="#">
-                                    <div class="message-image">
-                                        <img alt="user1" class="rounded-circle w-100" src="{{ asset('templates') }}/assets/images/avatar1.png">
-                                    </div>
-                                    <div class="message-content read">
-                                        <div class="subject">
-                                            Brad
-                                        </div>
-                                        <div class="body">
-                                            I have something to discuss, please call me soon
-                                        </div>
-                                        <div class="time">3 hours ago</div>
-                                    </div>
-                                </a>
-                                <a href="#">
-                                    <div class="message-image">
-                                        <img alt="user1" class="rounded-circle w-100" src="{{ asset('templates') }}/assets/images/avatar2.png">
-                                    </div>
-                                    <div class="message-content">
-                                        <div class="subject">
-                                            Anel
-                                        </div>
-                                        <div class="body">
-                                            Sorry i'm late
-                                        </div>
-                                        <div class="time">8 hours ago</div>
-                                    </div>
-                                </a>
-                                <a href="#">
-                                    <div class="message-image">
-                                        <img alt="user1" class="rounded-circle w-100" src="{{ asset('templates') }}/assets/images/avatar2.png">
-                                    </div>
-                                    <div class="message-content">
-                                        <div class="subject">
-                                            Mary
-                                        </div>
-                                        <div class="body">
-                                            Please answer my question last night
-                                        </div>
-                                        <div class="time">Last month</div>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
                     </div>
                     <div class="notification dropdown">
                         <a aria-expanded="false" data-bs-toggle="dropdown" href="#">
