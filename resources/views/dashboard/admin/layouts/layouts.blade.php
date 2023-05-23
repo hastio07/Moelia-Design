@@ -214,6 +214,12 @@
                             <span>Manage Layanan</span>
                         </a>
                     </li>
+                    <li class="{{ Route::is('pembayaran.*') ? 'active' : '' }}">
+                        <a class="link" href="">
+                            <i class="ti-money"></i>
+                            <span>Pembayaran</span>
+                        </a>
+                    </li>
                 </ul>
 
             </div>
