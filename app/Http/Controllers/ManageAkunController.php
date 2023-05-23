@@ -6,7 +6,6 @@ use App\Models\Admin;
 // use App\Models\Role;
 use Hashids\Hashids;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 // use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator;
 
@@ -19,15 +18,9 @@ class ManageAkunController extends Controller
      */
     public function index()
     {
-        //
-
-        $guardName = Auth::getDefaultDriver(); // Mendapatkan nama guard default yang sedang aktif saat ini
-        // $guard = auth()->guard($guardName); // Mendapatkan instance guard dengan nama guard default
-        // $user = $guard->user(); // Mendapatkan objek user dari guard default
 
         $this->authorize('view', [Admin::class]);
-        $get_admins = Admin::with('role')->where('role_id', '=', 2)->latest('created_at')->get(); //untuk menampilkan semua admins
-        // $roles = Role::all()->where('id', '=', 2); // menampilkan table role
+        $get_admins = Admin::with('role')->where('role_id', '=', 2)->latest('created_at')->get();
 
         $hashids = new Hashids(env('HASHIDS_KEY'), 20);
         return view('dashboard.admin.manageakun', compact('get_admins', 'hashids'));
@@ -74,7 +67,7 @@ class ManageAkunController extends Controller
         ];
         $validator = Validator::make($request->all(), $rules, $massages);
         if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
+            return back()->with('failed_add_account', 'gagal menambahkan akun')->withErrors($validator)->withInput();
         }
         // dd($request->all());
         $data_admin = [
@@ -87,7 +80,7 @@ class ManageAkunController extends Controller
         ];
         Admin::create($data_admin);
 
-        return redirect('dashboard/manage-akun')->with('success', 'data berhasil disimpan');
+        return redirect()->route('manage-akun.index')->with('success_add_account', 'berhasil menambahkan akun');
     }
 
     /**
@@ -192,13 +185,12 @@ class ManageAkunController extends Controller
     public function destroy($id)
     {
         //
-
         $hashids = new Hashids(env('HASHIDS_KEY'), 20);
         $decryptID = $hashids->decode($id); //decrypt menjadi string
         // $admin = Admin::findOrFail($decryptID); //cari user berdasarkan id pada model app/Models/Admin
         // $admin->delete();
         Admin::where('id', $decryptID[0])->delete();
 
-        return redirect('dashboard/manage-akun')->with('massage', 'data berhasil dihapus');
+        return redirect()->route('manage-akun.index')->with('massage', 'data berhasil dihapus');
     }
 }
