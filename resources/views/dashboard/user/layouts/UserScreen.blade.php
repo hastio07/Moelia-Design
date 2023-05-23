@@ -73,6 +73,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/maintenance">Pembayaran</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/maintenance">Booking Jadwal</a>
+                        </li>
                     </ul>
                     <div class="d-flex center">
                         <a href="/login">

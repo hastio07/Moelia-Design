@@ -21,6 +21,10 @@
     margin-bottom: 50px;
 }
 
+.img-services {
+    width: 80%;
+}
+
 /* .card .card-body .text-center {
     max-width: 10px; */
 .flex-header {
@@ -62,7 +66,3 @@ form.formstyle {
 .flex-item.button {
     margin: 10px;
 }
-
-/* .left{
-    height: 100vh !important;
-} */

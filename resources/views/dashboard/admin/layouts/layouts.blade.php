@@ -28,6 +28,7 @@
     <link href="{{ asset('templates') }}/assets/css-modif/ManagePerusahaan.css" rel="stylesheet">
     <link href="{{ asset('templates') }}/assets/css-modif/Gallery.css" rel="stylesheet">
     <link href="{{ asset('templates') }}/assets/css-modif/ManageLayanan.css" rel="stylesheet">
+    <link href="{{ asset('templates') }}/assets/css-modif/Dashboard.css" rel="stylesheet">
     <!-- end css -->
 
     <link href="{{ asset('templates') }}/assets/css/style.min.css" rel="stylesheet">
@@ -46,7 +47,8 @@
         <header class="header-navbar fixed">
             <div class="toggle-mobile action-toggle"><i class="fas fa-bars"></i></div>
             <div class="header-wrapper">
-                <div class="header-left">
+                <div class="header-left pt-2 text-capitalize">
+                    <h6>Selamat Datang {{ auth()->user()->nama_depan . ' ' . auth()->user()->nama_belakang }}!</h6>
                 </div>
                 <div class="header-content">
                     <div class="notification dropdown">
@@ -238,12 +240,12 @@
                         </a>
                     </li>
                     @can('view', App\Models\Admin::class)
-                        <li class="{{ Route::is('manage-akun.*') ? 'active' : '' }}">
-                            <a class="link" href="{{ route('manage-akun.index') }}">
-                                <i class="ti-id-badge"></i>
-                                <span>Manage Akun</span>
-                            </a>
-                        </li>
+                    <li class="{{ Route::is('manage-akun.*') ? 'active' : '' }}">
+                        <a class="link" href="{{ route('manage-akun.index') }}">
+                            <i class="ti-id-badge"></i>
+                            <span>Manage Akun</span>
+                        </a>
+                    </li>
                     @endcan
                     <li class="{{ Route::is('manage-perusahaan.*') ? 'active' : '' }}">
                         <a class="link" href="{{ route('manage-perusahaan.index') }}">
