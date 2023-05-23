@@ -35,6 +35,29 @@
         </div>
     </div>
     <!-- end konten -->
+    <!-- konten2 -->
+    <div class="div second-contents container">
+        <div class="row same-height mt-3 p-3">
+            <div class="col-md-7 text-center align-self-center" data-aos="fade-up">
+                <div class="card bg-transparent border border-0 h-100" data-aos="flip-up">
+                    @if (!empty($offers->foto_bersama))
+                    <img alt="foto_bersama" class="left-image" src="/storage/{{ $offers->foto_bersama }}">
+                    @endif
+                </div>
+            </div>
+            <div class="col-md-5" data-aos="fade-down">
+                <h5 class="text-center">Moelia Design</h5>
+                <div class="line"></div><br>
+                <h6 class="card-subtitle">
+                    Apa saja yang akan anda dapatkan dari kami?
+                </h6>
+                @if (!empty($offers->penawaran))
+                {!! $offers->penawaran !!}
+                @endif
+            </div>
+        </div>
+    </div>
+    <!-- end konten -->
 
     <!-- konten3 -->
     <div class="third-content mt-5">
@@ -49,9 +72,13 @@
                 </div>
                 <div class="content">
                     <div class="details">
-                        <h2 class="mb-5">{{ $owners->nama_owner }}<br><span>owner</span></h2>
+                        @if (!empty($owners->nama_owner))
+                        <h2>{{ $owners->nama_owner }}<br><span>owner</span></h2>
+                        @endif
                         <div class="data">
+                            @if (!empty($owners->kata_sambutan))
                             <p>{{ $owners->kata_sambutan }}</p>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -108,13 +135,15 @@
                 <div class="address details">
                     <i class="bi bi-geo-alt-fill"></i>
                     <div class="topic">Alamat</div>
+                    @if (!empty($addresses->alamat_perusahaan))
                     <div class="text-one">{{ $addresses->alamat_perusahaan }}</div>
+                    @endif
                 </div>
                 @if (!empty($contacts->telephone))
                 <div class="phone details">
                     <i class="bi bi-whatsapp"></i>
                     <div class="topic">Whatsapp</div>
-                    <div class="text-one">{{$contacts->telephone}}</div>
+                    <div class="text-one">$contacts->telephone</div>
                 </div>
                 @endif
                 @if (!empty($contacts->email))

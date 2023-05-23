@@ -315,8 +315,7 @@
     <script src="{{ asset('templates') }}/assets/js/main.js"></script>
     {{-- ======= --}}
 
-    {{-- script for manageproduk page --}}
-    @stack('manageproduk-scripts')
+    {{-- script for anything --}}
     @stack('manageperusahaan-scripts')
     {{-- ======= --}}
 
@@ -332,6 +331,7 @@
         DataTable.init()
     </script>
     @stack('managegallery-scripts')
+    @stack('manageproduk-scripts')
     {{-- =======  --}}
 
     <script>

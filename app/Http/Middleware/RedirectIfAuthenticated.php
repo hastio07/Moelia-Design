@@ -28,14 +28,9 @@ class RedirectIfAuthenticated
         foreach ($guards as $guard) {
             //Cek apakah terautentikasi
             if (Auth::guard($guard)->check()) {
-                //Jika ya maka cek role_id yang login apakah superadmin
-                if (Auth::guard($guard)->user()->role_id === 1 || Auth::guard($guard)->user()->role_id === 2) {
-                    //Jika ya maka lempar ke dashboard
-                    return redirect('/dashboard');
-                }
-                //Jika tidak maka lempar ke /
                 return redirect(RouteServiceProvider::HOME);
             }
+
         }
         //Jika variable $guards kosong maka lanjutkan permintaan
         return $next($request);

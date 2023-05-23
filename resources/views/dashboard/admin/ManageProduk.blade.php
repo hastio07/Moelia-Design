@@ -21,7 +21,7 @@
                             <div class="btn-modal">
                                 <button class="btn mb-2 icon-left  btn-success" data-bs-route="{{ route('manage-produk.store') }}" data-bs-target="#CUModal" data-bs-toggle="modal" id="btnCreateModal" type="button"><i class="bi bi-plus-lg"></i>Tambah Produk</i></button>
                             </div>
-                            <table class="table display" id="example2">
+                            <table class="table display" id="table-produk">
                                 <thead>
                                     <tr>
                                         <th>Nama Produk</th>
@@ -34,7 +34,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($get_products as $value)
+                                    {{-- @foreach ($get_products as $value)
                                         <tr>
                                             <td>{{ $value->nama_produk }}</td>
                                             <td>{{ $value->category->nama_kategori }}</td>
@@ -55,7 +55,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                    @endforeach
+                                    @endforeach --}}
                                 </tbody>
                             </table>
                         </div>
@@ -212,6 +212,48 @@
             menubar: 'edit insert format',
             toolbar: 'bullist numlist',
             content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#table-produk').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{{ url()->current() }}',
+                columns: [{
+                        data: 'nama_produk',
+                        name: 'nama_produk'
+                    },
+                    {
+                        data: 'kategori_id',
+                        name: 'kategori_id'
+                    },
+                    {
+                        data: 'harga_sewa',
+                        name: 'harga_sewa'
+                    },
+                    {
+                        data: 'rincian_produk',
+                        name: 'rincian_produk',
+                    },
+                    {
+                        data: 'deskripsi',
+                        name: 'deskripsi',
+                    },
+                    {
+                        data: 'gambar',
+                        name: 'gambar',
+                    },
+                    {
+                        data: 'aksi',
+                        name: 'aksi'
+                    },
+
+                ],
+                order: [
+                    [3, 'desc']
+                ],
+            });
         });
     </script>
 @endpush

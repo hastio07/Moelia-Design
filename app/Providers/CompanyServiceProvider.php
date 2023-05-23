@@ -6,7 +6,7 @@ use App\Http\View\Composers\CompanyComposer;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
-class ComposerServiceProvider extends ServiceProvider
+class CompanyServiceProvider extends ServiceProvider
 {
     /**
      * Register services.

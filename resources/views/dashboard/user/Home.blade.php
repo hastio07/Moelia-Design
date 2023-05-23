@@ -131,7 +131,7 @@
         <div class="row">
             @foreach ($products as $value)
             <div class="col-md-4">
-                <div class="card card-new-prdct h-100" data-aos="fade-down">
+                <div class="card card-new-prdct" data-aos="fade-down">
                     <img alt="{{ $value->nama_produk }}" class="card-img-top" src="/storage/post-images{{ $value->gambar }}">
                     <div class="card-body">
                         <div class="kategori d-flex">
@@ -142,9 +142,8 @@
                                 <p class="ms-1">{{ Str::words($value->category->nama_kategori, 1) }}</p>
                             </i>
                         </div>
-                        <h5 class="card-title fw-bold">{{ Str::words($value->nama_produk, 5) }}</h5>
-                        <h6 class="card-title fw-bold">Rp.16.000.000</h6>
-                        <p class="card-text text-center">{!! Str::words($value->deskripsi, 30) !!}</p>
+                        <h6 class="card-title fw-bold">{{ Str::words($value->nama_produk, 5) }}</h6>
+                        <p class="card-text text-center">{!! Str::words($value->deskripsi, 15) !!}</p>
                         <a class="btn" href={{ route('produk.show', $value->id) }}>Selengkapnya</a>
                     </div>
                 </div>

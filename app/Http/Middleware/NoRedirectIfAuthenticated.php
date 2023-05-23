@@ -1,0 +1,60 @@
+<?php
+
+namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Contracts\Auth\Factory as Auth;
+use Illuminate\Http\Request;
+
+class NoRedirectIfAuthenticated
+{
+    /* Middleware ini adalah untuk kasus jika pengguna login atau tidak maka masih bisa menampilkan halaman.
+     * Middleware ini juga adalah kasus untuk pengguna login maka data informasi si pengguna login bisa di akses di halaman.
+     * Middleware ini juga tidak redirect ke halaman tertentu.
+     */
+
+    /**
+     * Instansi factory Authentikasi.
+     *
+     * @var \Illuminate\Contracts\Auth\Factory $auth
+     */
+    protected $auth;
+
+    /**
+     * Membuat sebuah instansi middleware baru
+     *
+     * @param  \Illuminate\Contracts\Auth\Factory  $auth
+     * @return void
+     */
+    public function __construct(Auth $auth)
+    {
+        $this->auth = $auth;
+    }
+
+    /**
+     * Menangani permintaan yang datang
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @param  string[]  ...$guards
+     * @return mixed
+     *
+     * @throws \Illuminate\Auth\AuthenticationException
+     */
+    public function handle(Request $request, Closure $next, ...$guards)
+    {
+        if (empty($guards)) {
+            $guards = [null];
+        }
+
+        foreach ($guards as $guard) {
+            if ($this->auth->guard($guard)->check()) {
+                $this->auth->shouldUse($guard);
+                return $next($request);
+            }
+            return $next($request);
+        }
+
+    }
+
+}
