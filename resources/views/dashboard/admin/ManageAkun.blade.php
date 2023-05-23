@@ -1,5 +1,8 @@
 @extends('dashboard.admin.layouts.layouts')
 @section('title', 'Manage Akun')
+@push('StylesAdmin')
+<link href="{{ asset('templates') }}/assets/css-modif/manageakun.css" rel="stylesheet">
+@endpush
 @section('content')
 <section class="manage-akun">
     <div class="content-wrapper">

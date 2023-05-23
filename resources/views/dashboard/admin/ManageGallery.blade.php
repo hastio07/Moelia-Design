@@ -1,5 +1,8 @@
 @extends('dashboard.admin.layouts.layouts')
 @section('title', 'Manage Gallery')
+@push('StylesAdmin')
+<link href="{{ asset('templates') }}/assets/css-modif/Gallery.css" rel="stylesheet">
+@endpush
 @section('content')
 <section class="container">
     <div class="content-wrapper">

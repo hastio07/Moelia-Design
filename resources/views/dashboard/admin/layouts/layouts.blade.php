@@ -22,19 +22,12 @@
     {{-- <link rel="stylesheet" href="{{ asset('templates') }}/vendor/chart.js/dist/Chart.min.css"> --}}
     <!-- End CSS  -->
 
-    <!-- css edit  -->
-    <link href="{{ asset('templates') }}/assets/css-modif/manageakun.css" rel="stylesheet">
-    <link href="{{ asset('templates') }}/assets/css-modif/ManageProduk.css" rel="stylesheet">
-    <link href="{{ asset('templates') }}/assets/css-modif/ManagePerusahaan.css" rel="stylesheet">
-    <link href="{{ asset('templates') }}/assets/css-modif/Gallery.css" rel="stylesheet">
-    <link href="{{ asset('templates') }}/assets/css-modif/ManageLayanan.css" rel="stylesheet">
-    <link href="{{ asset('templates') }}/assets/css-modif/Dashboard.css" rel="stylesheet">
+
     <link href="{{ asset('templates') }}/assets/css-modif/LayoutAdmins.css" rel="stylesheet">
-    <!-- end css -->
+    @stack('StylesAdmin')
 
     <link href="{{ asset('templates') }}/assets/css/style.min.css" rel="stylesheet">
     <link href="{{ asset('templates') }}/assets/css/bootstrap-override.min.css" rel="stylesheet">
-    {{-- <link rel="stylesheet" id="theme-color" href="template/assets/css/dark.min.css"> --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet">
 
     <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" referrerpolicy="no-referrer" rel="stylesheet" />

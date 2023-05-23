@@ -1,5 +1,8 @@
 @extends('dashboard.admin.layouts.layouts')
 @section('title', 'Manage Produk')
+@push('StylesAdmin')
+<link href="{{ asset('templates') }}/assets/css-modif/ManageProduk.css" rel="stylesheet">
+@endpush
 @push('head-scripts')
 <script src="{{ asset('templates') }}/vendor/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
 @endpush

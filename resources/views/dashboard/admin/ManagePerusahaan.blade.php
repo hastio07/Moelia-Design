@@ -4,6 +4,9 @@
 @push('head-scripts')
 <script src="{{ asset('templates') }}/vendor/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
 @endpush
+@push('StylesAdmin')
+<link href="{{ asset('templates') }}/assets/css-modif/ManagePerusahaan.css" rel="stylesheet">
+@endpush
 
 @section('content')
 <section>
