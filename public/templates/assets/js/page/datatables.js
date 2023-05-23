@@ -4,8 +4,8 @@ const DataTable = (function () {
     function example1() {
         $('#example').DataTable();
     }
-    function example2() {
-        $('#example2').DataTable({
+    function tableAdmins() {
+        $('#table-admins').DataTable({
             responsive: true,
             // lengthMenu: [
             //     [4, 10, 15, 50],
@@ -16,7 +16,7 @@ const DataTable = (function () {
     return {
         init: function () {
             example1();
-            example2();
+            tableAdmins();
         },
     };
 })();

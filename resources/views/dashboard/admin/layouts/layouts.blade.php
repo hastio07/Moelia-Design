@@ -160,12 +160,12 @@
                         </a>
                     </li>
                     @can('view', App\Models\Admin::class)
-                    <li class="{{ Route::is('manage-akun.*') ? 'active' : '' }}">
-                        <a class="link" href="{{ route('manage-akun.index') }}">
-                            <i class="ti-id-badge"></i>
-                            <span>Manage Akun</span>
-                        </a>
-                    </li>
+                        <li class="{{ Route::is('manage-akun.*') ? 'active' : '' }}">
+                            <a class="link" href="{{ route('manage-akun.index') }}">
+                                <i class="ti-id-badge"></i>
+                                <span>Manage Akun</span>
+                            </a>
+                        </li>
                     @endcan
                     <li class="{{ Route::is('manage-perusahaan.*') ? 'active' : '' }}">
                         <a class="link" href="{{ route('manage-perusahaan.index') }}">
@@ -253,14 +253,11 @@
     {{-- =======  --}}
 
     {{-- script for table --}}
-    <script>
-        DataTable.init()
-    </script>
     @stack('managegallery-scripts')
     @stack('manageproduk-scripts')
     {{-- =======  --}}
 
-    <script>
+    <script type="text/javascript">
         Main.init()
     </script>
     @stack('scripts')
