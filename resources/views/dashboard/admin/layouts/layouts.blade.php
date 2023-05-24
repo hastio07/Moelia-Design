@@ -160,12 +160,12 @@
                         </a>
                     </li>
                     @can('view', App\Models\Admin::class)
-                        <li class="{{ Route::is('manage-akun.*') ? 'active' : '' }}">
-                            <a class="link" href="{{ route('manage-akun.index') }}">
-                                <i class="ti-id-badge"></i>
-                                <span>Manage Akun</span>
-                            </a>
-                        </li>
+                    <li class="{{ Route::is('manage-akun.*') ? 'active' : '' }}">
+                        <a class="link" href="{{ route('manage-akun.index') }}">
+                            <i class="ti-id-badge"></i>
+                            <span>Manage Akun</span>
+                        </a>
+                    </li>
                     @endcan
                     <li class="{{ Route::is('manage-perusahaan.*') ? 'active' : '' }}">
                         <a class="link" href="{{ route('manage-perusahaan.index') }}">
@@ -191,8 +191,8 @@
                             <span>Manage Pesanan</span>
                         </a>
                         <ul class="sub-menu ">
-                            <li><a class="link" href="/manage-pesanan"><span>Selesai Dikerjakan</span></a></li>
-                            <li><a class="link" href="/manage-pesanan"><span>Belum Dikerjakan</span></a></li>
+                            <li><a class="link" href="/PesananProses"><span>Pesanan Diproses</span></a></li>
+                            <li><a class="link" href="/PesananSelesai"><span>Pesanan Selesai</span></a></li>
                         </ul>
                     </li>
                     <li class="{{ Route::is('manage-gallery.*') ? 'active' : '' }}">
@@ -205,6 +205,12 @@
                         <a class="link" href="{{ route('manage-layanan.index') }}">
                             <i class="ti-bookmark-alt"></i>
                             <span>Manage Layanan</span>
+                        </a>
+                    </li>
+                    <li class="{{ Route::is('manage-layanan.*') ? 'active' : '' }}">
+                        <a class="link" href="/manage-pegawai">
+                            <i class="ti-user"></i>
+                            <span>Manage Pegawai</span>
                         </a>
                     </li>
                     <li class="{{ Route::is('pembayaran.*') ? 'active' : '' }}">
