@@ -180,7 +180,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="link" href="/dashboard/managejadwal">
+                        <a class="{{ Route::is('manage-jadwal.*') ? 'active' : '' }}" href="/dashboard/managejadwal">
                             <i class="ti-agenda"></i>
                             <span>Manage Jadwal</span>
                         </a>
@@ -207,7 +207,7 @@
                             <span>Manage Layanan</span>
                         </a>
                     </li>
-                    <li class="{{ Route::is('manage-layanan.*') ? 'active' : '' }}">
+                    <li class="{{ Route::is('manage-pegawai.*') ? 'active' : '' }}">
                         <a class="link" href="/manage-pegawai">
                             <i class="ti-user"></i>
                             <span>Manage Pegawai</span>

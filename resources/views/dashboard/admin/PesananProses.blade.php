@@ -1,5 +1,5 @@
 @extends('dashboard.admin.layouts.layouts')
-@section('title', 'Manage Akun')
+@section('title', 'Pesanan')
 @push('StylesAdmin')
 <link href="{{ asset('templates') }}/assets/css-modif/managepesanan.css" rel="stylesheet">
 @endpush
