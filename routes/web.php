@@ -45,6 +45,9 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
     Route::get('/PesananProses', function () {
         return view('dashboard/admin/PesananProses');
     });
+    Route::get('/manage-pegawai', function () {
+        return view('dashboard/admin/ManagePegawai');
+    });
     Route::get('dashboard', [DashboardAdminsController::class, 'index'])->name('dashboard');
     Route::middleware(['role:super_admin'])->prefix('dashboard')->group(function () {
         Route::resource('manage-akun', ManageAkunController::class)->except('create');
