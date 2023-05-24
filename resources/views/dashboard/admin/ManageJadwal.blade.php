@@ -82,7 +82,7 @@
                     <div class="btn-modal mt-3 mb-2">
                         <button class="btn mb-2 icon-left  btn-success" data-bs-toggle="modal" data-bs-target="#largeModal" type="button "><i class="bi bi-plus-lg"></i>Tambah Jadwal</i></button>
                     </div>
-                    <table id="example2" class="table display text-center">
+                    <table id="tabelJadwal" class="table display text-center">
                         <thead>
                             <tr>
                                 <th>Nama Customer</th>
