@@ -31,7 +31,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet">
 
     <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" referrerpolicy="no-referrer" rel="stylesheet" />
-
     @stack('head-scripts')
 
 </head>
@@ -110,7 +109,7 @@
                         </a>
                         <ul class="dropdown-menu small">
                             <li class="menu-content ps-menu">
-                                <a href="#">
+                                <a href="/ProfileAdmin">
                                     <div class="description">
                                         <i class="ti-user"></i> Profile
                                     </div>

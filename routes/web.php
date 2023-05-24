@@ -42,6 +42,9 @@ Route::middleware(['no-redirect-if-authenticated:admins', 'prevent-back-history'
 
 /** Awal kode untuk rute super_admin & admin**/
 Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
+    Route::get('/ProfileAdmin', function () {
+        return view('dashboard/admin/ProfileAdmin');
+    });
     Route::get('/PesananProses', function () {
         return view('dashboard/admin/PesananProses');
     });
