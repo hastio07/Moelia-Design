@@ -3,6 +3,7 @@
 @push('StylesAdmin')
 <link href="{{ asset('templates') }}/assets/css-modif/ManageProduk.css" rel="stylesheet">
 @endpush
+
 @push('head-scripts')
 <script src="{{ asset('templates') }}/vendor/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
 @endpush
@@ -36,30 +37,6 @@
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                {{-- @foreach ($get_products as $value)
-                                        <tr>
-                                            <td>{{ $value->nama_produk }}</td>
-                                <td>{{ $value->category->nama_kategori }}</td>
-                                <td>{{ $value->formatRupiah('harga_sewa') }}</td>
-                                <td>{!! $value->rincian_produk !!}</td>
-                                <td>{{ $value->deskripsi }}</td>
-                                <td>
-                                    @if ($value->gambar)
-                                    <img alt="{{ $value->nama_produk }}" height="150" src="/storage/compressed{{ $value->gambar }}" width="180">
-                                    @else
-                                    <img alt="{{ $value->nama_produk }}" height="150" src="https://dummyimage.com/180x150.png" width="180">
-                                    @endif
-                                </td>
-                                <td>
-                                    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                                        <button class="btn btn-warning" data-bs-product="{{ $value }}" data-bs-route="{{ route('manage-produk.update', $value->id) }}" data-bs-target="#CUModal" data-bs-toggle="modal" id="btnUpdateModal" type="button"><i class="bi bi-pencil-square"></i></button>
-                                        <button class="btn btn-danger" data-bs-route="{{ route('manage-produk.destroy', $value->id) }}" data-bs-target="#DeleteModal" data-bs-toggle="modal" id="btnDeleteModal" type="button"><i class="bi bi-trash"></i></button>
-                                    </div>
-                                </td>
-                                </tr>
-                                @endforeach --}}
-                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -154,7 +131,7 @@
                                 <input class="form-control" id="hargasewa" name="hargasewa" placeholder="Masukan Harga Sewa" type="number">
                             </div>
                             <div class="form-inpt">
-                                <label class="form-label" for="rincianproduk">Rincian Pesanan<span class="text-danger">*</span></label>
+                                <label class="form-label" for="rincianproduk">Rincian Produk<span class="text-danger">*</span></label>
                                 <textarea id="rincianproduk" name="rincianproduk"></textarea>
                             </div>
                             <div class="form-inpt">
