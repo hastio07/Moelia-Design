@@ -1,22 +1,32 @@
 'use strict';
 
 const DataTable = (function () {
-    function example1() {
-        $('#example').DataTable();
+    function tabelPesananProses() {
+        $('#tabelPesananProses').DataTable({
+            responsive: true,
+        });
+    }
+    function tabelLayanan() {
+        $('#tabelLayanan').DataTable({
+            responsive: true,
+        });
+    }
+    function tabelJadwal() {
+        $('#tabelJadwal').DataTable({
+            responsive: true,
+        });
     }
     function tableAdmins() {
         $('#table-admins').DataTable({
             responsive: true,
-            // lengthMenu: [
-            //     [4, 10, 15, 50],
-            //     [4, 10, 15, 50],
-            // ],
         });
     }
     return {
         init: function () {
-            example1();
+            tabelPesananProses();
             tableAdmins();
+            tabelJadwal();
+            tabelLayanan();
         },
     };
 })();
