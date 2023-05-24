@@ -14,7 +14,7 @@
                 <div class="btn-modal">
                     <button class="btn mb-2 icon-left btn-success" data-bs-route="{{ route('manage-layanan.store') }}" data-bs-target="#CUModal" data-bs-toggle="modal" id="btnCreate" type="button"><i class="bi bi-plus-lg"></i>Tambah Layanan</i></button>
                 </div>
-                <table class="table display text-center" id="example2">
+                <table class="table display text-center" id="tabelLayanan">
                     <thead>
                         <tr>
                             <th>Tipe Layanan</th>
@@ -123,4 +123,8 @@
 
 @push('scripts')
 <script src="{{ asset('templates') }}/assets/js/page/crudservice.js"></script>
+
+<script>
+    DataTable.init()
+</script>
 @endpush
