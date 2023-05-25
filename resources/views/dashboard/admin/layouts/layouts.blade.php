@@ -113,11 +113,6 @@
                                         <i class="ti-user"></i> Profile
                                     </div>
                                 </a>
-                                <a href="#">
-                                    <div class="description">
-                                        <i class="ti-settings"></i> Setting
-                                    </div>
-                                </a>
                                 <form action="{{ route('logout') }}" id="logout" method="post">
                                     @csrf
                                     <a href="#" onclick="document.getElementById('logout').submit();">
