@@ -22,7 +22,6 @@
     {{-- <link rel="stylesheet" href="{{ asset('templates') }}/vendor/chart.js/dist/Chart.min.css"> --}}
     <!-- End CSS  -->
 
-
     <link href="{{ asset('templates') }}/assets/css-modif/LayoutAdmins.css" rel="stylesheet">
     @stack('StylesAdmin')
 
@@ -159,12 +158,12 @@
                         </a>
                     </li>
                     @can('view', App\Models\Admin::class)
-                    <li class="{{ Route::is('manage-akun.*') ? 'active' : '' }}">
-                        <a class="link" href="{{ route('manage-akun.index') }}">
-                            <i class="ti-id-badge"></i>
-                            <span>Manage Akun</span>
-                        </a>
-                    </li>
+                        <li class="{{ Route::is('manage-akun.*') ? 'active' : '' }}">
+                            <a class="link" href="{{ route('manage-akun.index') }}">
+                                <i class="ti-id-badge"></i>
+                                <span>Manage Akun</span>
+                            </a>
+                        </li>
                     @endcan
                     <li class="{{ Route::is('manage-perusahaan.*') ? 'active' : '' }}">
                         <a class="link" href="{{ route('manage-perusahaan.index') }}">
@@ -178,8 +177,8 @@
                             <span>Manage Produk</span>
                         </a>
                     </li>
-                    <li>
-                        <a class="{{ Route::is('manage-jadwal.*') ? 'active' : '' }}" href="/dashboard/managejadwal">
+                    <li class="{{ Route::is('manage-jadwal.*') ? 'active' : '' }}">
+                        <a class="link" href="{{ route('manage-jadwal.index') }}">
                             <i class="ti-agenda"></i>
                             <span>Manage Jadwal</span>
                         </a>
