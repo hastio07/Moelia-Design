@@ -158,12 +158,12 @@
                         </a>
                     </li>
                     @can('view', App\Models\Admin::class)
-                        <li class="{{ Route::is('manage-akun.*') ? 'active' : '' }}">
-                            <a class="link" href="{{ route('manage-akun.index') }}">
-                                <i class="ti-id-badge"></i>
-                                <span>Manage Akun</span>
-                            </a>
-                        </li>
+                    <li class="{{ Route::is('manage-akun.*') ? 'active' : '' }}">
+                        <a class="link" href="{{ route('manage-akun.index') }}">
+                            <i class="ti-id-badge"></i>
+                            <span>Manage Akun</span>
+                        </a>
+                    </li>
                     @endcan
                     <li class="{{ Route::is('manage-perusahaan.*') ? 'active' : '' }}">
                         <a class="link" href="{{ route('manage-perusahaan.index') }}">
@@ -215,6 +215,12 @@
                         <a class="link" href="">
                             <i class="ti-money"></i>
                             <span>Pembayaran</span>
+                        </a>
+                    </li>
+                    <li class="{{ Route::is('manage-gudang.*') ? 'active' : '' }}">
+                        <a class="link" href="/manage-gudang">
+                            <i class="ti-package"></i>
+                            <span>Manange Gudang</span>
                         </a>
                     </li>
                 </ul>
