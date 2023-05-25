@@ -43,7 +43,6 @@
                                                 <option value="3">Three</option>
                                             </select>
                                         </div>
-
                                         <div class="mt-3">
                                             <label for="fotopegawai" class="form-label">Foto Pegawai</label>
                                             <input class="form-control" type="file" id="fotopegawau" multiple>

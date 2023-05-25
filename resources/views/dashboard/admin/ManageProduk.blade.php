@@ -85,7 +85,7 @@
                                         <tr>
                                             <td>{{ $value->nama_kategori }}</td>
                                             <td>
-                                                <button class="btn btn-danger" data-bs-route="{{ route('manage-produk.destroycategory', $value->id) }}" data-bs-target="#DeleteModal" data-bs-toggle="modal" id="btnDeleteModal" type="button"><i class="bi bi-trash"></i></button>
+                                                <button class="btn text-danger" data-bs-route="{{ route('manage-produk.destroycategory', $value->id) }}" data-bs-target="#DeleteModal" data-bs-toggle="modal" id="btnDeleteModal" type="button"><i class="bi bi-trash"></i></button>
                                             </td>
                                         </tr>
                                         @endforeach

@@ -261,6 +261,7 @@
     @stack('managegallery-scripts')
     @stack('manageproduk-scripts')
     {{-- =======  --}}
+    @stack('proses-pesanan')
 
     <script type="text/javascript">
         Main.init()
