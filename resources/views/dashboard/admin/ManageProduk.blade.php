@@ -25,6 +25,22 @@
                         <div class="btn-modal">
                             <button class="btn mb-2 icon-left  btn-success" data-bs-route="{{ route('manage-produk.store') }}" data-bs-target="#CUModal" data-bs-toggle="modal" id="btnCreateModal" type="button"><i class="bi bi-plus-lg"></i>Tambah Produk</i></button>
                         </div>
+                        @if (session()->has('success_add_product'))
+                        <div class="alert alert-success m-3">{{ session()->get('success_add_product') }}</div>
+                        @elseif (session()->has('error_add_product'))
+                        <div class="alert alert-danger m-3">{{ session()->get('error_add_product') }}</div>
+                        @endif
+                        @if ($errors->any())
+                        <div class="pt-1 m-3">
+                            <div class="alert alert-danger">
+                                <ul style="list-style:none;">
+                                    @foreach ($errors->all() as $item)
+                                    <li>{{ $item }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                        @endif
                         <table class="table display" id="table-produk">
                             <thead>
                                 <tr>
@@ -50,15 +66,14 @@
                             <h4>Tambah Kategori</h4>
                         </div>
                         @if (session()->has('success_add_category'))
-                        <div class="alert alert-success">{{ session()->get('success_add_category') }}</div>
+                        <div class="alert alert-success m-3">{{ session()->get('success_add_category') }}</div>
                         @elseif (session()->has('error_add_category'))
-                        <div class="alert alert-danger">{{ session()->get('error_add_category') }}</div>
+                        <div class="alert alert-danger m-3">{{ session()->get('error_add_category') }}</div>
                         @endif
                         @if ($errors->any())
-                        <div class="pt-3">
+                        <div class="pt-1 m-3">
                             <div class="alert alert-danger">
-                                <p>Lengkapi Data!</p>
-                                <ul class="pt=10" style="list-style:none;">
+                                <ul style="list-style:none;">
                                     @foreach ($errors->all() as $item)
                                     <li>{{ $item }}</li>
                                     @endforeach
@@ -75,9 +90,9 @@
                             <div class="list-kategori mt-4">
                                 <table class="table mt-3 caption-top border">
                                     @if (session()->has('success_category'))
-                                    <div class="alert alert-success">{{ session()->get('success_category') }}</div>
+                                    <div class="alert alert-success m-3">{{ session()->get('success_category') }}</div>
                                     @elseif (session()->has('error_category'))
-                                    <div class="alert alert-danger">{{ session()->get('error_category') }}</div>
+                                    <div class="alert alert-danger m-3">{{ session()->get('error_category') }}</div>
                                     @endif
                                     <caption class="text-center fw-bold">List Kategori</caption>
                                     <tbody>
