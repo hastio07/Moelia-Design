@@ -3,6 +3,9 @@
 @push('StylesAdmin')
 <link href="{{ asset('templates') }}/assets/css-modif/managepesanan.css" rel="stylesheet">
 @endpush
+@push('head-scripts')
+<script src="{{ asset('templates') }}/vendor/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+@endpush
 
 @section('content')
 <div class="content-wrapper">
@@ -20,28 +23,23 @@
                                 <div class="add-jadwal">
                                     <div class="form-inpt">
                                         <label for="basicInput" class="form-label">Nama</label>
-                                        <input type="text" placeholder="Masukan Nama" class="form-control" id="nama" name="nama" value="">
+                                        <input type="text" placeholder="John Doe" class="form-control" id="nama" name="nama" value="">
                                     </div>
                                     <div class="form-inpt">
-                                        <label for="basicInput" class="form-label">Lokasi</label>
-                                        <input type="text" placeholder="Masukan Lokasi Kegiatan" class="form-control" id="lokasi" name="lokasi" value="">
+                                        <label for="basicInput" class="form-label">Alamat</label>
+                                        <input type="text" placeholder="Jl. Nangka" class="form-control" id="lokasi" name="Alamat" value="">
                                     </div>
                                     <div class="form-inpt">
-                                        <label for="basicInput" class="form-label">Jam Kegiatan</label>
-                                        <input type="time" id="appt" class="form-control" id="jam" name="jam" value="">
+                                        <label class="form-label" for="rincianproduk">Rincian Produk<span class="text-danger">*</span></label>
+                                        <textarea id="rincianproduk" name="rincianproduk"></textarea>
                                     </div>
                                     <div class="form-inpt">
-                                        <label for="datepicker-icon" class="form-label">Tentukan Tanggal</label>
-                                        <div class="input-group input-append date" data-date-format="dd-mm-yyyy">
-                                            <input class="form-control" type="text" readonly="" autocomplete="off" placeholder="Masukan Tanggal" id="tanggal" name="tanggal" value="">
-                                            <button class="btn btn-outline-secondary" type="button">
-                                                <i class="far fa-calendar-alt"></i>
-                                            </button>
-                                        </div>
+                                        <label for="basicInput" class="form-label">Biaya Sewa</label>
+                                        <input type="number" placeholder="Rp.100.000.000" class="form-control" id="lokasi" name="Alamat" value="">
                                     </div>
                                     <div class="form-inpt">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Kegiatan</label>
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" id="kegiatan" name="kegiatan"></textarea>
+                                        <label for="basicInput" class="form-label">Uang Muka</label>
+                                        <input type="number" placeholder="Rp.10.000.000" class="form-control" id="lokasi" name="Alamat" value="">
                                     </div>
                                 </div>
                             </div>
@@ -90,6 +88,7 @@
                                     <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#smallModaljadwal" type="button"><i class="bi bi-trash"></i></button>
                                     <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#UpdateModaljadwal" type="button"><i class="bi bi-pencil-square"></i></button>
                                     <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#UpdateModaljadwal" type="button"><i class="bi bi-send"></i></button>
+                                    <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#UpdateModaljadwal" type="button"><i class="bi bi-check2"></i></i></button>
                                     <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#UpdateModaljadwal" type="button"><i class="bi bi-printer"></i></i></button>
                                 </div>
                             </td>
@@ -109,6 +108,7 @@
                                     <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#smallModaljadwal" type="button"><i class="bi bi-trash"></i></button>
                                     <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#UpdateModaljadwal" type="button"><i class="bi bi-pencil-square"></i></button>
                                     <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#UpdateModaljadwal" type="button"><i class="bi bi-send"></i></button>
+                                    <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#UpdateModaljadwal" type="button"><i class="bi bi-check2"></i></i></button>
                                     <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#UpdateModaljadwal" type="button"><i class="bi bi-printer"></i></i></button>
                                 </div>
                             </td>
@@ -137,5 +137,19 @@
 @push('scripts')
 <script>
     DataTable.init()
+</script>
+@endpush
+
+@push('proses-pesanan')
+<script>
+    tinymce.init({
+        selector: 'textarea#rincianproduk',
+        plugins: [
+            'lists', 'wordcount'
+        ],
+        menubar: 'edit insert format',
+        toolbar: 'bullist numlist',
+        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
+    });
 </script>
 @endpush
