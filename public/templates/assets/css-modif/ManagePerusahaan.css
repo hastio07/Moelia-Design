@@ -21,6 +21,12 @@
     margin-bottom: 50px;
 }
 
+textarea {
+    resize: none;
+    width: 100%;
+    height: 300px;
+}
+
 .img-services {
     width: 80%;
 }

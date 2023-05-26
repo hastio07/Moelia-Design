@@ -113,11 +113,6 @@
                                         <i class="ti-user"></i> Profile
                                     </div>
                                 </a>
-                                <a href="#">
-                                    <div class="description">
-                                        <i class="ti-settings"></i> Setting
-                                    </div>
-                                </a>
                                 <form action="{{ route('logout') }}" id="logout" method="post">
                                     @csrf
                                     <a href="#" onclick="document.getElementById('logout').submit();">
@@ -158,12 +153,12 @@
                         </a>
                     </li>
                     @can('view', App\Models\Admin::class)
-                        <li class="{{ Route::is('manage-akun.*') ? 'active' : '' }}">
-                            <a class="link" href="{{ route('manage-akun.index') }}">
-                                <i class="ti-id-badge"></i>
-                                <span>Manage Akun</span>
-                            </a>
-                        </li>
+                    <li class="{{ Route::is('manage-akun.*') ? 'active' : '' }}">
+                        <a class="link" href="{{ route('manage-akun.index') }}">
+                            <i class="ti-id-badge"></i>
+                            <span>Manage Akun</span>
+                        </a>
+                    </li>
                     @endcan
                     <li class="{{ Route::is('manage-perusahaan.*') ? 'active' : '' }}">
                         <a class="link" href="{{ route('manage-perusahaan.index') }}">
@@ -217,6 +212,12 @@
                             <span>Pembayaran</span>
                         </a>
                     </li>
+                    <li class="{{ Route::is('manage-gudang.*') ? 'active' : '' }}">
+                        <a class="link" href="/manage-gudang">
+                            <i class="ti-package"></i>
+                            <span>Manange Gudang</span>
+                        </a>
+                    </li>
                 </ul>
 
             </div>
@@ -260,6 +261,7 @@
     @stack('managegallery-scripts')
     @stack('manageproduk-scripts')
     {{-- =======  --}}
+    @stack('proses-pesanan')
 
     <script type="text/javascript">
         Main.init()

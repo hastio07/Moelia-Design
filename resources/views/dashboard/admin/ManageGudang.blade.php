@@ -1,10 +1,8 @@
 @extends('dashboard.admin.layouts.layouts')
-@section('title', 'Manage Pegawai')
-@push('StylesAdmin')
-<link href="{{ asset('templates') }}/assets/css-modif/ManagePegawai.css" rel="stylesheet">
-@endpush
+@section('title', 'Manage Gudang')
+
 @section('content')
-<div class="content-wrapper">
+<div class="content-wrapper container">
     <div class="row same-height">
         <div class="col-sm-9">
             <div class="modal fade" id="largeModal" tabindex="-1" aria-labelledby="largeModalLabel" aria-hidden="true">
@@ -12,40 +10,28 @@
                     <form action="" method="post">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="largeModalLabel">Tambah Pegawai</h5>
+                                <h5 class="modal-title" id="largeModalLabel">Tambah Barang</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <div class="p-3 mb-5">
                                     <div class="add-jadwal">
                                         <div class="form-inpt">
-                                            <label for="basicInput" class="form-label">Nama</label>
-                                            <input type="text" placeholder="Masukan Nama" class="form-control" id="nama" name="nama" value="">
+                                            <label for="basicInput" class="form-label">Nama Barang</label>
+                                            <input type="text" placeholder="Masukan Nama Barang" class="form-control" id="nama" name="nama" value="">
                                         </div>
                                         <div class="form-inpt mt-3">
-                                            <label for="basicInput" class="form-label">Alamat Domisili</label>
-                                            <input type="text" placeholder="Masukan Alamat Pegawai" class="form-control" id="alamat" name="alamat" value="">
-                                        </div>
-                                        <div class="form-inpt mt-3">
-                                            <label for="basicInput" class="form-label">No. Telephone</label>
-                                            <input type="text" placeholder="Masukan Nomor Telephone" class="form-control" id="telephone" name="telephonr" value="">
-                                        </div>
-                                        <div class="form-inpt mt-3">
-                                            <label for="basicInput" class="form-label">Gaji</label>
-                                            <input type="text" placeholder="Masukan Jumlah Gaji" class="form-control" id="gaji" name="telephone" value="">
-                                        </div>
-                                        <div class="form-inpt mt-3">
-                                            <label for="basicInput" class="form-label">Jabatan</label>
+                                            <label for="basicInput" class="form-label">Jenis Barang</label>
                                             <select class="form-select" aria-label="Default select example">
-                                                <option selected>Pilih sesuai jabatan pegawai</option>
+                                                <option selected>Pilih sesuai jenis barang</option>
                                                 <option value="1">One</option>
                                                 <option value="2">Two</option>
                                                 <option value="3">Three</option>
                                             </select>
                                         </div>
-                                        <div class="mt-3">
-                                            <label for="fotopegawai" class="form-label">Foto Pegawai</label>
-                                            <input class="form-control" type="file" id="fotopegawau" multiple>
+                                        <div class="form-inpt mt-3">
+                                            <label for="basicInput" class="form-label">Stok Barang</label>
+                                            <input type="number" placeholder="Masukan jumlah stok" class="form-control" id="alamat" name="alamat" value="">
                                         </div>
                                     </div>
                                 </div>
@@ -60,32 +46,26 @@
             </div>
             <div class="card">
                 <div class="card-header">
-                    <h4>Daftar Pegawai</h4>
+                    <h4>Daftar Barang</h4>
                 </div>
                 <div class="card-body">
                     <div class="btn-modal mt-3 mb-2">
-                        <button class="btn mb-2 icon-left  btn-success" data-bs-toggle="modal" data-bs-target="#largeModal" type="button "><i class="bi bi-plus-lg"></i>Tambah Pegawai</i></button>
+                        <button class="btn mb-2 icon-left  btn-success" data-bs-toggle="modal" data-bs-target="#largeModal" type="button "><i class="bi bi-plus-lg"></i>Tambah Barang</i></button>
                     </div>
                     <table class="table display" id="tabelPesananProses">
                         <thead>
                             <tr>
-                                <th>Nama</th>
-                                <th>Alamat Domisili</th>
-                                <th>Kontak</th>
-                                <th>Besaran Gaji</th>
-                                <th>Jabatan</th>
-                                <th>Foto</th>
+                                <th>Nama Barang</th>
+                                <th>Jenis Barang</th>
+                                <th>Stok</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="fw-bolder">Muhammad</td>
-                                <td>Jl. Purnawirawan Gg. Man 1</td>
-                                <td>081256766661</td>
-                                <td>Rp.1.000.000</td>
-                                <td>Owner</td>
-                                <td>img1.jpg</td>
+                                <td class="fw-bolder">Tenda</td>
+                                <td>dekorasi</td>
+                                <td>100</td>
                                 <td>
                                     <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                                         <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#smallModal" type="button"><i class="bi bi-trash"></i></button>
@@ -96,14 +76,10 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>Nama</th>
-                                <th>Alamat Domisili</th>
-                                <th>No. Telephone</th>
-                                <th>Besaran Gaji</th>
-                                <th>Jabatan</th>
-                                <th>Foto</th>
-                                <th class="text-center">Aksi</th>
-                            </tr>
+                                <th>Nama Barang</th>
+                                <th>Jenis Barang</th>
+                                <th>Stok</th>
+                                <th class="text-center">Aksi</th </tr>
                         </tfoot>
                     </table>
                 </div>
@@ -113,13 +89,12 @@
             <div class="content-wrapper">
                 <div class="same-height">
                     <div class="card p-3 text-center">
-                        <h5>Tambah Jabatan</h5>
+                        <h5 class="fw-bold">Kategori Barang</h5>
                         <div class="form-inpt mt-3 d-flex">
-                            <input type="text" placeholder="Masukan jabatan" class="form-control" id="telephone" name="telephonr" value="">
+                            <input type="text" placeholder="Masukan Kategori" class="form-control" id="telephone" name="telephonr" value="">
                             <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="" type="button"><i class="bi bi-plus-lg"></i></button>
                         </div>
                         <div class="mt-4">
-                            <p class="fw-bold">Daftar Jabatan</p>
                             <ul class="list-group">
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     A list item
@@ -142,6 +117,7 @@
     </div>
 </div>
 @endsection
+
 @push('scripts')
 <script>
     DataTable.init()

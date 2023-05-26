@@ -75,7 +75,7 @@ class ManageProdukController extends Controller
         //Jika gagal
         if ($validator->fails()) {
 
-            return dd(back()->withErrors($validator)->withInput()); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
+            return back()->withErrors($validator)->withInput()->with('error_add_product', 'gagal menambahkan produk'); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
         }
 
         $validatedData = $validator->validated();
@@ -104,7 +104,7 @@ class ManageProdukController extends Controller
         //Simpan produk
         Product::create($data);
 
-        return redirect('dashboard/manage-produk')->with('success', 'data berhasil disimpan');
+        return redirect('dashboard/manage-produk')->with('success_add_product', 'data berhasil disimpan');
     }
 
     public function update(Request $request, $id)
@@ -129,7 +129,7 @@ class ManageProdukController extends Controller
 
         //Jika gagal
         if ($validator->fails()) {
-            return dd(back()->withErrors($validator)->withInput()); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
+            return back()->withErrors($validator)->withInput(); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
         }
 
         $validatedData = $validator->validated();
@@ -171,24 +171,25 @@ class ManageProdukController extends Controller
             Storage::delete(['compressed/' . $path, 'post-images/' . $path]);
         }
         Product::destroy($id);
-        return redirect('/dashboard/manage-produk')->with('success', 'Data Berhasil DiHapus!');
+        return redirect('/dashboard/manage-produk')->with('success_add_product', 'Data Berhasil DiHapus!');
     }
 
     public function createcategory(Request $request)
     {
         $rules = [
-            'nama_kategori' => 'required|string|max:255',
+            'nama_kategori' => 'required|string|max:255|unique:categories',
         ];
         $massages = [
             'max' => ':attribute harus diisi maksimal :max karakter.',
             'string' => ':attribute harus berupa teks.',
             'required' => ':attribute wajib diisi.',
+            'unique' => 'Kategori sudah ada!',
         ];
         //Validasi
         $validator = Validator::make($request->all(), $rules, $massages);
         //Jika gagal
         if ($validator->fails()) {
-            return back()->with('error_add_category', 'Data gagal disimpan')->withErrors($validator)->withInput(); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
+            return back()->with('error_add_category', 'Data gagal disimpan!')->withErrors($validator)->withInput(); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
         }
         $validatedData = $validator->validated();
         //Menampung data request setelah validasi
