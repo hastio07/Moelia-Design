@@ -76,20 +76,20 @@
                                 @csrf
                                 <div class="form-inpt">
                                     <label class="form-label" for="nama">Nama</label>
-                                    <input class="form-control" id="nama" name="nama" placeholder="Masukan Nama" type="text" value="{{ Session::get('nama') }}">
+                                    <input class="form-control" id="nama" name="nama" placeholder="Masukan Nama" type="text" value="{{ old('nama') }}">
                                 </div>
                                 <div class="form-inpt">
                                     <label class="form-label" for="lokasi">Lokasi</label>
-                                    <input class="form-control" id="lokasi" name="lokasi" placeholder="Masukan Lokasi Kegiatan" type="text" value="{{ Session::get('lokasi') }}">
+                                    <input class="form-control" id="lokasi" name="lokasi" placeholder="Masukan Lokasi Kegiatan" type="text" value="{{ old('lokasi') }}">
                                 </div>
                                 <div class="form-inpt">
                                     <label class="form-label" for="jam">Jam Kegiatan</label>
-                                    <input class="form-control" id="jam" name="jam" type="time" value="{{ Session::get('jam') }}">
+                                    <input class="form-control" id="jam" name="jam" type="time" value="{{ old('jam') }}">
                                 </div>
                                 <div class="form-inpt">
                                     <label class="form-label" for="tanggal">Tentukan Tanggal</label>
                                     <div class="input-group input-append date" data-date-format="dd-mm-yyyy">
-                                        <input autocomplete="off" class="form-control" id="tanggal" name="tanggal" placeholder="Masukan Tanggal" type="text" value="{{ Session::get('tanggal') }}">
+                                        <input autocomplete="off" class="form-control" id="tanggal" name="tanggal" placeholder="Masukan Tanggal" type="text" value="{{ old('tanggal') }}">
                                         <button class="btn btn-outline-secondary" type="button">
                                             <i class="far fa-calendar-alt"></i>
                                         </button>
@@ -97,7 +97,7 @@
                                 </div>
                                 <div class="form-inpt">
                                     <label class="form-label" for="kegiatan">Kegiatan</label>
-                                    <textarea class="form-control" id="kegiatan" name="kegiatan" rows="3">{{ Session::get('kegiatan') }}</textarea>
+                                    <textarea class="form-control" id="kegiatan" name="kegiatan" rows="3">{{ old('kegiatan') }}</textarea>
                                 </div>
                             </form>
                         </div>
@@ -207,8 +207,8 @@
                 csrfField.insertAdjacentElement('beforebegin', createField); // Taruh sebelum csrf field
                 // Isi field hasil parseData
                 const convertTimeStampToTimeJS = new Date(parseData.waktu); // konversi timestamp db ke timejs
-                const hour = convertTimeStampToTimeJS.getHours(); // Ambil jam
-                const minute = convertTimeStampToTimeJS.getMinutes(); // Ambil menit
+                const hour = convertTimeStampToTimeJS.getHours().toString().padStart(2, '0'); // Ambil jam
+                const minute = convertTimeStampToTimeJS.getMinutes().toString().padStart(2, '0'); // Ambil menit
                 const year = convertTimeStampToTimeJS.getFullYear(); // Ambil tahun
                 const month = (convertTimeStampToTimeJS.getMonth() + 1).toString().padStart(2, '0'); // Ambil bulan
                 const day = convertTimeStampToTimeJS.getDate().toString().padStart(2, '0'); // Ambil Tanggal

@@ -67,11 +67,11 @@ class ManageJadwalController extends Controller
             'tanggal' => 'required',
         ];
         $massages = [
-            'nama.required' => "Nama Customer Wajib Diisi",
-            'Kegiatan.required' => "Kegiatan Wajib Diisi",
-            'lokasi.required' => "Lokasi Wajib Diisi",
-            'jam.required' => "Jam Wajib Diisi",
-            'tanggal.required' => "Tanggal Wajib Diisi",
+            'nama.required' => ":Attribute Customer Wajib Diisi",
+            'kegiatan.required' => ":Attribute Wajib Diisi",
+            'lokasi.required' => ":Attribute Wajib Diisi",
+            'jam.required' => ":Attribute Wajib Diisi",
+            'tanggal.required' => ":Attribute Wajib Diisi",
         ];
         $validator = Validator::make($request->all(), $rules, $massages);
         $validatedData = $validator->validated();
