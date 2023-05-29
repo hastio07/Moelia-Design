@@ -222,22 +222,57 @@ class ManagePerusahaanController extends Controller
     public function updateorcreatecontact(Request $request)
     {
         $rules = [
-            'telephone' => 'nullable|string|max:255',
-            'whatsapp' => 'nullable|string|max:255',
+            'telephone1_name' => 'nullable|string|max:255',
+            'telephone1_number' => 'nullable|numeric|max:99999999999999|regex:/^(?:\+62)?\d{9,12}$/',
+            'telephone2_name' => 'nullable|string|max:255',
+            'telephone2_number' => 'nullable|string|max:255',
+            'whatsapp1_name' => 'nullable|string|max:255',
+            'whatsapp1_number' => 'nullable|string|max:255',
+            'whatsapp2_name' => 'nullable|string|max:255',
+            'whatsapp2_number' => 'nullable|string|max:255',
+            'whatsapp3_name' => 'nullable|string|max:255',
+            'whatsapp3_number' => 'nullable|string|max:255',
+            'whatsapp4_name' => 'nullable|string|max:255',
+            'whatsapp4_number' => 'nullable|string|max:255',
             'email' => 'nullable|email|max:255',
         ];
-        $massages = [
-            'max' => ':attribute harus diisi maksimal :max karakter.',
-            'string' => ':attribute harus berupa teks.',
+        $messages = [
+            'max' => ':attribute melebihi panjang maksimum yang diizinkan',
+            'regex' => 'format :attribute tidak valid',
+            'string' => ':attribute hanya boleh berupa karakter teks.',
+            'numeric' => ':attribute harus dalam format numerik.',
             'email' => ':attribute harus berupa alamat surel yang valid.',
         ];
+        // foreach ($rules as $field => $rule) {
+        //     if (!Str::contains($rule, 'email')) {
+        //         $messages["{$field}.max"] = ":attribute harus diisi maksimal :max karakter.";
+        //     }
+        // }
         //Validasi
-        $validator = Validator::make($request->all(), $rules, $massages);
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        $validator->setAttributeNames([
+            'telephone1_name' => 'Nama Telepon 1',
+            'telephone1_number' => 'Nomor Telepon 1',
+            'telephone2_name' => 'Nama Telepon 2',
+            'telephone2_number' => 'Nomor Telepon 2',
+            'whatsapp1_name' => 'Nama WhatsApp 1',
+            'whatsapp1_number' => 'Nomor WhatsApp 1',
+            'whatsapp2_name' => 'Nama WhatsApp 2',
+            'whatsapp2_number' => 'Nomor WhatsApp 2',
+            'whatsapp3_name' => 'Nama WhatsApp 3',
+            'whatsapp3_number' => 'Nomor WhatsApp 3',
+            'whatsapp4_name' => 'Nama WhatsApp 4',
+            'whatsapp4_number' => 'Nomor WhatsApp 4',
+            'email' => 'E-mail',
+        ]);
+
         //Jika gagal
         if ($validator->fails()) {
             return dd(back()->withErrors($validator)->withInput()); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
         }
         $validatedData = $validator->validated();
+
         $id = (int) $request->input('id_contact');
         // dd($id);
         // update atau create record dengan data yang diberikan
