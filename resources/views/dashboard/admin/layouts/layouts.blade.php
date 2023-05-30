@@ -213,7 +213,7 @@
                         </a>
                     </li>
                     <li class="{{ Route::is('manage-gudang.*') ? 'active' : '' }}">
-                        <a class="link" href="/manage-gudang">
+                        <a class="link" href="{{ route('manage-gudang.index') }}">
                             <i class="ti-package"></i>
                             <span>Manange Gudang</span>
                         </a>

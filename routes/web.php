@@ -7,6 +7,7 @@ use App\Http\Controllers\ManageJadwalController;
 use App\Http\Controllers\ManageLayananController;
 use App\Http\Controllers\ManagePerusahaanController;
 use App\Http\Controllers\ManageProdukController;
+use App\Http\Controllers\ManageGudangController;
 use App\Http\Controllers\user\AboutController;
 use App\Http\Controllers\user\FotoController;
 use App\Http\Controllers\user\HomeController;
@@ -51,9 +52,6 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
     Route::get('/manage-pegawai', function () {
         return view('dashboard/admin/ManagePegawai');
     });
-    Route::get('/manage-gudang', function () {
-        return view('dashboard/admin/ManageGudang');
-    });
     Route::get('dashboard', [DashboardAdminsController::class, 'index'])->name('dashboard');
     Route::middleware(['role:super_admin'])->prefix('dashboard')->group(function () {
         Route::resource('manage-akun', ManageAkunController::class)->except('create');
@@ -76,6 +74,14 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
             Route::delete('manage-gallery/photo-tab/{id}', 'destroyphoto')->name('manage-gallery.destroyphoto');
             Route::post('manage-gallery/video-tab', 'createvideo')->name('manage-gallery.createvideo');
             Route::delete('manage-gallery/video-tab/{id}', 'destroyvideo')->name('manage-gallery.destroyvideo');
+        });
+        Route::controller(ManageGudangController::class)->group(function () {
+            Route::get('manage-gudang', 'index')->name('manage-gudang.index');
+            Route::post('manage-gudang', 'store')->name('manage-gudang.store');
+            Route::put('manage-gudang/{id}', 'update')->name('manage-gudang.update');
+            Route::delete('manage-gudang/{id}', 'destroy')->name('manage-gudang.destroy');
+            Route::post('manage-gudang/kategori', 'creatcategorygudang')->name('manage-gudang.creatcategorygudang');
+            Route::delete('manage-gudang/kategori', 'destroycategorygudang')->name('manage-gudang.destroycategorygudang');
         });
         Route::controller(ManagePerusahaanController::class)->group(function () {
             Route::get('manage-perusahaan', 'index')->name('manage-perusahaan.index');

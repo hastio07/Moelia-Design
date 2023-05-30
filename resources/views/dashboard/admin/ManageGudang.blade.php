@@ -95,20 +95,14 @@
                             <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="" type="button"><i class="bi bi-plus-lg"></i></button>
                         </div>
                         <div class="mt-4">
+                            @foreach($get_categories as $value)
                             <ul class="list-group">
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    A list item
-                                    <span><a href=""><i class="bi bi-trash text-danger"></i></a></span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    A second list item
-                                    <span><a href=""><i class="bi bi-trash text-danger"></i></a></span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    A third list item
-                                    <span><a href=""><i class="bi bi-trash text-danger"></i></a></span>
+                                    {{ $value->nama_kategori_barang }}
+                                    <span><button class="btn text-danger" data-bs-route="" data-bs-target="#DeleteModal" data-bs-toggle="modal" id="btnDeleteModal" type="button"><i class="bi bi-trash"></i></button></span>
                                 </li>
                             </ul>
+                            @endforeach
                         </div>
                     </div>
                 </div>

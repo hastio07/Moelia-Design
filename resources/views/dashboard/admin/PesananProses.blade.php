@@ -65,6 +65,7 @@
                         <tr>
                             <th>Nama Customer</th>
                             <th>Alamat</th>
+                            <th>Tanggal Acara</th>
                             <th>Detail Pesanan</th>
                             <th>Biaya Sewa</th>
                             <th>Uang Muka</th>
@@ -76,6 +77,7 @@
                         <tr>
                             <td class="fw-bolder">Lutfi Aziz</td>
                             <td>Jl. Purnawirawan</td>
+                            <td>30/06/2023</td>
                             <td></td>
                             <td>Rp.100.000.000</td>
                             <td>Rp.10.000.000;- </td>
@@ -96,6 +98,7 @@
                         <tr>
                             <td class="fw-bolder">Muhammad</td>
                             <td>Jl. Purnawirawan Gg. Man 1</td>
+                            <td>30/01/2023</td>
                             <td></td>
                             <td>Rp.150.000.000</td>
                             <td>Rp.15.000.000;- </td>
@@ -120,6 +123,7 @@
                         <tr>
                             <th>Nama Customer</th>
                             <th>Alamat</th>
+                            <th>Tanggal Acara</th>
                             <th>Detail Pesanan</th>
                             <th>Biaya Sewa</th>
                             <th>Uang Muka</th>
