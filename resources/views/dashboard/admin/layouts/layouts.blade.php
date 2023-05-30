@@ -99,7 +99,7 @@
                     </div>
                     <div class="dropdown dropdown-menu-end">
                         <a aria-expanded="false" class="user-dropdown" data-bs-toggle="dropdown" href="#">
-                            <div class="label">
+                            <div class="label text-capitalize">
                                 <span></span>
                                 @auth<div>{{ auth()->user()->nama_depan . ' ' . auth()->user()->nama_belakang }}</div>
                                 @endauth

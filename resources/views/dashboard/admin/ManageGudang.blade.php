@@ -56,7 +56,7 @@
                         <thead>
                             <tr>
                                 <th>Nama Barang</th>
-                                <th>Jenis Barang</th>
+                                <th>Ktegori Barang</th>
                                 <th>Stok</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
@@ -77,7 +77,7 @@
                         <tfoot>
                             <tr>
                                 <th>Nama Barang</th>
-                                <th>Jenis Barang</th>
+                                <th>Kategori Barang</th>
                                 <th>Stok</th>
                                 <th class="text-center">Aksi</th </tr>
                         </tfoot>
