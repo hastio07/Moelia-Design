@@ -22,14 +22,14 @@
                                     <div class="col-md-8">
                                         <div class="wrapper-list">
                                             <div class="flex-header text-center border">
-                                                <h5 class="fw-bold">Manage Perusahaan</h5>
+                                                <h3 class="fw-bold">Manage Perusahaan</h3>
                                             </div>
 
                                             <!-- foto owner -->
                                             <div class="container border mt-3 shadow p-3 mb-5 bg-body rounded">
-                                                <h5 class="text-center">
+                                                <h4 class="text-center">
                                                     Foto & Nama Owner
-                                                </h5>
+                                                </h4>
                                                 <form action="{{ route('manage-perusahaan.updateorcreateowner') }}" class="formstyle" enctype="multipart/form-data" id="formOwner" method="POST">
                                                     <div class="flex-item form">
                                                         @csrf
@@ -55,9 +55,9 @@
 
                                             <!-- logo dan nama perusahaan -->
                                             <div class="container border mt-3 shadow p-3 mb-5 bg-body rounded">
-                                                <h5 class="text-center">
+                                                <h4 class="text-center">
                                                     Logo & Nama Perusahaan
-                                                </h5>
+                                                </h4>
                                                 <form action="{{ route('manage-perusahaan.updateorcreatecompany') }}" class="formstyle" enctype="multipart/form-data" id="formCompany" method="POST">
                                                     <div class="flex-item form">
                                                         @csrf
@@ -81,7 +81,7 @@
 
                                             <!-- alamat perusahaan -->
                                             <div class="container border mt-3 shadow p-3 mb-5 bg-body rounded">
-                                                <div class="flex-item label">Alamat Perusahaan</div>
+                                                <h4 class="text-center">Alamat Perusahaan</h4>
                                                 <form action="{{ route('manage-perusahaan.updateorcreateaddress') }}" class="formstyle" enctype="multipart/form-data" id="formAlamat" method="POST">
                                                     <div class="flex-item form">
                                                         @csrf
@@ -104,9 +104,9 @@
 
                                             <!-- telephone dan whatsapp perusahaan -->
                                             <div class="container border mt-3 shadow p-3 mb-5 bg-body rounded">
-                                                <h5 class="text-center">
+                                                <h4 class="text-center">
                                                     Kontak
-                                                </h5>
+                                                </h4>
                                                 <form action="{{ route('manage-perusahaan.updateorcreatecontact') }}" class="formstyle" enctype="multipart/form-data" id="formContact" method="POST">
                                                     <div class="flex-item form">
                                                         @csrf
@@ -151,42 +151,114 @@
 
                                             <!-- sosial media -->
                                             <div class="container border mt-3 shadow p-3 mb-5 bg-body rounded">
-                                                <h5 class="text-center">
+                                                <h4 class="text-center">
                                                     Social Media
-                                                </h5>
+                                                </h4>
                                                 <form action="{{ route('manage-perusahaan.updateorcreatesosmed') }}" class="formstyle" enctype="multipart/form-data" id="formSosmed" method="POST">
                                                     <div class="flex-item form">
                                                         @csrf
                                                         <input name="id_sosmed" readonly type="hidden" value="{{ $sosmeds->id ?? null }}">
-                                                        <label class="form-label mt-2" for="instagram">Instagram</label>
-                                                        <input class="form-control" id="instagram" name="u_instagram" placeholder="Masukkan username instagram" type="text" value="{{ $sosmeds->u_instagram ?? null }}">
-                                                        <input class="form-control mt-1" id="instagram" name="l_instagram" placeholder="Masukkan link instagram" type="text" value="{{ $sosmeds->l_instagram ?? null }}">
-                                                        <label class="form-label mt-2" for="facebook">Facebook</label>
-                                                        <input class="form-control" id="facebook" name="u_facebook" placeholder="Masukkan username facebook" type="text" value="{{ $sosmeds->u_facebook ?? null }}">
-                                                        <input class="form-control mt-1" id="facebook" name="l_facebook" placeholder="Masukkan link Facebook" type="text" value="{{ $sosmeds->l_facebook ?? null }}">
-                                                        <label class="form-label mt-2" for="twitter">Twitter</label>
-                                                        <input class="form-control" id="twitter" name="u_twitter" placeholder="Masukkan username twitter" type="text" value="{{ $sosmeds->u_twitter ?? null }}">
-                                                        <input class="form-control mt-1" id="twitter" name="l_twitter" placeholder="Masukkan link twitter" type="text" value="{{ $sosmeds->l_twitter ?? null }}">
-                                                        <label class="form-label mt-2" for="youtube">Youtube</label>
-                                                        <input class="form-control" id="youtube" name="u_youtube" placeholder="Masukkan link channel youtube" type="text" value="{{ $sosmeds->u_youtube ?? null }}">
-                                                        <input class="form-control mt-1" id="youtube" name="l_youtube" placeholder="Masukkan link youtube" type="text" value="{{ $sosmeds->l_youtube ?? null }}">
-                                                    </div>
-                                                    <div class="flex-item button">
-                                                        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                                                            <button class="btn btn-success" type="submit">Upload</i></button>
-                                                            @php
-                                                                $social_media = ['u_instagram', 'l_instagram', 'u_facebook', 'l_facebook', 'u_twitter', 'l_twitter', 'u_youtube', 'l_youtube'];
-                                                                $show_button = false;
-                                                                foreach ($social_media as $media) {
-                                                                    if (!empty($sosmeds->$media)) {
-                                                                        $show_button = true;
-                                                                        break;
+                                                        <div class="mb-3">
+                                                            <h6 class="fw-bold">Instagram</h6>
+                                                            <div class="col-auto mb-2">
+                                                                <label class="sr-only" for="u_instagram">Username Instagram</label>
+                                                                <div class="input-group">
+                                                                    <div class="input-group-prepend">
+                                                                        <div class="input-group-text">@</div>
+                                                                    </div>
+                                                                    <input class="form-control" id="instagram" name="u_instagram" placeholder="Masukkan username instagram" type="text" value="{{ $sosmeds->u_instagram ?? null }}">
+                                                                    <span class="fa-circle-info-help"><i class="fa-sharp fa-solid fa-circle-question" data-bs-toggle="tooltip" title="Username"></i></span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <label class="sr-only" for="l_instagram">Link Instagram</label>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-text"><i class="fa fa-link" style="font-size: .8rem;"></i></span>
+                                                                    <input class="form-control" id="l_instagram" name="l_instagram" placeholder="Masukkan link instagram" type="text" value="{{ $sosmeds->l_instagram ?? null }}">
+                                                                    <span class="fa-circle-info-help"><i class="fa-sharp fa-solid fa-circle-question" data-bs-toggle="tooltip" title="Link"></i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <h6 class="fw-bold">Facebook</h6>
+                                                            <div class="col-auto mb-2">
+                                                                <label class="sr-only" for="u_facebook">Username Facebook</label>
+                                                                <div class="input-group">
+                                                                    <div class="input-group-prepend">
+                                                                        <div class="input-group-text">@</div>
+                                                                    </div>
+                                                                    <input class="form-control" id="facebook" name="u_facebook" placeholder="Masukkan username facebook" type="text" value="{{ $sosmeds->u_facebook ?? null }}">
+                                                                    <span class="fa-circle-info-help"><i class="fa-sharp fa-solid fa-circle-question" data-bs-toggle="tooltip" title="Username"></i></span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <label class="sr-only" for="l_facebook">Link Facebook</label>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-text"><i class="fa fa-link" style="font-size: .8rem;"></i></span>
+                                                                    <input class="form-control" id="facebook" name="l_facebook" placeholder="Masukkan link Facebook" type="text" value="{{ $sosmeds->l_facebook ?? null }}">
+                                                                    <span class="fa-circle-info-help"><i class="fa-sharp fa-solid fa-circle-question" data-bs-toggle="tooltip" title="Link"></i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <h6 class="fw-bold">Twitter</h6>
+                                                            <div class="col-auto mb-2">
+                                                                <label class="sr-only" for="u_twitter">Username Twitter</label>
+                                                                <div class="input-group">
+                                                                    <div class="input-group-prepend">
+                                                                        <div class="input-group-text">@</div>
+                                                                    </div>
+                                                                    <input class="form-control" id="twitter" name="u_twitter" placeholder="Masukkan username twitter" type="text" value="{{ $sosmeds->u_twitter ?? null }}">
+                                                                    <span class="fa-circle-info-help"><i class="fa-sharp fa-solid fa-circle-question" data-bs-toggle="tooltip" title="Username"></i></span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <label class="sr-only" for="l_twitter">Link Twitter</label>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-text"><i class="fa fa-link" style="font-size: .8rem;"></i></span>
+                                                                    <input class="form-control" id="twitter" name="l_twitter" placeholder="Masukkan link twitter" type="text" value="{{ $sosmeds->l_twitter ?? null }}">
+                                                                    <span class="fa-circle-info-help"><i class="fa-sharp fa-solid fa-circle-question" data-bs-toggle="tooltip" title="Link"></i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <h6 class="fw-bold">Youtube</h6>
+                                                            <div class="col-auto mb-2">
+                                                                <label class="sr-only" for="u_youtube">Username Youtube</label>
+                                                                <div class="input-group">
+                                                                    <div class="input-group-prepend">
+                                                                        <div class="input-group-text">@</div>
+                                                                    </div>
+                                                                    <input class="form-control" id="youtube" name="u_youtube" placeholder="Masukkan link channel youtube" type="text" value="{{ $sosmeds->u_youtube ?? null }}">
+                                                                    <span class="fa-circle-info-help"><i class="fa-sharp fa-solid fa-circle-question" data-bs-toggle="tooltip" title="Username"></i></span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <label class="sr-only" for="l_youtube">Link Youtube</label>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-text"><i class="fa fa-link" style="font-size: .8rem;"></i></span>
+                                                                    <input class="form-control" id="youtube" name="l_youtube" placeholder="Masukkan link youtube" type="text" value="{{ $sosmeds->l_youtube ?? null }}">
+                                                                    <span class="fa-circle-info-help"><i class="fa-sharp fa-solid fa-circle-question" data-bs-toggle="tooltip" title="Link"></i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flex-item button">
+                                                            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                                                                <button class="btn btn-success" type="submit">Upload</i></button>
+                                                                @php
+                                                                    $social_media = ['u_instagram', 'l_instagram', 'u_facebook', 'l_facebook', 'u_twitter', 'l_twitter', 'u_youtube', 'l_youtube'];
+                                                                    $show_button = false;
+                                                                    foreach ($social_media as $media) {
+                                                                        if (!empty($sosmeds->$media)) {
+                                                                            $show_button = true;
+                                                                            break;
+                                                                        }
                                                                     }
-                                                                }
-                                                            @endphp
-                                                            @if (!empty($sosmeds) && $show_button)
-                                                                <button class="btn btn-danger" data-bs-route="{{ route('manage-perusahaan.deletesosmed', $sosmeds->id) }}" id="btnDelete" type="submit">Hapus</button>
-                                                            @endif
+                                                                @endphp
+                                                                @if (!empty($sosmeds) && $show_button)
+                                                                    <button class="btn btn-danger" data-bs-route="{{ route('manage-perusahaan.deletesosmed', $sosmeds->id) }}" id="btnDelete" type="submit">Hapus</button>
+                                                                @endif
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </form>
@@ -194,9 +266,9 @@
 
                                             <!-- konten siapa kami -->
                                             <div class="container border mt-3 shadow p-3 mb-5 bg-body rounded">
-                                                <h5 class="text-center">
+                                                <h4 class="text-center">
                                                     Siapa Kami?
-                                                </h5>
+                                                </h4>
                                                 <form action="{{ route('manage-perusahaan.updateorcreateabout') }}" class="formstyle" enctype="multipart/form-data" id="formAbout" method="POST">
                                                     @csrf
                                                     <input name="id_about" readonly type="hidden" value="{{ $abouts->id ?? null }}">
@@ -218,9 +290,9 @@
 
                                             <!-- keunggulan perusahaan -->
                                             <div class="container border mt-3 shadow p-3 mb-5 bg-body rounded">
-                                                <h5 class="text-center">
+                                                <h4 class="text-center">
                                                     Apa Saja Yang Didapatkan?
-                                                </h5>
+                                                </h4>
                                                 <form action="{{ route('manage-perusahaan.updateorcreateoffer') }}" class="formstyle" enctype="multipart/form-data" id="formOffer" method="POST">
                                                     @csrf
                                                     <input name="id_offer" readonly type="hidden" value="{{ $offers->id ?? null }}">
@@ -368,6 +440,7 @@
 @endsection
 
 @push('manageperusahaan-scripts')
+    {{-- script untuk seluruh tombol hapus  --}}
     <script>
         btnDelete = document.querySelectorAll('#btnDelete');
         btnDelete.forEach((btn) => {
@@ -384,6 +457,7 @@
             })
         })
     </script>
+    {{-- script untuk textarea form penawaran --}}
     <script>
         tinymce.init({
             selector: 'textarea#penawaran',
@@ -394,5 +468,13 @@
             toolbar: 'bullist numlist',
             content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
         });
+    </script>
+    {{-- script untuk tooltip icon help info --}}
+    <script>
+        // Initialize tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
     </script>
 @endpush
