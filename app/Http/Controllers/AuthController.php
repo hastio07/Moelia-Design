@@ -57,4 +57,12 @@ class AuthController extends Controller
     {
         return view('authenticate.register.index');
     }
+    public function forgotpassword()
+    {
+        return view('authenticate.forgot.forgot-password');
+    }
+    public function confirmpassword()
+    {
+        return view('authenticate.forgot.confirm');
+    }
 }

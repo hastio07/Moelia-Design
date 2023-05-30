@@ -12,63 +12,24 @@
                             <i class="bi bi-arrow-left fs-4"></i>
                         </a>
                     </div>
-                    <img src="{{ asset('templates') }}/assets/images/reset.jpg" class="img-fluid" alt="Phone image">
-                    <form method="POST" aria-label="abdul" data-id="abdul" class="needs-validation" novalidate="" autocomplete="off">
+                    <img src="{{ asset('templates') }}/assets/images/reset.jpg" class="img-fluid mb-3" alt="Phone image">
+                    <form method="POST" aria-label="abdul" data-id="abdul" class="needs-validation" novalidate="" autocomplete="off" action="/confirm">
                         <div class="mb-3">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-outline d-flex">
-                                        <input type="text" class="form-control" placeholder="First name" aria-label="First name" required>
-                                        <label class="form-label" for="form3Example1">First Name</label>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-outline d-flex">
-                                        <input type="text" class="form-control" placeholder="First name" aria-label="Last name" required>
-                                        <label class="form-label" for="form3Example1">Last Name</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mb-3">
+                            @csrf
                             <div class="form-outline d-flex">
-                                <input class="form-control bg-transparent" id="exampleInputPassword1" name="password" placeholder="Masukan password" required type="password">
+                                <input class="form-control bg-transparent" id="" name="" placeholder="name@example.com" required type="email">
                                 <span class="input-group-text rounded-end cursor-pointer bg-white border-0"><i class="fa fa-envelope"></i></span>
                                 <label class="form-label" for="form3Example1">Email</label>
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <div class="form-outline d-flex">
-                                <input class="form-control bg-transparent" id="exampleInputPassword1" name="password" placeholder="Masukan password" required type="password">
-                                <span class="input-group-text rounded-end cursor-pointer bg-white border-0"><i class="fa fa-phone"></i></span>
-                                <label class="form-label" for="form3Example1">Email</label>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <div class="form-outline d-flex">
-                                <input class="form-control bg-transparent" id="exampleInputPassword1" name="password" placeholder="Masukan password" required type="password">
-                                <span class="input-group-text rounded-end password cursor-pointer bg-white border-0">&nbsp<i class="fa fa-eye"></i>&nbsp</span>
-                                <label class="form-label" for="form3Example1">Password</label>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <div class="form-outline d-flex">
-                                <input class="form-control bg-transparent" id="exampleInputPassword1" name="password" placeholder="Masukan password" required type="password">
-                                <span class="input-group-text rounded-end password cursor-pointer bg-white border-0">&nbsp<i class="fa fa-eye"></i>&nbsp</span>
-                                <label class="form-label" for="form3Example1">Ulangi Password</label>
-                            </div>
-                        </div>
                         <div class="d-flex align-items-center buttons">
-                            <button type="submit" class="btn ms-auto text-capitalize">
-                                Register <i class="bi bi-check2-square"></i>
-                            </button>
+                            <a href="/forgot">
+                                <button type="submit" class="btn text-capitalize">
+                                    Kirim Link Resset Password <i class="bi bi-envelope-check-fill"></i>
+                                </button>
+                            </a>
                         </div>
                     </form>
-                </div>
-                <div class="card-footer py-3 border-0">
-                    <div class="text-center">
-                        Sudah Memiliki Akun? <a href="/login" class="text-dark">Masuk</a>
-                    </div>
                 </div>
             </div>
         </div>

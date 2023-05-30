@@ -9,6 +9,8 @@ Route::middleware('guest:admins,web')->group(function () {
         Route::post('register', 'store');
         Route::get('login', 'index')->name('login');
         Route::post('login', 'authenticate');
+        Route::get('forgot', 'forgotpassword')->name('forgot');
+        Route::post('confirm', 'confirmpassword')->name('confirm');
     });
 });
 

@@ -1,77 +1,73 @@
 @extends('authenticate.layouts')
 
 @section('content')
-    <section class="container login d-flex shadow-lg p-3 mb-5 bg-body rounded position-absolute top-50 start-50 translate-middle">
-        <div class="login-left w-50 h-100">
-            <div class="row justify-content-center align-content-center h-100">
-                <div class="col-sm-6">
-                    <div class="header">
-                        <h1 class="text-center">Selamat Datang!</h1>
+<section class="container h-100">
+    <div class="row justify-content-sm-center h-100 align-items-center">
+        @if (session()->has('failed'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session('failed') }}
+            <button aria-label="Close" class="btn-close" data-bs-dismiss="alert" type="button"></button>
+        </div>
+        @endif
+        <div class="col-xxl-4 col-xl-5 col-lg-6 col-md-7 col-sm-8">
+            <div class="card shadow-lg">
+                <div class="card-body p-4">
+                    <div class="back">
+                        <a href="/">
+                            <i class="bi bi-arrow-left fs-4"></i>
+                        </a>
                     </div>
-                    @if (session()->has('failed'))
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            {{ session('failed') }}
-                            <button aria-label="Close" class="btn-close" data-bs-dismiss="alert" type="button"></button>
-                        </div>
-                    @endif
-
-                    <div class="in-form">
-                        <form action="/login" enctype="multipart/form-data" method="POST">
-                            @csrf
-                            <label class="form-label mt-0" for="email">Email:</label>
-                            <div class="input-group mb-3 has-validation">
-                                <span class="input-group-text bg-transparent"><i class="bi bi-envelope"></i></span>
-                                <input autofocus class="form-control text-decoration-none bg-transparent @error('email')is-invalid @enderror" id="email" name="email" placeholder="name@example.com" required type="email" value="{{ old('email') }}">
+                    <img src="{{ asset('templates') }}/assets/images/login.jpg" class="img-fluid" alt="Phone image">
+                    <form action="/login" enctype="multipart/form-data" method="POST" aria-label="abdul" data-id="abdul" class="needs-validation pt-5" novalidate="" autocomplete="off">
+                        <h1 class="fs-4 text-center fw-bold mb-4">Login</h1>
+                        @csrf
+                        <div class="mb-3">
+                            <div class="input-group input-group-join mb-3">
+                                <div class="form-outline">
+                                    <input autofocus class="form-control @error('email')is-invalid @enderror" id="email" name="email" placeholder="name@example.com" required type="email" value="{{ old('email') }}">
+                                    <label class="form-label" for="form3Example1">Email</label>
+                                </div>
                                 @error('email')
-                                    <div class="invalid-feedback" id="email">
-                                        {{ $message }}
-                                    </div>
+                                <div class="invalid-feedback" id="email">
+                                    {{ $message }}
+                                </div>
                                 @enderror
                             </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="input-group input-group-join mb-3">
+                                <div class="form-outline d-flex">
+                                    <input class="form-control bg-transparent" id="exampleInputPassword1" name="password" placeholder="Masukan password" required type="password">
+                                    <span class="input-group-text rounded-end password cursor-pointer bg-white border-0">&nbsp<i class="fa fa-eye"></i>&nbsp</span>
+                                    <label class="form-label" for="form3Example1">Password</label>
+                                </div>
+                                <div class="invalid-feedback">
+                                    Password required
+                                </div>
+                            </div>
+                        </div>
 
-                            <label class="form-label mt-0" for="email">Password:</label>
-                            <div class="input-group mb-3 has-validation">
-                                <span class="input-group-text bg-transparent"><i class="bi bi-key-fill"></i></span>
-                                <input class="form-control bg-transparent" id="exampleInputPassword1" name="password" placeholder="Masukan password" required type="password">
+                        <div class="d-flex align-items-center buttons">
+                            <div class="">
+                                <a href="/forgot" class="float-end text-danger">
+                                    Forgot Password?
+                                </a>
                             </div>
-                            <a class="text-decoration-none text-center" href="#">Lupa Password</a>
-                            <button class="btn btn center-block signin" type="submit">LogIn</button>
-                            <div class="text-center">
-                                <span class="d-inline text-center">Tidak Punya Akun? <a class="d-inline text-decoration-none text-danger" href="#">Daftar Sekarang!</a></span>
-                            </div>
-                        </form>
+                            <button type="submit" class="btn ms-auto text-capitalize">
+                                Login <i class="bi bi-box-arrow-right"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer py-3 border-0">
+                    <div class="text-center">
+                        Tidak Punya Akun? <a href="/register">Buat Akun</a>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</section>
 
-        </div>
-        <div class="login-right w-50 h-100 position-absolute top-50 end-0 translate-middle-y">
-            <div class="carousel slide h-100" id="carouselExampleIndicators">
-                <div class="carousel-indicators">
-                    <button aria-current="true" aria-label="Slide 1" class="active" data-bs-slide-to="0" data-bs-target="#carouselExampleIndicators" type="button"></button>
-                    <button aria-label="Slide 2" data-bs-slide-to="1" data-bs-target="#carouselExampleIndicators" type="button"></button>
-                    <button aria-label="Slide 3" data-bs-slide-to="2" data-bs-target="#carouselExampleIndicators" type="button"></button>
-                </div>
-                <div class="carousel-inner rounded-end h-100">
-                    <div class="carousel-item active h-100">
-                        <img alt="..." class="d-block w-100 h-100" src="https://raw.githubusercontent.com/hastio07/Project_WO/52e9acb396534a7b977fb931a009fce50ab719f1/public/img/img1.jpg">
-                    </div>
-                    <div class="carousel-item h-100">
-                        <img alt="..." class="d-block w-100 h-100" src="https://raw.githubusercontent.com/hastio07/Project_WO/52e9acb396534a7b977fb931a009fce50ab719f1/public/img/img2.jpg">
-                    </div>
-                    <div class="carousel-item h-100">
-                        <img alt="..." class="d-block w-100 h-100" src="https://raw.githubusercontent.com/hastio07/Project_WO/52e9acb396534a7b977fb931a009fce50ab719f1/public/img/img3.jpg">
-                    </div>
-                </div>
-                <button class="carousel-control-prev" data-bs-slide="prev" data-bs-target="#carouselExampleIndicators" type="button">
-                    <span aria-hidden="true" class="carousel-control-prev-icon"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" data-bs-slide="next" data-bs-target="#carouselExampleIndicators" type="button">
-                    <span aria-hidden="true" class="carousel-control-next-icon"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-        </div>
-    </section>
+
 @endsection

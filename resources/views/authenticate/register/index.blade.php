@@ -1,59 +1,78 @@
 @extends('authenticate.layouts')
 
 @section('content')
-    <section class="container register d-flex shadow-lg p-3 mb-5 bg-body rounded position-absolute top-50 start-50 translate-middle">
-        <div class="w-100 h-100">
-            <div class="row justify-content-center align-content-center h-100">
-                <div class="col-sm-7 col-lg-5">
-
-                    <div class="header">
-                        <h1 class="text-center">Registrasi</h1>
+<section class="container h-100">
+    <div class="row justify-content-sm-center h-100 align-items-center">
+        <div class="col-xxl-4 col-xl-5 col-lg-6 col-md-7 col-sm-8">
+            <div class="card shadow-lg">
+                <div class="card-body p-4">
+                    <h1 class="fs-4 text-center fw-bold mb-3">Register</h1>
+                    <div class="back">
+                        <a href="/login">
+                            <i class="bi bi-arrow-left fs-4"></i>
+                        </a>
                     </div>
-                    <div class="in-form">
-                        <!-- Nama Input-->
-                        <div class="row">
-                            <div class="col">
-                                <label class="form-label" for="Name">Nama Depan</label>
-                                <input aria-label="First name" class="form-control bg-transparent" placeholder="Nama Depan" type="text">
-                            </div>
-                            <div class="col">
-                                <label class="form-label" for="Name">Nama Belakang</label>
-                                <input aria-label="Last name" class="form-control bg-transparent" placeholder="Nama Belakang" type="text">
+                    <img src="{{ asset('templates') }}/assets/images/register.jpg" class="img-fluid" alt="Phone image">
+                    <form method="POST" aria-label="abdul" data-id="abdul" class="needs-validation" novalidate="" autocomplete="off">
+                        <div class="mb-3">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-outline d-flex">
+                                        <input type="text" class="form-control" placeholder="First name" aria-label="First name" required>
+                                        <label class="form-label" for="form3Example1">First Name</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-outline d-flex">
+                                        <input type="text" class="form-control" placeholder="Last name" aria-label="Last name" required>
+                                        <label class="form-label" for="form3Example1">Last Name</label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <!-- Email Input-->
-                        <label class="form-label" for="email">Email</label>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text bg-transparent"><i class="bi bi-envelope"></i></span>
-                            <input class="form-control bg-transparent" id="email" placeholder="Masukan Email" required type="email">
+                        <div class="mb-3">
+                            <div class="form-outline d-flex">
+                                <input class="form-control bg-transparent" id="exampleInputPassword1" name="email" placeholder="name@example.com" required type="email">
+                                <span class="input-group-text rounded-end cursor-pointer bg-white border-0"><i class="fa fa-envelope"></i></span>
+                                <label class="form-label" for="form3Example1">Email</label>
+                            </div>
                         </div>
-                        <!-- No. Hp-->
-                        <label class="NomorHp" for="NomorHp">Nomor Handphone</label>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text bg-transparent"><i class="bi bi-phone"></i></span>
-                            <input class="form-control bg-transparent" id="NomorHp" placeholder="Masukan Nomor HP" required type="NomorHp">
+                        <div class="mb-3">
+                            <div class="form-outline d-flex">
+                                <input class="form-control bg-transparent" id="exampleInputPassword1" name="phone" placeholder="Masukan nomor" required type="text">
+                                <span class="input-group-text rounded-end cursor-pointer bg-white border-0"><i class="fa fa-phone"></i></span>
+                                <label class="form-label" for="form3Example1">No. Hanphone</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-outline d-flex">
+                                <input class="form-control bg-transparent" id="exampleInputPassword1" name="password" placeholder="Masukan password" required type="password">
+                                <span class="input-group-text rounded-end password cursor-pointer bg-white border-0">&nbsp<i class="fa fa-eye"></i>&nbsp</span>
+                                <label class="form-label" for="form3Example1">Password</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-outline d-flex">
+                                <input class="form-control bg-transparent" id="exampleInputPassword1" name="password" placeholder="Masukan password" required type="password">
+                                <span class="input-group-text rounded-end password cursor-pointer bg-white border-0">&nbsp<i class="fa fa-eye"></i>&nbsp</span>
+                                <label class="form-label" for="form3Example1">Ulangi Password</label>
+                            </div>
                         </div>
 
-                        <!-- Password Input-->
-                        <div class="row">
-                            <div class="col">
-                                <label class="form-label" for="Password">Password</label>
-                                <input aria-label="First name" class="form-control bg-transparent" placeholder="Password" type="password">
-                            </div>
-                            <div class="col">
-                                <label class="form-label" for="Password">Ulangi Password</label>
-                                <input aria-label="Last name" class="form-control bg-transparent" placeholder="Password" type="password">
-                            </div>
+                        <div class="d-flex align-items-center buttons">
+                            <button type="submit" class="btn ms-auto text-capitalize">
+                                Register <i class="bi bi-check2-square"></i>
+                            </button>
                         </div>
-                        <div class="mt-4">
-                            <button class="btn btn center-block signin">Daftar Sekarang</button>
-                        </div>
+                    </form>
+                </div>
+                <div class="card-footer py-3 border-0">
+                    <div class="text-center">
+                        Sudah Memiliki Akun? <a href="/login" class="text-dark">Masuk</a>
                     </div>
-
                 </div>
             </div>
-
         </div>
-
-    </section>
+    </div>
+</section>
 @endsection
