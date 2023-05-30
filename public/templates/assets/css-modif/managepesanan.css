@@ -1,0 +1,9 @@
+@media screen and (max-width:425px) {
+    .btn-modal .btn p {
+        display: none;
+    }
+}
+
+.btn-modal .btn p {
+    margin-bottom: 0px;
+}

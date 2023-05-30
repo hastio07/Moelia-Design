@@ -52,13 +52,41 @@
                 </form>
             </div>
         </div>
+        <!-- Modal -->
+        <div class="modal fade" id="modalshowpesanan" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Cari Data Pesanan</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-md-12">
+                            <div class="input-group mb-3 input-daterange datepicker date" data-date-format="dd-mm-yyyy">
+                                <input class="form-control" required="" type="text" id="start_date" name="start_date" value="" readonly="">
+                                <span class="bg-primary text-light px-3 justify-content-center align-items-center d-flex">to</span>
+                                <input class="form-control" required="" type="text" id="end_date" name="end_date" value="" readonly="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">Cari Pesanan <i class="bi bi-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="card">
             <div class="card-header">
                 <h4>Rincian Jadwal Kegiatan</h4>
             </div>
             <div class="card-body">
-                <div class="btn-modal mt-3 mb-2">
-                    <button class="btn mb-2 icon-left  btn-success" data-bs-toggle="modal" data-bs-target="#largeModal" type="button "><i class="bi bi-plus-lg"></i>Tambah Pesanan</i></button>
+                <div class="btn-modal mt-3 mb-2 gap-3 d-flex">
+                    <button class="btn icon-left btn-success d-flex" data-bs-toggle="modal" data-bs-target="#largeModal" type="button "><i class="bi bi-plus-lg"></i>
+                        <p>Pesanan</p></i>
+                    </button>
+                    <button type="button " class="btn btn-primary icon-left d-flex" data-bs-toggle="modal" data-bs-target="#modalshowpesanan"><i class="bi bi-filter"></i>
+                        <p>Tanggal</p>
+                    </button>
                 </div>
                 <table class="table display" id="tabelPesananProses">
                     <thead>
@@ -115,9 +143,7 @@
                                     <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#UpdateModaljadwal" type="button"><i class="bi bi-printer"></i></i></button>
                                 </div>
                             </td>
-
                         </tr>
-
                     </tbody>
                     <tfoot>
                         <tr>
@@ -141,6 +167,16 @@
 @push('scripts')
 <script>
     DataTable.init()
+</script>
+<script src="{{ asset('templates') }}/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script>
+    $('.date').datepicker({
+        autoclose: true,
+        todayHighlight: true,
+        format: 'dd-mm-yyyy'
+    }).on('changeDate', function(e) {
+        console.log(e.target.value);
+    });
 </script>
 @endpush
 
