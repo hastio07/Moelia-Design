@@ -13,7 +13,7 @@
                         </a>
                     </div>
                     <img src="{{ asset('templates') }}/assets/images/reset.jpg" class="img-fluid mb-3" alt="Phone image">
-                    <form method="POST" aria-label="abdul" data-id="abdul" class="needs-validation" novalidate="" autocomplete="off" action="/confirm">
+                    <form method="GET" aria-label="abdul" data-id="abdul" class="needs-validation" novalidate="" autocomplete="off" action="/confirm">
                         <div class="mb-3">
                             @csrf
                             <div class="form-outline d-flex">
@@ -23,7 +23,7 @@
                             </div>
                         </div>
                         <div class="d-flex align-items-center buttons">
-                            <a href="/forgot">
+                            <a href="/confirm">
                                 <button type="submit" class="btn text-capitalize">
                                     Kirim Link Resset Password <i class="bi bi-envelope-check-fill"></i>
                                 </button>

@@ -25,3 +25,7 @@
     color: #504800;
     text-decoration: none;
 }
+
+.form-outline input {
+    margin-bottom: 0px !important;
+}
