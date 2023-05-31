@@ -1,7 +1,0 @@
-.card-gallery {
-    transition: all 0.3s;
-}
-
-.card-gallery:hover {
-    transform: scale(1.15);
-}

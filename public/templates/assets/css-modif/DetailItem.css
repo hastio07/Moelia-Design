@@ -1,9 +1,0 @@
-.details-item {
-    height: 100vh;
-}
-
-@media (max-width:767px) {
-    .details-item {
-        margin-top: 18%;
-    }
-}
