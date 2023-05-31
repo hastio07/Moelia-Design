@@ -2,7 +2,7 @@
 @section('title', 'Detail Item')
 
 @push('styles')
-    <link href="{{ asset('templates') }}/assets/css-modif/DetailItem.css" rel="stylesheet">
+    <link href="{{ asset('templates') }}/assets/css-modif/user/UserDetailProduk.css" rel="stylesheet">
 @endpush
 
 @section('konten')

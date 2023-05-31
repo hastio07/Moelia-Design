@@ -1,6 +1,8 @@
 @extends('dashboard.admin.layouts.layouts')
 @section('title', 'Manage Jadwal')
-
+@push('styles')
+    <link href="{{ asset('templates') }}/vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
+@endpush
 @section('content')
     <section class="manage-akun container">
         <div class="title">
