@@ -74,10 +74,7 @@
                             <a @class(['nav-link', 'active'=> Route::is('aboutus')]) href="/aboutus">Tentang Kami</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/maintenance">Pembayaran</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/maintenance">Booking Jadwal</a>
+                            <a class="nav-link" href="/pembayaran">Pembayaran</a>
                         </li>
                     </ul>
                     <div class="d-flex center">

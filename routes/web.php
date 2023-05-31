@@ -36,6 +36,9 @@ Route::middleware(['no-redirect-if-authenticated:admins', 'prevent-back-history'
     Route::get('/maintenance', function () {
         return view('dashboard.user.maintenance');
     });
+    Route::get('/pembayaran', function () {
+        return view('dashboard.user.pembayaran');
+    });
     Route::resource('/produk', ProdukController::class)->except(['create', 'store', 'edit', 'update', 'destroy']);
     Route::get('/foto', [FotoController::class, 'index'])->name('foto');
     Route::get('/vidio', [VideoController::class, 'index'])->name('vidio');
