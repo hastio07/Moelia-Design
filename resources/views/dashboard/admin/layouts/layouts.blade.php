@@ -5,33 +5,26 @@
     <meta charset="UTF-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Moelia | @yield('title') | {{ ucwords(str_replace('_', ' ', auth()->user()->role->level)) }}</title>
-    <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" rel="stylesheet" />
-
-    <link href="{{ asset('templates') }}/vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{ asset('templates') }}/vendor/themify-icons/themify-icons.css" rel="stylesheet">
-    <link href="{{ asset('templates') }}/vendor/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
-    <link href="{{ asset('templates') }}/vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
-
-    <!-- CSS for manage jadwal only -->
-    <link href="{{ asset('templates') }}/vendor/datatables.net-dt/css/jquery.dataTables.min.css" rel="stylesheet" />
-    <link href="{{ asset('templates') }}/vendor/datatables.net-responsive-dt/css/responsive.dataTables.min.css" rel="stylesheet" />
-    <!-- End CSS  -->
-
-    <!-- CSS for all page -->
-    {{-- <link rel="stylesheet" href="{{ asset('templates') }}/vendor/chart.js/dist/Chart.min.css"> --}}
-    <!-- End CSS  -->
-
-    <link href="{{ asset('templates') }}/assets/css-modif/LayoutAdmins.css" rel="stylesheet">
-    @stack('StylesAdmin')
-
-    <link href="{{ asset('templates') }}/assets/css/style.min.css" rel="stylesheet">
-    <link href="{{ asset('templates') }}/assets/css/bootstrap-override.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet">
 
     <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" referrerpolicy="no-referrer" rel="stylesheet" />
-    @stack('head-scripts')
+    <link href="{{ asset('templates') }}/vendor/themify-icons/themify-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet">
 
+    <link href="{{ asset('templates') }}/vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('templates') }}/assets/css/bootstrap-override.min.css" rel="stylesheet">
+
+    <link href="{{ asset('templates') }}/vendor/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
+
+    <link href="{{ asset('templates') }}/vendor/datatables.net-dt/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="{{ asset('templates') }}/vendor/datatables.net-responsive-dt/css/responsive.dataTables.min.css" rel="stylesheet" />
+
+    <link href="{{ asset('templates') }}/assets/css/style.min.css" rel="stylesheet">
+
+    <link href="{{ asset('templates') }}/assets/css-modif/admin/AdminLayout.css" rel="stylesheet">
+
+    @stack('styles')
+
+    <title>Moelia | @yield('title') | {{ ucwords(str_replace('_', ' ', auth()->user()->role->level)) }}</title>
 </head>
 
 <body>
@@ -153,12 +146,12 @@
                         </a>
                     </li>
                     @can('view', App\Models\Admin::class)
-                    <li class="{{ Route::is('manage-akun.*') ? 'active' : '' }}">
-                        <a class="link" href="{{ route('manage-akun.index') }}">
-                            <i class="ti-id-badge"></i>
-                            <span>Manage Akun</span>
-                        </a>
-                    </li>
+                        <li class="{{ Route::is('manage-akun.*') ? 'active' : '' }}">
+                            <a class="link" href="{{ route('manage-akun.index') }}">
+                                <i class="ti-id-badge"></i>
+                                <span>Manage Akun</span>
+                            </a>
+                        </li>
                     @endcan
                     <li class="{{ Route::is('manage-perusahaan.*') ? 'active' : '' }}">
                         <a class="link" href="{{ route('manage-perusahaan.index') }}">
@@ -243,31 +236,15 @@
     {{-- js for all page --}}
     <script src="{{ asset('templates') }}/vendor/bootstrap/dist/js/bootstrap.bundle.js"></script>
     <script src="{{ asset('templates') }}/vendor/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
-    <script src="{{ asset('templates') }}/assets/js/main.js"></script>
-    {{-- ======= --}}
-
-    {{-- script for anything --}}
-    @stack('manageperusahaan-scripts')
-    {{-- ======= --}}
-
-    {{-- js for page table --}}
     <script src="{{ asset('templates') }}/vendor/jquery/dist/jquery.min.js"></script>
     <script src="{{ asset('templates') }}/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('templates') }}/vendor/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="{{ asset('templates') }}/assets/js/page/datatables.js"></script>
-    {{-- =======  --}}
+    <script src="{{ asset('templates') }}/assets/js/main.js"></script>
 
-    {{-- script for table --}}
-    @stack('managegallery-scripts')
-    @stack('manageproduk-scripts')
-    {{-- =======  --}}
-    @stack('proses-pesanan')
-
-    <script type="text/javascript">
+    <script>
         Main.init()
     </script>
     @stack('scripts')
-
 </body>
 
 </html>

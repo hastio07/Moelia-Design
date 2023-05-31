@@ -20,7 +20,7 @@
     <link href="{{ asset('templates/assets/css/fonts.css') }}" rel="stylesheet" />
 
     <!-- Css Modif -->
-    <link href="{{ asset('templates') }}/assets/css-modif/LayoutScreen.css" rel="stylesheet">
+    <link href="{{ asset('templates') }}/assets/css-modif/user/UserLayout.css" rel="stylesheet">
 
     <!-- Css for spesific page -->
     @stack('styles')
@@ -50,28 +50,37 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
                         <li class="nav-item">
-                            <a @class(['nav-link', 'active'=> Route::is('home')]) aria-current="page" href="/">Home</a>
+                            <a @class(['nav-link', 'active' => Route::is('home')]) aria-current="page" href="/">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a @class(['nav-link', 'active'=> Route::is('produk.*')]) href="/produk">Produk</a>
+                            <a @class(['nav-link', 'active' => Route::is('produk.*')]) href="/produk">Produk</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a @class([ 'nav-link' , 'dropdown-toggle' , 'active'=> Route::is('foto') || Route::is('vidio'),
-                                ]) aria-expanded="false" data-bs-toggle="dropdown" href="#" role="button">
+                            <a @class([
+                                'nav-link',
+                                'dropdown-toggle',
+                                'active' => Route::is('foto') || Route::is('vidio'),
+                            ]) aria-expanded="false" data-bs-toggle="dropdown" href="#" role="button">
                                 Gallery
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a @class([ 'nav-link' , 'dropdown-item' , 'bg-light active'=> Route::is('foto'),
-                                        ]) href="/foto">Foto</a></li>
-                                <li><a @class([ 'nav-link' , 'dropdown-item' , 'bg-light active'=> Route::is('vidio'),
-                                        ]) href="/vidio">Vidio</a></li>
+                                <li><a @class([
+                                    'nav-link',
+                                    'dropdown-item',
+                                    'bg-light active' => Route::is('foto'),
+                                ]) href="/foto">Foto</a></li>
+                                <li><a @class([
+                                    'nav-link',
+                                    'dropdown-item',
+                                    'bg-light active' => Route::is('vidio'),
+                                ]) href="/vidio">Vidio</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/maintenance">Wedding Calculator</a>
                         </li>
                         <li class="nav-item">
-                            <a @class(['nav-link', 'active'=> Route::is('aboutus')]) href="/aboutus">Tentang Kami</a>
+                            <a @class(['nav-link', 'active' => Route::is('aboutus')]) href="/aboutus">Tentang Kami</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/pembayaran">Pembayaran</a>
@@ -79,11 +88,11 @@
                     </ul>
                     <div class="d-flex center">
                         @auth
-                        <a href="/dashboard"><button class="btn btn-color text-capitalize">{{ auth()->user()->nama_depan . ' ' . auth()->user()->nama_belakang  }}</button></a>
+                            <a href="/dashboard"><button class="btn btn-color text-capitalize">{{ auth()->user()->nama_depan . ' ' . auth()->user()->nama_belakang }}</button></a>
                         @else
-                        <a href="/login">
-                            <button class="btn btn-color" type="submit">Login <i class="fa-solid fa-right-to-bracket"></i></button>
-                        </a>
+                            <a href="/login">
+                                <button class="btn btn-color" type="submit">Login <i class="fa-solid fa-right-to-bracket"></i></button>
+                            </a>
                         @endauth
                     </div>
                 </div>

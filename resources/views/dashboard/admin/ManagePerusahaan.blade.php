@@ -1,13 +1,8 @@
 @extends('dashboard.admin.layouts.layouts')
 @section('title', 'Manage Perusahaan')
-
-@push('head-scripts')
-    <script src="{{ asset('templates') }}/vendor/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+@push('styles')
+    <link href="{{ asset('templates') }}/assets/css-modif/admin/ManagePerusahaan.css" rel="stylesheet">
 @endpush
-@push('StylesAdmin')
-    <link href="{{ asset('templates') }}/assets/css-modif/ManagePerusahaan.css" rel="stylesheet">
-@endpush
-
 @section('content')
     <section>
         <div class="content-wrapper">
@@ -439,7 +434,9 @@
     </section>
 @endsection
 
-@push('manageperusahaan-scripts')
+@push('scripts')
+    {{-- TinyMCE --}}
+    <script src="{{ asset('templates') }}/vendor/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
     {{-- script untuk seluruh tombol hapus  --}}
     <script>
         btnDelete = document.querySelectorAll('#btnDelete');

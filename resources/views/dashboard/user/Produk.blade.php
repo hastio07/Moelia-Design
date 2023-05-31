@@ -2,7 +2,7 @@
 @section('title', 'Produk')
 
 @push('styles')
-    <link href="{{ asset('templates') }}/assets/css-modif/Produk.css" rel="stylesheet">
+    <link href="{{ asset('templates') }}/assets/css-modif/user/UserProduk.css" rel="stylesheet">
 @endpush
 
 @section('konten')
