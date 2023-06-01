@@ -84,3 +84,89 @@ form.formstyle {
     text-align: center;
     white-space: nowrap;
 }
+
+/* css untuk jam operasional */
+.hours-operation .time input,
+select {
+    padding: 2px 6px;
+    border: none;
+    border-bottom: 1px solid #c7c7c7;
+    border-radius: none;
+    box-sizing: border-box;
+    color: #000000;
+    background-color: transparent;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-align: center !important
+}
+
+.hours-operation .time input:focus,
+select:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border-bottom: 1px solid #00C853;
+    outline-width: 0
+}
+
+.hours-operation select option {
+    background-color: #fffdfd
+}
+
+.hours-operation select option:focus {
+    background-color: #00C853 !important
+}
+
+::placeholder {
+    color: #fff;
+    opacity: 1
+}
+
+:-ms-input-placeholder {
+    color: #fff
+}
+
+::-ms-input-placeholder {
+    color: #fff
+}
+
+.hours-operation button:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    outline-width: 0
+}
+
+.hours-operation .btn {
+    width: 120px
+}
+
+.exit {
+    border: 1px solid #9E9E9E;
+    color: #9E9E9E;
+    background-color: transparent
+}
+
+.exit:hover {
+    border: 1px solid #9E9E9E;
+    color: #000 !important;
+    background-color: #9E9E9E
+}
+
+@media screen and (max-width: 768px) {
+    .mob {
+        width: 70%
+    }
+
+    select.mob {
+        width: 50%
+    }
+}
+
+.switch-text {
+    color: blue;
+}
+
+.switch-input:checked+.form-check-label .switch-text {
+    color: red;
+}

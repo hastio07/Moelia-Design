@@ -244,3 +244,50 @@
         margin-left: 0;
     }
 }
+
+/* jam operasional */
+.back-bg {
+    background: #fff;
+    margin-top: 60px;
+}
+
+.business-hours {
+    background: #ffc801;
+    padding: 80px 90px;
+    margin-top: -15px;
+    position: relative;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+
+.business-hours .title {
+    font-size: 20px;
+    color: #fff;
+    text-transform: uppercase;
+    padding-left: 5px;
+    border-left: 4px solid #1b2e35;
+}
+
+.business-hours li {
+    color: #1b2e35;
+    line-height: 30px;
+    font-weight: 700;
+}
+
+.business-hours li:last-child {
+    border-bottom: none;
+}
+
+.business-hours .opening-hours li.today {
+    color: #ffac0c;
+}
+
+@media (max-width: 374px) {
+    .business-hours {
+        background: #ffc801;
+        padding: 80px 35px;
+        margin-top: -15px;
+        position: relative;
+    }
+}
