@@ -8,9 +8,42 @@ use Hashids\Hashids;
 use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator;
+use Yajra\DataTables\Facades\DataTables;
 
 class ManageAkunController extends Controller
 {
+    private function getDataForDataTables()
+    {
+        $get_admins = Admin::with('role')->where('role_id', '=', 2)->latest('created_at')->get();
+
+        return $get_admins;
+    }
+    private function renderDataTables($data)
+    {
+        $hashids = new Hashids(env('HASHIDS_KEY'), 20);
+
+        return DataTables::of($data)
+            ->addColumn('Nama Admin', function ($value) {
+                return $value->nama_depan . ' ' . $value->nama_belakang;
+            })
+            ->addColumn('email', function ($value) {
+                return $value->email;
+            })
+            ->addColumn('phone_number', function ($value) {
+                return $value->phone_number;
+            })
+            ->addColumn('role', function ($value) {
+                return $value->role->level;
+            })
+            ->addColumn('aksi', function ($value) use ($hashids) {
+                return ' <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <button class="btn btn-warning" data-route="' . route('manage-akun.edit', $hashids->encode($value->id)) . '" id="edit-button"><i class="bi bi-pencil-square"></i></button>
+                <button class="btn btn-danger" data-route="' . route('manage-akun.destroy', $hashids->encode($value->id)) . '" id="delete-button"><i class="bi bi-trash"></i></button>
+            </div>';
+            })
+            ->rawColumns(['Nama Admin', 'email', 'phone_number', 'role', 'aksi'])
+            ->make();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -19,11 +52,15 @@ class ManageAkunController extends Controller
     public function index()
     {
 
-        $this->authorize('view', [Admin::class]);
-        $get_admins = Admin::with('role')->where('role_id', '=', 2)->latest('created_at')->get();
+        $this->authorize('akses_manage_akun', Admin::class);
 
         $hashids = new Hashids(env('HASHIDS_KEY'), 20);
-        return view('dashboard.admin.manageakun', compact('get_admins', 'hashids'));
+        if (request()->ajax()) {
+            $data = $this->getDataForDataTables();
+            return $this->renderDataTables($data);
+        }
+
+        return view('dashboard.admin.manageakun', compact('hashids'));
     }
 
     /**
@@ -112,8 +149,13 @@ class ManageAkunController extends Controller
 
         $adminedit = Admin::findOrFail($decryptID[0]); //cari user berdasarkan id pada model app/Models/Admin
 
-        $get_admins = Admin::with('role')->where('role_id', '=', 2)->latest('created_at')->get();
-        return view('dashboard.admin.manageakun', compact('get_admins', 'adminedit', 'hashids'));
+        if (request()->ajax()) {
+            $data = $this->getDataForDataTables();
+            return $this->renderDataTables($data);
+        }
+
+        // $get_admins = Admin::with('role')->where('role_id', '=', 2)->latest('created_at')->get();
+        return view('dashboard.admin.manageakun', compact('adminedit', 'hashids'));
     }
 
     /**
@@ -173,7 +215,7 @@ class ManageAkunController extends Controller
             'email' => $request->input('email'),
         ]);
 
-        return redirect('dashboard/manage-akun')->with('massage', 'data berhasil diubah');
+        return redirect()->route('manage-akun.index')->with('massage', 'data berhasil diubah');
     }
 
     /**

@@ -104,7 +104,7 @@
                             <table class="table display" id="table-admins">
                                 <thead>
                                     <tr>
-                                        <th>Nama User</th>
+                                        <th>Nama Admin</th>
                                         <th>E-Mail</th>
                                         <th>No. Handphone</th>
                                         <th>Role Akun</th>
@@ -112,7 +112,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($get_admins as $i => $admin)
+                                    {{-- @foreach ($get_admins as $i => $admin)
                                         <tr>
                                             <td>{{ $admin->nama_depan }} {{ $admin->nama_belakang }}</td>
                                             <td>{{ $admin->email }}</td>
@@ -125,11 +125,11 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                    @endforeach
+                                    @endforeach --}}
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>Nama User</th>
+                                        <th>Nama Admin</th>
                                         <th>E-Mail</th>
                                         <th>No. Handphone</th>
                                         <th>Role Akun</th>
@@ -151,47 +151,75 @@
     <script>
         $(document).ready(function() {
             $('#table-admins').DataTable({
+                processing: true,
+                serverSide: true,
                 responsive: true,
+                ajax: '{{ url()->current() }}',
+                columns: [{
+                        data: 'Nama Admin',
+                        name: 'Nama Admin'
+                    },
+                    {
+                        data: 'email',
+                        name: 'email'
+                    },
+                    {
+                        data: 'phone_number',
+                        name: 'phone_number'
+                    },
+                    {
+                        data: 'role',
+                        name: 'role',
+                    },
+                    {
+                        data: 'aksi',
+                        name: 'aksi'
+                    },
+
+                ],
+                order: [
+                    [1, 'asc']
+                ],
+                drawCallback: function(settings) {
+                    let buttonEdit = document.querySelectorAll('#edit-button');
+                    buttonEdit.forEach((btn) => {
+                        btn.addEventListener('click', function(e) {
+                            e.preventDefault(); // Menghentikan aksi default dari tombol
+                            let route = btn.getAttribute('data-route'); // Mengambil nilai data-route dari atribut data pada tombol
+                            window.location.href = route; // Mengganti URL di browser dengan nilai data-route
+                        })
+                    })
+                    let buttonDelete = document.querySelectorAll('#delete-button');
+                    buttonDelete.forEach((btn) => {
+                        btn.addEventListener('click', function(e) {
+                            e.preventDefault(); // Menghentikan aksi default dari tombol
+                            let route = btn.getAttribute('data-route'); // Mengambil nilai data-route dari atribut data pada tombol
+
+                            // Membuat elemen form baru
+                            let form = document.createElement('form');
+                            form.action = route;
+                            form.method = 'POST';
+                            // Menambahkan input _token dengan nilai token CSRF
+                            csrfField = document.createElement('input');
+                            csrfField.type = 'hidden';
+                            csrfField.name = '_token';
+                            csrfField.value = '{{ csrf_token() }}';
+                            form.appendChild(csrfField);
+                            // Menambahkan input _method dengan nilai 'DELETE'
+                            const createField = document.createElement('input');
+                            createField.type = 'hidden';
+                            createField.name = '_method';
+                            createField.value = 'DELETE';
+                            csrfField.insertAdjacentElement('beforebegin', createField);
+                            // Menambahkan form ke dalam dokumen
+                            document.body.appendChild(form);
+
+                            // Mengirimkan form secara otomatis
+                            form.submit();
+                        })
+                    })
+                }
             });
         });
-    </script>
-    <script>
-        let buttonEdit = document.querySelectorAll('#edit-button');
-        buttonEdit.forEach((btn) => {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault(); // Menghentikan aksi default dari tombol
-                let route = btn.getAttribute('data-route'); // Mengambil nilai data-route dari atribut data pada tombol
-                window.location.href = route; // Mengganti URL di browser dengan nilai data-route
-            })
-        })
-        let buttonDelete = document.querySelectorAll('#delete-button');
-        buttonDelete.forEach((btn) => {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault(); // Menghentikan aksi default dari tombol
-                let route = btn.getAttribute('data-route'); // Mengambil nilai data-route dari atribut data pada tombol
-
-                // Membuat elemen form baru
-                let form = document.createElement('form');
-                form.action = route;
-                form.method = 'POST';
-                // Menambahkan input _token dengan nilai token CSRF
-                csrfField = document.createElement('input');
-                csrfField.type = 'hidden';
-                csrfField.name = '_token';
-                csrfField.value = '{{ csrf_token() }}';
-                form.appendChild(csrfField);
-                // Menambahkan input _method dengan nilai 'DELETE'
-                const createField = document.createElement('input');
-                createField.type = 'hidden';
-                createField.name = '_method';
-                createField.value = 'DELETE';
-                csrfField.insertAdjacentElement('beforebegin', createField);
-                // Menambahkan form ke dalam dokumen
-                document.body.appendChild(form);
-
-                // Mengirimkan form secara otomatis
-                form.submit();
-            })
-        })
     </script>
 @endpush
