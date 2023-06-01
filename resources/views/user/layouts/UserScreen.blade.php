@@ -50,37 +50,28 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
                         <li class="nav-item">
-                            <a @class(['nav-link', 'active' => Route::is('home')]) aria-current="page" href="/">Home</a>
+                            <a @class(['nav-link', 'active'=> Route::is('home')]) aria-current="page" href="/">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a @class(['nav-link', 'active' => Route::is('produk.*')]) href="/produk">Produk</a>
+                            <a @class(['nav-link', 'active'=> Route::is('produk.*')]) href="/produk">Produk</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a @class([
-                                'nav-link',
-                                'dropdown-toggle',
-                                'active' => Route::is('foto') || Route::is('vidio'),
-                            ]) aria-expanded="false" data-bs-toggle="dropdown" href="#" role="button">
+                            <a @class([ 'nav-link' , 'dropdown-toggle' , 'active'=> Route::is('foto') || Route::is('vidio'),
+                                ]) aria-expanded="false" data-bs-toggle="dropdown" href="#" role="button">
                                 Gallery
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a @class([
-                                    'nav-link',
-                                    'dropdown-item',
-                                    'bg-light active' => Route::is('foto'),
-                                ]) href="/foto">Foto</a></li>
-                                <li><a @class([
-                                    'nav-link',
-                                    'dropdown-item',
-                                    'bg-light active' => Route::is('vidio'),
-                                ]) href="/vidio">Vidio</a></li>
+                                <li><a @class([ 'nav-link' , 'dropdown-item' , 'bg-light active'=> Route::is('foto'),
+                                        ]) href="/foto">Foto</a></li>
+                                <li><a @class([ 'nav-link' , 'dropdown-item' , 'bg-light active'=> Route::is('vidio'),
+                                        ]) href="/vidio">Vidio</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/maintenance">Wedding Calculator</a>
                         </li>
                         <li class="nav-item">
-                            <a @class(['nav-link', 'active' => Route::is('aboutus')]) href="/aboutus">Tentang Kami</a>
+                            <a @class(['nav-link', 'active'=> Route::is('aboutus')]) href="/aboutus">Tentang Kami</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/pembayaran">Pembayaran</a>
@@ -88,11 +79,15 @@
                     </ul>
                     <div class="d-flex center">
                         @auth
-                            <a href="{{ route('dashboard') }}"><button class="btn btn-color text-capitalize">{{ auth()->user()->nama_depan . ' ' . auth()->user()->nama_belakang }}</button></a>
+                        <a href="/dashboard"><button class="btn btn-color text-capitalize">{{ auth()->user()->nama_depan . ' ' . auth()->user()->nama_belakang }}</button></a>
+                        <a href="{{ route('dashboard') }}"><button class="btn btn-color text-capitalize">{{ auth()->user()->nama_depan . ' ' . auth()->user()->nama_belakang }}</button></a>
                         @else
-                            <a href="{{ route('login') }}">
-                                <button class="btn btn-color" type="submit">Login <i class="fa-solid fa-right-to-bracket"></i></button>
-                            </a>
+                        <a href="/login">
+                            <button class="btn btn-color" type="submit">Login <i class="fa-solid fa-right-to-bracket"></i></button>
+                        </a>
+                        <a href="{{ route('login') }}">
+                            <button class="btn btn-color" type="submit">Login <i class="fa-solid fa-right-to-bracket"></i></button>
+                        </a>
                         @endauth
                     </div>
                 </div>
@@ -109,59 +104,14 @@
     <div class="body-footer">
         <footer>
             <div class="container">
-                <div class="wrapper">
-                    <div class="footer-widget">
-                        <h6>Social Media Kami</h6>
-                        <ul class="socials">
-                            <li>
-                                <a href="#">
-                                    <i class="fab fa-facebook-f"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fab fa-instagram"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fab fa-linkedin-in"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="footer-widget">
-                        <ul class="links">
-                            <h6>Menu</h6>
-                            <li><a href="#">home</a></li>
-                            <li><a href="#">about</a></li>
-                            <li><a href="#">service</a></li>
-                            <li><a href="#">testimonial</a></li>
-                            <li><a href="#">contact</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-widget">
-                        <ul class="links">
-                            <h6>Layanan</h6>
-                            <li><a href="#">web design</a></li>
-                            <li><a href="#">web development</a></li>
-                            <li><a href="#">seo optimization</a></li>
-                            <li><a href="#">blog writing</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-widget">
-                        <h6>Kontak Kami</h6>
-                        <ul class="links fa-ul">
-                            <li><i class="fa-li fa fa-duotone fa-phone"></i>0857345687</li>
-                            <li><i class="fa-li fa fa-solid fa-envelope"></i>Contoh@gmail.com</li>
-                            <li><i class="fa-li fa fa-brands fa-whatsapp"></i>0857345687</li>
-                        </ul>
-                    </div>
+                <div class="text-center">
+                    <h1 class="fw-bolder">Moelia Design</h1>
+                </div>
+                <div class="icon-socmed text-center">
+                    <i class="bi bi-instagram"></i>
+                    <i class="bi bi-facebook"></i>
+                    <i class="bi bi-twitter"></i>
+                    <i class="bi bi-youtube"></i>
                 </div>
                 <div class="copyright-wrapper">
                     <p>
