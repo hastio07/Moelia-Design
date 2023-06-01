@@ -27,17 +27,17 @@ use Illuminate\Support\Facades\Route;
  */
 
 // Route::get('/PesananDiproses', function () {
-//     return view('dashboard.admin.PesananProses');
+//     return view('admin.PesananProses');
 // });
 
 Route::middleware(['no-redirect-if-authenticated:admins', 'prevent-back-history'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/aboutus', [AboutController::class, 'index'])->name('aboutus');
     Route::get('/maintenance', function () {
-        return view('dashboard.user.maintenance');
+        return view('user.maintenance');
     });
     Route::get('/pembayaran', function () {
-        return view('dashboard.user.pembayaran');
+        return view('user.pembayaran');
     });
     Route::resource('/produk', ProdukController::class)->except(['create', 'store', 'edit', 'update', 'destroy']);
     Route::get('/foto', [FotoController::class, 'index'])->name('foto');
@@ -76,7 +76,7 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
         });
         Route::resource('manage-jadwal', ManageJadwalController::class);
         Route::get('/PesananProses', function () {
-            return view('dashboard/admin/PesananProses');
+            return view('admin.pesananproses');
         });
         Route::controller(ManageGalleryController::class)->group(function () {
             Route::get('manage-gallery', 'index')->name('manage-gallery.index');
@@ -89,7 +89,7 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
         });
         Route::resource('manage-layanan', ManageLayananController::class)->except(['create', 'show', 'edit']);
         Route::get('/manage-pegawai', function () {
-            return view('dashboard/admin/ManagePegawai');
+            return view('admin.managepegawai');
         });
         Route::controller(ManageGudangController::class)->group(function () {
             Route::get('manage-gudang', 'index')->name('manage-gudang.index');
@@ -100,7 +100,7 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
             Route::delete('manage-gudang/kategori', 'destroycategorygudang')->name('manage-gudang.destroycategorygudang');
         });
         Route::get('/ProfileAdmin', function () {
-            return view('dashboard/admin/ProfileAdmin');
+            return view('admin.profileadmin');
         });
     });
 });

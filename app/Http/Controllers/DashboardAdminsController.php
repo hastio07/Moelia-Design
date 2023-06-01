@@ -7,6 +7,6 @@ class DashboardAdminsController extends Controller
     //
     public function index()
     {
-        return view('dashboard.admin.dashboard');
+        return view('admin.dashboard');
     }
 }

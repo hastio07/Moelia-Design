@@ -10,12 +10,12 @@ class ProdukController extends Controller
     public function index()
     {
         $products = Product::with('category')->latest()->paginate($perPage = 4, $columns = ['*']);
-        return view('dashboard.user.produk', compact('products'));
+        return view('user.produk', compact('products'));
     }
 
     public function show($id)
     {
         $products = Product::findOrFail($id);
-        return view('dashboard.user.detailitem', compact('products'));
+        return view('user.detailitem', compact('products'));
     }
 }

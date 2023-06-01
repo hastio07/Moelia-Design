@@ -1,4 +1,4 @@
-@extends('dashboard.admin.layouts.layouts')
+@extends('admin.layouts.layouts')
 @section('title', 'Manage Gallery')
 @push('styles')
     <link href="{{ asset('templates') }}/assets/css-modif/admin/ManageGallery.css" rel="stylesheet">
@@ -121,7 +121,7 @@
         const tabEls = document.querySelectorAll('button[data-bs-toggle="tab"]')
         tabEls.forEach(function(tabEl) {
             tabEl.addEventListener('show.bs.tab', function(event) {
-                // location.href = `/dashboard/manage-gallery/${event.target.id}`
+                // location.href = `/manage-gallery/${event.target.id}`
                 location.href = `${event.target.getAttribute('data-bs-route')}`
             })
         });

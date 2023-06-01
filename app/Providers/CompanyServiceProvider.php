@@ -25,6 +25,6 @@ class CompanyServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer('dashboard.user.layouts.UserScreen', CompanyComposer::class);
+        View::composer('user.layouts.UserScreen', CompanyComposer::class);
     }
 }

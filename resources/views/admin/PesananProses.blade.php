@@ -1,4 +1,4 @@
-@extends('dashboard.admin.layouts.layouts')
+@extends('admin.layouts.layouts')
 @section('title', 'Pesanan')
 @push('styles')
     <link href="{{ asset('templates') }}/vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet">

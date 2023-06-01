@@ -18,7 +18,7 @@ class ManageLayananController extends Controller
     public function index()
     {
         $services = Service::get();
-        return view('dashboard.admin.managelayanan', compact('services'));
+        return view('admin.managelayanan', compact('services'));
     }
 
     /**

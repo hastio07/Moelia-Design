@@ -88,9 +88,9 @@
                     </ul>
                     <div class="d-flex center">
                         @auth
-                            <a href="/dashboard"><button class="btn btn-color text-capitalize">{{ auth()->user()->nama_depan . ' ' . auth()->user()->nama_belakang }}</button></a>
+                            <a href="{{ route('dashboard') }}"><button class="btn btn-color text-capitalize">{{ auth()->user()->nama_depan . ' ' . auth()->user()->nama_belakang }}</button></a>
                         @else
-                            <a href="/login">
+                            <a href="{{ route('login') }}">
                                 <button class="btn btn-color" type="submit">Login <i class="fa-solid fa-right-to-bracket"></i></button>
                             </a>
                         @endauth

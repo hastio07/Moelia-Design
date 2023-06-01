@@ -38,7 +38,7 @@ class ManageJadwalController extends Controller
                                             </div>';
             })->rawColumns(['nama', 'kegiatan', 'lokasi', 'jam', 'tanggal', 'aksi'])->make();
         }
-        return view('dashboard.admin.ManageJadwal');
+        return view('admin.ManageJadwal');
     }
 
     /**

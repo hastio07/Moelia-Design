@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="col-lg-8">
-                    <a href="/dashboard">
+                    <a href="{{ route('dashboard') }}">
                         <button class="btn btn-primary mb-3"><i class="bi bi-arrow-left"></i> Dashboard</button>
                     </a>
                     <div class="card mb-4">

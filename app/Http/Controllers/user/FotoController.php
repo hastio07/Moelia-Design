@@ -11,6 +11,6 @@ class FotoController extends Controller
     public function index()
     {
         $photos = Photo::latest()->paginate($perPage = 6, $columns = ['*'], $pageName = 'photo');
-        return view('dashboard.user.foto', compact('photos'));
+        return view('user.foto', compact('photos'));
     }
 }

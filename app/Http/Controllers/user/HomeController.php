@@ -20,6 +20,6 @@ class HomeController extends Controller
         $addresses = Address::first();
         $services = Service::latest()->get();
         $companies = Company::first();
-        return view('dashboard.user.home', compact('galleries', 'photos', 'products', 'addresses', 'services', 'companies'));
+        return view('user.home', compact('galleries', 'photos', 'products', 'addresses', 'services', 'companies'));
     }
 }

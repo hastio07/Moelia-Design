@@ -45,7 +45,7 @@ class ManagePerusahaanController extends Controller
             'abouts' => $this->abouts->first(),
             'offers' => $this->offers->first(),
         ];
-        return view('dashboard.admin.manageperusahaan', $data);
+        return view('admin.manageperusahaan', $data);
     }
 
     public function updateorcreatecompany(Request $request)

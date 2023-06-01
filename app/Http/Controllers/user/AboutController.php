@@ -20,6 +20,6 @@ class AboutController extends Controller
         $contacts = Contact::first();
         //Owner
         $owners = Owner::first();
-        return view('dashboard.user.aboutus', compact('offers', 'addresses', 'contacts', 'owners'));
+        return view('user.aboutus', compact('offers', 'addresses', 'contacts', 'owners'));
     }
 }

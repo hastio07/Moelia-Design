@@ -20,7 +20,7 @@ class ManageGalleryController extends Controller
     {
         $photos = Photo::latest()->paginate($perPage = 14, $columns = ['*'], $pageName = 'photo');
         $activeTab = 'photo-tab';
-        return view('dashboard.admin.managegallery', compact('photos', 'activeTab'));
+        return view('admin.managegallery', compact('photos', 'activeTab'));
     }
     public function createphoto(Request $request)
     {
@@ -84,7 +84,7 @@ class ManageGalleryController extends Controller
             })->rawColumns(['video_thumbnail', 'created_at', 'aksi'])->make();
         }
 
-        return view('dashboard.admin.managegallery', compact('activeTab'));
+        return view('admin.managegallery', compact('activeTab'));
     }
     public function createvideo(Request $request)
     {

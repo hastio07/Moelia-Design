@@ -43,7 +43,7 @@ class ManageProdukController extends Controller
                          </div>';
             })->rawColumns(['kategori_id', 'harga_sewa', 'rincian_produk', 'deskripsi', 'gambar', 'aksi'])->make();
         }
-        return view('dashboard.admin.manageproduk', compact('get_categories'));
+        return view('admin.manageproduk', compact('get_categories'));
     }
 
     public function store(Request $request)

@@ -60,7 +60,7 @@ class ManageAkunController extends Controller
             return $this->renderDataTables($data);
         }
 
-        return view('dashboard.admin.manageakun', compact('hashids'));
+        return view('admin.manageakun', compact('hashids'));
     }
 
     /**
@@ -155,7 +155,7 @@ class ManageAkunController extends Controller
         }
 
         // $get_admins = Admin::with('role')->where('role_id', '=', 2)->latest('created_at')->get();
-        return view('dashboard.admin.manageakun', compact('adminedit', 'hashids'));
+        return view('admin.manageakun', compact('adminedit', 'hashids'));
     }
 
     /**

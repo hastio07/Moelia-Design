@@ -1,4 +1,4 @@
-@extends('dashboard.user.layouts.UserScreen')
+@extends('user.layouts.UserScreen')
 @section('title', 'Produk')
 
 @push('styles')

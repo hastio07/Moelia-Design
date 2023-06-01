@@ -17,7 +17,7 @@ class ManageGudangController extends Controller
     public function index()
     {
         $get_categories = CategoriesBarang::latest()->get();
-        return view('dashboard.admin.ManageGudang', compact('get_categories'));
+        return view('admin.ManageGudang', compact('get_categories'));
     }
 
     /**
