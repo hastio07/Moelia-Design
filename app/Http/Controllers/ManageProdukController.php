@@ -104,7 +104,7 @@ class ManageProdukController extends Controller
         //Simpan produk
         Product::create($data);
 
-        return redirect('dashboard/manage-produk')->with('success_add_product', 'data berhasil disimpan');
+        return redirect()->route('manage-produk.index')->with('success_add_product', 'data berhasil disimpan');
     }
 
     public function update(Request $request, $id)
@@ -159,7 +159,7 @@ class ManageProdukController extends Controller
         //Simpan produk
         Product::where('id', $id)->update($data);
 
-        return redirect('dashboard/manage-produk')->with('success', 'data berhasil diubah');
+        return redirect()->route('manage-produk.index')->with('success', 'data berhasil diubah');
     }
 
     public function destroy($id)
@@ -171,7 +171,7 @@ class ManageProdukController extends Controller
             Storage::delete(['compressed/' . $path, 'post-images/' . $path]);
         }
         Product::destroy($id);
-        return redirect('/dashboard/manage-produk')->with('success_add_product', 'Data Berhasil DiHapus!');
+        return redirect()->route('manage-produk.index')->with('success_add_product', 'Data Berhasil DiHapus!');
     }
 
     public function createcategory(Request $request)
@@ -198,7 +198,7 @@ class ManageProdukController extends Controller
         ];
         //Simpan kategori
         Category::create($data);
-        return redirect('dashboard/manage-produk')->with('success_add_category', 'Data berhasil disimpan');
+        return redirect()->route('manage-produk.index')->with('success_add_category', 'Data berhasil disimpan');
     }
     public function destroycategory($id)
     {
@@ -206,10 +206,10 @@ class ManageProdukController extends Controller
         // cek apakah ada produk yang menggunakan kategori ini
         $products = $get_category->product()->get();
         if ($products->count() > 0) {
-            return redirect('/dashboard/manage-produk')->with('error_category', 'Kategori tidak bisa dihapus karena masih digunakan oleh produk!');
+            return redirect()->route('manage-produk.index')->with('error_category', 'Kategori tidak bisa dihapus karena masih digunakan oleh produk!');
         }
         // jika tidak ada produk yang menggunakan kategori ini, maka hapus kategori
         $get_category->delete();
-        return redirect('/dashboard/manage-produk')->with('success_category', 'Data Berhasil DiHapus!');
+        return redirect()->route('manage-produk.index')->with('success_category', 'Data Berhasil DiHapus!');
     }
 }

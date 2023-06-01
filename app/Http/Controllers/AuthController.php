@@ -38,7 +38,7 @@ class AuthController extends Controller
         if (Auth::guard('web')->attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/');
+            return redirect()->intended('dashboard');
         }
 
         return back()->with('failed', 'Login gagal!'); // ditaruh di session flash massage kalau withError dipanggil di @error
@@ -50,7 +50,7 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/');
+        return redirect()->route('home');
     }
 
     public function create()

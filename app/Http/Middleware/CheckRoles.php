@@ -45,6 +45,6 @@ class CheckRoles
         }
         // Jika terbukti true tidak sah
         //Dilempar ke /dashboard
-        return redirect('/dashboard');
+        return redirect()->route('dashboard');
     }
 }

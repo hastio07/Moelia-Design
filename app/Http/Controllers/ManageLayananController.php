@@ -80,7 +80,7 @@ class ManageLayananController extends Controller
         //Simpan layanan
         Service::create($data);
 
-        return redirect('dashboard/manage-layanan')->with('success', 'data berhasil disimpan');
+        return redirect()->route('manage-layanan.index')->with('success', 'data berhasil disimpan');
 
     }
 
@@ -165,7 +165,7 @@ class ManageLayananController extends Controller
         //Simpan produk
         Service::where('id', $id)->update($data);
 
-        return redirect('dashboard/manage-layanan')->with('success', 'data berhasil diubah');
+        return redirect()->route('manage-layanan.index')->with('success', 'data berhasil diubah');
 
     }
 
@@ -184,7 +184,7 @@ class ManageLayananController extends Controller
             Storage::delete(['compressed/' . $path, 'service-images/' . $path]);
         }
         Service::destroy($id);
-        return redirect('/dashboard/manage-layanan')->with('success', 'Data Berhasil DiHapus!');
+        return redirect()->route('manage-layanan.index')->with('success', 'Data Berhasil DiHapus!');
 
     }
 }

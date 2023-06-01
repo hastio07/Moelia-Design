@@ -52,7 +52,7 @@ class ManageGalleryController extends Controller
             $data['photo_path'] = $oriPath;
             Photo::create($data);
         }
-        return redirect('dashboard/manage-gallery/photo-tab')->with('success', 'data berhasil disimpan');
+        return redirect()->route('manage-gallery.phototab')->with('success', 'data berhasil disimpan');
     }
 
     public function destroyphoto($id)
@@ -65,7 +65,7 @@ class ManageGalleryController extends Controller
             Storage::delete($path);
         }
         Photo::destroy($id);
-        return redirect('dashboard/manage-gallery/photo-tab')->with('success', 'Data Berhasil DiHapus!');
+        return redirect()->route('manage-gallery.phototab')->with('success', 'Data Berhasil DiHapus!');
     }
     public function videotab()
     {
@@ -125,12 +125,12 @@ class ManageGalleryController extends Controller
         $data['video_path'] = $validatedData['linkvideo'];
 
         Video::create($data);
-        return redirect('dashboard/manage-gallery/video-tab')->with('success', 'data berhasil disimpan');
+        return redirect()->route('manage-gallery.videotab')->with('success', 'data berhasil disimpan');
     }
 
     public function destroyvideo($id)
     {
         Video::destroy($id);
-        return redirect('dashboard/manage-gallery/video-tab')->with('success', 'Data Berhasil DiHapus!');
+        return redirect()->route('manage-gallery.videotab')->with('success', 'Data Berhasil DiHapus!');
     }
 }

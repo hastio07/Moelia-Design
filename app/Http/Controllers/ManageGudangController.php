@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\CategoriesBarang;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ManageGudangController extends Controller
 {
@@ -109,7 +109,7 @@ class ManageGudangController extends Controller
         ];
         //Simpan kategori
         Category::create($data);
-        return redirect('dashboard/manage-produk')->with('success_add_category', 'Data berhasil disimpan');
+        return redirect()->route('manage-produk.index')->with('success_add_category', 'Data berhasil disimpan');
     }
     public function destroycategory($id)
     {
@@ -117,10 +117,10 @@ class ManageGudangController extends Controller
         // cek apakah ada produk yang menggunakan kategori ini
         $products = $get_category->product()->get();
         if ($products->count() > 0) {
-            return redirect('/dashboard/manage-produk')->with('error_category', 'Kategori tidak bisa dihapus karena masih digunakan oleh produk!');
+            return redirect()->route('manage-produk.index')->with('error_category', 'Kategori tidak bisa dihapus karena masih digunakan oleh produk!');
         }
         // jika tidak ada produk yang menggunakan kategori ini, maka hapus kategori
         $get_category->delete();
-        return redirect('/dashboard/manage-produk')->with('success_category', 'Data Berhasil DiHapus!');
+        return redirect()->route('manage-produk.index')->with('success_category', 'Data Berhasil DiHapus!');
     }
 }
