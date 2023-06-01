@@ -79,12 +79,9 @@
                     </ul>
                     <div class="d-flex center">
                         @auth
-                        <a href="/dashboard"><button class="btn btn-color text-capitalize">{{ auth()->user()->nama_depan . ' ' . auth()->user()->nama_belakang }}</button></a>
                         <a href="{{ route('dashboard') }}"><button class="btn btn-color text-capitalize">{{ auth()->user()->nama_depan . ' ' . auth()->user()->nama_belakang }}</button></a>
                         @else
-                        <a href="/login">
-                            <button class="btn btn-color" type="submit">Login <i class="fa-solid fa-right-to-bracket"></i></button>
-                        </a>
+
                         <a href="{{ route('login') }}">
                             <button class="btn btn-color" type="submit">Login <i class="fa-solid fa-right-to-bracket"></i></button>
                         </a>
@@ -101,26 +98,32 @@
     <!-- end konten -->
 
     <!-- footer -->
-    <div class="body-footer">
-        <footer>
-            <div class="container">
-                <div class="text-center">
-                    <h1 class="fw-bolder">Moelia Design</h1>
-                </div>
-                <div class="icon-socmed text-center">
-                    <i class="bi bi-instagram"></i>
-                    <i class="bi bi-facebook"></i>
-                    <i class="bi bi-twitter"></i>
-                    <i class="bi bi-youtube"></i>
-                </div>
-                <div class="copyright-wrapper">
-                    <p>
-                        Copyright © 2023 &nbsp<a class="ml-1" href="https://www.instagram.com/moeliadesign/" target="_blank">Moelia Design</a> <span> . All rights Reserved</span>
-                    </p>
-                </div>
-            </div>
-        </footer>
-    </div>
+    <footer class="text-center mt-5 pt-5">
+        <h1>Moelia Design</h1>
+        <div class="line-footer"></div><br>
+        <p>Gg. Cinta Damai No.31, Tj. Baru, Kec. Sukabumi, Kota Bandar Lampung, Lampung 35122</p>
+        <div class="icon-socmed text-center my-4">
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-twitter"></i></a>
+            <a href=""><i class="bi bi-youtube"></i></a>
+            <a href=""><i class="bi bi-whatsapp"></i></a>
+            <a href=""><i class="bi bi-tiktok"></i></a>
+        </div>
+        <div class="d-flex flex-column flex-sm-row justify-content-center mb-3 fw-bold">
+            <a href="" class="me-sm-3 mb-2 mb-sm-0 menu-link">Home</a>
+            <a href="" class="me-sm-3 mb-2 mb-sm-0 menu-link">Gallery</a>
+            <a href="" class="me-sm-3 mb-2 mb-sm-0 menu-link">Wedding Calculator</a>
+            <a href="" class="me-sm-3 mb-2 mb-sm-0 menu-link">Tentang Kami</a>
+            <a href="" class="me-sm-3 mb-2 mb-sm-0 menu-link">Pembayaran</a>
+        </div>
+
+        <div class="copyright-wrapper">
+            <p>
+                Copyright © 2023 &nbsp<a class="ml-1" href="https://www.instagram.com/moeliadesign/" target="_blank">Moelia Design</a> <span> . All rights Reserved</span>
+            </p>
+        </div>
+    </footer>
     <!-- end footer -->
     <!-- bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
