@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('jadwal', function (Blueprint $table) {
+        Schema::create('working_hours', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('kegiatan');
-            $table->string('lokasi', 500);
-            $table->timestamp('waktu')->nullable();
+            $table->enum('day', ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'])->unique('day');
+            $table->boolean('status')->default(0);
+            $table->time('time_from')->nullable();
+            $table->time('time_to')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jadwal');
+        Schema::dropIfExists('working_hours');
     }
 };

@@ -9,6 +9,7 @@ use App\Models\Contact;
 use App\Models\Offer;
 use App\Models\Owner;
 use App\Models\Sosmed;
+use App\Models\WorkingHour;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -22,8 +23,9 @@ class ManagePerusahaanController extends Controller
     protected $addresses;
     protected $abouts;
     protected $offers;
+    protected $workinghours;
 
-    public function __construct(Company $companies, Contact $contacts, Sosmed $sosmeds, Owner $owners, Address $addresses, About $abouts, Offer $offers)
+    public function __construct(Company $companies, Contact $contacts, Sosmed $sosmeds, Owner $owners, Address $addresses, About $abouts, Offer $offers, WorkingHour $workinghours)
     {
         $this->companies = $companies;
         $this->contacts = $contacts;
@@ -32,10 +34,11 @@ class ManagePerusahaanController extends Controller
         $this->addresses = $addresses;
         $this->abouts = $abouts;
         $this->offers = $offers;
-
+        $this->workinghours = $workinghours;
     }
     public function index()
     {
+        $days = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
         $data = [
             'companies' => $this->companies->first(),
             'contacts' => $this->contacts->first(),
@@ -44,7 +47,9 @@ class ManagePerusahaanController extends Controller
             'addresses' => $this->addresses->first(),
             'abouts' => $this->abouts->first(),
             'offers' => $this->offers->first(),
+            'workinghours' => $this->workinghours->whereIn('day', $days)->orderBy('day')->get(),
         ];
+
         return view('admin.manageperusahaan', $data);
     }
 
@@ -462,5 +467,50 @@ class ManagePerusahaanController extends Controller
 
         $db->update($data);
         return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil DiHapus!');
+    }
+    public function updateorcreatejo(Request $request)
+    {
+        $rules = [
+            'day.*' => 'required',
+            'from.*' => 'nullable',
+            'to.*' => 'nullable',
+        ];
+        $massages = [
+            'max' => ':attribute harus diisi maksimal :max karakter.',
+            'required' => ':attribute wajib diisi.',
+        ];
+        //Validasi
+        $validator = Validator::make($request->all(), $rules, $massages);
+        //Jika gagal
+        if ($validator->fails()) {
+            return dd(redirect()->back()->withErrors($validator)->withInput()); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
+        }
+        $validatedData = $validator->validated();
+        // dd($validatedData);
+        // Iterasi melalui data yang dikirimkan
+        $daysIdx = [1, 2, 3, 4, 5, 6, 7];
+
+        foreach ($daysIdx as $daysId) {
+            if (!isset($validatedData['day'][$daysId])) {
+                $filterData = [
+                    'status' => false,
+                ];
+                $this->workinghours->updateOrCreate(['id' => $daysId], $filterData);
+            } else {
+                foreach ($validatedData['day'][$daysId] as $index => $isChecked) {
+                    // Konversi nilai 'true' menjadi true
+                    $status = $isChecked === 'true' ? true : false;
+                    // Mendapatkan data waktu berdasarkan ID hari dan indeks
+                    $filterData = [
+                        'status' => $status,
+                        'time_from' => isset($validatedData['from'][$daysId][$index]) ? $validatedData['from'][$daysId][$index] : null,
+                        'time_to' => isset($validatedData['to'][$daysId][$index]) ? $validatedData['to'][$daysId][$index] : null,
+                    ];
+                    $this->workinghours->updateOrCreate(['id' => $daysId], $filterData);
+                }
+            }
+        }
+
+        return redirect()->route('manage-perusahaan.index')->with('success', 'Jam Operasional Berhasil di Perbarui');
     }
 }
