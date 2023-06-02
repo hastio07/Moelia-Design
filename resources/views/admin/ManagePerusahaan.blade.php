@@ -108,30 +108,30 @@
                                                         <input name="id_contact" readonly type="hidden" value="{{ $contacts->id ?? null }}">
                                                         <label class="form-label fw-bold" for="telephone1">Telephone 1</label>
                                                         <input class="form-control" id="telephone1" name="telephone1_name" placeholder="Nama nomor telephone 1" type="text" value="{{ $contacts->telephone1_name ?? null }}">
-                                                        <input class="form-control mt-2" id="telephone1" name="telephone1_number" placeholder="Masukkan nomor telephone 1" type="text" value="{{ $contacts->telephone1_number ?? null }}">
+                                                        <input class="form-control mt-2" id="telephone1_number" name="telephone1_number" placeholder="Masukkan nomor telephone 1" type="text" value="{{ $contacts->telephone1_number ?? null }}">
 
                                                         <label class="form-label mt-3 fw-bold" for="telephone2">Telephone 2</label>
                                                         <input class="form-control" id="telephone2" name="telephone2_name" placeholder="Nama nomor telephone 2" type="text" value="{{ $contacts->telephone2_name ?? null }}">
-                                                        <input class="form-control mt-2" id="telephone2" name="telephone2_number" placeholder="Masukkan nomor telephone 2" type="text" value="{{ $contacts->telephone2_number ?? null }}">
+                                                        <input class="form-control mt-2" id="telephone2_number" name="telephone2_number" placeholder="Masukkan nomor telephone 2" type="text" value="{{ $contacts->telephone2_number ?? null }}">
 
                                                         <label class="form-label mt-4 fw-bold" for="whatsapp1">Whatsapp 1</label>
                                                         <input class="form-control" id="whatsapp1" name="whatsapp1_name" placeholder="Nama Whatsapp 1" type="text" value="{{ $contacts->whatsapp1_name ?? null }}">
-                                                        <input class="form-control mt-2" id="whatsapp1" name="whatsapp1_number" placeholder="Masukkan nomor whatsapp 1" type="text" value="{{ $contacts->whatsapp1_number ?? null }}">
+                                                        <input class="form-control mt-2" id="whatsapp1_number" name="whatsapp1_number" placeholder="Masukkan nomor whatsapp 1" type="text" value="{{ $contacts->whatsapp1_number ?? null }}">
 
                                                         <label class="form-label mt-3 fw-bold" for="whatsapp2">Whatsapp 2</label>
                                                         <input class="form-control" id="whatsapp2" name="whatsapp2_name" placeholder="Nama Whatsapp 2" type="text" value="{{ $contacts->whatsapp2_name ?? null }}">
-                                                        <input class="form-control mt-2" id="whatsapp2" name="whatsapp2_number" placeholder="Masukkan nomor whatsapp 2" type="text" value="{{ $contacts->whatsapp2_number ?? null }}">
+                                                        <input class="form-control mt-2" id="whatsapp2_number" name="whatsapp2_number" placeholder="Masukkan nomor whatsapp 2" type="text" value="{{ $contacts->whatsapp2_number ?? null }}">
 
                                                         <label class="form-label mt-3 fw-bold" for="whatsapp3">Whatsapp 3</label>
                                                         <input class="form-control" id="whatsapp3" name="whatsapp3_name" placeholder="Nama Whatsapp 3" type="text" value="{{ $contacts->whatsapp3_name ?? null }}">
-                                                        <input class="form-control mt-2" id="whatsapp3" name="whatsapp3_number" placeholder="Masukkan nomor whatsapp 3" type="text" value="{{ $contacts->whatsapp3_number ?? null }}">
+                                                        <input class="form-control mt-2" id="whatsapp3_number" name="whatsapp3_number" placeholder="Masukkan nomor whatsapp 3" type="text" value="{{ $contacts->whatsapp3_number ?? null }}">
 
                                                         <label class="form-label mt-3 fw-bold" for="whatsapp4">Whatsapp 4</label>
                                                         <input class="form-control" id="whatsapp4" name="whatsapp4_name" placeholder="Nama Whatsapp 4" type="text" value="{{ $contacts->whatsapp4_name ?? null }}">
-                                                        <input class="form-control mt-2" id="whatsapp4" name="whatsapp4_number" placeholder="Masukkan nomor whatsapp 4" type="text" value="{{ $contacts->whatsapp4_number ?? null }}">
+                                                        <input class="form-control mt-2" id="whatsapp4_number" name="whatsapp4_number" placeholder="Masukkan nomor whatsapp 4" type="text" value="{{ $contacts->whatsapp4_number ?? null }}">
 
                                                         <label class="form-label mt-3 fw-bold" for="email">Email</label>
-                                                        <input class="form-control mt-2" id="email" name="email" placeholder="Masukkan email" type="email" value="{{ $contacts->email ?? null }}">
+                                                        <input autocomplete="email" class="form-control mt-2" id="email" name="email" placeholder="Masukkan email" type="email" value="{{ $contacts->email ?? null }}">
                                                     </div>
                                                     <div class="flex-item button">
                                                         <div class="d-grid gap-2 d-md-flex justify-content-md-center">
@@ -161,7 +161,7 @@
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">@</div>
                                                                     </div>
-                                                                    <input class="form-control" id="instagram" name="u_instagram" placeholder="Masukkan username instagram" type="text" value="{{ $sosmeds->u_instagram ?? null }}">
+                                                                    <input class="form-control" id="u_instagram" name="u_instagram" placeholder="Masukkan username instagram" type="text" value="{{ $sosmeds->u_instagram ?? null }}">
                                                                     <span class="fa-circle-info-help"><i class="fa-sharp fa-solid fa-circle-question" data-bs-toggle="tooltip" title="Username"></i></span>
                                                                 </div>
                                                             </div>
@@ -182,7 +182,7 @@
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">@</div>
                                                                     </div>
-                                                                    <input class="form-control" id="facebook" name="u_facebook" placeholder="Masukkan username facebook" type="text" value="{{ $sosmeds->u_facebook ?? null }}">
+                                                                    <input class="form-control" id="u_facebook" name="u_facebook" placeholder="Masukkan username facebook" type="text" value="{{ $sosmeds->u_facebook ?? null }}">
                                                                     <span class="fa-circle-info-help"><i class="fa-sharp fa-solid fa-circle-question" data-bs-toggle="tooltip" title="Username"></i></span>
                                                                 </div>
                                                             </div>
@@ -190,7 +190,7 @@
                                                                 <label class="sr-only" for="l_facebook">Link Facebook</label>
                                                                 <div class="input-group">
                                                                     <span class="input-group-text"><i class="fa fa-link" style="font-size: .8rem;"></i></span>
-                                                                    <input class="form-control" id="facebook" name="l_facebook" placeholder="Masukkan link Facebook" type="text" value="{{ $sosmeds->l_facebook ?? null }}">
+                                                                    <input class="form-control" id="l_facebook" name="l_facebook" placeholder="Masukkan link Facebook" type="text" value="{{ $sosmeds->l_facebook ?? null }}">
                                                                     <span class="fa-circle-info-help"><i class="fa-sharp fa-solid fa-circle-question" data-bs-toggle="tooltip" title="Link"></i></span>
                                                                 </div>
                                                             </div>
@@ -203,7 +203,7 @@
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">@</div>
                                                                     </div>
-                                                                    <input class="form-control" id="twitter" name="u_twitter" placeholder="Masukkan username twitter" type="text" value="{{ $sosmeds->u_twitter ?? null }}">
+                                                                    <input class="form-control" id="u_twitter" name="u_twitter" placeholder="Masukkan username twitter" type="text" value="{{ $sosmeds->u_twitter ?? null }}">
                                                                     <span class="fa-circle-info-help"><i class="fa-sharp fa-solid fa-circle-question" data-bs-toggle="tooltip" title="Username"></i></span>
                                                                 </div>
                                                             </div>
@@ -211,7 +211,7 @@
                                                                 <label class="sr-only" for="l_twitter">Link Twitter</label>
                                                                 <div class="input-group">
                                                                     <span class="input-group-text"><i class="fa fa-link" style="font-size: .8rem;"></i></span>
-                                                                    <input class="form-control" id="twitter" name="l_twitter" placeholder="Masukkan link twitter" type="text" value="{{ $sosmeds->l_twitter ?? null }}">
+                                                                    <input class="form-control" id="l_twitter" name="l_twitter" placeholder="Masukkan link twitter" type="text" value="{{ $sosmeds->l_twitter ?? null }}">
                                                                     <span class="fa-circle-info-help"><i class="fa-sharp fa-solid fa-circle-question" data-bs-toggle="tooltip" title="Link"></i></span>
                                                                 </div>
                                                             </div>
@@ -224,7 +224,7 @@
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">@</div>
                                                                     </div>
-                                                                    <input class="form-control" id="youtube" name="u_youtube" placeholder="Masukkan link channel youtube" type="text" value="{{ $sosmeds->u_youtube ?? null }}">
+                                                                    <input class="form-control" id="u_youtube" name="u_youtube" placeholder="Masukkan link channel youtube" type="text" value="{{ $sosmeds->u_youtube ?? null }}">
                                                                     <span class="fa-circle-info-help"><i class="fa-sharp fa-solid fa-circle-question" data-bs-toggle="tooltip" title="Username"></i></span>
                                                                 </div>
                                                             </div>
@@ -232,7 +232,7 @@
                                                                 <label class="sr-only" for="l_youtube">Link Youtube</label>
                                                                 <div class="input-group">
                                                                     <span class="input-group-text"><i class="fa fa-link" style="font-size: .8rem;"></i></span>
-                                                                    <input class="form-control" id="youtube" name="l_youtube" placeholder="Masukkan link youtube" type="text" value="{{ $sosmeds->l_youtube ?? null }}">
+                                                                    <input class="form-control" id="l_youtube" name="l_youtube" placeholder="Masukkan link youtube" type="text" value="{{ $sosmeds->l_youtube ?? null }}">
                                                                     <span class="fa-circle-info-help"><i class="fa-sharp fa-solid fa-circle-question" data-bs-toggle="tooltip" title="Link"></i></span>
                                                                 </div>
                                                             </div>
@@ -328,12 +328,12 @@
                                                                 </div>
                                                                 <div class="col-sm-7 d-flex time">
                                                                     <div class="mob">
-                                                                        <label class="mr-1">From</label>
-                                                                        <input class="ml-1" name="from[{{ $value->id }}][]" type="time" value={{ old('', $value->time_from_format) }}>
+                                                                        <label class="mr-1" for="from{{ $i }}">From</label>
+                                                                        <input class="ml-1" id="from{{ $i }}" name="from[{{ $value->id }}][]" type="time" value={{ old('', $value->time_from_format) }}>
                                                                     </div>
                                                                     <div class="mob mb-2">
-                                                                        <label class="mr-4">To</label>
-                                                                        <input class="ml-1" name="to[{{ $value->id }}][]" type="time" value={{ old('', $value->time_to_format) }}>
+                                                                        <label class="mr-4" for="to{{ $i }}">To</label>
+                                                                        <input id="to{{ $i }}"class="ml-1" name="to[{{ $value->id }}][]" type="time" value={{ old('', $value->time_to_format) }}>
                                                                     </div>
                                                                 </div>
                                                             </div>
