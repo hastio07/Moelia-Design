@@ -1,70 +1,39 @@
 @extends('admin.layouts.layouts')
 @section('title', 'Manage Pegawai')
 @push('styles')
-    <link href="{{ asset('templates') }}/assets/css-modif/ManagePegawai.css" rel="stylesheet">
+    {{-- <link href="{{ asset('templates') }}/assets/css-modif/admin/ManagePegawai.css" rel="stylesheet"> --}}
 @endpush
 @section('content')
     <div class="content-wrapper">
         <div class="row same-height">
             <div class="col-sm-9">
-                <div aria-hidden="true" aria-labelledby="largeModalLabel" class="modal fade" id="largeModal" tabindex="-1">
-                    <div class="modal-dialog modal-lg">
-                        <form action="" method="post">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="largeModalLabel">Tambah Pegawai</h5>
-                                    <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="p-3 mb-5">
-                                        <div class="add-jadwal">
-                                            <div class="form-inpt">
-                                                <label class="form-label" for="basicInput">Nama</label>
-                                                <input class="form-control" id="nama" name="nama" placeholder="Masukan Nama" type="text" value="">
-                                            </div>
-                                            <div class="form-inpt mt-3">
-                                                <label class="form-label" for="basicInput">Alamat Domisili</label>
-                                                <input class="form-control" id="alamat" name="alamat" placeholder="Masukan Alamat Pegawai" type="text" value="">
-                                            </div>
-                                            <div class="form-inpt mt-3">
-                                                <label class="form-label" for="basicInput">No. Telephone</label>
-                                                <input class="form-control" id="telephone" name="telephonr" placeholder="Masukan Nomor Telephone" type="text" value="">
-                                            </div>
-                                            <div class="form-inpt mt-3">
-                                                <label class="form-label" for="basicInput">Gaji</label>
-                                                <input class="form-control" id="gaji" name="telephone" placeholder="Masukan Jumlah Gaji" type="text" value="">
-                                            </div>
-                                            <div class="form-inpt mt-3">
-                                                <label class="form-label" for="basicInput">Jabatan</label>
-                                                <select aria-label="Default select example" class="form-select">
-                                                    <option selected>Pilih sesuai jabatan pegawai</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
-                                                </select>
-                                            </div>
-                                            <div class="mt-3">
-                                                <label class="form-label" for="fotopegawai">Foto Pegawai</label>
-                                                <input class="form-control" id="fotopegawau" multiple type="file">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button class="btn btn-secondary" data-bs-dismiss="modal" type="submit">Close</button>
-                                    <button class="btn mb-2 icon-left  btn-success" name="submit" type="submit"><i class="ti-plus"></i>Tambah</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
                 <div class="card">
                     <div class="card-header">
                         <h4>Daftar Pegawai</h4>
                     </div>
+                    @if (session()->has('success_add_employee'))
+                        <div class="alert alert-success m-3">{{ session()->get('success_add_employee') }}</div>
+                    @elseif (session()->has('error_add_employee'))
+                        <div class="alert alert-danger m-3">{{ session()->get('error_add_employee') }}</div>
+                    @elseif(session()->has('success_edit_employee'))
+                        <div class="alert alert-success m-3">{{ session()->get('success_edit_employee') }}</div>
+                    @elseif(session()->has('error_edit_employee'))
+                        <div class="alert alert-danger m-3">{{ session()->get('error_edit_employee') }}</div>
+                    @endif
+                    @if ($errors->has('nama') || $errors->has('alamat') || $errors->has('kontak') || $errors->has('gaji') || $errors->has('jabatan') || $errors->has('foto'))
+                        <div class="pt-1 m-3">
+                            <div class="alert alert-danger">
+                                <ul style="list-style:none;">
+                                    @foreach ($errors->all() as $item)
+                                        <li>{{ $item }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    @endif
                     <div class="card-body">
                         <div class="btn-modal mt-3 mb-2">
-                            <button class="btn mb-2 icon-left  btn-success" data-bs-target="#largeModal" data-bs-toggle="modal" type="button "><i class="bi bi-plus-lg"></i>Tambah Pegawai</i></button>
+                            <button class="btn mb-2 icon-left  btn-success" data-bs-route="{{ route('manage-pegawai.store') }}" data-bs-target="#CUModal" data-bs-toggle="modal" id="btnCreateModal" type="button"><i class="bi bi-plus-lg"></i>Tambah Pegawai</i></button>
                         </div>
                         <table class="table display" id="table-pegawai">
                             <thead>
@@ -79,20 +48,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="fw-bolder">Muhammad</td>
-                                    <td>Jl. Purnawirawan Gg. Man 1</td>
-                                    <td>081256766661</td>
-                                    <td>Rp.1.000.000</td>
-                                    <td>Owner</td>
-                                    <td>img1.jpg</td>
-                                    <td>
-                                        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                                            <button class="btn btn-danger" data-bs-target="#smallModal" data-bs-toggle="modal" type="button"><i class="bi bi-trash"></i></button>
-                                            <button class="btn btn-warning" data-bs-target="#UpdateModal" data-bs-toggle="modal" type="button"><i class="bi bi-pencil-square"></i></button>
-                                        </div>
-                                    </td>
-                                </tr>
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -114,25 +69,42 @@
                     <div class="same-height">
                         <div class="card p-3 text-center">
                             <h5>Tambah Jabatan</h5>
-                            <div class="form-inpt mt-3 d-flex">
-                                <input class="form-control" id="telephone" name="telephonr" placeholder="Masukan jabatan" type="text" value="">
-                                <button class="btn btn-success" data-bs-target="" data-bs-toggle="modal" type="button"><i class="bi bi-plus-lg"></i></button>
-                            </div>
+                            @if (session()->has('success_add_categoryjabatan'))
+                                <div class="alert alert-success m-3">{{ session()->get('success_add_categoryjabatan') }}</div>
+                            @elseif (session()->has('error_add_categoryjabatan'))
+                                <div class="alert alert-danger m-3">{{ session()->get('error_add_categoryjabatan') }}</div>
+                            @elseif (session()->has('success_delete_categoryjabatan'))
+                                <div class="alert alert-success m-3">{{ session()->get('success_delete_categoryjabatan') }}</div>
+                            @elseif (session()->has('error_delete_categoryjabatan'))
+                                <div class="alert alert-danger m-3">{{ session()->get('error_delete_categoryjabatan') }}</div>
+                            @endif
+                            @if ($errors->has('nama_jabatan'))
+                                <div class="pt-1 m-3">
+                                    <div class="alert alert-danger">
+                                        <ul style="list-style:none;">
+                                            @foreach ($$errors->all() as $message)
+                                                <li>{{ $message }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                            @endif
+                            <form action="{{ route('manage-pegawai.createjabatan') }}" class="mt-3" method="POST">
+                                <div class="form-inpt  d-flex">
+                                    @csrf
+                                    <input class="form-control" id="nama_jabatan" name="nama_jabatan" placeholder="Masukan jabatan" type="text" type="submit" value="{{ old('nama_jabatan') }}">
+                                    <button class="btn btn-success" type="submit"><i class="bi bi-plus-lg"></i></button>
+                                </div>
+                            </form>
                             <div class="mt-4">
                                 <p class="fw-bold">Daftar Jabatan</p>
                                 <ul class="list-group">
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        A list item
-                                        <span><a href=""><i class="bi bi-trash text-danger"></i></a></span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        A second list item
-                                        <span><a href=""><i class="bi bi-trash text-danger"></i></a></span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        A third list item
-                                        <span><a href=""><i class="bi bi-trash text-danger"></i></a></span>
-                                    </li>
+                                    @foreach ($get_jabatan as $value)
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            {{ $value->nama_jabatan }}
+                                            <button class="btn text-danger" data-bs-route="{{ route('manage-pegawai.destroyjabatan', $value->id) }}" data-bs-target="#DeleteModal" data-bs-toggle="modal" id="btnDeleteModal" type="button"><i class="bi bi-trash text-danger"></i></button>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>
@@ -140,14 +112,251 @@
                 </div>
             </div>
         </div>
+
+        <!-- modal add and update employee -->
+        <div aria-hidden="true" aria-labelledby="cuModalLabel" class="modal fade" id="CUModal" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="cuModalLabel">Tambah Pegawai</h5>
+                        <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+                    </div>
+                    <form enctype="multipart/form-data" id="CUForm" method="post">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="p-3 mb-5">
+                                <div class="form-inpt">
+                                    <label class="form-label" for="nama">Nama</label>
+                                    <input class="form-control" id="nama" name="nama" placeholder="Masukan Nama" type="text">
+                                </div>
+                                <div class="form-inpt mt-3">
+                                    <label class="form-label" for="alamat">Alamat Domisili</label>
+                                    <input class="form-control" id="alamat" name="alamat" placeholder="Masukan Alamat Pegawai" type="text" value="">
+                                </div>
+                                <div class="form-inpt mt-3">
+                                    <label class="form-label" for="kontak">No. Telephone</label>
+                                    <input class="form-control" id="kontak" name="kontak" placeholder="Masukan Nomor Telephone" type="text" value="">
+                                </div>
+                                <div class="form-inpt mt-3">
+                                    <label class="form-label" for="gaji">Gaji</label>
+                                    <input class="form-control" id="gaji" name="gaji" placeholder="Masukan Besaran Gaji" type="number" value="">
+                                </div>
+                                <div class="form-inpt mt-3">
+                                    <label class="form-label" for="jabatan">Jabatan</label>
+                                    <select class="form-select" id="jabatan" name="jabatan">
+                                        <option disabled selected value="">Pilih sesuai jabatan pegawai</option>
+                                        @foreach ($get_jabatan as $value)
+                                            <option value="{{ $value->id }}">
+                                                {{ $value->nama_jabatan }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="mt-3">
+                                    <label class="form-label" for="foto">Foto Pegawai</label>
+                                    <input id="oldImage" name="oldImage" type="hidden">
+                                    <input accept="image/jpg, image/png, image/jpeg" class="form-control" id="foto" name="foto" type="file">
+                                    <output class="img-result" id="result"></output>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Tutup</button>
+                            <button class="btn mb-2 icon-left  btn-success" type="submit"><i class="ti-plus"></i>Tambah</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- modal delete employee dan category jabatan -->
+        <div aria-hidden="true" aria-labelledby="deleteModalLabel" class="modal fade" id="DeleteModal" tabindex="-1">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-danger" id="deleteModalLabel">Peringatan!</h5>
+                        <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h6>Yakin Ingin Menghapusnya?</h6>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" data-bs-dismiss="modal" id="closeModal" type="button">Tutup</button>
+                        <form method="post">
+                            @method('delete')
+                            @csrf
+                            <button class="btn btn-danger" type="submit">YA</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     </div>
 @endsection
 @push('scripts')
     <script>
         $(document).ready(function() {
             $('#table-pegawai').DataTable({
+                processing: true,
+                serverSide: true,
                 responsive: true,
+                ajax: '{{ url()->current() }}',
+                columnDefs: [{
+                    targets: 0,
+                    className: "fw-bolder"
+                }],
+                columns: [{
+                        data: 'nama', // db
+                        name: 'nama'
+                    },
+                    {
+                        data: 'alamat_domisili', // db
+                        name: 'alamat_domisili'
+                    },
+                    {
+                        data: 'kontak',
+                        name: 'kontak'
+                    },
+                    {
+                        data: 'Besaran Gaji',
+                        name: 'Besaran Gaji',
+                    },
+                    {
+                        data: 'Jabatan',
+                        name: 'Jabatan'
+                    },
+                    {
+                        data: 'Foto',
+                        name: 'Foto'
+                    },
+                    {
+                        data: 'Aksi',
+                        name: 'Aksi'
+                    },
+                ],
+                order: [
+                    [1, 'asc']
+                ],
             });
         })
+    </script>
+    <script>
+        /**
+         * Buat Pegawai & Ubah Pegawai
+         */
+        const CUModal = document.getElementById('CUModal');
+        const CUForm = CUModal.querySelector('.modal-content form#CUForm');
+        const titleModal = CUModal.querySelector('.modal-content .modal-header h5#cuModalLabel.modal-title');
+        const namaPegawai = CUModal.querySelector('.modal-content .modal-body input#nama');
+        const alamatPegawai = CUModal.querySelector('.modal-content .modal-body input#alamat');
+        const kontakPegawai = CUModal.querySelector('.modal-content .modal-body input#kontak');
+        const gajiPegawai = CUModal.querySelector('.modal-content .modal-body input#gaji');
+        const jabatanPegawai = CUModal.querySelector('.modal-content .modal-body select#jabatan');
+
+        let btnSubmit = document.querySelector('.modal-content .modal-footer .btn.btn-success');
+        const csrfField = CUForm.querySelector('input[name="_token"]');
+        const oldImageField = document.querySelector('.modal-content .modal-body input#oldImage');
+        const imgFile = CUModal.querySelector('.modal-content .modal-body input#foto');
+        const output = CUModal.querySelector('.modal-content .modal-body output#result');
+
+        CUModal.addEventListener('show.bs.modal', (event) => {
+            const button = event.relatedTarget;
+            const btnID = button.getAttribute('id');
+            const route = button.getAttribute('data-bs-route');
+            const img = document.createElement('img');
+            img.className = 'thumbnail';
+            img.height = 240;
+            img.width = 320;
+            imgFile.addEventListener('change', (e) => {
+                if (window.File && window.FileReader && window.FileList && window.Blob) {
+                    const file = e.target.files;
+
+                    // if files is image
+                    if (file[0].type.match('image')) {
+                        const picReader = new FileReader();
+                        picReader.addEventListener('load', function(event) {
+                            const picFile = event.target;
+                            img.src = `${picFile.result}`;
+                            img.title = `${picFile.name}`;
+                            // cek apakah ada/belum child-nya
+                            if (output.hasChildNodes()) {
+                                output.replaceChildren(img);
+                            } else {
+                                output.appendChild(img);
+                            }
+                        });
+                        picReader.readAsDataURL(file[0]);
+                    }
+                } else {
+                    alert('your browswer does not support the file API');
+                }
+            });
+            if (btnID === 'btnUpdateModal') {
+                // Extract info from data-bs-* attributes
+                const rawData = button.getAttribute('data-bs-product');
+                const parseData = JSON.parse(rawData);
+                // The modal's content.
+                CUForm.action = route;
+                const createField = document.createElement('input');
+                createField.type = 'hidden';
+                createField.name = '_method';
+                createField.value = 'PUT';
+                csrfField.insertAdjacentElement('beforebegin', createField);
+                titleModal.textContent = 'Ubah Pegawai';
+                namaPegawai.value = parseData.nama;
+                alamatPegawai.value = parseData.alamat_domisili;
+                kontakPegawai.value = parseData.kontak;
+                gajiPegawai.value = parseData.besaran_gaji;
+                jabatanPegawai.value = parseData.jabatan;
+
+                if (parseData.foto) {
+                    const picFile = parseData.foto;
+                    let src = `/storage/compressed${picFile}`;
+                    img.src = `${src}`;
+                    img.title = `${parseData.nama}`;
+                    if (output.hasChildNodes()) {
+                        output.replaceChildren(img);
+                    } else {
+                        output.appendChild(img);
+                    }
+                    oldImageField.value = picFile;
+                }
+                btnSubmit.textContent = 'Ubah'; // Ubah text tombol submit
+            }
+            if (btnID === 'btnCreateModal') {
+                CUForm.action = route;
+                titleModal.textContent = 'Tambah Produk';
+            }
+        });
+
+        CUModal.addEventListener('hidden.bs.modal', (event) => {
+            const methodField = CUForm.querySelector('input[name="_method"]');
+            if (methodField !== null) {
+                methodField.remove();
+            }
+            const url = `#`;
+            CUForm.action = url;
+            namaPegawai.value = null;
+            alamatPegawai.value = '';
+            kontakPegawai.value = null;
+            gajiPegawai.value = null;
+            if (output.hasChildNodes()) {
+                imgFile.value = null;
+                output.removeChild(output.firstChild);
+            }
+            btnSubmit.textContent = 'Tambah'; // Ubah text tombol submit
+        });
+
+        /**
+         * Hapus Pegawai
+         */
+        const deleteModal = document.getElementById('DeleteModal');
+        deleteModal.addEventListener('show.bs.modal', (event) => {
+            const button = event.relatedTarget;
+            const route = button.getAttribute('data-bs-route');
+            deleteModal.querySelector('.modal-content .modal-footer form').setAttribute('action', route);
+        });
     </script>
 @endpush

@@ -6,7 +6,9 @@ use App\Http\Controllers\ManageGalleryController;
 use App\Http\Controllers\ManageGudangController;
 use App\Http\Controllers\ManageJadwalController;
 use App\Http\Controllers\ManageLayananController;
+use App\Http\Controllers\ManagePegawaiController;
 use App\Http\Controllers\ManagePerusahaanController;
+use App\Http\Controllers\ManagePesananProsesController;
 use App\Http\Controllers\ManageProdukController;
 use App\Http\Controllers\user\AboutController;
 use App\Http\Controllers\user\FotoController;
@@ -25,10 +27,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
  */
-
-// Route::get('/PesananDiproses', function () {
-//     return view('admin.PesananProses');
-// });
 
 Route::middleware(['no-redirect-if-authenticated:admins', 'prevent-back-history'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -76,8 +74,8 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
             Route::delete('manage-produk/kategori/{id}', 'destroycategory')->name('manage-produk.destroycategory');
         });
         Route::resource('manage-jadwal', ManageJadwalController::class);
-        Route::get('/PesananProses', function () {
-            return view('admin.pesananproses');
+        Route::controller(ManagePesananProsesController::class)->group(function () {
+            Route::get('manage-pesanan-proses', 'index')->name('manage-pesanan-proses.index');
         });
         Route::controller(ManageGalleryController::class)->group(function () {
             Route::get('manage-gallery', 'index')->name('manage-gallery.index');
@@ -89,8 +87,13 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
             Route::delete('manage-gallery/video-tab/{id}', 'destroyvideo')->name('manage-gallery.destroyvideo');
         });
         Route::resource('manage-layanan', ManageLayananController::class)->except(['create', 'show', 'edit']);
-        Route::get('/manage-pegawai', function () {
-            return view('admin.managepegawai');
+        Route::controller(ManagePegawaiController::class)->group(function () {
+            Route::get('manage-pegawai', 'index')->name('manage-pegawai.index');
+            Route::post('manage-pegawai', 'store')->name('manage-pegawai.store');
+            Route::put('manage-pegawai/{id}', 'update')->name('manage-pegawai.update');
+            Route::delete('manage-pegawai/{id}', 'destroy')->name('manage-pegawai.destroy');
+            Route::post('manage-pegawai/jabatan', 'createjabatan')->name('manage-pegawai.createjabatan');
+            Route::delete('manage-pegawai/jabatan/{id}', 'destroyjabatan')->name('manage-pegawai.destroyjabatan');
         });
         Route::controller(ManageGudangController::class)->group(function () {
             Route::get('manage-gudang', 'index')->name('manage-gudang.index');
