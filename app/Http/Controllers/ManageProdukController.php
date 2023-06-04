@@ -48,8 +48,6 @@ class ManageProdukController extends Controller
 
     public function store(Request $request)
     {
-        //
-
         // return dd($request->all());
         // $array = array();
         // foreach ($request->rincianproduk as $i => $value) {
@@ -68,6 +66,7 @@ class ManageProdukController extends Controller
             'required' => ':attribute wajib diisi.',
             'max' => ':attribute melebihi panjang maksimum yang diizinkan',
             'string' => ':attribute hanya boleh berupa karakter teks.',
+            'numeric' => ':attribute harus dalam format numerik.',
         ];
         //Validasi
         $validator = Validator::make($request->all(), $rules, $massages);
@@ -123,6 +122,7 @@ class ManageProdukController extends Controller
             'required' => ':attribute wajib diisi.',
             'max' => ':attribute melebihi panjang maksimum yang diizinkan',
             'string' => ':attribute hanya boleh berupa karakter teks.',
+            'numeric' => ':attribute harus dalam format numerik.',
         ];
         //Validasi
         $validator = Validator::make($request->all(), $rules, $massages);
@@ -194,7 +194,7 @@ class ManageProdukController extends Controller
         ]);
         //Jika gagal
         if ($validator->fails()) {
-            return back()->with('error_add_categoryproduct', 'Gagal menambahkan produk')->withErrors($validator)->withInput(); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
+            return back()->with('error_add_categoryproduct', 'Gagal menambahkan kategori produk')->withErrors($validator)->withInput(); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
         }
         $validatedData = $validator->validated();
         //Menampung data request setelah validasi

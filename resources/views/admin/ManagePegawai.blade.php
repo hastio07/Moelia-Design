@@ -28,8 +28,8 @@
                         <div class="pt-1 m-3">
                             <div class="alert alert-danger">
                                 <ul style="list-style:none;">
-                                    @foreach ($errors->all() as $item)
-                                        <li>{{ $item }}</li>
+                                    @foreach ($errors->all() as $message)
+                                        <li>{{ $message }}</li>
                                     @endforeach
                                 </ul>
                             </div>
