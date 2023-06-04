@@ -171,14 +171,22 @@
                             <span>Manage Jadwal</span>
                         </a>
                     </li>
-                    <li>
+                    <li class="{{ Route::is('manage-pesanan-proses.*') ? 'open' : '' }}">
                         <a class="main-menu has-dropdown" href="#">
                             <i class="ti-shopping-cart-full"></i>
                             <span>Manage Pesanan</span>
                         </a>
-                        <ul class="sub-menu ">
-                            <li><a class="link" href="/PesananProses"><span>Pesanan Diproses</span></a></li>
-                            <li><a class="link" href="/PesananSelesai"><span>Pesanan Selesai</span></a></li>
+                        <ul class="sub-menu {{ Route::is('manage-pesanan-proses.*') ? 'expand' : '' }}">
+                            <li class="{{ Route::is('manage-pesanan-proses.*') ? 'active' : '' }}">
+                                <a class="link" href="{{ route('manage-pesanan-proses.index') }}">
+                                    <span>Pesanan Diproses</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="link" href="/PesananSelesai">
+                                    <span>Pesanan Selesai</span>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     <li class="{{ Route::is('manage-gallery.*') ? 'active' : '' }}">
