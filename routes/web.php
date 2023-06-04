@@ -100,8 +100,8 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
             Route::post('manage-gudang', 'store')->name('manage-gudang.store');
             Route::put('manage-gudang/{id}', 'update')->name('manage-gudang.update');
             Route::delete('manage-gudang/{id}', 'destroy')->name('manage-gudang.destroy');
-            Route::post('manage-gudang/kategori', 'creatcategorygudang')->name('manage-gudang.creatcategorygudang');
-            Route::delete('manage-gudang/kategori', 'destroycategorygudang')->name('manage-gudang.destroycategorygudang');
+            Route::post('manage-gudang/kategori', 'createcategorybarang')->name('manage-gudang.createcategorybarang');
+            Route::delete('manage-gudang/kategori/{id}', 'destroycategorybarang')->name('manage-gudang.destroycategorybarang');
         });
         Route::get('/ProfileAdmin', function () {
             return view('admin.profileadmin');

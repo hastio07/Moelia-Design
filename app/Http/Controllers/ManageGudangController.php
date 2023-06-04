@@ -2,125 +2,174 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CategoriesBarang;
-use App\Models\Category;
+use App\Models\Barang;
+use App\Models\CategoryBarang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Yajra\DataTables\Facades\DataTables;
 
 class ManageGudangController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    private function getDataForDataTables()
+    {
+        $get_barang = Barang::with('categorybarang')->latest('created_at')->get();
+        return $get_barang;
+    }
+    private function renderDataTables($data)
+    {
+        return DataTables::of($data)
+            ->addColumn('Kategori', function ($value) {
+                return $value->categorybarang->nama_kategori_barang;
+            })
+            ->addColumn('Aksi', function ($value) {
+                $json = htmlspecialchars(json_encode($value), ENT_QUOTES, 'UTF-8');
+                return ' <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <button class="btn btn-warning" data-bs-product="' . $json . '" data-bs-route="' . route('manage-gudang.update', $value->id) . '" data-bs-target="#CUModal" data-bs-toggle="modal" id="btnUpdateModal" type="button"><i class="bi bi-pencil-square"></i></button>
+                <button class="btn btn-danger" data-bs-route="' . route('manage-gudang.destroy', $value->id) . '" data-bs-target="#DeleteModal" data-bs-toggle="modal" id="btnDeleteModal" type="button"><i class="bi bi-trash"></i></button>
+                </div>';
+            })
+            ->rawColumns(['Kategori', 'Aksi'])
+            ->make();
+    }
     public function index()
     {
-        $get_categories = CategoriesBarang::latest()->get();
-        return view('admin.ManageGudang', compact('get_categories'));
+        if (request()->ajax()) {
+            $data = $this->getDataForDataTables();
+            return $this->renderDataTables($data);
+        }
+        $get_category_barang = CategoryBarang::latest()->get();
+        return view('admin.managegudang', compact('get_category_barang'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-    public function createcategory(Request $request)
-    {
         $rules = [
-            'nama_kategori' => 'required|string|max:255|unique:categories',
+            'nama' => 'required|string|max:255',
+            'kategori' => 'required|string|max:255',
+            'stok' => 'required|numeric|integer',
         ];
         $massages = [
-            'max' => ':attribute harus diisi maksimal :max karakter.',
-            'string' => ':attribute harus berupa teks.',
             'required' => ':attribute wajib diisi.',
-            'unique' => 'Kategori sudah ada!',
+            'max' => ':attribute melebihi panjang maksimum yang diizinkan',
+            'string' => ':attribute hanya boleh berupa karakter teks.',
+            'numeric' => ':attribute harus dalam format numerik.',
+        ];
+        //Validasi
+        $validator = Validator::make($request->all(), $rules, $massages);
+        // Custom Attribute Name
+        $validator->setAttributeNames([
+            'nama' => 'Nama Barang',
+            'kategori' => 'Kategori Barang',
+            'stok' => 'Stok',
+        ]);
+
+        //Jika gagal
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput()->with('error_add_barang', 'Gagal menambahkan data barang'); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
+        }
+
+        $validatedData = $validator->validated();
+
+        //Menampung data request setelah validasi
+        $data = [
+            'nama_barang' => $validatedData['nama'],
+            'kategori_id' => (int) $validatedData['kategori'],
+            'stok' => (int) $validatedData['stok'],
+        ];
+        //Simpan barang
+        Barang::create($data);
+        return redirect()->route('manage-gudang.index')->with('success_add_barang', 'Data berhasil disimpan');
+
+    }
+
+    public function update(Request $request, $id)
+    {
+        $rules = [
+            'nama' => 'required|string|max:255',
+            'kategori' => 'required|string|max:255',
+            'stok' => 'required|numeric|integer',
+        ];
+        $massages = [
+            'required' => ':attribute wajib diisi.',
+            'max' => ':attribute melebihi panjang maksimum yang diizinkan',
+            'string' => ':attribute hanya boleh berupa karakter teks.',
+            'numeric' => ':attribute harus dalam format numerik.',
+        ];
+        //Validasi
+        $validator = Validator::make($request->all(), $rules, $massages);
+        // Custom Attribute Name
+        $validator->setAttributeNames([
+            'nama' => 'Nama Barang',
+            'kategori' => 'Kategori Barang',
+            'stok' => 'Stok',
+        ]);
+
+        //Jika gagal
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput()->with('error_edit_barang', 'Gagal mengubah data barang'); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
+        }
+
+        $validatedData = $validator->validated();
+
+        //Menampung data request setelah validasi
+        $data = [
+            'nama_barang' => $validatedData['nama'],
+            'kategori_id' => (int) $validatedData['kategori'],
+            'stok' => (int) $validatedData['stok'],
+        ];
+        //Simpan barang
+        Barang::where('id', $id)->update($data);
+
+        return redirect()->route('manage-gudang.index')->with('success_edit_barang', 'Data berhasil diubah');
+    }
+
+    public function destroy($id)
+    {
+        $get_barang = Barang::findOrFail($id);
+        if (!$get_barang) {
+            // Jika model Barang tidak ditemukan, lakukan tindakan yang sesuai
+            return abort(404, 'Barang tidak ditemukan');
+        }
+        $get_barang->delete();
+        return redirect()->route('manage-gudang.index')->with('success_delete_barang', 'Data berhasil dihapus');
+    }
+
+    public function createcategorybarang(Request $request)
+    {
+        $rules = [
+            'nama_kategori_barang' => 'required|string|max:255|unique:category_barangs',
+        ];
+        $massages = [
+            'required' => ':attribute wajib diisi.',
+            'max' => ':attribute melebihi panjang maksimum yang diizinkan',
+            'string' => ':attribute hanya boleh berupa karakter teks.',
+            'unique' => ':attribute sudah digunakan',
         ];
         //Validasi
         $validator = Validator::make($request->all(), $rules, $massages);
         //Jika gagal
         if ($validator->fails()) {
-            return back()->with('error_add_category', 'Data gagal disimpan!')->withErrors($validator)->withInput(); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
+            return back()->with('error_add_categorybarang', 'Gagal menambahkan kategori barang')->withErrors($validator)->withInput(); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
         }
         $validatedData = $validator->validated();
         //Menampung data request setelah validasi
         $data = [
-            'nama_kategori' => $validatedData['nama_kategori'],
+            'nama_kategori_barang' => $validatedData['nama_kategori_barang'],
         ];
         //Simpan kategori
-        Category::create($data);
-        return redirect()->route('manage-produk.index')->with('success_add_category', 'Data berhasil disimpan');
+        CategoryBarang::create($data);
+        return redirect()->route('manage-gudang.index')->with('success_add_categorybarang', 'Data berhasil disimpan');
     }
-    public function destroycategory($id)
+    public function destroycategorybarang($id)
     {
-        $get_category = Category::findOrFail($id);
-        // cek apakah ada produk yang menggunakan kategori ini
-        $products = $get_category->product()->get();
-        if ($products->count() > 0) {
-            return redirect()->route('manage-produk.index')->with('error_category', 'Kategori tidak bisa dihapus karena masih digunakan oleh produk!');
+        $get_category = CategoryBarang::findOrFail($id);
+        // cek apakah ada gudang yang menggunakan kategori ini
+        if ($get_category->barang()->get()->count() > 0) {
+            return redirect()->route('manage-gudang.index')->with('error_delete_categorybarang', 'Kategori barang ini tidak dapat dihapus karena saat ini masih digunakan oleh beberapa barang');
         }
-        // jika tidak ada produk yang menggunakan kategori ini, maka hapus kategori
+        // jika tidak ada gudang yang menggunakan kategori ini, maka hapus kategori
         $get_category->delete();
-        return redirect()->route('manage-produk.index')->with('success_category', 'Data Berhasil DiHapus!');
+        return redirect()->route('manage-gudang.index')->with('success_delete_categorybarang', 'Data berhasil dihapus');
     }
 }
