@@ -19,6 +19,10 @@
                         <div class="alert alert-success m-3">{{ session()->get('success_edit_employee') }}</div>
                     @elseif(session()->has('error_edit_employee'))
                         <div class="alert alert-danger m-3">{{ session()->get('error_edit_employee') }}</div>
+                    @elseif(session()->has('success_delete_employee'))
+                        <div class="alert alert-success m-3">{{ session()->get('success_delete_employee') }}</div>
+                    @elseif(session()->has('error_delete_employee'))
+                        <div class="alert alert-danger m-3">{{ session()->get('error_delete_employee') }}</div>
                     @endif
                     @if ($errors->has('nama') || $errors->has('alamat') || $errors->has('kontak') || $errors->has('gaji') || $errors->has('jabatan') || $errors->has('foto'))
                         <div class="pt-1 m-3">
@@ -82,7 +86,7 @@
                                 <div class="pt-1 m-3">
                                     <div class="alert alert-danger">
                                         <ul style="list-style:none;">
-                                            @foreach ($$errors->all() as $message)
+                                            @foreach ($errors->all() as $message)
                                                 <li>{{ $message }}</li>
                                             @endforeach
                                         </ul>
@@ -246,38 +250,38 @@
         /**
          * Buat Pegawai & Ubah Pegawai
          */
-        const CUModal = document.getElementById('CUModal');
-        const CUForm = CUModal.querySelector('.modal-content form#CUForm');
-        const titleModal = CUModal.querySelector('.modal-content .modal-header h5#cuModalLabel.modal-title');
-        const namaPegawai = CUModal.querySelector('.modal-content .modal-body input#nama');
-        const alamatPegawai = CUModal.querySelector('.modal-content .modal-body input#alamat');
-        const kontakPegawai = CUModal.querySelector('.modal-content .modal-body input#kontak');
-        const gajiPegawai = CUModal.querySelector('.modal-content .modal-body input#gaji');
-        const jabatanPegawai = CUModal.querySelector('.modal-content .modal-body select#jabatan');
+        let CUModal = document.getElementById('CUModal');
+        let CUForm = CUModal.querySelector('.modal-content form#CUForm');
+        let titleModal = CUModal.querySelector('.modal-content .modal-header h5#cuModalLabel.modal-title');
+        let namaPegawai = CUModal.querySelector('.modal-content .modal-body input#nama');
+        let alamatPegawai = CUModal.querySelector('.modal-content .modal-body input#alamat');
+        let kontakPegawai = CUModal.querySelector('.modal-content .modal-body input#kontak');
+        let gajiPegawai = CUModal.querySelector('.modal-content .modal-body input#gaji');
+        let jabatanPegawai = CUModal.querySelector('.modal-content .modal-body select#jabatan');
 
         let btnSubmit = document.querySelector('.modal-content .modal-footer .btn.btn-success');
-        const csrfField = CUForm.querySelector('input[name="_token"]');
-        const oldImageField = document.querySelector('.modal-content .modal-body input#oldImage');
-        const imgFile = CUModal.querySelector('.modal-content .modal-body input#foto');
-        const output = CUModal.querySelector('.modal-content .modal-body output#result');
+        let csrfField = CUForm.querySelector('input[name="_token"]');
+        let oldImageField = document.querySelector('.modal-content .modal-body input#oldImage');
+        let imgFile = CUModal.querySelector('.modal-content .modal-body input#foto');
+        let output = CUModal.querySelector('.modal-content .modal-body output#result');
 
         CUModal.addEventListener('show.bs.modal', (event) => {
-            const button = event.relatedTarget;
-            const btnID = button.getAttribute('id');
-            const route = button.getAttribute('data-bs-route');
-            const img = document.createElement('img');
+            let button = event.relatedTarget;
+            let btnID = button.getAttribute('id');
+            let route = button.getAttribute('data-bs-route');
+            let img = document.createElement('img');
             img.className = 'thumbnail';
             img.height = 240;
             img.width = 320;
             imgFile.addEventListener('change', (e) => {
                 if (window.File && window.FileReader && window.FileList && window.Blob) {
-                    const file = e.target.files;
+                    let file = e.target.files;
 
                     // if files is image
                     if (file[0].type.match('image')) {
-                        const picReader = new FileReader();
+                        let picReader = new FileReader();
                         picReader.addEventListener('load', function(event) {
-                            const picFile = event.target;
+                            let picFile = event.target;
                             img.src = `${picFile.result}`;
                             img.title = `${picFile.name}`;
                             // cek apakah ada/belum child-nya
@@ -295,11 +299,11 @@
             });
             if (btnID === 'btnUpdateModal') {
                 // Extract info from data-bs-* attributes
-                const rawData = button.getAttribute('data-bs-product');
-                const parseData = JSON.parse(rawData);
+                let rawData = button.getAttribute('data-bs-product');
+                let parseData = JSON.parse(rawData);
                 // The modal's content.
                 CUForm.action = route;
-                const createField = document.createElement('input');
+                let createField = document.createElement('input');
                 createField.type = 'hidden';
                 createField.name = '_method';
                 createField.value = 'PUT';
@@ -312,7 +316,7 @@
                 jabatanPegawai.value = parseData.jabatan;
 
                 if (parseData.foto) {
-                    const picFile = parseData.foto;
+                    let picFile = parseData.foto;
                     let src = `/storage/compressed${picFile}`;
                     img.src = `${src}`;
                     img.title = `${parseData.nama}`;
@@ -332,11 +336,11 @@
         });
 
         CUModal.addEventListener('hidden.bs.modal', (event) => {
-            const methodField = CUForm.querySelector('input[name="_method"]');
+            let methodField = CUForm.querySelector('input[name="_method"]');
             if (methodField !== null) {
                 methodField.remove();
             }
-            const url = `#`;
+            let url = `#`;
             CUForm.action = url;
             namaPegawai.value = null;
             alamatPegawai.value = '';
@@ -352,10 +356,10 @@
         /**
          * Hapus Pegawai
          */
-        const deleteModal = document.getElementById('DeleteModal');
+        let deleteModal = document.getElementById('DeleteModal');
         deleteModal.addEventListener('show.bs.modal', (event) => {
-            const button = event.relatedTarget;
-            const route = button.getAttribute('data-bs-route');
+            let button = event.relatedTarget;
+            let route = button.getAttribute('data-bs-route');
             deleteModal.querySelector('.modal-content .modal-footer form').setAttribute('action', route);
         });
     </script>

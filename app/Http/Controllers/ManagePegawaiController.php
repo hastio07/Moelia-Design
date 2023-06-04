@@ -122,7 +122,7 @@ class ManagePegawaiController extends Controller
             'nama' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',
             'kontak' => 'required|numeric|max:99999999999999|regex:/^(?:\+62)?\d{9,12}$/',
-            'gaji' => 'required|numeric|max:9999999999',
+            'gaji' => 'required|numeric|integer',
             'jabatan' => 'required|string',
             'foto' => 'file|image|mimetypes:image/jpeg,image/jpg,image/png|max:2048',
         ];

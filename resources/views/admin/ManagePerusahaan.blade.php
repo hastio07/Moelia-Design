@@ -638,11 +638,9 @@
 @endsection
 
 @push('scripts')
-    {{-- TinyMCE --}}
-    <script src="{{ asset('templates') }}/vendor/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
     {{-- script untuk seluruh tombol hapus  --}}
     <script>
-        btnDelete = document.querySelectorAll('#btnDelete');
+        let btnDelete = document.querySelectorAll('#btnDelete');
         btnDelete.forEach((btn) => {
             btn.addEventListener('click', function(e) {
                 console.log(e.currentTarget);
@@ -657,6 +655,8 @@
             })
         })
     </script>
+    {{-- TinyMCE --}}
+    <script src="{{ asset('templates') }}/vendor/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
     {{-- script untuk textarea form penawaran --}}
     <script>
         tinymce.init({
@@ -672,24 +672,24 @@
     {{-- script untuk tooltip icon help info --}}
     <script>
         // Initialize tooltips
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+        let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        let tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl)
         })
     </script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             // Mendapatkan semua elemen switch dan input waktu
-            var switches = document.querySelectorAll("input[type='checkbox'][role='switch']");
+            let switches = document.querySelectorAll("input[type='checkbox'][role='switch']");
 
             switches.forEach(function(switchElement) {
                 // Menambahkan event listener ke setiap switch
                 switchElement.addEventListener("change", function(e) {
                     // Mendapatkan elemen teks status terkait
-                    var switchText = this.closest(".row").querySelector(".switch-text");
+                    let switchText = this.closest(".row").querySelector(".switch-text");
                     // Mendapatkan input waktu terkait
-                    var parentRow = this.closest(".row");
-                    var inputs = parentRow.querySelectorAll("input[type='time']");
+                    let parentRow = this.closest(".row");
+                    let inputs = parentRow.querySelectorAll("input[type='time']");
                     // Memeriksa status tombol switch
                     if (this.checked) {
                         // Mengaktifkan input waktu terkait
@@ -721,9 +721,9 @@
                 });
 
                 // Inisialisasi status switch saat halaman dimuat
-                var switchText = switchElement.closest(".row").querySelector(".switch-text");
-                var parentRow = switchElement.closest(".row");
-                var inputs = parentRow.querySelectorAll("input[type='time']");
+                let switchText = switchElement.closest(".row").querySelector(".switch-text");
+                let parentRow = switchElement.closest(".row");
+                let inputs = parentRow.querySelectorAll("input[type='time']");
                 // Memeriksa status tombol switch
                 if (switchElement.checked) {
                     // Mengaktifkan input waktu terkait
