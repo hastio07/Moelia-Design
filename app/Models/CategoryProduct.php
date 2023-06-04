@@ -6,7 +6,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class CategoryProduct extends Model
 {
     use HasFactory, Sluggable;
 
@@ -21,7 +21,7 @@ class Category extends Model
         ];
     }
     /**
-     * Relasi database table categories ke table products (one-to-many)
+     * Relasi database table category_products ke table products (one-to-many)
      */
     public function product()
     {

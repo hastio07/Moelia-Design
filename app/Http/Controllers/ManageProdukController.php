@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Models\CategoryProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,33 +17,33 @@ class ManageProdukController extends Controller
     public function index()
     {
         //
-        $get_categories = Category::latest()->get();
+        $get_category_product = CategoryProduct::latest()->get();
         if (request()->ajax()) {
-            $get_products = Product::with('category')->latest()->get();
-            return DataTables::of($get_products)->addColumn('kategori_id', function ($value) {
-                return $value->category->nama_kategori;
-            })->addColumn('harga_sewa', function ($value) {
+            $get_products = Product::with('category_products')->latest()->get();
+            return DataTables::of($get_products)->addColumn('Kategori', function ($value) {
+                return $value->category_products->nama_kategori;
+            })->addColumn('Harga Sewa', function ($value) {
                 return $value->formatRupiah('harga_sewa');
-            })->addColumn('rincian_produk', function ($value) {
+            })->addColumn('Rincian Produk', function ($value) {
                 return Str::words(strip_tags($value->rincian_produk), 5);
-            })->addColumn('deskripsi', function ($value) {
+            })->addColumn('Deskripsi', function ($value) {
                 return Str::words($value->deskripsi, 5);
-            })->addColumn('gambar', function ($value) {
+            })->addColumn('Gambar', function ($value) {
                 if ($value->gambar) {
                     return '<img alt="' . $value->nama_produk . '" height="150" src="/storage/compressed' . $value->gambar . '" width="180">';
                 } else {
                     return '<img alt="' . $value->nama_produk . '" height="150" src="https://dummyimage.com/180x150.png" width="180">';
                 }
-            })->addColumn('aksi', function ($value) {
+            })->addColumn('Aksi', function ($value) {
                 $json = htmlspecialchars(json_encode($value), ENT_QUOTES, 'UTF-8');
 
                 return ' <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                             <button class="btn btn-warning" data-bs-product="' . $json . '" data-bs-route="' . route('manage-produk.update', $value->id) . '" data-bs-target="#CUModal" data-bs-toggle="modal" id="btnUpdateModal" type="button"><i class="bi bi-pencil-square"></i></button>
                             <button class="btn btn-danger" data-bs-route="' . route('manage-produk.destroy', $value->id) . '" data-bs-target="#DeleteModal" data-bs-toggle="modal" id="btnDeleteModal" type="button"><i class="bi bi-trash"></i></button>
                          </div>';
-            })->rawColumns(['kategori_id', 'harga_sewa', 'rincian_produk', 'deskripsi', 'gambar', 'aksi'])->make();
+            })->rawColumns(['Kategori', 'Harga Sewa', 'Rincian Produk', 'Deskripsi', 'Gambar', 'Aksi'])->make();
         }
-        return view('admin.manageproduk', compact('get_categories'));
+        return view('admin.manageproduk', compact('get_category_product'));
     }
 
     public function store(Request $request)
@@ -65,9 +65,9 @@ class ManageProdukController extends Controller
             'gambar' => 'file|image|mimetypes:image/jpeg,image/jpg,image/png|max:2048',
         ];
         $massages = [
-            'max' => ':attribute harus diisi maksimal :max karakter.',
-            'string' => ':attribute harus berupa teks.',
             'required' => ':attribute wajib diisi.',
+            'max' => ':attribute melebihi panjang maksimum yang diizinkan',
+            'string' => ':attribute hanya boleh berupa karakter teks.',
         ];
         //Validasi
         $validator = Validator::make($request->all(), $rules, $massages);
@@ -75,7 +75,7 @@ class ManageProdukController extends Controller
         //Jika gagal
         if ($validator->fails()) {
 
-            return back()->withErrors($validator)->withInput()->with('error_add_product', 'gagal menambahkan produk'); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
+            return back()->withErrors($validator)->withInput()->with('error_add_product', 'Gagal menambahkan data produk'); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
         }
 
         $validatedData = $validator->validated();
@@ -84,7 +84,7 @@ class ManageProdukController extends Controller
         $data = [
             'created_by' => Auth::id(),
             'nama_produk' => $validatedData['namaproduk'],
-            'kategori_id' => $validatedData['kategori'],
+            'kategori_id' => (int) $validatedData['kategori'],
             'harga_sewa' => (int) $validatedData['hargasewa'],
             'rincian_produk' => $validatedData['rincianproduk'],
             'deskripsi' => $validatedData['deskripsi'],
@@ -104,7 +104,7 @@ class ManageProdukController extends Controller
         //Simpan produk
         Product::create($data);
 
-        return redirect()->route('manage-produk.index')->with('success_add_product', 'data berhasil disimpan');
+        return redirect()->route('manage-produk.index')->with('success_add_product', 'Data berhasil disimpan');
     }
 
     public function update(Request $request, $id)
@@ -120,16 +120,16 @@ class ManageProdukController extends Controller
             'gambar' => 'file|image|mimetypes:image/jpeg,image/jpg,image/png|max:2048',
         ];
         $massages = [
-            'max' => ':attribute harus diisi maksimal :max karakter.',
-            'string' => ':attribute harus berupa teks.',
             'required' => ':attribute wajib diisi.',
+            'max' => ':attribute melebihi panjang maksimum yang diizinkan',
+            'string' => ':attribute hanya boleh berupa karakter teks.',
         ];
         //Validasi
         $validator = Validator::make($request->all(), $rules, $massages);
 
         //Jika gagal
         if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput(); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
+            return back()->withErrors($validator)->withInput()->with('error_edit_product', 'Gagal mengubah data produk'); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
         }
 
         $validatedData = $validator->validated();
@@ -137,7 +137,7 @@ class ManageProdukController extends Controller
         //Menampung data request setelah validasi
         $data = [
             'nama_produk' => $validatedData['namaproduk'],
-            'kategori_id' => $validatedData['kategori'],
+            'kategori_id' => (int) $validatedData['kategori'],
             'harga_sewa' => (int) $validatedData['hargasewa'],
             'rincian_produk' => $validatedData['rincianproduk'],
             'deskripsi' => $validatedData['deskripsi'],
@@ -159,7 +159,7 @@ class ManageProdukController extends Controller
         //Simpan produk
         Product::where('id', $id)->update($data);
 
-        return redirect()->route('manage-produk.index')->with('success', 'data berhasil diubah');
+        return redirect()->route('manage-produk.index')->with('success_edit_product', 'Data berhasil diubah');
     }
 
     public function destroy($id)
@@ -171,25 +171,30 @@ class ManageProdukController extends Controller
             Storage::delete(['compressed/' . $path, 'post-images/' . $path]);
         }
         Product::destroy($id);
-        return redirect()->route('manage-produk.index')->with('success_add_product', 'Data Berhasil DiHapus!');
+        return redirect()->route('manage-produk.index')->with('success_delete_product', 'Data berhasil dihapus');
     }
 
     public function createcategory(Request $request)
     {
         $rules = [
-            'nama_kategori' => 'required|string|max:255|unique:categories',
+            'nama_kategori' => 'required|string|max:255|unique:category_products',
         ];
         $massages = [
-            'max' => ':attribute harus diisi maksimal :max karakter.',
-            'string' => ':attribute harus berupa teks.',
             'required' => ':attribute wajib diisi.',
-            'unique' => 'Kategori sudah ada!',
+            'max' => ':attribute melebihi panjang maksimum yang diizinkan',
+            'string' => ':attribute hanya boleh berupa karakter teks.',
+            'unique' => ':attribute sudah digunakan',
         ];
         //Validasi
         $validator = Validator::make($request->all(), $rules, $massages);
+
+        // Custom Attribute Name
+        $validator->setAttributeNames([
+            'nama_kategori' => $request->input('nama_kategori'),
+        ]);
         //Jika gagal
         if ($validator->fails()) {
-            return back()->with('error_add_category', 'Data gagal disimpan!')->withErrors($validator)->withInput(); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
+            return back()->with('error_add_categoryproduct', 'Gagal menambahkan produk')->withErrors($validator)->withInput(); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
         }
         $validatedData = $validator->validated();
         //Menampung data request setelah validasi
@@ -197,19 +202,19 @@ class ManageProdukController extends Controller
             'nama_kategori' => $validatedData['nama_kategori'],
         ];
         //Simpan kategori
-        Category::create($data);
-        return redirect()->route('manage-produk.index')->with('success_add_category', 'Data berhasil disimpan');
+        CategoryProduct::create($data);
+        return redirect()->route('manage-produk.index')->with('success_add_categoryproduct', 'Data berhasil disimpan');
     }
     public function destroycategory($id)
     {
-        $get_category = Category::findOrFail($id);
+        $get_category = CategoryProduct::findOrFail($id);
         // cek apakah ada produk yang menggunakan kategori ini
         $products = $get_category->product()->get();
         if ($products->count() > 0) {
-            return redirect()->route('manage-produk.index')->with('error_category', 'Kategori tidak bisa dihapus karena masih digunakan oleh produk!');
+            return redirect()->route('manage-produk.index')->with('error_delete_categoryproduct', 'Kategori produk ini tidak dapat dihapus karena saat ini masih digunakan oleh beberapa produk');
         }
         // jika tidak ada produk yang menggunakan kategori ini, maka hapus kategori
         $get_category->delete();
-        return redirect()->route('manage-produk.index')->with('success_category', 'Data Berhasil DiHapus!');
+        return redirect()->route('manage-produk.index')->with('success_delete_categoryproduct', 'Data berhasil dihapus');
     }
 }

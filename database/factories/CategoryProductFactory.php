@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Category>
  */
-class CategoryFactory extends Factory
+class CategoryProductFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -16,11 +16,11 @@ class CategoryFactory extends Factory
      */
     public function definition(): array
     {
-        $categories = fake()->unique()->word();
+        $category_product = fake()->unique()->word();
         return [
             //
-            'nama_kategori' => $categories,
-            'slug_kategori' => str()->slug($categories)
+            'nama_kategori' => $category_product,
+            'slug_kategori' => str()->slug($category_product),
         ];
     }
 }

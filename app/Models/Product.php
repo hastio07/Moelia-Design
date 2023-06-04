@@ -36,11 +36,11 @@ class Product extends Model
         ];
     }
     /**
-     * Relasi database table products ke table categories (one-to-many (invers))
+     * Relasi database table products ke table category_products (one-to-many (invers))
      */
-    public function category()
+    public function category_products()
     {
-        return $this->belongsTo(Category::class, 'kategori_id', 'id');
+        return $this->belongsTo(CategoryProduct::class, 'kategori_id', 'id');
     }
 
 }
