@@ -343,9 +343,9 @@
     $(document).ready(function() {
         $('#table-produk').DataTable({
             processing: true,
+            searching: true,
             serverSide: true,
             responsive: true,
-            searching: true,
             ajax: '{{ url()->current() }}',
             columns: [{
                     data: 'nama_produk',
@@ -382,16 +382,5 @@
             ],
         });
     });
-</script>
-],
-order: [
-[0, 'asc']
-],
-});
-
-/* $('#myInput').on('keyup', function() {
-table.search(this.value).draw();
-}); */
-});
 </script>
 @endpush
