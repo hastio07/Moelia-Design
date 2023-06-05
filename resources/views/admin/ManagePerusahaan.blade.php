@@ -217,6 +217,27 @@
                                                         </div>
                                                     </div>
                                                     <div class="mb-3">
+                                                        <h6 class="fw-bold">Tiktok</h6>
+                                                        <div class="col-auto mb-2">
+                                                            <label class="sr-only" for="u_twitter">Username Tiktok</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-prepend">
+                                                                    <div class="input-group-text">@</div>
+                                                                </div>
+                                                                <input class="form-control" id="twitter" name="u_twitter" placeholder="Masukkan username tiktok" type="text" value="">
+                                                                <span class="fa-circle-info-help"><i class="fa-sharp fa-solid fa-circle-question" data-bs-toggle="tooltip" title="Username"></i></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <label class="sr-only" for="l_twitter">Link Tiktok</label>
+                                                            <div class="input-group">
+                                                                <span class="input-group-text"><i class="fa fa-link" style="font-size: .8rem;"></i></span>
+                                                                <input class="form-control" id="twitter" name="l_tiktok" placeholder="Masukkan link tiktok" type="text" value="">
+                                                                <span class="fa-circle-info-help"><i class="fa-sharp fa-solid fa-circle-question" data-bs-toggle="tooltip" title="Link"></i></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mb-3">
                                                         <h6 class="fw-bold">Youtube</h6>
                                                         <div class="col-auto mb-2">
                                                             <label class="sr-only" for="u_youtube">Username Youtube</label>
@@ -592,6 +613,12 @@
                                             <div class="d-flex" style="min-height: 30px; align-items: center;">
                                                 <i class="fa-brands fa-twitter me-1" style="font-size: 2rem; height: 32px; width: 32px;"></i>
                                                 <span class="ms-3">{{ $sosmeds->u_twitter ?? null }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="mb-4">
+                                            <div class="d-flex" style="min-height: 30px; align-items: center;">
+                                                <i class="fa-brands fa-tiktok me-1" style="font-size: 2rem; height: 32px; width: 32px;"></i>
+                                                <span class="ms-3"></span>
                                             </div>
                                         </div>
                                         <div class="mb-4">
