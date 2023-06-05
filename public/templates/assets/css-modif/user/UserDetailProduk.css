@@ -1,9 +1,14 @@
-.details-item {
-    height: 100vh;
+.detail-item {
+    margin-top: 100px;
 }
 
-@media (max-width:767px) {
-    .details-item {
-        margin-top: 18%;
-    }
+.kategori {
+    font-family: 'Suwannaphum', serif;
+    font-size: smaller;
+    margin-bottom: 10px;
+    color: #8f8f8f;
+}
+
+.kategori i p {
+    margin-top: -3px;
 }
