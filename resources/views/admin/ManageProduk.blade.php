@@ -44,6 +44,7 @@
                                     </div>
                                 </div>
                             @endif
+                            {{-- <input id="myInput" type="text"> --}}
                             <table class="table display" id="table-produk">
                                 <thead>
                                     <tr>
@@ -341,14 +342,16 @@
     </script>
     <script>
         $(document).ready(function() {
-            $('#table-produk').DataTable({
+            let table = $('#table-produk').DataTable({
                 processing: true,
+                searching: true,
                 serverSide: true,
                 responsive: true,
+
                 ajax: '{{ url()->current() }}',
                 columns: [{
                         data: 'nama_produk',
-                        name: 'nama_produk'
+                        name: 'nama_produk',
                     },
                     {
                         data: 'Kategori',
@@ -372,7 +375,9 @@
                     },
                     {
                         data: 'Aksi',
-                        name: 'Aksi'
+                        name: 'Aksi',
+                        orderable: false,
+                        searchable: false,
                     },
 
                 ],
@@ -380,6 +385,10 @@
                     [0, 'asc']
                 ],
             });
+
+            /*  $('#myInput').on('keyup', function() {
+                  table.search(this.value).draw();
+              }); */
         });
     </script>
 @endpush

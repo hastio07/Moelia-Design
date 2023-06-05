@@ -19,7 +19,7 @@ class ManageProdukController extends Controller
         //
         $get_category_product = CategoryProduct::latest()->get();
         if (request()->ajax()) {
-            $get_products = Product::with('category_products')->latest()->get();
+            $get_products = Product::with('category_products');
             return DataTables::of($get_products)->addColumn('Kategori', function ($value) {
                 return $value->category_products->nama_kategori;
             })->addColumn('Harga Sewa', function ($value) {
@@ -36,12 +36,24 @@ class ManageProdukController extends Controller
                 }
             })->addColumn('Aksi', function ($value) {
                 $json = htmlspecialchars(json_encode($value), ENT_QUOTES, 'UTF-8');
-
                 return ' <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                             <button class="btn btn-warning" data-bs-product="' . $json . '" data-bs-route="' . route('manage-produk.update', $value->id) . '" data-bs-target="#CUModal" data-bs-toggle="modal" id="btnUpdateModal" type="button"><i class="bi bi-pencil-square"></i></button>
                             <button class="btn btn-danger" data-bs-route="' . route('manage-produk.destroy', $value->id) . '" data-bs-target="#DeleteModal" data-bs-toggle="modal" id="btnDeleteModal" type="button"><i class="bi bi-trash"></i></button>
                          </div>';
-            })->rawColumns(['Kategori', 'Harga Sewa', 'Rincian Produk', 'Deskripsi', 'Gambar', 'Aksi'])->make();
+            })->filter(function ($query) {
+                if (request()->has('search') && !empty(request()->get('search')['value'])) {
+                    $searchValue = request()->get('search')['value'];
+                    $query->where(function ($query) use ($searchValue) {
+                        $query->where('nama_produk', 'like', "%$searchValue%")
+                            ->orWhereHas('category_products', function ($query) use ($searchValue) {
+                                $query->where('nama_kategori', 'like', "%$searchValue%");
+                            })
+                            ->orWhere('harga_sewa', 'like', "%$searchValue%")
+                            ->orWhere('rincian_produk', 'like', "%$searchValue%")
+                            ->orWhere('deskripsi', 'like', "%$searchValue%");
+                    });
+                }
+            })->rawColumns(['Kategori', 'Harga Sewa', 'Rincian Produk', 'Deskripsi', 'Gambar', 'Aksi'])->make(true);
         }
         return view('admin.manageproduk', compact('get_category_product'));
     }
