@@ -18,8 +18,6 @@
     <link href="{{ asset('templates') }}/vendor/DataTables/datatables.min.css" rel="stylesheet">
     <link href="{{ asset('templates') }}/vendor/DataTables/Responsive-2.4.1/css/responsive.dataTables.min.css" rel="stylesheet">
 
-    {{-- <link href="{{ asset('templates') }}/vendor/datatables.net-dt/css/jquery.dataTables.min.css" rel="stylesheet" />
-    <link href="{{ asset('templates') }}/vendor/datatables.net-responsive-dt/css/responsive.dataTables.min.css" rel="stylesheet" /> --}}
     <link href="{{ asset('templates') }}/assets/css/style.min.css" rel="stylesheet">
 
     <link href="{{ asset('templates') }}/assets/css-modif/admin/AdminLayout.css" rel="stylesheet">
@@ -148,12 +146,12 @@
                         </a>
                     </li>
                     @can('akses_manage_akun', App\Models\Admin::class)
-                        <li class="{{ Route::is('manage-akun.*') ? 'active' : '' }}">
-                            <a class="link" href="{{ route('manage-akun.index') }}">
-                                <i class="ti-id-badge"></i>
-                                <span>Manage Akun</span>
-                            </a>
-                        </li>
+                    <li class="{{ Route::is('manage-akun.*') ? 'active' : '' }}">
+                        <a class="link" href="{{ route('manage-akun.index') }}">
+                            <i class="ti-id-badge"></i>
+                            <span>Manage Akun</span>
+                        </a>
+                    </li>
                     @endcan
                     <li class="{{ Route::is('manage-perusahaan.*') ? 'active' : '' }}">
                         <a class="link" href="{{ route('manage-perusahaan.index') }}">
@@ -246,9 +244,6 @@
     {{-- js for all page --}}
     <script src="{{ asset('templates') }}/vendor/bootstrap/dist/js/bootstrap.bundle.js"></script>
     <script src="{{ asset('templates') }}/vendor/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
-    {{-- <script src="{{ asset('templates') }}/vendor/jquery/dist/jquery.min.js"></script> --}}
-    {{-- <script src="{{ asset('templates') }}/vendor/datatables.net/js/jquery.dataTables.min.js"></script> --}}
-    {{-- <script src="{{ asset('templates') }}/vendor/datatables.net-responsive/js/dataTables.responsive.min.js"></script>  --}}
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('templates') }}/vendor/DataTables/datatables.min.js"></script>
