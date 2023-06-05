@@ -2,127 +2,103 @@
 @section('title', 'Produk')
 
 @push('styles')
-    <link href="{{ asset('templates') }}/assets/css-modif/user/UserProduk.css" rel="stylesheet">
+<link href="{{ asset('templates') }}/assets/css-modif/user/UserProduk.css" rel="stylesheet">
 @endpush
 
 @section('konten')
-    <section>
-        <div class="head-product text-center align-self-center">
-            <h1>Product</h1>
-            <div class="d-flex justify-content-center">
+<section style="padding-top: 80px;">
+    <div class="container">
+        <div class="row height d-flex justify-content-center align-items-center">
+            <div class="col-md-6">
+                <div class="form">
+                    <i class="fa fa-search"></i>
+                    <input type="text" class="form-control form-input" placeholder="Search anything...">
+                    <span class="left-pan"><i class="fa fa-microphone"></i></span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <nav class="navbar navbar-expand-lg container mt-4">
+        <div class="container-fluid">
+            <nav aria-label="breadcrumb">
                 {{ Breadcrumbs::render('produk') }}
+            </nav>
+            <div class="navbar-nav ml-auto">
+                <div class="btn-group shadow-0">
+                    <button class="btn btn-link btn-lg dropdown-toggle" type="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-funnel-fill"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li>
+                            <hr class="dropdown-divider" />
+                        </li>
+                        <li><a class="dropdown-item" href="#">Separated link</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-        <div class="container  py-5">
-            <h1 class="text-center">Make Up</h1>
-            <div class="line"></div>
-            <div class="row row-cols-1 row-cols-md-2 g-4 py-5">
-                @foreach ($products as $key => $value)
-                    <div class="col">
-                        <div class="card mb-3" style="max-width: 540px;">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img alt="produk-{{ $key }}" class="img-fluid rounded-start" src="storage/post-images/{{ $value->gambar }}">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body pb-0">
-                                        <h5 class="card-title">{{ Str::words($value->nama_produk, 5) }}</h5>
-                                        <p class="card-text">{!! Str::words($value->deskripsi, 15) !!}</p>
-                                        <div class="category d-flex">
-                                            <i class="bi bi-calendar-event d-flex me-2">
-                                                <p class="ms-1">{{ $value->created_at->format('d/m/y') }}</p>
-                                            </i>
-                                            <i class="bi bi-tag-fill ms-2 d-flex">
-                                                <p class="ms-1">{{ Str::words($value->category->nama_kategori, 1) }}</p>
-                                            </i>
+    </nav>
+    <div class="container shadow pt-2 pb-5">
+        <div class="row justify-content-center mb-3">
+            @foreach ($products as $key => $value)
+            <div class="col-md-12 col-xl-10">
+                <div class="card shadow border-0 rounded-3 mt-3" data-aos="fade-right">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
+                                <div class="bg-image hover-zoom ripple rounded ripple-surface">
+                                    <img src="storage/post-images/{{ $value->gambar }}" class="w-100" alt="produk-{{ $key }}" />
+                                    <a href="#!">
+                                        <div class="hover-overlay">
+                                            <div class="mask" style="background-color: rgba(253, 253, 253, 0.15);"></div>
                                         </div>
-                                    </div>
-                                    <div class="ms-3">
-                                        <a class="btn" href={{ route('produk.show', $value->id) }}>
-                                            selengkapnnya
-                                        </a>
-                                    </div>
+                                    </a>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                @endforeach
-                {{-- <div class="col">
-                    <div class="card mb-3" style="max-width: 540px;">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img alt="..." class="img-fluid rounded-start" src="img/cover-2.jpg">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body pb-0">
-                                    <h5 class="card-title">Ervin Howell</h5>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, est?</p>
-                                    <div class="category d-flex">
-                                        <i class="bi bi-calendar-event d-flex me-2">
-                                            <p class="ms-1">20/1/2023</p>
-                                        </i>
-                                        <i class="bi bi-tag-fill ms-2 d-flex">
-                                            <p class="ms-1">Make Up</p>
-                                        </i>
-                                    </div>
+                            <div class="col-md-6 col-lg-6 col-xl-6">
+                                <h5>{{ Str::words($value->nama_produk) }}</h5>
+                                <div class="d-flex flex-row kategori">
+                                    <i class="bi bi-calendar-event-fill d-flex me-2">
+                                        <p class="ms-1">{{ $value->created_at->format('d/m/y') }}</p>
+                                    </i>
+                                    <i class="bi bi-bookmark-fill ms-2 d-flex">
+                                        <p class="ms-1">{{ Str::words($value->category_products->nama_kategori) }}</p>
+                                    </i>
                                 </div>
-                                <div class="btn btn ms-3">selengkapnnya</div>
+                                <div class="mt-1 mb-0 text-muted small">
+                                    {{ $value->updated_at->diffForHumans() }}
+                                </div>
+                                <p class="mb-4 mb-md-0 h-100">
+                                    {!! Str::words($value->deskripsi, 20) !!}
+                                </p>
+                            </div>
+                            <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
+                                <div class="d-flex text-success harga">
+                                    <i class="bi bi-tags-fill me-1"></i>
+                                    <h6 class="fw-bold">Harga Sewa</h6>
+                                </div>
+                                <div class="align-items-center mb-1">
+                                    <h4 class="mb-1 me-1">{{$value->formatRupiah('harga_sewa')}}</h4>
+                                </div>
+                                <div class="d-flex flex-column mt-4">
+                                    <a class="btn btn-primary btn-sm button-product" href={{ route('produk.show', $value->id) }}>Selengkapnya</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card mb-3" style="max-width: 540px;">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img alt="..." class="img-fluid rounded-start" src="img/cover-2.jpg">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body pb-0">
-                                    <h5 class="card-title">Ervin Howell</h5>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, est?</p>
-                                    <div class="category d-flex">
-                                        <i class="bi bi-calendar-event d-flex me-2">
-                                            <p class="ms-1">20/1/2023</p>
-                                        </i>
-                                        <i class="bi bi-tag-fill ms-2 d-flex">
-                                            <p class="ms-1">Make Up</p>
-                                        </i>
-                                    </div>
-                                </div>
-                                <div class="btn btn ms-3">selengkapnnya</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card mb-3" style="max-width: 540px;">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img alt="..." class="img-fluid rounded-start" src="img/cover-2.jpg">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body pb-0">
-                                    <h5 class="card-title">Ervin Howell</h5>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, est?</p>
-                                    <div class="category d-flex">
-                                        <i class="bi bi-calendar-event d-flex me-2">
-                                            <p class="ms-1">20/1/2023</p>
-                                        </i>
-                                        <i class="bi bi-tag-fill ms-2 d-flex">
-                                            <p class="ms-1">Make Up</p>
-                                        </i>
-                                    </div>
-                                </div>
-                                <div class="btn btn ms-3">selengkapnnya</div>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
             </div>
-            <div class="text-center">
+            @endforeach
+            <div class="px-5 pt-4 text-center">
                 {!! $products->links('pagination::bootstrap-5') !!}
             </div>
         </div>
-    </section>
+    </div>
+</section>
 @endsection

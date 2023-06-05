@@ -10,6 +10,7 @@
 
 @section('konten')
 <section>
+
     <!-- bagian carousel -->
     <div class=" carousel-home">
         <div class="carousel slide" data-bs-ride="false" id="carouselExampleCaptions">
@@ -57,7 +58,6 @@
             </button>
         </div>
     </div>
-
     <!-- konten 2 bigrafi-->
     <div class="second-konten container">
         <div class="row same-height" data-aos="fade-down-right">
@@ -125,33 +125,66 @@
     <!-- akhir konten 4 -->
 
     <!-- konten 5 produk terbaru -->
-    <div class="container mb-5 new-product" data-aos="fade-down">
+    <div class="mb-5 shadow pt-5">
         <h5 class="text-center card-perusahaan">Moelia Design</h5>
         <h6 class="text-center card-subtitle">Produk Terbaru Kami</h6>
-        <div class="row">
-            @foreach ($products as $value)
-            <div class="col-md-4">
-                <div class="card card-new-prdct" data-aos="fade-down">
-                    <img alt="{{ $value->nama_produk }}" class="card-img-top" src="/storage/post-images{{ $value->gambar }}">
-                    <div class="card-body">
-                        <div class="kategori d-flex">
-                            <i class="bi bi-calendar-event d-flex me-2">
-                                <p class="ms-1">{{ $value->created_at->format('d/m/y') }}</p>
-                            </i>
-                            <i class="bi bi-tag-fill ms-2 d-flex">
-                                <p class="ms-1">{{ Str::words($value->category->nama_kategori, 1) }}</p>
-                            </i>
+        <div class="container pb-5">
+            <div class="row justify-content-center mb-3">
+                @foreach ($products as $value)
+                <div class="col-md-12 col-xl-10">
+                    <div class="card shadow border rounded-3 mt-3" data-aos="fade-down">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
+                                    <div class="bg-image hover-zoom ripple rounded ripple-surface">
+                                        <img alt="{{ $value->nama_produk }}" class="w-100" src="/storage/post-images{{ $value->gambar }}">
+                                        <a href={{ route('produk.show', $value->id) }}>
+                                            <div class="hover-overlay">
+                                                <div class="mask" style="background-color: rgba(253, 253, 253, 0.15);"></div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-6 col-xl-6">
+                                    <h5>{{ Str::words($value->nama_produk, 5) }}</h5>
+                                    <div class="d-flex flex-row">
+                                        <div class="kategori d-flex">
+                                            <i class="bi bi-calendar-event d-flex me-2">
+                                                <p class="ms-1">{{ $value->created_at->format('d/m/y') }}</p>
+                                            </i>
+                                            <i class="bi bi-bookmark-fill ms-2 d-flex">
+                                                <p class="ms-1">{{ Str::words($value->category_products->nama_kategori) }}</p>
+                                            </i>
+                                        </div>
+                                    </div>
+                                    <div class="mb-2 text-muted small">
+                                        {{ $value->updated_at->diffForHumans() }}
+                                    </div>
+                                    <p class="mb-4 mb-md-0 h-100">
+                                        {!! Str::words($value->deskripsi, 25) !!}e.
+                                    </p>
+                                </div>
+                                <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
+                                    <div class="d-flex text-success harga">
+                                        <i class="bi bi-tags-fill me-1"></i>
+                                        <h6 class="fw-bold">Harga Sewa</h6>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center mb-1">
+                                        <h5 class="mb-1 me-1">{{$value->formatRupiah('harga_sewa')}}</h5>
+                                    </div>
+                                    <div class="d-flex flex-column mt-4">
+                                        <a class="btn btn-primary btn-sm button-product" href={{ route('produk.show', $value->id) }}>Selengkapnya</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <h6 class="card-title fw-bold">{{ Str::words($value->nama_produk, 5) }}</h6>
-                        <p class="card-text text-center">{!! Str::words($value->deskripsi, 15) !!}</p>
-                        <a class="btn" href={{ route('produk.show', $value->id) }}>Selengkapnya</a>
                     </div>
                 </div>
+                @endforeach
             </div>
-            @endforeach
-
         </div>
     </div>
+
     <!-- akhir konten 5 -->
     <!-- konten 6 gallery -->
     <div data-aos="fade-down">

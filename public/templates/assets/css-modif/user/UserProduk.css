@@ -1,94 +1,68 @@
-.head-product {
-    padding-top: 20px;
-    margin: 65px 0 10px 0;
-    height: 15vh;
-    background-color: #a39300b0;
-    color: #fff;
+/* search bar */
+.button-product {
+    background-color: #a39300;
 }
 
-.line {
-    width: 100px;
-    height: 2px;
-    background-color: burlywood;
-    margin: auto;
+.button-product:hover {
+    background-color: #dfc902;
 }
 
-.img-fluid {
-    height: 300px;
-    width: 350px !important;
-    object-fit: cover;
-}
-
-.card {
-    border: none;
-}
-
-.col {
-    padding-left: 100px;
-}
-
-.col-md-8 {
-    background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    height: 233px;
-    position: absolute;
-    left: 220px;
-    width: 47.666667% !important;
-    top: 38px;
-}
-
-.col-md-4 {
-    flex: 0 0 auto;
-    width: 52.33333333% !important;
-}
-
-.btn {
-    background-color: #a39300b0;
-    color: #fff;
-}
-
-.category {
-    color: rgb(182, 182, 182);
+.kategori {
+    font-family: 'Suwannaphum', serif;
     font-size: smaller;
+    margin-bottom: 10px;
+    color: #8f8f8f;
 }
 
-.category p {
-    margin-top: -2px;
+.kategori i p {
+    margin-top: -3px;
 }
 
-@media only screen and (max-width: 1078px) {
-    .col-md-8 {
-        left: 0px;
-        background-color: white;
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-        top: 300px !important;
-        width: 100% !important;
-    }
+/* .harga h6 {
+    margin-bottom: 0.2px;
+} */
 
-    .col-md-4 {
-        flex: 0 0 auto;
-        width: 100% !important;
-    }
-
-    .img-fluid {
-        width: 544px !important;
-        height: 500px !important;
-    }
-
-    .col {
-        padding-right: 60px;
-    }
+.form {
+    position: relative;
 }
 
-@media only screen and (max-width: 616px) {
-    .col {
-        padding-left: 60px;
-    }
+.form .fa-search {
+
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: #9ca3af;
+
 }
 
-@media only screen and (max-width: 561px) {
-    .col {
-        padding-left: 10px;
-        padding-right: 10px;
-    }
+.form span {
+
+    position: absolute;
+    right: 17px;
+    top: 13px;
+    padding: 2px;
+    border-left: 1px solid #d1d5db;
+
+}
+
+.left-pan {
+    padding-left: 7px;
+}
+
+.left-pan i {
+
+    padding-left: 10px;
+}
+
+.form-input {
+
+    height: 55px;
+    text-indent: 33px;
+    border-radius: 10px;
+}
+
+.form-input:focus {
+
+    box-shadow: none;
+    border: none;
 }

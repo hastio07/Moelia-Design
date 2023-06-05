@@ -199,7 +199,7 @@ class ManagePegawaiController extends Controller
             'max' => ':attribute melebihi panjang maksimum yang diizinkan',
             'regex' => 'format :attribute tidak valid',
             'string' => ':attribute hanya boleh berupa karakter teks.',
-            'unique' => ':attribute sudah digunakan',
+            'unique' => 'kategori :attribute sudah ada',
         ];
         // Validasi
         $validator = Validator::make($request->all(), $rules, $massages);

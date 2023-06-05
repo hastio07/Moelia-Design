@@ -313,7 +313,6 @@
                                                 <form action="{{ route('manage-perusahaan.updateorcreatejo') }}" id="formJamOperasional" method="POST">
                                                     @csrf
                                                     @foreach ($workinghours as $i => $value)
-                                                    {{ $value->status_format }}
                                                     <div class="row px-3">
                                                         <div class="col-sm-2">
                                                             <div class="form-check form-switch me-5">
@@ -508,7 +507,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <!-- right konten -->
                                 <div class="col-md-4">
                                     <div class="left border text-center bg-white shadow p-3 mb-5 bg-body rounded">
