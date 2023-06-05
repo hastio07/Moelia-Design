@@ -345,6 +345,7 @@
             processing: true,
             serverSide: true,
             responsive: true,
+            searching: true,
             ajax: '{{ url()->current() }}',
             columns: [{
                     data: 'nama_produk',
