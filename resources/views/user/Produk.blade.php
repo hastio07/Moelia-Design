@@ -54,7 +54,7 @@
                             <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
                                 <div class="bg-image hover-zoom ripple rounded ripple-surface">
                                     <img src="storage/post-images/{{ $value->gambar }}" class="w-100" alt="produk-{{ $key }}" />
-                                    <a href="#!">
+                                    <a href={{ route('produk.show', $value->id) }}>
                                         <div class="hover-overlay">
                                             <div class="mask" style="background-color: rgba(253, 253, 253, 0.15);"></div>
                                         </div>
@@ -62,7 +62,9 @@
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-6 col-xl-6">
-                                <h5>{{ Str::words($value->nama_produk) }}</h5>
+                                <a class="text-dark" href={{ route('produk.show', $value->id) }}>
+                                    <h5>{{ Str::words($value->nama_produk) }}</h5>
+                                </a>
                                 <div class="d-flex flex-row kategori">
                                     <i class="bi bi-calendar-event-fill d-flex me-2">
                                         <p class="ms-1">{{ $value->created_at->format('d/m/y') }}</p>
