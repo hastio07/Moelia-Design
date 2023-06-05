@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('jadwal', function (Blueprint $table) {
+        Schema::create('category_barangs', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('kegiatan');
-            $table->string('lokasi', 500);
-            $table->timestamp('waktu')->nullable();
+            $table->string('nama_kategori_barang')->unique();
+            $table->string('slug_kategori')->unique();
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jadwal');
+        Schema::dropIfExists('category_barangs');
     }
 };

@@ -13,12 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('jadwal', function (Blueprint $table) {
+        Schema::create('employees', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('kegiatan');
-            $table->string('lokasi', 500);
-            $table->timestamp('waktu')->nullable();
+            $table->text('alamat_domisili');
+            $table->string('kontak');
+            $table->decimal('besaran_gaji', 10, 0, true);
+            $table->foreignId('jabatan')->constrained('category_jabatans', 'id')->restrictOnDelete()->cascadeOnUpdate();
+            $table->string('foto')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jadwal');
+        Schema::dropIfExists('employees');
     }
 };

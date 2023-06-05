@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('created_by')->constrained('admins', 'id')->restrictOnDelete()->restrictOnUpdate();
             $table->string('nama_produk');
             $table->string('slug_produk')->unique();
-            $table->foreignId('kategori_id')->constrained('categories', 'id')->restrictOnDelete()->cascadeOnUpdate();
+            $table->foreignId('kategori_id')->constrained('category_products', 'id')->restrictOnDelete()->cascadeOnUpdate();
             $table->decimal('harga_sewa', 10, 0, true);
             $table->longText('rincian_produk');
             $table->text('deskripsi');

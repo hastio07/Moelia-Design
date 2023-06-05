@@ -89,7 +89,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button class="btn btn-secondary" data-bs-dismiss="modal" type="submit">Close</button>
+                            <button class="btn btn-secondary" data-bs-dismiss="modal" type="submit">Tutup</button>
                             <button class="btn mb-2 icon-left  btn-success" type="button "><i class="ti-check"></i>selesai</button>
                         </div>
                     </form>
@@ -126,33 +126,33 @@
         /**
          * Buat Layanan & Ubah Layanan
          */
-        const CUModal = document.getElementById('CUModal');
-        const CUForm = CUModal.querySelector('.modal-content form#CUForm');
-        const titleModal = CUModal.querySelector('.modal-content .modal-header h5#cuModalLabel.modal-title');
-        const tipeLayanan = CUModal.querySelector('.modal-content form#CUForm .modal-body input#tipe_layanan');
-        const deskripsiLayanan = CUModal.querySelector('.modal-content form#CUForm .modal-body textarea#deskripsi');
-        const csrfField = CUForm.querySelector('input[name="_token"]');
-        const oldImageField = CUModal.querySelector('.modal-content form#CUForm .modal-body input#oldImage');
-        const imgFile = CUModal.querySelector('.modal-content form#CUForm .modal-body input#gambar');
-        const output = CUModal.querySelector('.modal-content form#CUForm .modal-body output#result');
-
+        let CUModal = document.getElementById('CUModal');
+        let CUForm = CUModal.querySelector('.modal-content form#CUForm');
+        let titleModal = CUModal.querySelector('.modal-content .modal-header h5#cuModalLabel.modal-title');
+        let tipeLayanan = CUModal.querySelector('.modal-content form#CUForm .modal-body input#tipe_layanan');
+        let deskripsiLayanan = CUModal.querySelector('.modal-content form#CUForm .modal-body textarea#deskripsi');
+        let csrfField = CUForm.querySelector('input[name="_token"]');
+        let oldImageField = CUModal.querySelector('.modal-content form#CUForm .modal-body input#oldImage');
+        let imgFile = CUModal.querySelector('.modal-content form#CUForm .modal-body input#gambar');
+        let output = CUModal.querySelector('.modal-content form#CUForm .modal-body output#result');
+        let btnSubmit = document.querySelector('.modal-content .modal-footer .btn.btn-success');
         CUModal.addEventListener('show.bs.modal', (event) => {
-            const button = event.relatedTarget;
-            const btnID = button.getAttribute('id');
-            const route = button.getAttribute('data-bs-route');
-            const img = document.createElement('img');
+            let button = event.relatedTarget;
+            let btnID = button.getAttribute('id');
+            let route = button.getAttribute('data-bs-route');
+            let img = document.createElement('img');
             img.className = 'thumbnail';
             img.height = 240;
             img.width = 320;
             imgFile.addEventListener('change', (e) => {
                 if (window.File && window.FileReader && window.FileList && window.Blob) {
-                    const file = e.target.files;
+                    let file = e.target.files;
 
                     // if files is image
                     if (file[0].type.match('image')) {
-                        const picReader = new FileReader();
+                        let picReader = new FileReader();
                         picReader.addEventListener('load', function(event) {
-                            const picFile = event.target;
+                            let picFile = event.target;
                             img.src = `${picFile.result}`;
                             img.title = `${picFile.name}`;
                             // cek apakah ada/belum child-nya
@@ -171,11 +171,11 @@
 
             if (btnID === 'btnUpdate') {
                 // Extract info from data-bs-* attributes
-                const rawData = button.getAttribute('data-bs-layanan');
-                const parseData = JSON.parse(rawData);
+                let rawData = button.getAttribute('data-bs-layanan');
+                let parseData = JSON.parse(rawData);
                 // The modal's content.
                 CUForm.action = route;
-                const createField = document.createElement('input');
+                let createField = document.createElement('input');
                 createField.type = 'hidden';
                 createField.name = '_method';
                 createField.value = 'PUT';
@@ -184,7 +184,7 @@
                 tipeLayanan.value = parseData.tipe_layanan;
                 deskripsiLayanan.value = parseData.deskripsi;
                 if (parseData.gambar) {
-                    const picFile = parseData.gambar;
+                    let picFile = parseData.gambar;
                     let src = `/storage/compressed/${picFile}`;
                     img.src = `${src}`;
                     img.title = `${parseData.tipe_layanan}`;
@@ -195,6 +195,7 @@
                     }
                     oldImageField.value = picFile;
                 }
+                btnSubmit.textContent = 'Ubah'; // Ubah text tombol submit
             }
             if (btnID === 'btnCreate') {
                 CUForm.action = route;
@@ -203,11 +204,11 @@
         });
 
         CUModal.addEventListener('hidden.bs.modal', () => {
-            const methodField = CUForm.querySelector('input[name="_method"]');
+            let methodField = CUForm.querySelector('input[name="_method"]');
             if (methodField !== null) {
                 methodField.remove();
             }
-            const url = `#`;
+            let url = `#`;
             CUForm.action = url;
             tipeLayanan.value = null;
             deskripsiLayanan.value = null;
@@ -215,15 +216,16 @@
                 imgFile.value = null;
                 output.removeChild(output.firstChild);
             }
+            btnSubmit.textContent = 'Tambah'; // Ubah text tombol submit
         });
 
         /**
          * Hapus Produk
          */
-        const deleteModal = document.getElementById('DeleteModal');
+        let deleteModal = document.getElementById('DeleteModal');
         deleteModal.addEventListener('show.bs.modal', (event) => {
-            const button = event.relatedTarget;
-            const route = button.getAttribute('data-bs-route');
+            let button = event.relatedTarget;
+            let route = button.getAttribute('data-bs-route');
             deleteModal.querySelector('.modal-content .modal-footer form').setAttribute('action', route);
         });
     </script>

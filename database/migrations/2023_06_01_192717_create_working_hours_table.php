@@ -13,11 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('gudang', function (Blueprint $table) {
+        Schema::create('working_hours', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_barang');
-            $table->foreignId('kategori_id')->constrained('categories_barang', 'id')->restrictOnDelete()->cascadeOnUpdate();
-            $table->integer('stok');
+            $table->enum('day', ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'])->unique('day');
+            $table->boolean('status')->default(0);
+            $table->time('time_from')->nullable();
+            $table->time('time_to')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('gudang');
+        Schema::dropIfExists('working_hours');
     }
 };

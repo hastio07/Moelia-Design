@@ -108,30 +108,30 @@
                                                     <input name="id_contact" readonly type="hidden" value="{{ $contacts->id ?? null }}">
                                                     <label class="form-label fw-bold" for="telephone1">Telephone 1</label>
                                                     <input class="form-control" id="telephone1" name="telephone1_name" placeholder="Nama nomor telephone 1" type="text" value="{{ $contacts->telephone1_name ?? null }}">
-                                                    <input class="form-control mt-2" id="telephone1" name="telephone1_number" placeholder="Masukkan nomor telephone 1" type="text" value="{{ $contacts->telephone1_number ?? null }}">
+                                                    <input class="form-control mt-2" id="telephone1_number" name="telephone1_number" placeholder="Masukkan nomor telephone 1" type="text" value="{{ $contacts->telephone1_number ?? null }}">
 
                                                     <label class="form-label mt-3 fw-bold" for="telephone2">Telephone 2</label>
                                                     <input class="form-control" id="telephone2" name="telephone2_name" placeholder="Nama nomor telephone 2" type="text" value="{{ $contacts->telephone2_name ?? null }}">
-                                                    <input class="form-control mt-2" id="telephone2" name="telephone2_number" placeholder="Masukkan nomor telephone 2" type="text" value="{{ $contacts->telephone2_number ?? null }}">
+                                                    <input class="form-control mt-2" id="telephone2_number" name="telephone2_number" placeholder="Masukkan nomor telephone 2" type="text" value="{{ $contacts->telephone2_number ?? null }}">
 
                                                     <label class="form-label mt-4 fw-bold" for="whatsapp1">Whatsapp 1</label>
                                                     <input class="form-control" id="whatsapp1" name="whatsapp1_name" placeholder="Nama Whatsapp 1" type="text" value="{{ $contacts->whatsapp1_name ?? null }}">
-                                                    <input class="form-control mt-2" id="whatsapp1" name="whatsapp1_number" placeholder="Masukkan nomor whatsapp 1" type="text" value="{{ $contacts->whatsapp1_number ?? null }}">
+                                                    <input class="form-control mt-2" id="whatsapp1_number" name="whatsapp1_number" placeholder="Masukkan nomor whatsapp 1" type="text" value="{{ $contacts->whatsapp1_number ?? null }}">
 
                                                     <label class="form-label mt-3 fw-bold" for="whatsapp2">Whatsapp 2</label>
                                                     <input class="form-control" id="whatsapp2" name="whatsapp2_name" placeholder="Nama Whatsapp 2" type="text" value="{{ $contacts->whatsapp2_name ?? null }}">
-                                                    <input class="form-control mt-2" id="whatsapp2" name="whatsapp2_number" placeholder="Masukkan nomor whatsapp 2" type="text" value="{{ $contacts->whatsapp2_number ?? null }}">
+                                                    <input class="form-control mt-2" id="whatsapp2_number" name="whatsapp2_number" placeholder="Masukkan nomor whatsapp 2" type="text" value="{{ $contacts->whatsapp2_number ?? null }}">
 
                                                     <label class="form-label mt-3 fw-bold" for="whatsapp3">Whatsapp 3</label>
                                                     <input class="form-control" id="whatsapp3" name="whatsapp3_name" placeholder="Nama Whatsapp 3" type="text" value="{{ $contacts->whatsapp3_name ?? null }}">
-                                                    <input class="form-control mt-2" id="whatsapp3" name="whatsapp3_number" placeholder="Masukkan nomor whatsapp 3" type="text" value="{{ $contacts->whatsapp3_number ?? null }}">
+                                                    <input class="form-control mt-2" id="whatsapp3_number" name="whatsapp3_number" placeholder="Masukkan nomor whatsapp 3" type="text" value="{{ $contacts->whatsapp3_number ?? null }}">
 
                                                     <label class="form-label mt-3 fw-bold" for="whatsapp4">Whatsapp 4</label>
                                                     <input class="form-control" id="whatsapp4" name="whatsapp4_name" placeholder="Nama Whatsapp 4" type="text" value="{{ $contacts->whatsapp4_name ?? null }}">
-                                                    <input class="form-control mt-2" id="whatsapp4" name="whatsapp4_number" placeholder="Masukkan nomor whatsapp 4" type="text" value="{{ $contacts->whatsapp4_number ?? null }}">
+                                                    <input class="form-control mt-2" id="whatsapp4_number" name="whatsapp4_number" placeholder="Masukkan nomor whatsapp 4" type="text" value="{{ $contacts->whatsapp4_number ?? null }}">
 
                                                     <label class="form-label mt-3 fw-bold" for="email">Email</label>
-                                                    <input class="form-control mt-2" id="email" name="email" placeholder="Masukkan email" type="email" value="{{ $contacts->email ?? null }}">
+                                                    <input autocomplete="email" class="form-control mt-2" id="email" name="email" placeholder="Masukkan email" type="email" value="{{ $contacts->email ?? null }}">
                                                 </div>
                                                 <div class="flex-item button">
                                                     <div class="d-grid gap-2 d-md-flex justify-content-md-center">
@@ -212,27 +212,6 @@
                                                             <div class="input-group">
                                                                 <span class="input-group-text"><i class="fa fa-link" style="font-size: .8rem;"></i></span>
                                                                 <input class="form-control" id="twitter" name="l_twitter" placeholder="Masukkan link twitter" type="text" value="{{ $sosmeds->l_twitter ?? null }}">
-                                                                <span class="fa-circle-info-help"><i class="fa-sharp fa-solid fa-circle-question" data-bs-toggle="tooltip" title="Link"></i></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <h6 class="fw-bold">Tiktok</h6>
-                                                        <div class="col-auto mb-2">
-                                                            <label class="sr-only" for="u_twitter">Username Tiktok</label>
-                                                            <div class="input-group">
-                                                                <div class="input-group-prepend">
-                                                                    <div class="input-group-text">@</div>
-                                                                </div>
-                                                                <input class="form-control" id="twitter" name="u_twitter" placeholder="Masukkan username tiktok" type="text" value="">
-                                                                <span class="fa-circle-info-help"><i class="fa-sharp fa-solid fa-circle-question" data-bs-toggle="tooltip" title="Username"></i></span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-auto">
-                                                            <label class="sr-only" for="l_twitter">Link Tiktok</label>
-                                                            <div class="input-group">
-                                                                <span class="input-group-text"><i class="fa fa-link" style="font-size: .8rem;"></i></span>
-                                                                <input class="form-control" id="twitter" name="l_tiktok" placeholder="Masukkan link tiktok" type="text" value="">
                                                                 <span class="fa-circle-info-help"><i class="fa-sharp fa-solid fa-circle-question" data-bs-toggle="tooltip" title="Link"></i></span>
                                                             </div>
                                                         </div>
@@ -331,170 +310,199 @@
                                                 Jam Operasional Perusahaan
                                             </h4>
                                             <div class="mt-5 ms-3 hours-operation">
-                                                <div class="row px-3">
-                                                    <div class="col-sm-2 list">
-                                                        <div class="form-check form-switch me-5">
-                                                            <input class="form-check-input" type="checkbox" role="switch" id="switch1">
-                                                            <label class="form-check-label" for="switch1">
-                                                                Senin
-                                                            </label>
+                                                <form action="{{ route('manage-perusahaan.updateorcreatejo') }}" id="formJamOperasional" method="POST">
+                                                    @csrf
+                                                    @foreach ($workinghours as $i => $value)
+                                                    {{ $value->status_format }}
+                                                    <div class="row px-3">
+                                                        <div class="col-sm-2">
+                                                            <div class="form-check form-switch me-5">
+                                                                <input @checked(old(false, $value->status_format)) class="form-check-input" id="switch{{ $i }}" name="day[{{ $value->id }}][]" role="switch" type="checkbox" value="true">
+                                                                <label class="form-check-label @if ($value->day == 'Minggu') text-danger @endif" for="switch{{ $i }}">
+                                                                    {{ $value->day }}
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <div class="switch-text ms-4">Buka</div>
+                                                        </div>
+                                                        <div class="col-sm-7 d-flex time">
+                                                            <div class="mob">
+                                                                <label class="mr-1" for="from{{ $i }}">From</label>
+                                                                <input class="ml-1" id="from{{ $i }}" name="from[{{ $value->id }}][]" type="time" value={{ old('', $value->time_from_format) }}>
+                                                            </div>
+                                                            <div class="mob mb-2">
+                                                                <label class="mr-4" for="to{{ $i }}">To</label>
+                                                                <input id="to{{ $i }}" class="ml-1" name="to[{{ $value->id }}][]" type="time" value={{ old('', $value->time_to_format) }}>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-3">
-                                                        <div class="switch-text ms-4">Buka</div>
-                                                    </div>
-                                                    <div class="col-sm-7 d-flex time">
-                                                        <div class="mob">
-                                                            <label class="mr-1">From</label>
-                                                            <input class="ml-1" type="time" name="from">
+                                                    @endforeach
+                                                    {{-- <div class="row px-3">
+                                                            <div class="col-sm-2">
+                                                                <div class="form-check form-switch me-5">
+                                                                    <input @checked(old(false, $cek)) class="form-check-input" id="switch1" name="senin" role="switch" type="checkbox">
+                                                                    <label class="form-check-label" for="switch1">
+                                                                        Senin
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="switch-text ms-4">Buka</div>
+                                                            </div>
+                                                            <div class="col-sm-7 d-flex time">
+                                                                <div class="mob">
+                                                                    <label class="mr-1">From</label>
+                                                                    <input class="ml-1" name="from" type="time">
+                                                                </div>
+                                                                <div class="mob mb-2">
+                                                                    <label class="mr-4">To</label>
+                                                                    <input class="ml-1" name="to" type="time">
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="mob mb-2">
-                                                            <label class="mr-4">To</label>
-                                                            <input class="ml-1" type="time" name="to">
+                                                        <div class="row px-3">
+                                                            <div class="col-sm-2 list">
+                                                                <div class="form-check form-switch me-5">
+                                                                    <input class="form-check-input" id="switch2" name="selasa" role="switch" type="checkbox">
+                                                                    <label class="form-check-label" for="switch2">
+                                                                        Selasa
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="switch-text ms-4">Buka</div>
+                                                            </div>
+                                                            <div class="col-sm-7 d-flex time">
+                                                                <div class="mob">
+                                                                    <label class="mr-1">From</label>
+                                                                    <input class="ml-1" name="from" type="time">
+                                                                </div>
+                                                                <div class="mob mb-2">
+                                                                    <label class="mr-4">To</label>
+                                                                    <input class="ml-1" name="to" type="time">
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row px-3">
-                                                    <div class="col-sm-2 list">
-                                                        <div class="form-check form-switch me-5">
-                                                            <input class="form-check-input" type="checkbox" role="switch" id="switch2">
-                                                            <label class="form-check-label" for="switch2">
-                                                                Selasa
-                                                            </label>
+                                                        <div class="row px-3">
+                                                            <div class="col-sm-2 list">
+                                                                <div class="form-check form-switch me-5">
+                                                                    <input class="form-check-input" id="switch3" role="switch" type="checkbox">
+                                                                    <label class="form-check-label" for="switch3">
+                                                                        Rabu
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="switch-text ms-4">Buka</div>
+                                                            </div>
+                                                            <div class="col-sm-7 d-flex time">
+                                                                <div class="mob">
+                                                                    <label class="mr-1">From</label>
+                                                                    <input class="ml-1" name="from" type="time">
+                                                                </div>
+                                                                <div class="mob mb-2">
+                                                                    <label class="mr-4">To</label>
+                                                                    <input class="ml-1" name="to" type="time">
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-sm-3">
-                                                        <div class="switch-text ms-4">Buka</div>
-                                                    </div>
-                                                    <div class="col-sm-7 d-flex time">
-                                                        <div class="mob">
-                                                            <label class="mr-1">From</label>
-                                                            <input class="ml-1" type="time" name="from">
+                                                        <div class="row px-3">
+                                                            <div class="col-sm-2 list">
+                                                                <div class="form-check form-switch me-5">
+                                                                    <input class="form-check-input" id="switch4" role="switch" type="checkbox">
+                                                                    <label class="form-check-label" for="switch4">
+                                                                        Kamis
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="switch-text ms-4">Buka</div>
+                                                            </div>
+                                                            <div class="col-sm-7 d-flex time">
+                                                                <div class="mob">
+                                                                    <label class="mr-1">From</label>
+                                                                    <input class="ml-1" name="from" type="time">
+                                                                </div>
+                                                                <div class="mob mb-2">
+                                                                    <label class="mr-4">To</label>
+                                                                    <input class="ml-1" name="to" type="time">
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="mob mb-2">
-                                                            <label class="mr-4">To</label>
-                                                            <input class="ml-1" type="time" name="to">
+                                                        <div class="row px-3">
+                                                            <div class="col-sm-2 list">
+                                                                <div class="form-check form-switch me-5">
+                                                                    <input class="form-check-input" id="switch5" role="switch" type="checkbox">
+                                                                    <label class="form-check-label" for="switch5">
+                                                                        Jumat
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="switch-text ms-4">Buka</div>
+                                                            </div>
+                                                            <div class="col-sm-7 d-flex time">
+                                                                <div class="mob">
+                                                                    <label class="mr-1">From</label>
+                                                                    <input class="ml-1" name="from" type="time">
+                                                                </div>
+                                                                <div class="mob mb-2">
+                                                                    <label class="mr-4">To</label>
+                                                                    <input class="ml-1" name="to" type="time">
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row px-3">
-                                                    <div class="col-sm-2 list">
-                                                        <div class="form-check form-switch me-5">
-                                                            <input class="form-check-input" type="checkbox" role="switch" id="switch3">
-                                                            <label class="form-check-label" for="switch3">
-                                                                Rabu
-                                                            </label>
+                                                        <div class="row px-3">
+                                                            <div class="col-sm-2 list">
+                                                                <div class="form-check form-switch me-5">
+                                                                    <input class="form-check-input" id="switch6" role="switch" type="checkbox">
+                                                                    <label class="form-check-label" for="switch6">
+                                                                        Sabtu
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="switch-text ms-4">Buka</div>
+                                                            </div>
+                                                            <div class="col-sm-7 d-flex time">
+                                                                <div class="mob">
+                                                                    <label class="mr-1">From</label>
+                                                                    <input class="ml-1" name="from" type="time">
+                                                                </div>
+                                                                <div class="mob mb-2">
+                                                                    <label class="mr-4">To</label>
+                                                                    <input class="ml-1" name="to" type="time">
+                                                                </div>
+                                                            </div>
                                                         </div>
+                                                        <div class="row px-3">
+                                                            <div class="col-sm-2 list">
+                                                                <div class="form-check form-switch me-5">
+                                                                    <input class="form-check-input" id="switch7" role="switch" type="checkbox">
+                                                                    <label class="form-check-label text-danger" for="switch7">
+                                                                        Minggu
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <div class="switch-text ms-4">Buka</div>
+                                                            </div>
+                                                            <div class="col-sm-7 d-flex time">
+                                                                <div class="mob">
+                                                                    <label class="mr-1">From</label>
+                                                                    <input class="ml-1" name="from" type="time">
+                                                                </div>
+                                                                <div class="mob mb-2">
+                                                                    <label class="mr-4">To</label>
+                                                                    <input class="ml-1" name="to" type="time">
+                                                                </div>
+                                                            </div>
+                                                        </div> --}}
+                                                    <div class="row px-3 mt-3 justify-content-center">
+                                                        <button class="btn btn-success ml-2" type="submit">Upload</button>
                                                     </div>
-                                                    <div class="col-sm-3">
-                                                        <div class="switch-text ms-4">Buka</div>
-                                                    </div>
-                                                    <div class="col-sm-7 d-flex time">
-                                                        <div class="mob">
-                                                            <label class="mr-1">From</label>
-                                                            <input class="ml-1" type="time" name="from">
-                                                        </div>
-                                                        <div class="mob mb-2">
-                                                            <label class="mr-4">To</label>
-                                                            <input class="ml-1" type="time" name="to">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row px-3">
-                                                    <div class="col-sm-2 list">
-                                                        <div class="form-check form-switch me-5">
-                                                            <input class="form-check-input" type="checkbox" role="switch" id="switch4">
-                                                            <label class="form-check-label" for="switch4">
-                                                                Kamis
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-3">
-                                                        <div class="switch-text ms-4">Buka</div>
-                                                    </div>
-                                                    <div class="col-sm-7 d-flex time">
-                                                        <div class="mob">
-                                                            <label class="mr-1">From</label>
-                                                            <input class="ml-1" type="time" name="from">
-                                                        </div>
-                                                        <div class="mob mb-2">
-                                                            <label class="mr-4">To</label>
-                                                            <input class="ml-1" type="time" name="to">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row px-3">
-                                                    <div class="col-sm-2 list">
-                                                        <div class="form-check form-switch me-5">
-                                                            <input class="form-check-input" type="checkbox" role="switch" id="switch5">
-                                                            <label class="form-check-label" for="switch5">
-                                                                Jumat
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-3">
-                                                        <div class="switch-text ms-4">Buka</div>
-                                                    </div>
-                                                    <div class="col-sm-7 d-flex time">
-                                                        <div class="mob">
-                                                            <label class="mr-1">From</label>
-                                                            <input class="ml-1" type="time" name="from">
-                                                        </div>
-                                                        <div class="mob mb-2">
-                                                            <label class="mr-4">To</label>
-                                                            <input class="ml-1" type="time" name="to">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row px-3">
-                                                    <div class="col-sm-2 list">
-                                                        <div class="form-check form-switch me-5">
-                                                            <input class="form-check-input" type="checkbox" role="switch" id="switch6">
-                                                            <label class="form-check-label" for="switch6">
-                                                                Sabtu
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-3">
-                                                        <div class="switch-text ms-4">Buka</div>
-                                                    </div>
-                                                    <div class="col-sm-7 d-flex time">
-                                                        <div class="mob">
-                                                            <label class="mr-1">From</label>
-                                                            <input class="ml-1" type="time" name="from">
-                                                        </div>
-                                                        <div class="mob mb-2">
-                                                            <label class="mr-4">To</label>
-                                                            <input class="ml-1" type="time" name="to">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row px-3">
-                                                    <div class="col-sm-2 list">
-                                                        <div class="form-check form-switch me-5">
-                                                            <input class="form-check-input" type="checkbox" role="switch" id="switch7">
-                                                            <label class="form-check-label text-danger" for="switch7">
-                                                                Minggu
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-3">
-                                                        <div class="switch-text ms-4">Buka</div>
-                                                    </div>
-                                                    <div class="col-sm-7 d-flex time">
-                                                        <div class="mob">
-                                                            <label class="mr-1">From</label>
-                                                            <input class="ml-1" type="time" name="from">
-                                                        </div>
-                                                        <div class="mob mb-2">
-                                                            <label class="mr-4">To</label>
-                                                            <input class="ml-1" type="time" name="to">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row px-3 mt-3 justify-content-center">
-                                                    <button class="btn btn-success ml-2">Upload</button>
-                                                </div>
+                                                </form>
                                             </div>
 
                                         </div>
@@ -590,12 +598,6 @@
                                         </div>
                                         <div class="mb-4">
                                             <div class="d-flex" style="min-height: 30px; align-items: center;">
-                                                <i class="fa-brands fa-tiktok me-1" style="font-size: 2rem; height: 32px; width: 32px;"></i>
-                                                <span class="ms-3"></span>
-                                            </div>
-                                        </div>
-                                        <div class="mb-4">
-                                            <div class="d-flex" style="min-height: 30px; align-items: center;">
                                                 <i class="fa-brands fa-youtube me-1" style="font-size: 2rem; height: 32px; width: 32px;"></i>
                                                 <span class="ms-3">{{ $sosmeds->u_youtube ?? null }}</span>
                                             </div>
@@ -636,11 +638,9 @@
 @endsection
 
 @push('scripts')
-{{-- TinyMCE --}}
-<script src="{{ asset('templates') }}/vendor/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
 {{-- script untuk seluruh tombol hapus  --}}
 <script>
-    btnDelete = document.querySelectorAll('#btnDelete');
+    let btnDelete = document.querySelectorAll('#btnDelete');
     btnDelete.forEach((btn) => {
         btn.addEventListener('click', function(e) {
             console.log(e.currentTarget);
@@ -655,6 +655,8 @@
         })
     })
 </script>
+{{-- TinyMCE --}}
+<script src="{{ asset('templates') }}/vendor/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
 {{-- script untuk textarea form penawaran --}}
 <script>
     tinymce.init({
@@ -670,35 +672,64 @@
 {{-- script untuk tooltip icon help info --}}
 <script>
     // Initialize tooltips
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-    var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+    let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    let tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl)
     })
 </script>
-
-<!-- script untuk menonaktifkan jam operasinya -->
 <script>
-    // Mendapatkan semua elemen switch dan input waktu
-    var switches = document.querySelectorAll("input[type='checkbox'][role='switch']");
-    var timeInputs = document.querySelectorAll("input[type='time']");
+    document.addEventListener("DOMContentLoaded", function() {
+        // Mendapatkan semua elemen switch dan input waktu
+        let switches = document.querySelectorAll("input[type='checkbox'][role='switch']");
 
-    // Menambahkan event listener ke setiap switch
-    switches.forEach(function(switchElement) {
-        switchElement.addEventListener("change", function() {
-            // Mendapatkan elemen teks status terkait
-            var switchText = this.closest(".row").querySelector(".switch-text");
+        switches.forEach(function(switchElement) {
+            // Menambahkan event listener ke setiap switch
+            switchElement.addEventListener("change", function(e) {
+                // Mendapatkan elemen teks status terkait
+                let switchText = this.closest(".row").querySelector(".switch-text");
+                // Mendapatkan input waktu terkait
+                let parentRow = this.closest(".row");
+                let inputs = parentRow.querySelectorAll("input[type='time']");
+                // Memeriksa status tombol switch
+                if (this.checked) {
+                    // Mengaktifkan input waktu terkait
+                    inputs.forEach(function(input) {
+                        input.disabled = false;
+                    });
+                    // Mengubah teks status menjadi "Buka"
+                    switchText.textContent = "Buka";
+                    // Mengubah warna teks menjadi biru
+                    switchText.style.color = "blue";
+                    // Membuat attribute checked elemen switch
+                    e.target.setAttribute('checked', '');
+                    // Mengubah nilai elemen switch
+                    e.target.value = 'true';
+                } else {
+                    // Menonaktifkan input waktu terkait
+                    inputs.forEach(function(input) {
+                        input.disabled = true;
+                    });
+                    // Mengubah teks status menjadi "Tutup"
+                    switchText.textContent = "Tutup";
+                    // Mengubah warna teks menjadi merah
+                    switchText.style.color = "red";
+                    // Menghapus attribute checked elemen switch
+                    e.target.removeAttribute('checked');
+                    // Mengubah nilai elemen switch
+                    e.target.value = 'false';
+                }
+            });
 
-            // Mendapatkan input waktu terkait
-            var parentRow = this.closest(".row");
-            var inputs = parentRow.querySelectorAll("input[type='time']");
-
+            // Inisialisasi status switch saat halaman dimuat
+            let switchText = switchElement.closest(".row").querySelector(".switch-text");
+            let parentRow = switchElement.closest(".row");
+            let inputs = parentRow.querySelectorAll("input[type='time']");
             // Memeriksa status tombol switch
-            if (this.checked) {
+            if (switchElement.checked) {
                 // Mengaktifkan input waktu terkait
                 inputs.forEach(function(input) {
                     input.disabled = false;
                 });
-
                 // Mengubah teks status menjadi "Buka"
                 switchText.textContent = "Buka";
                 // Mengubah warna teks menjadi biru
@@ -708,33 +739,14 @@
                 inputs.forEach(function(input) {
                     input.disabled = true;
                 });
-
                 // Mengubah teks status menjadi "Tutup"
                 switchText.textContent = "Tutup";
                 // Mengubah warna teks menjadi merah
                 switchText.style.color = "red";
+                // Mengubah nilai elemen switch
+                switchElement.value = 'false';
             }
         });
-
-        // Mengatur status awal menjadi "Tutup"
-        switchElement.checked = false;
-
-        // Mendapatkan elemen teks status terkait
-        var switchText = switchElement.closest(".row").querySelector(".switch-text");
-
-        // Menonaktifkan input waktu terkait
-        var parentRow = switchElement.closest(".row");
-        var inputs = parentRow.querySelectorAll("input[type='time']");
-        inputs.forEach(function(input) {
-            input.disabled = true;
-        });
-
-        // Mengubah teks status menjadi "Tutup"
-        switchText.textContent = "Tutup";
-        // Mengubah warna teks menjadi merah
-        switchText.style.color = "red";
     });
 </script>
-
-<!-- script tambah jam operasional -->
 @endpush
