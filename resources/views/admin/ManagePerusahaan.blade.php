@@ -162,15 +162,15 @@
                                                                         <div class="input-group-text">@</div>
                                                                     </div>
                                                                     <input class="form-control" id="u_instagram" name="u_instagram" placeholder="Masukkan username instagram" type="text" value="{{ $sosmeds->u_instagram ?? null }}">
-                                                                    <span class="fa-circle-info-help"><i class="fa-sharp fa-solid fa-circle-question" data-bs-toggle="tooltip" title="Username"></i></span>
+                                                                    <span class="bi-question-help-circle-fill"><i class="bi bi-question-circle-fill" data-bs-toggle="tooltip" title="Username"></i></span>
                                                                 </div>
                                                             </div>
                                                             <div class="col-auto">
                                                                 <label class="sr-only" for="l_instagram">Link Instagram</label>
                                                                 <div class="input-group">
-                                                                    <span class="input-group-text"><i class="fa fa-link" style="font-size: .8rem;"></i></span>
+                                                                    <span class="input-group-text"><i class="bi bi-link-45deg" style="font-size: 1rem;"></i></span>
                                                                     <input class="form-control" id="l_instagram" name="l_instagram" placeholder="Masukkan link instagram" type="text" value="{{ $sosmeds->l_instagram ?? null }}">
-                                                                    <span class="fa-circle-info-help"><i class="fa-sharp fa-solid fa-circle-question" data-bs-toggle="tooltip" title="Link"></i></span>
+                                                                    <span class="bi-question-help-circle-fill"><i class="bi bi-question-circle-fill" data-bs-toggle="tooltip" title="Link"></i></span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -183,15 +183,15 @@
                                                                         <div class="input-group-text">@</div>
                                                                     </div>
                                                                     <input class="form-control" id="u_facebook" name="u_facebook" placeholder="Masukkan username facebook" type="text" value="{{ $sosmeds->u_facebook ?? null }}">
-                                                                    <span class="fa-circle-info-help"><i class="fa-sharp fa-solid fa-circle-question" data-bs-toggle="tooltip" title="Username"></i></span>
+                                                                    <span class="bi-question-help-circle-fill"><i class="bi bi-question-circle-fill" data-bs-toggle="tooltip" title="Username"></i></span>
                                                                 </div>
                                                             </div>
                                                             <div class="col-auto">
                                                                 <label class="sr-only" for="l_facebook">Link Facebook</label>
                                                                 <div class="input-group">
-                                                                    <span class="input-group-text"><i class="fa fa-link" style="font-size: .8rem;"></i></span>
+                                                                    <span class="input-group-text"><i class="bi bi-link-45deg" style="font-size: 1rem;"></i></span>
                                                                     <input class="form-control" id="l_facebook" name="l_facebook" placeholder="Masukkan link Facebook" type="text" value="{{ $sosmeds->l_facebook ?? null }}">
-                                                                    <span class="fa-circle-info-help"><i class="fa-sharp fa-solid fa-circle-question" data-bs-toggle="tooltip" title="Link"></i></span>
+                                                                    <span class="bi-question-help-circle-fill"><i class="bi bi-question-circle-fill" data-bs-toggle="tooltip" title="Link"></i></span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -204,15 +204,15 @@
                                                                         <div class="input-group-text">@</div>
                                                                     </div>
                                                                     <input class="form-control" id="u_twitter" name="u_twitter" placeholder="Masukkan username twitter" type="text" value="{{ $sosmeds->u_twitter ?? null }}">
-                                                                    <span class="fa-circle-info-help"><i class="fa-sharp fa-solid fa-circle-question" data-bs-toggle="tooltip" title="Username"></i></span>
+                                                                    <span class="bi-question-help-circle-fill"><i class="bi bi-question-circle-fill" data-bs-toggle="tooltip" title="Username"></i></span>
                                                                 </div>
                                                             </div>
                                                             <div class="col-auto">
                                                                 <label class="sr-only" for="l_twitter">Link Twitter</label>
                                                                 <div class="input-group">
-                                                                    <span class="input-group-text"><i class="fa fa-link" style="font-size: .8rem;"></i></span>
+                                                                    <span class="input-group-text"><i class="bi bi-link-45deg" style="font-size: 1rem;"></i></span>
                                                                     <input class="form-control" id="l_twitter" name="l_twitter" placeholder="Masukkan link twitter" type="text" value="{{ $sosmeds->l_twitter ?? null }}">
-                                                                    <span class="fa-circle-info-help"><i class="fa-sharp fa-solid fa-circle-question" data-bs-toggle="tooltip" title="Link"></i></span>
+                                                                    <span class="bi-question-help-circle-fill"><i class="bi bi-question-circle-fill" data-bs-toggle="tooltip" title="Link"></i></span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -224,16 +224,16 @@
                                                                     <div class="input-group-prepend">
                                                                         <div class="input-group-text">@</div>
                                                                     </div>
-                                                                    <input class="form-control" id="u_tiktok" name="u_tiktok" placeholder="Masukkan username tiktok" type="text" value="">
-                                                                    <span class="fa-circle-info-help"><i class="fa-sharp fa-solid fa-circle-question" data-bs-toggle="tooltip" title="Username"></i></span>
+                                                                    <input class="form-control" id="u_tiktok" name="u_tiktok" placeholder="Masukkan username tiktok" type="text" value="{{ $sosmeds->u_tiktok ?? null }}">
+                                                                    <span class="bi-question-help-circle-fill"><i class="bi bi-question-circle-fill" data-bs-toggle="tooltip" title="Username"></i></span>
                                                                 </div>
                                                             </div>
                                                             <div class="col-auto">
                                                                 <label class="sr-only" for="l_tiktok">Link Tiktok</label>
                                                                 <div class="input-group">
-                                                                    <span class="input-group-text"><i class="fa fa-link" style="font-size: .8rem;"></i></span>
-                                                                    <input class="form-control" id="l_tiktok" name="l_tiktok" placeholder="Masukkan link tiktok" type="text" value="">
-                                                                    <span class="fa-circle-info-help"><i class="fa-sharp fa-solid fa-circle-question" data-bs-toggle="tooltip" title="Link"></i></span>
+                                                                    <span class="input-group-text"><i class="bi bi-link-45deg" style="font-size: 1rem;"></i></span>
+                                                                    <input class="form-control" id="l_tiktok" name="l_tiktok" placeholder="Masukkan link tiktok" type="text" value="{{ $sosmeds->l_tiktok ?? null }}">
+                                                                    <span class="bi-question-help-circle-fill"><i class="bi bi-question-circle-fill" data-bs-toggle="tooltip" title="Link"></i></span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -246,15 +246,15 @@
                                                                         <div class="input-group-text">@</div>
                                                                     </div>
                                                                     <input class="form-control" id="u_youtube" name="u_youtube" placeholder="Masukkan link channel youtube" type="text" value="{{ $sosmeds->u_youtube ?? null }}">
-                                                                    <span class="fa-circle-info-help"><i class="fa-sharp fa-solid fa-circle-question" data-bs-toggle="tooltip" title="Username"></i></span>
+                                                                    <span class="bi-question-help-circle-fill"><i class="bi bi-question-circle-fill" data-bs-toggle="tooltip" title="Username"></i></span>
                                                                 </div>
                                                             </div>
                                                             <div class="col-auto">
                                                                 <label class="sr-only" for="l_youtube">Link Youtube</label>
                                                                 <div class="input-group">
-                                                                    <span class="input-group-text"><i class="fa fa-link" style="font-size: .8rem;"></i></span>
+                                                                    <span class="input-group-text"><i class="bi bi-link-45deg" style="font-size: 1rem;"></i></span>
                                                                     <input class="form-control" id="youtube" name="l_youtube" placeholder="Masukkan link youtube" type="text" value="{{ $sosmeds->l_youtube ?? null }}">
-                                                                    <span class="fa-circle-info-help"><i class="fa-sharp fa-solid fa-circle-question" data-bs-toggle="tooltip" title="Link"></i></span>
+                                                                    <span class="bi-question-help-circle-fill"><i class="bi bi-question-circle-fill" data-bs-toggle="tooltip" title="Link"></i></span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -561,13 +561,13 @@
                                             </div>
                                             <div class="mb-4">
                                                 <div class="d-flex" style="min-height: 30px; align-items: center;">
-                                                    <i class="fa-sharp fa-solid fa-map-location-dot me-1" style="font-size: 2rem; height: 32px; width: 32px;"></i>
+                                                    <i class="bi bi-geo-alt-fill me-1" style="font-size: 2rem; height: 32px; width: 32px;"></i>
                                                     <span class="ms-3">{{ $addresses->alamat_perusahaan ?? null }}</span>
                                                 </div>
                                             </div>
                                             <div class="mb-4">
                                                 <div class="d-flex" style="min-height: 30px; align-items: center;">
-                                                    <i class="fa-solid fa-phone-volume me-1" style="font-size: 2rem; height: 32px; width: 32px;"></i>
+                                                    <i class="bi bi-telephone-plus-fill me-1" style="font-size: 2rem; height: 32px; width: 32px;"></i>
                                                     <span class="ms-3">Telephone</span>
                                                 </div>
                                                 <ol style="margin-left: 2.3rem; padding-left: 2.1rem;">
@@ -583,7 +583,7 @@
                                             </div>
                                             <div class="mb-4">
                                                 <div class="d-flex" style="min-height: 30px; align-items: center;">
-                                                    <i class="fa-brands fa-whatsapp me-1" style="font-size: 2rem; height: 32px; width: 32px;"></i>
+                                                    <i class="bi bi-whatsapp me-1" style="font-size: 2rem; height: 32px; width: 32px;"></i>
                                                     <span class="ms-3">Whatsapp</span>
                                                 </div>
                                                 <ol style="margin-left: 2.3rem; padding-left: 2.1rem;">
@@ -599,31 +599,31 @@
                                             </div>
                                             <div class="mb-4">
                                                 <div class="d-flex" style="min-height: 30px; align-items: center;">
-                                                    <i class="fa-brands fa-instagram me-1" style="font-size: 2rem; height: 32px; width: 32px;"></i>
+                                                    <i class="bi bi-instagram me-1" style="font-size: 2rem; height: 32px; width: 32px;"></i>
                                                     <span class="ms-3">{{ $sosmeds->u_instagram ?? null }}</span>
                                                 </div>
                                             </div>
                                             <div class="mb-4">
                                                 <div class="d-flex" style="min-height: 30px; align-items: center;">
-                                                    <i class="fa-brands fa-facebook me-1" style="font-size: 2rem; height: 32px; width: 32px;"></i>
+                                                    <i class="bi bi-facebook me-1" style="font-size: 2rem; height: 32px; width: 32px;"></i>
                                                     <span class="ms-3">{{ $sosmeds->u_facebook ?? null }}</span>
                                                 </div>
                                             </div>
                                             <div class="mb-4">
                                                 <div class="d-flex" style="min-height: 30px; align-items: center;">
-                                                    <i class="fa-brands fa-twitter me-1" style="font-size: 2rem; height: 32px; width: 32px;"></i>
+                                                    <i class="bi bi-twitter me-1" style="font-size: 2rem; height: 32px; width: 32px;"></i>
                                                     <span class="ms-3">{{ $sosmeds->u_twitter ?? null }}</span>
                                                 </div>
                                             </div>
                                             <div class="mb-4">
                                                 <div class="d-flex" style="min-height: 30px; align-items: center;">
-                                                    <i class="fa-brands fa-tiktok me-1" style="font-size: 2rem; height: 32px; width: 32px;"></i>
-                                                    <span class="ms-3"></span>
+                                                    <i class="bi bi-tiktok me-1" style="font-size: 2rem; height: 32px; width: 32px;"></i>
+                                                    <span class="ms-3">{{ $sosmeds->u_tiktok ?? null }}</span>
                                                 </div>
                                             </div>
                                             <div class="mb-4">
                                                 <div class="d-flex" style="min-height: 30px; align-items: center;">
-                                                    <i class="fa-brands fa-youtube me-1" style="font-size: 2rem; height: 32px; width: 32px;"></i>
+                                                    <i class="bi bi-youtube me-1" style="font-size: 2rem; height: 32px; width: 32px;"></i>
                                                     <span class="ms-3">{{ $sosmeds->u_youtube ?? null }}</span>
                                                 </div>
                                             </div>
