@@ -283,7 +283,6 @@ class ManagePerusahaanController extends Controller
         // update atau create record dengan data yang diberikan
         $this->contacts->updateOrCreate(['id' => $id], $validatedData);
         return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil Disimpan');
-
     }
     public function deletecontact($id)
     {
@@ -346,6 +345,7 @@ class ManagePerusahaanController extends Controller
     {
         $rules = [
             'katasambutan' => 'nullable|string',
+            'judul_siapa' => 'nullable|string',
             'fotobersama' => 'nullable|file|image|mimetypes:image/jpeg,image/jpg,image/png|max:2048',
             'oldfotobersama' => ['nullable', 'string', function ($attribute, $value, $fail) {
                 if (!empty($value)) {
@@ -368,6 +368,7 @@ class ManagePerusahaanController extends Controller
         }
         $validatedData = $validator->validated();
         $filterData['katasambutan'] = $validatedData['katasambutan'];
+        $filterData['judul'] = $validatedData['judul_siapa'];
         if ($request->hasFile('fotobersama')) {
             if ($validatedData['oldfotobersama']) {
                 $path = $validatedData['oldfotobersama'];
