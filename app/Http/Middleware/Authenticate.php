@@ -17,7 +17,13 @@ class Authenticate extends Middleware
     {
 
         if (!$request->expectsJson()) {
-            return URL::previous();
+            $previousUrl = URL::previous();
+
+            // Periksa apakah URL sebelumnya tidak sama dengan URL saat ini
+            if ($previousUrl && $previousUrl !== $request->fullUrl()) {
+                return $previousUrl;
+            }
+
         }
     }
 }

@@ -130,11 +130,13 @@
         $(document).ready(function() {
             $('#table-jadwal').DataTable({
                 processing: true,
+                searching: true,
                 serverSide: true,
                 responsive: true,
                 ajax: '{{ url()->current() }}',
                 columnDefs: [{
                     orderable: false,
+                    searchable: false,
                     targets: 0
                 }],
                 columns: [{
@@ -162,7 +164,9 @@
                     },
                     {
                         data: 'aksi',
-                        name: 'aksi'
+                        name: 'aksi',
+                        orderable: false,
+                        searchable: false,
                     },
 
                 ],

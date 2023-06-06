@@ -18,7 +18,7 @@ class ManageJadwalController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            $get_jadwal = Jadwal::orderBy('updated_at', 'desc')->get();
+            $get_jadwal = Jadwal::orderBy('updated_at', 'desc');
             return DataTables::of($get_jadwal)->addIndexColumn()->addColumn('nama', function ($e) {
                 return $e->nama;
             })->addColumn('kegiatan', function ($e) {
@@ -36,7 +36,17 @@ class ManageJadwalController extends Controller
                                                 <button class="btn btn-warning" data-bs-jadwal="' . $json . '" data-bs-route="' . route('manage-jadwal.update', $e->id) . '" data-bs-target="#jadwalModal" data-bs-toggle="modal" id="edit-button" type="button"><i class="bi bi-pencil-square"></i></button>
                                                 <button class="btn btn-danger" data-bs-route="' . route('manage-jadwal.destroy', $e->id) . '" data-bs-target="#jadwalModal" data-bs-toggle="modal" id="delete-button" type="button"><i class="bi bi-trash"></i></button>
                                             </div>';
-            })->rawColumns(['nama', 'kegiatan', 'lokasi', 'jam', 'tanggal', 'aksi'])->make();
+            })->filter(function ($query) {
+                if (request()->has('search') && !empty(request()->get('search')['value'])) {
+                    $searchValue = request()->get('search')['value'];
+
+                    $query->where('nama', 'like', "%$searchValue%")
+                        ->orWhere('kegiatan', 'like', "%$searchValue%")
+                        ->orWhere('lokasi', 'like', "%$searchValue%")
+                        ->orWhere('waktu', 'like', "%$searchValue%");
+
+                }
+            })->rawColumns(['nama', 'kegiatan', 'lokasi', 'jam', 'tanggal', 'aksi'])->make(true);
         }
         return view('admin.ManageJadwal');
     }
