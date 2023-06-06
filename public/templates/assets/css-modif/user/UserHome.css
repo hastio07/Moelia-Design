@@ -263,6 +263,10 @@
     background-color: #dfc902;
 }
 
+.time p {
+    margin-top: -1px;
+}
+
 /* Akhir konten 5 produk terbaru */
 
 /* konten 6 gallery */

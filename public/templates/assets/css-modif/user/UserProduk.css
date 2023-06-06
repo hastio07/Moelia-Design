@@ -66,3 +66,7 @@
     box-shadow: none;
     border: none;
 }
+
+.time p {
+    margin-top: -1px;
+}

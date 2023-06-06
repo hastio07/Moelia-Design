@@ -159,8 +159,11 @@
                                             </i>
                                         </div>
                                     </div>
-                                    <div class="mb-2 text-muted small">
-                                        {{ $value->updated_at->diffForHumans() }}
+                                    <div class="mb-0 text-muted small d-flex time">
+                                        <i class="bi bi-clock-history me-1"></i>
+                                        <p>
+                                            {{ $value->updated_at->diffForHumans() }}
+                                        </p>
                                     </div>
                                     <p class="mb-4 mb-md-0 h-100">
                                         {!! Str::words($value->deskripsi, 25) !!}e.

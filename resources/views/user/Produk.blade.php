@@ -73,8 +73,11 @@
                                         <p class="ms-1">{{ Str::words($value->category_products->nama_kategori) }}</p>
                                     </i>
                                 </div>
-                                <div class="mt-1 mb-0 text-muted small">
-                                    {{ $value->updated_at->diffForHumans() }}
+                                <div class="mb-0 text-muted small d-flex time">
+                                    <i class="bi bi-clock-history me-1"></i>
+                                    <p>
+                                        {{ $value->updated_at->diffForHumans() }}
+                                    </p>
                                 </div>
                                 <p class="mb-4 mb-md-0 h-100">
                                     {!! Str::words($value->deskripsi, 20) !!}
