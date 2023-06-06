@@ -19,22 +19,22 @@ class ManageProdukController extends Controller
         //
         $get_category_product = CategoryProduct::latest()->get();
         if (request()->ajax()) {
-            $get_products = Product::with('category_products');
-            return DataTables::of($get_products)->addColumn('Kategori', function ($value) {
+            $get_products = Product::with('category_products')->orderBy('updated_at', 'desc');
+            return DataTables::eloquent($get_products)->editColumn('category_products.nama_kategori', function ($value) {
                 return $value->category_products->nama_kategori;
-            })->addColumn('Harga Sewa', function ($value) {
+            })->editColumn('harga_sewa', function ($value) {
                 return $value->formatRupiah('harga_sewa');
-            })->addColumn('Rincian Produk', function ($value) {
+            })->editColumn('rincian_produk', function ($value) {
                 return Str::words(strip_tags($value->rincian_produk), 5);
-            })->addColumn('Deskripsi', function ($value) {
+            })->editColumn('deskripsi', function ($value) {
                 return Str::words($value->deskripsi, 5);
-            })->addColumn('Gambar', function ($value) {
+            })->editColumn('gambar', function ($value) {
                 if ($value->gambar) {
                     return '<img alt="' . $value->nama_produk . '" height="150" src="/storage/compressed' . $value->gambar . '" width="180">';
                 } else {
                     return '<img alt="' . $value->nama_produk . '" height="150" src="https://dummyimage.com/180x150.png" width="180">';
                 }
-            })->addColumn('Aksi', function ($value) {
+            })->addColumn('aksi', function ($value) {
                 $json = htmlspecialchars(json_encode($value), ENT_QUOTES, 'UTF-8');
                 return ' <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                             <button class="btn btn-warning" data-bs-product="' . $json . '" data-bs-route="' . route('manage-produk.update', $value->id) . '" data-bs-target="#CUModal" data-bs-toggle="modal" id="btnUpdateModal" type="button"><i class="bi bi-pencil-square"></i></button>
@@ -44,16 +44,16 @@ class ManageProdukController extends Controller
                 if (request()->has('search') && !empty(request()->get('search')['value'])) {
                     $searchValue = request()->get('search')['value'];
                     $query->where(function ($query) use ($searchValue) {
-                        $query->where('nama_produk', 'like', "%$searchValue%")
+                        $query->where('nama_produk', 'LIKE', "%$searchValue%")
                             ->orWhereHas('category_products', function ($query) use ($searchValue) {
-                                $query->where('nama_kategori', 'like', "%$searchValue%");
+                                $query->where('nama_kategori', 'LIKE', "%$searchValue%");
                             })
-                            ->orWhere('harga_sewa', 'like', "%$searchValue%")
-                            ->orWhere('rincian_produk', 'like', "%$searchValue%")
-                            ->orWhere('deskripsi', 'like', "%$searchValue%");
+                            ->orWhere('harga_sewa', 'LIKE', "%$searchValue%")
+                            ->orWhere('rincian_produk', 'LIKE', "%$searchValue%")
+                            ->orWhere('deskripsi', 'LIKE', "%$searchValue%");
                     });
                 }
-            })->rawColumns(['Kategori', 'Harga Sewa', 'Rincian Produk', 'Deskripsi', 'Gambar', 'Aksi'])->make(true);
+            }, true)->rawColumns(['gambar', 'aksi'])->make(true);
         }
         return view('admin.manageproduk', compact('get_category_product'));
     }
