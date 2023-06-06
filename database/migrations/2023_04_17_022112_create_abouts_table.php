@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('abouts', function (Blueprint $table) {
             $table->id();
+            $table->string('judul')->nullable();
             $table->text('katasambutan')->nullable();
             $table->string('fotobersama')->nullable();
             $table->timestamps();

@@ -8,6 +8,7 @@ use App\Models\Company;
 use App\Models\Photo;
 use App\Models\Product;
 use App\Models\Service;
+use App\Models\About;
 
 class HomeController extends Controller
 {
@@ -20,6 +21,7 @@ class HomeController extends Controller
         $addresses = Address::first();
         $services = Service::latest()->get();
         $companies = Company::first();
-        return view('user.home', compact('galleries', 'photos', 'products', 'addresses', 'services', 'companies'));
+        $abouts = About::first();
+        return view('user.home', compact('galleries', 'photos', 'products', 'addresses', 'services', 'companies', 'abouts'));
     }
 }

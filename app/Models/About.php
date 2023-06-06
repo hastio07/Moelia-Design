@@ -9,5 +9,5 @@ class About extends Model
 {
     use HasFactory;
     protected $primaryKey = 'id';
-    protected $fillable = ['katasambutan', 'fotobersama'];
+    protected $fillable = ['judul', 'katasambutan', 'fotobersama'];
 }
