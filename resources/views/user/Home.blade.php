@@ -21,7 +21,7 @@
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active" data-aos="fade-up">
-                    <img alt="{{ $galleries[0]->photo_name ?? null }}" class="d-block w-100 h-100" src="/storage/{{ $galleries[0]->photo_path ?? '#' }}">
+                    <img alt="{{ $galleries[0]->photo_name ?? null }}" class="d-block w-100 h-100 image-carausel" src="/storage/{{ $galleries[0]->photo_path ?? '#' }}">
                     <div class="carousel-caption">
                         <h5>{{ $companies->nama_perusahaan }}</h5>
                         <h4>Wedding Organizer</h4>
@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img alt="{{ $galleries[1]->photo_name ?? null }}" class="d-block w-100 h-100" src="/storage/{{ $galleries[1]->photo_path ?? '#' }}">
+                    <img alt="{{ $galleries[1]->photo_name ?? null }}" class="d-block w-100 h-100 image-carausel" src="/storage/{{ $galleries[1]->photo_path ?? '#' }}">
                     <div class="carousel-caption">
                         <h5>{{ $companies->nama_perusahaan }}</h5>
                         <h4>Wedding Organizer</h4>
@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img alt="{{ $galleries[2]->photo_name ?? null }}" class="d-block w-100 h-100" src="/storage/{{ $galleries[2]->photo_path ?? '#' }}">
+                    <img alt="{{ $galleries[2]->photo_name ?? null }}" class="d-block w-100 h-100 image-carausel" src="/storage/{{ $galleries[2]->photo_path ?? '#' }}">
                     <div class="carousel-caption">
                         <h5>{{ $companies->nama_perusahaan }}</h5>
                         <h4>Wedding Organizer</h4>
@@ -61,18 +61,20 @@
     <!-- konten 2 bigrafi-->
     <div class="second-konten container">
         <div class="row same-height" data-aos="fade-down-right">
-            <div class="col-md-8">
+            <div class="col-lg-8 col-md-12 mt-4 order-sm-2 order-lg-1">
                 <div class="card text-center mb-5 bg-white h-100" data-aos="flip-down">
                     <div class=" card-body">
                         <h5 class="card-title card-perusahaan">Moelia Design</h5>
-                        <h6 class="card-subtitle mb-2">Sekarang saatnya anda tidak perlu repot lagi mempersiapkan pernikahan, Anda dapat menikah dengan biaya yang terjangkau</h6>
-                        <p class="card-text  text-muted">Perkenalkan kami Mawar wedding service salah satu penyedia jasa pernikahan yang menjadi tempat dimana segala kebutuhan pernikahan calon perngantin tersedia disini. Dari mulai Tim Wedding organizer Bandung yang profesional dan komunikatif, menu catering yang lezat dan beraneka ragam, dekorasi yang elegan dan inovatif, tata rias & busana pengantin yang cantik, tim dokumentasi yang berpengalaman dan kreatif,serta tim hiburan dan upacara adat yang memberi tuntunan sekaligus tontonan semuanya lengkap dalam satu paket pernikahan bandung . Adapun jasa yang kami tawarkan dapat diperoleh secara satuan ataupun keseluruhan ( paket All in ) tergantung kepada kebutuhan calon pengantin. Dengan moto ” nikah ga harus ribet, nikah ga harus mahal”. Kami berupaya membantu klien-klien kami untuk melaksanakan pernikahannya dengan terencana dan tentunya dengan biaya yang terjangkau. </p>
+                        <h6 class="card-subtitle mb-2">{{ $abouts->judul }}</h6>
+                        <p class="card-text  text-muted">{{ $abouts->katasambutan }} </p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-lg-4 col-md-12 mt-4 order-sm-1 order-lg-2">
                 <div class="card bg-transparent border border-0 h-100 image-konten-dua cover-img-dua" data-aos="flip-up">
-                    <img alt="" class="image-konten-dua" src=" ">
+                    @if (!empty($abouts->fotobersama))
+                    <img alt="fotobersama" class="image-konten-dua" src="{{ asset('storage') }}/{{ $abouts->fotobersama }}">
+                    @endif
                 </div>
             </div>
         </div>
@@ -85,7 +87,7 @@
     <h6 class="text-center card-subtitle">Layanan Yang Kami Sediakan</h6>
     <div class="slide-container swiper">
         <div class="slide-content" data-aos="fade-up">
-            <div class="card-wrapper swiper-wrapper">
+            <div class="card-wrapper swiper-wrapper my-5">
                 @foreach ($services as $value)
                 <div class="card swiper-slide">
                     <div class="image-content">
@@ -95,15 +97,15 @@
                     </div>
                     <div class="card-content">
                         <h6 class="name fw-bold text-capitalize">{{ $value->tipe_layanan }}</h6>
-                        <p class="description">{{ $value->deskripsi }}</p>
-                        <button class="button">Selengkapnya</button>
+                        <!-- <p class="description">{{ $value->deskripsi }}</p>
+                        <button class="button">Selengkapnya</button> -->
                     </div>
                 </div>
                 @endforeach
             </div>
+            <div class="swiper-pagination"></div>
         </div>
         <br>
-        <div class="swiper-pagination"></div>
     </div>
     <!-- akhir konten 3 -->
 
@@ -192,11 +194,12 @@
         <h6 class="text-center card-subtitle">Foto Kami</h6>
         <div class="gallery container">
             @foreach ($photos as $value)
-            <div class="item" data-aos="fade-down"><img alt="{{ $value->photo_name }}" src="/storage/{{ $value->photo_path }}"></div>
+            <a data-gallery="photo-gallery" data-toggle="lightbox" href="/storage/{{ $value->photo_path }}">
+                <img width="600" class="img-fluid item" height="600" src="/storage/{{ $value->photo_path }}">
+            </a>
             @endforeach
         </div>
     </div>
-
     <!-- akhir konten 6 gallery -->
 
 </section>
@@ -231,4 +234,5 @@
         },
     });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bs5-lightbox@1.8.3/dist/index.bundle.min.js"></script>
 @endpush
