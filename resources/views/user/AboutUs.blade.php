@@ -29,96 +29,99 @@
             <div class="col-md-5" data-aos="fade-down">
                 <h5 class="text-center">Moelia Design</h5>
                 <div class="line"></div><br>
-                <h6 class="card-subtitle">
+                <h4 class="card-subtitle fw-bold my-3">
                     Apa saja yang akan anda dapatkan dari kami?
-                </h6>
-                @if (!empty($offers->penawaran))
-                {!! $offers->penawaran !!}
-                @endif
+                </h4>
+                <p>
+                    @if (!empty($offers->penawaran))
+                    {!! $offers->penawaran !!}
+                    @endif
+                </p>
             </div>
         </div>
     </div>
     <!-- end konten -->
 
     <!-- konten3 -->
-    <div class="third-content mt-5">
+    <div class="third-content mt-5 shadow pt-4">
         <h1 class="text-center head-ourt fw-bold">Our Team</h1>
         <div class="line"></div>
-        <div class="owner-profile mt-5">
-            <div class="container four-content mb-5" data-aos="fade-down">
-                <div class="content">
-                    <div class="left-side">
-                        <div class="address details">
-                            @if (!empty($owners->foto_owner))
-                            <img alt="{{ $owners->nama_owner }}" class="rounded img-fluid" src="/storage/{{ $owners->foto_owner }}">
-                            @endif
-                            <div class="mt-3">
-                                @if (!empty($owners->nama_owner))
-                                <h5 class="fw-bold">{{ $owners->nama_owner }}</h5>
-                                <p>Owner</p>
-                                @endif
+        <div class="container-fluid container-team py-5 mt-3">
+            <div class="container">
+                <div class="row g-5 align-items-center" data-aos="fade-down">
+                    <div class="col-md-6 wow fadeIn">
+                        @if (!empty($owners->foto_owner))
+                        <!-- <img alt="{{ $owners->nama_owner }}" class="rounded img-fluid" src="/storage/{{ $owners->foto_owner }}"> -->
+                        <img class="img-fluid w-100 rounded" src="/storage/{{ $owners->foto_owner }}" alt="{{ $owners->nama_owner }}">
+                        @endif
+                    </div>
+                    <div class="col-md-6 wow fadeIn">
+                        @if (!empty($owners->nama_owner))
+                        <h4 class="display-6 mb-3 fw-bold">{{ $owners->nama_owner }}</h4>
+                        <p class="mb-1">CEO & Founder</p>
+                        @endif
+                        @if (!empty($owners->kata_sambutan))
+                        <p class="mb-4 mt-3">{{ $owners->kata_sambutan }}</p>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            <div class="container my-3">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6 mt-3">
+                        <div class="card h-100">
+                            <div class="p-2">
+                                <img src="{{ asset('templates') }}/assets/images/pegawai-1.jpg" class="card-img-top rounded-3" alt="...">
+                            </div>
+                            <div class="card-body text-center">
+                                <h5 class="card-title fw-bold">Shalan Abimanyu</h5>
+                                <p class="card-text">Cahering</p>
                             </div>
                         </div>
                     </div>
-                    <div class="right-side">
-                        <div class="details text-center">
-                            <div class="data p-3">
-                                @if (!empty($owners->kata_sambutan))
-                                <p>{{ $owners->kata_sambutan }}</p>
-                                @endif
+                    <div class="col-lg-3 col-md-6 col-sm-6 mt-3">
+                        <div class="card h-100">
+                            <div class="p-2">
+                                <img src="{{ asset('templates') }}/assets/images/pegawai-2.jpg" class="card-img-top rounded-3" alt="...">
+                            </div>
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Shinta Marito</h5>
+                                <p class="card-text">Fotografer</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 mt-3">
+                        <div class="card h-100">
+                            <div class="p-2">
+                                <img src="{{ asset('templates') }}/assets/images/pegawai-3.jpg" class="card-img-top rounded-3" alt="...">
+                            </div>
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Muhammad Khadafi</h5>
+                                <p class="card-text">Tata Rias</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 mt-3">
+                        <div class="card h-100">
+                            <div class="p-2">
+                                <img src="{{ asset('templates') }}/assets/images/pegawai-4.jpg" class="card-img-top rounded-3" alt="...">
+                            </div>
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Rido AKhbar Syah</h5>
+                                <p class="card-text">Admin Marketing</p>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
+
         </div>
     </div>
 
-    <div class="body-ourt mt-5">
-        <div class="our-team">
-            <div class="div card">
-                <div class="imgOT">
-                    <img alt="" src="img/cover-1.jpg">
-                </div>
-                <div class="content-ourt">
-                    <h2>sayid mufaqih</h2>
-                    <p>Marketing</p>
-                </div>
-            </div>
-            <div class="div card">
-                <div class="imgOT">
-                    <img alt="" src="img/cover-1.jpg">
-                </div>
-                <div class="content-ourt">
-                    <h2>sayid mufaqih</h2>
-                    <p>Marketing</p>
-                </div>
-            </div>
-            <div class="div card">
-                <div class="imgOT">
-                    <img alt="" src="img/cover-1.jpg">
-                </div>
-                <div class="content-ourt">
-                    <h2>sayid mufaqih</h2>
-                    <p>dekorasi</p>
-                </div>
-            </div>
-            <div class="div card">
-                <div class="imgOT">
-                    <img alt="" src="img/cover-1.jpg">
-                </div>
-                <div class="content-ourt">
-                    <h2>sayid mufaqih</h2>
-                    <p>make up</p>
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- end konten -->
 
     <!-- konten 5 -->
-    <div class="container four-content mb-5" data-aos="fade-down">
+    <div class="container four-content mb-5 mt-5" data-aos="fade-down">
         <div class="content">
             <div class="left-side">
                 <div class="address details">
@@ -173,7 +176,29 @@
             </div>
         </div>
     </div>
-
 </section>
+@push('scripts')
+<script>
+    function revealCards() {
+        const cards = document.querySelectorAll('.card');
+        cards.forEach((card, index) => {
+            const cardPosition = card.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+            if (cardPosition < windowHeight) {
+                setTimeout(() => {
+                    card.classList.add('visible');
+                }, index * 500);
+            }
+        });
+    }
+
+    function handleScroll() {
+        revealCards();
+    }
+
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('DOMContentLoaded', revealCards);
+</script>
+@endpush
 
 @endsection
