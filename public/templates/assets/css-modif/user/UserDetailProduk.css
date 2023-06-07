@@ -12,3 +12,7 @@
 .kategori i p {
     margin-top: -3px;
 }
+
+.photo-product img:hover {
+    transform: scale(1.1);
+}
