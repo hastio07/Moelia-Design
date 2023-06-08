@@ -11,6 +11,7 @@ use App\Http\Controllers\ManagePerusahaanController;
 use App\Http\Controllers\ManagePesananProsesController;
 use App\Http\Controllers\ManageProdukController;
 use App\Http\Controllers\user\AboutController;
+use App\Http\Controllers\user\CalculatorController;
 use App\Http\Controllers\user\FotoController;
 use App\Http\Controllers\user\HomeController;
 use App\Http\Controllers\user\ProdukController;
@@ -37,6 +38,7 @@ Route::middleware(['no-redirect-if-authenticated:admins', 'prevent-back-history'
     Route::get('/pembayaran', function () {
         return view('user.pembayaran');
     });
+    Route::resource('/wedding-calculator', CalculatorController::class);
     Route::resource('/produk', ProdukController::class)->except(['create', 'store', 'edit', 'update', 'destroy']);
     Route::get('/foto', [FotoController::class, 'index'])->name('foto');
     Route::get('/vidio', [VideoController::class, 'index'])->name('vidio');
