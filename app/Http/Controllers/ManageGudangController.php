@@ -11,32 +11,50 @@ use Yajra\DataTables\Facades\DataTables;
 class ManageGudangController extends Controller
 {
 
-    private function getDataForDataTables()
-    {
-        $get_barang = Barang::with('categorybarang')->latest('created_at')->get();
-        return $get_barang;
-    }
     private function renderDataTables($data)
     {
-        return DataTables::of($data)
-            ->addColumn('Kategori', function ($value) {
+        return DataTables::eloquent($data)
+            ->editColumn('kategori_id', function ($value) {
                 return $value->categorybarang->nama_kategori_barang;
             })
-            ->addColumn('Aksi', function ($value) {
+            ->editColumn('aksi', function ($value) {
                 $json = htmlspecialchars(json_encode($value), ENT_QUOTES, 'UTF-8');
                 return ' <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                <button class="btn btn-warning" data-bs-product="' . $json . '" data-bs-route="' . route('manage-gudang.update', $value->id) . '" data-bs-target="#CUModal" data-bs-toggle="modal" id="btnUpdateModal" type="button"><i class="bi bi-pencil-square"></i></button>
+                <button class="btn btn-warning" data-bs-barang="' . $json . '" data-bs-route="' . route('manage-gudang.update', $value->id) . '" data-bs-target="#CUModal" data-bs-toggle="modal" id="btnUpdateModal" type="button"><i class="bi bi-pencil-square"></i></button>
                 <button class="btn btn-danger" data-bs-route="' . route('manage-gudang.destroy', $value->id) . '" data-bs-target="#DeleteModal" data-bs-toggle="modal" id="btnDeleteModal" type="button"><i class="bi bi-trash"></i></button>
                 </div>';
-            })
-            ->rawColumns(['Kategori', 'Aksi'])
-            ->make();
+            })->filter(function ($query) {
+            if (request()->has('search') && !empty(request()->get('search')['value'])) {
+                $searchValue = request()->get('search')['value'];
+                $query->where('nama_barang', 'LIKE', "%$searchValue%")
+                    ->orWhere('stok', 'LIKE', "%$searchValue%")
+                    ->orWhereHas('categorybarang', function ($query) use ($searchValue) {
+                        $query->where('nama_kategori_barang', 'LIKE', "%$searchValue%");
+                    });
+
+            }
+        }, true)
+            ->rawColumns(['aksi'])
+            ->make(true);
     }
+
     public function index()
     {
         if (request()->ajax()) {
-            $data = $this->getDataForDataTables();
-            return $this->renderDataTables($data);
+
+            $barang = Barang::with('categorybarang');
+
+            if (request()->has('order') && !empty(request()->input('order'))) {
+                $order = request()->input('order')[0];
+                $columnIndex = $order['column'];
+                $columnName = request()->input('columns')[$columnIndex]['data'];
+                $columnDirection = $order['dir'];
+                $barang->orderBy($columnName, $columnDirection);
+            } else {
+                $barang->latest('updated_at');
+            }
+
+            return $this->renderDataTables($barang);
         }
         $get_category_barang = CategoryBarang::latest()->get();
         return view('admin.managegudang', compact('get_category_barang'));

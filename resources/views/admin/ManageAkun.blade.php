@@ -63,7 +63,6 @@
                                     <labe class="form-label" for="role_select">Pilih Role</labe>
                                     <select class="form-select form-select-sm" id="role_select" name="role_id" required>
                                         <option disabled selected value="">-- Pilih Role --</option>
-
                                         <option {{ isset($adminedit) && $adminedit->role_id == 2 ? 'selected' : '' }} value="2">Admin
                                         </option>
                                     </select>
@@ -111,22 +110,7 @@
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    {{-- @foreach ($get_admins as $i => $admin)
-                                        <tr>
-                                            <td>{{ $admin->nama_depan }} {{ $admin->nama_belakang }}</td>
-                                            <td>{{ $admin->email }}</td>
-                                            <td>{{ $admin->phone_number }}</td>
-                                            <td>{{ $admin->role->level }}</td>
-                                            <td>
-                                                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                                                    <button class="btn btn-warning" data-route="{{ route('manage-akun.edit', $hashids->encode($admin->id)) }}" id="edit-button"><i class="bi bi-pencil-square"></i></button>
-                                                    <button class="btn btn-danger" data-route="{{ route('manage-akun.destroy', $hashids->encode($admin->id)) }}" id="delete-button"><i class="bi bi-trash"></i></button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @endforeach --}}
-                                </tbody>
+                                <tbody></tbody>
                                 <tfoot>
                                     <tr>
                                         <th>Nama Admin</th>
@@ -137,12 +121,10 @@
                                     </tr>
                                 </tfoot>
                             </table>
-
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 @endsection
@@ -152,9 +134,18 @@
         $(document).ready(function() {
             $('#table-admins').DataTable({
                 processing: true,
+                searching: true,
                 serverSide: true,
                 responsive: true,
-                ajax: '{{ url()->current() }}',
+                ordering: true,
+                ajax: {
+                    url: '{{ url()->current() }}',
+                },
+                columnDefs: [{
+                    orderable: false,
+                    searchable: false,
+                    targets: 4
+                }],
                 columns: [{
                         data: 'Nama Admin',
                         name: 'Nama Admin'
@@ -165,21 +156,18 @@
                     },
                     {
                         data: 'phone_number',
-                        name: 'phone_number'
+                        name: 'phone_number',
                     },
                     {
-                        data: 'role',
-                        name: 'role',
+                        data: 'role_id',
+                        name: 'role_id',
                     },
                     {
                         data: 'aksi',
                         name: 'aksi'
                     },
-
                 ],
-                order: [
-                    [1, 'asc']
-                ],
+                order: [],
                 drawCallback: function(settings) {
                     let buttonEdit = document.querySelectorAll('#edit-button');
                     buttonEdit.forEach((btn) => {

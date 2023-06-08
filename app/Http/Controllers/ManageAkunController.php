@@ -12,27 +12,15 @@ use Yajra\DataTables\Facades\DataTables;
 
 class ManageAkunController extends Controller
 {
-    private function getDataForDataTables()
-    {
-        $get_admins = Admin::with('role')->where('role_id', '=', 2)->latest('created_at')->get();
-
-        return $get_admins;
-    }
     private function renderDataTables($data)
     {
         $hashids = new Hashids(env('HASHIDS_KEY'), 20);
 
-        return DataTables::of($data)
+        return DataTables::eloquent($data)
             ->addColumn('Nama Admin', function ($value) {
                 return $value->nama_depan . ' ' . $value->nama_belakang;
             })
-            ->addColumn('email', function ($value) {
-                return $value->email;
-            })
-            ->addColumn('phone_number', function ($value) {
-                return $value->phone_number;
-            })
-            ->addColumn('role', function ($value) {
+            ->editColumn('role_id', function ($value) {
                 return $value->role->level;
             })
             ->addColumn('aksi', function ($value) use ($hashids) {
@@ -40,9 +28,18 @@ class ManageAkunController extends Controller
                 <button class="btn btn-warning" data-route="' . route('manage-akun.edit', $hashids->encode($value->id)) . '" id="edit-button"><i class="bi bi-pencil-square"></i></button>
                 <button class="btn btn-danger" data-route="' . route('manage-akun.destroy', $hashids->encode($value->id)) . '" id="delete-button"><i class="bi bi-trash"></i></button>
             </div>';
-            })
-            ->rawColumns(['Nama Admin', 'email', 'phone_number', 'role', 'aksi'])
-            ->make();
+            })->filter(function ($query) {
+            if (request()->has('search') && !empty(request()->get('search')['value'])) {
+                $searchValue = request()->get('search')['value'];
+                $query->where(function ($query) use ($searchValue) {
+                    $query->where('nama_depan', 'LIKE', "%$searchValue%")
+                        ->orWhere('nama_belakang', 'LIKE', "%$searchValue%");
+                })->orWhere('email', 'LIKE', "%$searchValue%")->orWhere('phone_number', 'LIKE', "%$searchValue%")
+                    ->orWhereHas('role', function ($query) use ($searchValue) {
+                        $query->where('level', 'LIKE', "%$searchValue%");
+                    });
+            }
+        }, true)->rawColumns(['aksi'])->make(true);
     }
     /**
      * Display a listing of the resource.
@@ -56,8 +53,24 @@ class ManageAkunController extends Controller
 
         $hashids = new Hashids(env('HASHIDS_KEY'), 20);
         if (request()->ajax()) {
-            $data = $this->getDataForDataTables();
-            return $this->renderDataTables($data);
+
+            $akun = Admin::with('role')->where('role_id', '=', 2);
+
+            if (request()->has('order') && !empty(request()->input('order'))) {
+                $order = request()->input('order')[0];
+                $columnIndex = $order['column'];
+                $columnName = request()->input('columns')[$columnIndex]['data'];
+                $columnDirection = $order['dir'];
+                if ($columnName === 'Nama Admin') {
+                    $akun->orderByRaw("CONCAT(nama_depan, ' ', nama_belakang) $columnDirection");
+                } else {
+                    $akun->orderBy($columnName, $columnDirection);
+                }
+            } else {
+                $akun->latest('updated_at');
+            }
+
+            return $this->renderDataTables($akun);
         }
 
         return view('admin.manageakun', compact('hashids'));

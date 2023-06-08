@@ -107,7 +107,7 @@
             </div>
         </div>
 
-        <!-- modal add and update product -->
+        <!-- Modal create and update barang -->
         <div aria-hidden="true" class="modal fade" id="CUModal" tabindex="-1">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -149,7 +149,7 @@
             </div>
         </div>
 
-        <!-- modal delete product dan category -->
+        <!-- Modal delete barang dan category barang -->
         <div aria-hidden="true" class="modal fade" id="DeleteModal" tabindex="-1">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
@@ -179,33 +179,39 @@
         $(document).ready(function() {
             $('#table-barang').DataTable({
                 processing: true,
+                searching: true,
                 serverSide: true,
                 responsive: true,
-                ajax: '{{ url()->current() }}',
+                ordering: true,
+                ajax: {
+                    url: '{{ url()->current() }}'
+                },
                 columnDefs: [{
                     targets: 0,
                     className: "fw-bolder"
+                }, {
+                    orderable: false,
+                    searchable: false,
+                    targets: 3
                 }],
                 columns: [{
-                        data: 'nama_barang', // db
+                        data: 'nama_barang',
                         name: 'nama_barang'
                     },
                     {
-                        data: 'Kategori',
-                        name: 'Kategori'
+                        data: 'kategori_id',
+                        name: 'kategori_id'
                     },
                     {
                         data: 'stok',
                         name: 'stok'
                     },
                     {
-                        data: 'Aksi',
-                        name: 'Aksi'
+                        data: 'aksi',
+                        name: 'aksi'
                     },
                 ],
-                order: [
-                    [1, 'asc']
-                ],
+                order: [],
             });
         })
     </script>
@@ -230,7 +236,7 @@
             let route = button.getAttribute('data-bs-route');
             if (btnID === 'btnUpdateModal') {
                 // Extract info from data-bs-* attributes
-                let rawData = button.getAttribute('data-bs-product');
+                let rawData = button.getAttribute('data-bs-barang');
                 let parseData = JSON.parse(rawData);
                 // The modal's content.
                 CUForm.action = route;

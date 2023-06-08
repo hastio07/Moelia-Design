@@ -12,42 +12,62 @@ use Yajra\DataTables\Facades\DataTables;
 
 class ManagePegawaiController extends Controller
 {
-    private function getDataForDataTables()
-    {
-        $get_empolyees = Employee::with('categoryjabatan')->latest('created_at')->get();
-        return $get_empolyees;
-    }
+
     private function renderDataTables($data)
     {
-        return DataTables::of($data)
-            ->addColumn('Besaran Gaji', function ($value) {
+        return DataTables::eloquent($data)
+            ->editColumn('besaran_gaji', function ($value) {
                 return $value->formatRupiah('besaran_gaji');
             })
-            ->addColumn('Jabatan', function ($value) {
+            ->editColumn('jabatan', function ($value) {
                 return $value->categoryjabatan->nama_jabatan;
             })
-            ->addColumn('Foto', function ($value) {
+            ->editColumn('foto', function ($value) {
                 if ($value->foto) {
                     return '<img alt="' . $value->nama . '" height="150" src="/storage/compressed' . $value->foto . '" width="180">';
                 } else {
                     return '<img alt="' . $value->nama . '" height="150" src="https://dummyimage.com/180x150.png" width="180">';
                 }
             })
-            ->addColumn('Aksi', function ($value) {
+            ->addColumn('aksi', function ($value) {
                 $json = htmlspecialchars(json_encode($value), ENT_QUOTES, 'UTF-8');
                 return ' <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                <button class="btn btn-warning" data-bs-product="' . $json . '" data-bs-route="' . route('manage-pegawai.update', $value->id) . '" data-bs-target="#CUModal" data-bs-toggle="modal" id="btnUpdateModal" type="button"><i class="bi bi-pencil-square"></i></button>
+                <button class="btn btn-warning" data-bs-pegawai="' . $json . '" data-bs-route="' . route('manage-pegawai.update', $value->id) . '" data-bs-target="#CUModal" data-bs-toggle="modal" id="btnUpdateModal" type="button"><i class="bi bi-pencil-square"></i></button>
                 <button class="btn btn-danger" data-bs-route="' . route('manage-pegawai.destroy', $value->id) . '" data-bs-target="#DeleteModal" data-bs-toggle="modal" id="btnDeleteModal" type="button"><i class="bi bi-trash"></i></button>
                 </div>';
-            })
-            ->rawColumns(['Besaran Gaji', 'Jabatan', 'Foto', 'Aksi'])
-            ->make();
+            })->filter(function ($query) {
+            if (request()->has('search') && !empty(request()->get('search')['value'])) {
+                $searchValue = request()->get('search')['value'];
+                $query->where('nama', 'LIKE', "%$searchValue%")
+                    ->orWhere('alamat_domisili', 'LIKE', "%$searchValue%")
+                    ->orWhere('kontak', 'LIKE', "%$searchValue%")
+                    ->orWhere('besaran_gaji', 'LIKE', "%$searchValue%")
+                    ->orWhereHas('categoryjabatan', function ($query) use ($searchValue) {
+                        $query->where('nama_jabatan', 'LIKE', "%$searchValue%");
+                    });
+            }
+        }, true)
+            ->rawColumns(['foto', 'aksi'])
+            ->make(true);
     }
+
     public function index()
     {
         if (request()->ajax()) {
-            $data = $this->getDataForDataTables();
-            return $this->renderDataTables($data);
+
+            $pegawai = Employee::with('categoryjabatan');
+
+            if (request()->has('order') && !empty(request()->input('order'))) {
+                $order = request()->input('order')[0];
+                $columnIndex = $order['column'];
+                $columnName = request()->input('columns')[$columnIndex]['data'];
+                $columnDirection = $order['dir'];
+                $pegawai->orderBy($columnName, $columnDirection);
+            } else {
+                $pegawai->latest('updated_at');
+            }
+
+            return $this->renderDataTables($pegawai);
         }
         $get_jabatan = CategoryJabatan::latest()->get();
 

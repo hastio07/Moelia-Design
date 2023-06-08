@@ -16,6 +16,7 @@
     <link href="{{ asset('templates') }}/vendor/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
 
     <link href="{{ asset('templates') }}/vendor/DataTables/datatables.min.css" rel="stylesheet">
+    <link href="{{ asset('templates') }}/vendor/DataTables/DataTables-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="{{ asset('templates') }}/vendor/DataTables/Responsive-2.4.1/css/responsive.dataTables.min.css" rel="stylesheet">
 
     <link href="{{ asset('templates') }}/assets/css/style.min.css" rel="stylesheet">
@@ -146,12 +147,12 @@
                         </a>
                     </li>
                     @can('akses_manage_akun', App\Models\Admin::class)
-                    <li class="{{ Route::is('manage-akun.*') ? 'active' : '' }}">
-                        <a class="link" href="{{ route('manage-akun.index') }}">
-                            <i class="ti-id-badge"></i>
-                            <span>Manage Akun</span>
-                        </a>
-                    </li>
+                        <li class="{{ Route::is('manage-akun.*') ? 'active' : '' }}">
+                            <a class="link" href="{{ route('manage-akun.index') }}">
+                                <i class="ti-id-badge"></i>
+                                <span>Manage Akun</span>
+                            </a>
+                        </li>
                     @endcan
                     <li class="{{ Route::is('manage-perusahaan.*') ? 'active' : '' }}">
                         <a class="link" href="{{ route('manage-perusahaan.index') }}">
@@ -241,14 +242,12 @@
     <div class="overlay action-toggle">
     </div>
 
-    {{-- js for all page --}}
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="{{ asset('templates') }}/vendor/bootstrap/dist/js/bootstrap.bundle.js"></script>
     <script src="{{ asset('templates') }}/vendor/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="{{ asset('templates') }}/vendor/DataTables/DataTables-1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('templates') }}/vendor/DataTables/datatables.min.js"></script>
     <script src="{{ asset('templates') }}/vendor/DataTables/Responsive-2.4.1/js/dataTables.responsive.min.js"></script>
-
     <script src="{{ asset('templates') }}/assets/js/main.js"></script>
 
     <script>

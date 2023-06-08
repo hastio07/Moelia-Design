@@ -9,7 +9,6 @@
             <div class="card">
                 <div class="card-header">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        {{-- @dd($activeTab) --}}
                         <li class="nav-item" role="presentation">
                             <button @class(['nav-link', 'active' => $activeTab === 'photo-tab']) aria-controls="photo-tab-pane" aria-selected="{{ $activeTab === 'photo-tab' ? 'true' : 'false' }}" data-bs-route="{{ route('manage-gallery.phototab') }}" data-bs-target="#photo-tab-pane" data-bs-toggle="tab" id="photo-tab" role="tab" type="button">Foto</button>
                         </li>
@@ -29,7 +28,7 @@
                                 @csrf
                                 <div class="form-inpt">
                                     <label class="form-label" for="namagambar">Judul foto<span class="text-danger">*</span></label>
-                                    <input class="form-control" id="namagambar" name="namagambar" placeholder="Masukan Judul Gambar" required type="text">
+                                    <input class="form-control" id="namagambar" name="namagambar" placeholder="Masukan Judul Gambar" required type="text" value="{{ old('namagambar') }}">
                                 </div>
                                 <div class="form-inpt">
                                     <label class="form-label" for="gambar">Upload Gambar <span class="text-danger">*</span></label>
@@ -62,11 +61,11 @@
                                 @csrf
                                 <div class="form-inpt">
                                     <label class="form-label" for="namavideo">Judul video <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="namavideo" name="namavideo" placeholder="Masukan Judul Video" required type="text">
+                                    <input class="form-control" id="namavideo" name="namavideo" placeholder="Masukan Judul Video" required type="text" value="{{ old('namavideo') }}">
                                 </div>
                                 <div class="form-inpt">
                                     <label class="form-label" for="linkvideo">Link video <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="linkvideo" name="linkvideo" placeholder="Masukan Link Video" required type="text">
+                                    <input class="form-control" id="linkvideo" name="linkvideo" placeholder="Masukan Link Video" required type="text" value="{{ old('linkvideo') }}">
                                 </div>
                                 <div class="d-flex justify-content-end py-3">
                                     <button class="btn btn-success" type="submit">Simpan</button>
@@ -75,7 +74,6 @@
                             <table class="table display" id="table-video">
                                 <thead>
                                     <tr>
-
                                         <th>Judul Video</th>
                                         <th>Thumbnail Video</th>
                                         <th>Link</th>
@@ -86,12 +84,13 @@
                                 <tbody>
                                 </tbody>
                             </table>
-                            {{-- {!! $videos->links('pagination::bootstrap-5') !!} --}}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        {{-- Modal Delete --}}
         <div aria-hidden="true" aria-labelledby="deleteModalLabel" class="modal fade" id="DeleteModal" tabindex="-1">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
@@ -113,6 +112,7 @@
                 </div>
             </div>
         </div>
+
     </section>
 @endsection
 
@@ -139,12 +139,27 @@
             $(document).ready(function() {
                 $('#table-video').DataTable({
                     processing: true,
+                    searching: true,
                     serverSide: true,
                     responsive: true,
-                    ajax: '{{ url()->current() }}',
+                    ordering: true,
+                    ajax: {
+                        url: '{{ url()->current() }}'
+                    },
+                    columnDefs: [{
+                            orderable: false,
+                            searchable: false,
+                            targets: 1
+                        },
+                        {
+                            orderable: false,
+                            searchable: false,
+                            targets: 4
+                        }
+                    ],
                     columns: [{
                             data: 'video_name',
-                            name: 'video_name'
+                            name: 'video_name',
                         },
                         {
                             data: 'video_thumbnail',
@@ -162,11 +177,8 @@
                             data: 'aksi',
                             name: 'aksi'
                         },
-
                     ],
-                    order: [
-                        [3, 'desc']
-                    ],
+                    order: [],
                 });
             });
         </script>

@@ -24,9 +24,6 @@ class Product extends Model
         'gambar',
     ];
 
-    protected $hidden = [
-        'id',
-    ];
     public function sluggable(): array
     {
         return [
@@ -35,6 +32,7 @@ class Product extends Model
             ],
         ];
     }
+
     /**
      * Relasi database table products ke table category_products (one-to-many (invers))
      */
