@@ -88,6 +88,13 @@
     <div class="slide-container swiper">
         <div class="slide-content" data-aos="fade-up">
             <div class="card-wrapper swiper-wrapper my-5">
+                @if($services->isEmpty())
+                <div class="container d-flex justify-content-center align-items-center" style="height: 10vh;">
+                    <div class="text-center">
+                        <h6 class="fw-bold text-secondary">Maaf!!<br>Saat Ini Layanan Belum Tersedia</h6>
+                    </div>
+                </div>
+                @else
                 @foreach ($services as $value)
                 <div class="card swiper-slide">
                     <div class="image-content">
@@ -97,11 +104,10 @@
                     </div>
                     <div class="card-content">
                         <h6 class="name fw-bold text-capitalize">{{ $value->tipe_layanan }}</h6>
-                        <!-- <p class="description">{{ $value->deskripsi }}</p>
-                        <button class="button">Selengkapnya</button> -->
                     </div>
                 </div>
                 @endforeach
+                @endif
             </div>
             <div class="swiper-pagination"></div>
         </div>
@@ -132,6 +138,13 @@
         <h6 class="text-center card-subtitle">Produk Terbaru Kami</h6>
         <div class="container pb-5">
             <div class="row justify-content-center mb-3">
+                @if($products->isEmpty())
+                <div class="container d-flex justify-content-center align-items-center" style="height: 10vh;">
+                    <div class="text-center">
+                        <h6 class="fw-bold text-secondary">Maaf!!<br>Saat Ini Tidak Ada Produk Terbaru</h6>
+                    </div>
+                </div>
+                @else
                 @foreach ($products as $value)
                 <div class="col-md-12 col-xl-10">
                     <div class="card shadow border rounded-3 mt-3" data-aos="fade-down">
@@ -186,6 +199,7 @@
                     </div>
                 </div>
                 @endforeach
+                @endif
             </div>
         </div>
     </div>
@@ -196,11 +210,19 @@
         <h5 class="text-center card-perusahaan">Moelia Design</h5>
         <h6 class="text-center card-subtitle">Foto Kami</h6>
         <div class="gallery container">
+            @if($photos->isEmpty())
+            <div class="container d-flex justify-content-center align-items-center" style="height: 10vh;">
+                <div class="text-center">
+                    <h6 class="fw-bold text-secondary">Maaf!!<br>Saat Ini Tidak Ada Foto Terbaru</h6>
+                </div>
+            </div>
+            @else
             @foreach ($photos as $value)
             <a data-gallery="photo-gallery" data-toggle="lightbox" href="/storage/{{ $value->photo_path }}">
                 <img width="600" class="img-fluid item" height="600" src="/storage/{{ $value->photo_path }}">
             </a>
             @endforeach
+            @endif
         </div>
     </div>
     <!-- akhir konten 6 gallery -->

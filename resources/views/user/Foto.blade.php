@@ -14,7 +14,14 @@
     </div>
     <div class="container mt-5 mb-5">
         <div class="row g-2">
-            @if (!empty($photos))
+            @if ($photos -> isEmpty())
+            <div class="container d-flex justify-content-center align-items-center" style="height: 50vh;">
+                <div class="text-center">
+                    <h5 class="fw-bold text-secondary">Opss!! Foto Saat Ini Belum Tesedia!!</h5>
+                    <a class="btn btn-warning mt-3" href="/"><i class="bi bi-arrow-left me-2"></i> Back To Home</a>
+                </div>
+            </div>
+            @else
             @foreach ($photos as $key => $value)
             <div class="col-sm-4">
                 <a data-gallery="photo-gallery" data-toggle="lightbox" href="/storage/{{ $value->photo_path }}">
@@ -22,10 +29,6 @@
                 </a>
             </div>
             @endforeach
-            @else
-            <div class="text-center">
-                <h2>Foto Tidak ada</h2>
-            </div>
             @endif
         </div>
         {!! $photos->links('pagination::bootstrap-5') !!}

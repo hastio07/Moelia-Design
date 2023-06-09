@@ -46,6 +46,14 @@
     </nav>
     <div class="container shadow pt-2 pb-5">
         <div class="row justify-content-center mb-3">
+            @if ($products->isEmpty())
+            <div class="container d-flex justify-content-center align-items-center" style="height: 50vh;">
+                <div class="text-center">
+                    <h5 class="fw-bold text-secondary">Opss!! Produk Saat Ini Belum Tesedia!!</h5>
+                    <a class="btn btn-warning mt-3" href="/"><i class="bi bi-arrow-left me-2"></i> Back To Home</a>
+                </div>
+            </div>
+            @else
             @foreach ($products as $key => $value)
             <div class="col-md-12 col-xl-10">
                 <div class="card shadow border-0 rounded-3 mt-3" data-aos="fade-right">
@@ -100,6 +108,8 @@
                 </div>
             </div>
             @endforeach
+            @endif
+
             <div class="px-5 pt-4 text-center">
                 {!! $products->links('pagination::bootstrap-5') !!}
             </div>
