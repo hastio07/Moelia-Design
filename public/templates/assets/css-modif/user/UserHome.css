@@ -22,7 +22,7 @@
     align-items: center;
 }
 
-.carousel-caption h5 {
+.caption-text {
     /* font-family: 'EB Garamond', serif; */
     font-family: 'Inspiration', cursive;
     font-size: 7vw;
