@@ -8,6 +8,7 @@ use App\Models\Contact;
 use App\Models\Employee;
 use App\Models\Offer;
 use App\Models\Owner;
+use App\Models\Sosmed;
 use App\Models\WorkingHour;
 
 class AboutController extends Controller
@@ -27,6 +28,8 @@ class AboutController extends Controller
 
         $workinghour = WorkingHour::get();
 
-        return view('user.aboutus', compact('offers', 'addresses', 'contacts', 'owners', 'employe', 'workinghour'));
+        $sosmed = Sosmed::get();
+
+        return view('user.aboutus', compact('offers', 'addresses', 'contacts', 'owners', 'employe', 'workinghour', 'sosmed'));
     }
 }

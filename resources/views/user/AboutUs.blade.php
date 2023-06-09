@@ -68,6 +68,13 @@
             </div>
             <div class="container my-3">
                 <div class="row">
+                    @if($employe->isEmpty())
+                    <div class="container d-flex justify-content-center align-items-center" style="height: 10vh;">
+                        <div class="text-center">
+                            <h6 class="fw-bold text-secondary">Data Pegawai Belum Diinputkan!</h6>
+                        </div>
+                    </div>
+                    @else
                     @foreach($employe as $employe)
                     <div class="col-lg-3 col-md-6 col-sm-6 mt-3">
                         <div class="card h-100">
@@ -81,6 +88,7 @@
                         </div>
                     </div>
                     @endforeach
+                    @endif
                 </div>
             </div>
 
@@ -126,6 +134,7 @@
     </div>
     <!-- end konten -->
 
+    <!-- content jam operasional -->
     <div class="container back-bg shadow mb-5">
         <div class="row">
             <div class="col-sm-4"><img src="{{ asset('templates') }}/assets/images/time.jpg" class="img-fluid" alt="Phone image"></div>
@@ -152,6 +161,53 @@
             </div>
         </div>
     </div>
+    <!-- end konten -->
+
+    <!-- content follow social media -->
+    <div class="container text-center socmed rounded-4 shadow p-5 text-capitalize">
+        <h4 class="fw-bold">Follow Us On Social Media</h4>
+        <p>untuk mendapatkan informasi lebih banayak ikuti sosial media kami</p>
+        <div class="row justify-content-center text-white" data-aos="fade-up">
+            @foreach($sosmed as $sosmed)
+            <div class="col-auto d-flex justify-content-center mt-3">
+                <a href="{{ $sosmed -> l_instagram }}">
+                    <div class="p-3 shadow rounded-circle icon-wrapper instagram">
+                        <i class="bi bi-instagram fs-2"></i>
+                    </div>
+                </a>
+            </div>
+            <div class="col-auto d-flex justify-content-center mt-3">
+                <a href="">
+                    <div class="p-3 shadow rounded-circle icon-wrapper" style="background-color: #3b5998;">
+                        <i class="bi bi-facebook fs-2"></i>
+                    </div>
+                </a>
+            </div>
+            <div class="col-auto d-flex justify-content-center mt-3">
+                <a href="">
+                    <div class="p-3 shadow rounded-circle icon-wrapper" style="background-color:#55acee;">
+                        <i class="bi bi-twitter fs-2"></i>
+                    </div>
+                </a>
+            </div>
+            <div class="col-auto d-flex justify-content-center mt-3">
+                <a href="">
+                    <div class="p-3 shadow rounded-circle icon-wrapper bg-dark">
+                        <i class="bi bi-tiktok fs-2"></i>
+                    </div>
+                </a>
+            </div>
+            <div class="col-auto d-flex justify-content-center mt-3">
+                <a href="">
+                    <div class="p-3 shadow rounded-circle icon-wrapper" style="background-color: #cd201f;">
+                        <i class="bi bi-youtube fs-2"></i>
+                    </div>
+                </a>
+            </div>
+            @endforeach
+        </div>
+    </div>
+    <!-- end content -->
 </section>
 @push('scripts')
 <script>
