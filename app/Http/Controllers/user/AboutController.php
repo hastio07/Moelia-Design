@@ -5,8 +5,10 @@ namespace App\Http\Controllers\user;
 use App\Http\Controllers\Controller;
 use App\Models\Address;
 use App\Models\Contact;
+use App\Models\Employee;
 use App\Models\Offer;
 use App\Models\Owner;
+use App\Models\WorkingHour;
 
 class AboutController extends Controller
 {
@@ -20,6 +22,11 @@ class AboutController extends Controller
         $contacts = Contact::first();
         //Owner
         $owners = Owner::first();
-        return view('user.aboutus', compact('offers', 'addresses', 'contacts', 'owners'));
+        //pegawai
+        $employe = Employee::with('categoryjabatan')->get();
+
+        $workinghour = WorkingHour::get();
+
+        return view('user.aboutus', compact('offers', 'addresses', 'contacts', 'owners', 'employe', 'workinghour'));
     }
 }

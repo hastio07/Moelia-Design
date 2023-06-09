@@ -32,7 +32,7 @@
                 <h4 class="card-subtitle fw-bold my-3">
                     Apa saja yang akan anda dapatkan dari kami?
                 </h4>
-                <p>
+                <p class="a">
                     @if (!empty($offers->penawaran))
                     {!! $offers->penawaran !!}
                     @endif
@@ -68,50 +68,19 @@
             </div>
             <div class="container my-3">
                 <div class="row">
+                    @foreach($employe as $employe)
                     <div class="col-lg-3 col-md-6 col-sm-6 mt-3">
                         <div class="card h-100">
                             <div class="p-2">
-                                <img src="{{ asset('templates') }}/assets/images/pegawai-1.jpg" class="card-img-top rounded-3" alt="...">
+                                <img src="/storage/employee-images{{ $employe->foto }}" class="card-img-top rounded-3" alt="{{ $employe->foto }}">
                             </div>
                             <div class="card-body text-center">
-                                <h5 class="card-title fw-bold">Shalan Abimanyu</h5>
-                                <p class="card-text">Cahering</p>
+                                <h5 class="card-title">{{ $employe -> nama}}</h5>
+                                <p class="card-text">{{ $employe->categoryjabatan->nama_jabatan}}</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 mt-3">
-                        <div class="card h-100">
-                            <div class="p-2">
-                                <img src="{{ asset('templates') }}/assets/images/pegawai-2.jpg" class="card-img-top rounded-3" alt="...">
-                            </div>
-                            <div class="card-body text-center">
-                                <h5 class="card-title">Shinta Marito</h5>
-                                <p class="card-text">Fotografer</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 mt-3">
-                        <div class="card h-100">
-                            <div class="p-2">
-                                <img src="{{ asset('templates') }}/assets/images/pegawai-3.jpg" class="card-img-top rounded-3" alt="...">
-                            </div>
-                            <div class="card-body text-center">
-                                <h5 class="card-title">Muhammad Khadafi</h5>
-                                <p class="card-text">Tata Rias</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 mt-3">
-                        <div class="card h-100">
-                            <div class="p-2">
-                                <img src="{{ asset('templates') }}/assets/images/pegawai-4.jpg" class="card-img-top rounded-3" alt="...">
-                            </div>
-                            <div class="card-body text-center">
-                                <h5 class="card-title">Rido AKhbar Syah</h5>
-                                <p class="card-text">Admin Marketing</p>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
 
@@ -131,11 +100,11 @@
                     <div class="text-one">{{ $addresses->alamat_perusahaan }}</div>
                     @endif
                 </div>
-                @if (!empty($contacts->telephone))
+                @if (!empty($contacts->whatsapp))
                 <div class="phone details">
                     <i class="bi bi-whatsapp"></i>
                     <div class="topic">Whatsapp</div>
-                    <div class="text-one">$contacts->telephone</div>
+                    <div class="text-one">{{$contacts->whatsapp}}</div>
                 </div>
                 @endif
                 @if (!empty($contacts->email))
@@ -163,15 +132,22 @@
             <div class="col-sm-8">
                 <div class="business-hours" data-aos="fade-down">
                     <h2 class="title fw-bold">Jam Operasional</h2>
-                    <ul class="list-unstyled opening-hours">
-                        <li>Sunday <span class="pull-right">Closed</span></li>
-                        <li>Monday <span class="pull-right">9:00-22:00</span></li>
-                        <li>Tuesday <span class="pull-right">9:00-22:00</span></li>
-                        <li>Wednesday <span class="pull-right">9:00-22:00</span></li>
-                        <li>Thursday <span class="pull-right">9:00-22:00</span></li>
-                        <li>Friday <span class="pull-right">9:00-23:30</span></li>
-                        <li>Saturday <span class="pull-right">14:00-23:30</span></li>
-                    </ul>
+                    @foreach($workinghour as $workinghour)
+                    <div class="row fw-bold">
+                        <div class="col col-lg-2">
+                            {{ $workinghour->day }}
+                        </div>
+                        <div class="col col-lg-10">
+                            @if($workinghour-> status == 1)
+                            {{$workinghour->time_from_format}} - {{ $workinghour->time_to_format }}
+
+                            @else
+                            Closed
+
+                            @endif
+                        </div>
+                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
