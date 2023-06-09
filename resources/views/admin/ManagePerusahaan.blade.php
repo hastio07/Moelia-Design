@@ -261,7 +261,7 @@
                                                         <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                                                             <button class="btn btn-success" type="submit">Upload</i></button>
                                                             @php
-                                                            $social_media = ['u_instagram', 'l_instagram', 'u_facebook', 'l_facebook', 'u_twitter', 'l_twitter', 'u_youtube', 'l_youtube'];
+                                                            $social_media = ['u_instagram', 'l_instagram', 'u_facebook', 'l_facebook', 'u_twitter', 'l_twitter', 'u_youtube', 'l_youtube', 'u_tiktok', 'l_tiktok'];
                                                             $show_button = false;
                                                             foreach ($social_media as $media) {
                                                             if (!empty($sosmeds->$media)) {
@@ -444,48 +444,70 @@
                                         <div class="mb-4">
                                             <div class="d-flex" style="min-height: 30px; align-items: center;">
                                                 <i class="bi bi-instagram me-1" style="font-size: 2rem; height: 32px; width: 32px;"></i>
+                                                @if(!empty($sosmeds) && ($sosmeds->u_instagram))
                                                 <span class="ms-3">{{ $sosmeds->u_instagram ?? null }}</span>
+                                                @else
+                                                <span class="ms-3 text-danger">-- data kosong, harap isi data instagram --</span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="mb-4">
                                             <div class="d-flex" style="min-height: 30px; align-items: center;">
                                                 <i class="bi bi-facebook me-1" style="font-size: 2rem; height: 32px; width: 32px;"></i>
+                                                @if(!empty($sosmeds) && ($sosmeds->u_facebook))
                                                 <span class="ms-3">{{ $sosmeds->u_facebook ?? null }}</span>
+                                                @else
+                                                <span class="ms-3 text-danger">-- data kosong, harap isi data facebook --</span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="mb-4">
                                             <div class="d-flex" style="min-height: 30px; align-items: center;">
                                                 <i class="bi bi-twitter me-1" style="font-size: 2rem; height: 32px; width: 32px;"></i>
+                                                @if(!empty($sosmeds) && ($sosmeds->u_twitter))
                                                 <span class="ms-3">{{ $sosmeds->u_twitter ?? null }}</span>
+                                                @else
+                                                <span class="ms-3 text-danger">-- data kosong, harap isi data facebook --</span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="mb-4">
                                             <div class="d-flex" style="min-height: 30px; align-items: center;">
                                                 <i class="bi bi-tiktok me-1" style="font-size: 2rem; height: 32px; width: 32px;"></i>
+                                                @if(!empty($sosmeds) && ($sosmeds->u_tiktok))
                                                 <span class="ms-3">{{ $sosmeds->u_tiktok ?? null }}</span>
+                                                @else
+                                                <span class="ms-3 text-danger">-- data kosong, harap isi data tiktok --</span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="mb-4">
                                             <div class="d-flex" style="min-height: 30px; align-items: center;">
                                                 <i class="bi bi-youtube me-1" style="font-size: 2rem; height: 32px; width: 32px;"></i>
+                                                @if(!empty($sosmeds) && ($sosmeds->u_youtube))
                                                 <span class="ms-3">{{ $sosmeds->u_youtube ?? null }}</span>
+                                                @else
+                                                <span class="ms-3 text-danger">-- data kosong, harap isi data youtube --</span>
+                                                @endif
                                             </div>
                                         </div>
 
                                     </div>
                                     <div class="left border text-center bg-white shadow p-3 mb-5 bg-body rounded">
-                                        @if (!empty($abouts) && ($abouts->katasambutan || $abouts->fotobersama))
                                         <h4 class="card-title text-center">Siapa Kami?</h4>
+                                        @if (!empty($abouts) && ($abouts->katasambutan || $abouts->fotobersama))
                                         @if (!empty($abouts->fotobersama))
                                         <img alt="fotobersama" class="rounded img-owner" src="/storage/{{ $abouts->fotobersama }}">
                                         @endif
                                         <p>{{ $abouts->katasambutan }}</p>
+                                        @else
+                                        <p class="text-danger mt-4"> Data Kosong!!<br> isi pada bagian form input siapa kami</p>
                                         @endif
                                     </div>
                                     <div class="left border bg-white shadow p-3 mb-5 bg-body rounded">
+                                        <h4 class="card-title text-center">Apa saja yang didapatkan?</h4>
                                         @if (!empty($offers) && ($offers->penawaran || $offers->foto_bersama))
                                         <div class="text-center">
-                                            <h4 class="card-title text-center">Apa saja yang didapatkan?</h4>
                                             @if (!empty($offers->foto_bersama))
                                             <img alt="fotobersama" class="rounded img-services mt-3" src="/storage/{{ $offers->foto_bersama }}">
                                             @endif
@@ -493,6 +515,8 @@
                                         <div class="p-5">
                                             {!! $offers->penawaran !!}
                                         </div>
+                                        @else
+                                        <p class="text-danger mt-4 text-center"> Data Kosong!!<br> isi pada bagian form input "Apa saja yang didapatkan?"</p>
                                         @endif
                                     </div>
                                 </div>

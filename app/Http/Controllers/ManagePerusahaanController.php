@@ -336,6 +336,8 @@ class ManagePerusahaanController extends Controller
             'l_facebook' => null,
             'u_twitter' => null,
             'l_twitter' => null,
+            'u_tiktok' => null,
+            'l_tiktok' => null,
             'u_youtube' => null,
             'l_youtube' => null,
         ];
