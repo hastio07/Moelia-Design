@@ -17,7 +17,10 @@
             @if ($photos -> isEmpty())
             <div class="container d-flex justify-content-center align-items-center" style="height: 50vh;">
                 <div class="text-center">
-                    <h5 class="fw-bold text-secondary">Opss!! Foto Saat Ini Belum Tesedia!!</h5>
+                    <div class="container">
+                        <img src="{{ asset('templates') }}/assets/images/data-kosong.jpg" class="img-fluid" alt="Phone image" style="max-width: 200px; max-height: 200px;">
+                    </div>
+                    <h5 class="fw-bold text-secondary mt-2">Opss!! Foto Saat Ini Belum Tesedia!!</h5>
                     <a class="btn btn-warning mt-3" href="/"><i class="bi bi-arrow-left me-2"></i> Back To Home</a>
                 </div>
             </div>
