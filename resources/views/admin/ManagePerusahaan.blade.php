@@ -12,7 +12,6 @@
                     <div aria-labelledby="home-tab" class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" tabindex="0">
                         <div class="content-wrapper">
                             <div class="row same-height">
-
                                 <!-- left content -->
                                 <div class="col-md-8">
                                     <div class="wrapper-list">
@@ -143,7 +142,6 @@
                                                 </div>
                                             </form>
                                         </div>
-
                                         <!-- sosial media -->
                                         <div class="container border mt-3 shadow p-3 mb-5 bg-body rounded">
                                             <h4 class="text-center">
@@ -358,167 +356,6 @@
                                                         </div>
                                                     </div>
                                                     @endforeach
-                                                    {{-- <div class="row px-3">
-                                                            <div class="col-sm-2">
-                                                                <div class="form-check form-switch me-5">
-                                                                    <input @checked(old(false, $cek)) class="form-check-input" id="switch1" name="senin" role="switch" type="checkbox">
-                                                                    <label class="form-check-label" for="switch1">
-                                                                        Senin
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-3">
-                                                                <div class="switch-text ms-4">Buka</div>
-                                                            </div>
-                                                            <div class="col-sm-7 d-flex time">
-                                                                <div class="mob">
-                                                                    <label class="mr-1">From</label>
-                                                                    <input class="ml-1" name="from" type="time">
-                                                                </div>
-                                                                <div class="mob mb-2">
-                                                                    <label class="mr-4">To</label>
-                                                                    <input class="ml-1" name="to" type="time">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row px-3">
-                                                            <div class="col-sm-2 list">
-                                                                <div class="form-check form-switch me-5">
-                                                                    <input class="form-check-input" id="switch2" name="selasa" role="switch" type="checkbox">
-                                                                    <label class="form-check-label" for="switch2">
-                                                                        Selasa
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-3">
-                                                                <div class="switch-text ms-4">Buka</div>
-                                                            </div>
-                                                            <div class="col-sm-7 d-flex time">
-                                                                <div class="mob">
-                                                                    <label class="mr-1">From</label>
-                                                                    <input class="ml-1" name="from" type="time">
-                                                                </div>
-                                                                <div class="mob mb-2">
-                                                                    <label class="mr-4">To</label>
-                                                                    <input class="ml-1" name="to" type="time">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row px-3">
-                                                            <div class="col-sm-2 list">
-                                                                <div class="form-check form-switch me-5">
-                                                                    <input class="form-check-input" id="switch3" role="switch" type="checkbox">
-                                                                    <label class="form-check-label" for="switch3">
-                                                                        Rabu
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-3">
-                                                                <div class="switch-text ms-4">Buka</div>
-                                                            </div>
-                                                            <div class="col-sm-7 d-flex time">
-                                                                <div class="mob">
-                                                                    <label class="mr-1">From</label>
-                                                                    <input class="ml-1" name="from" type="time">
-                                                                </div>
-                                                                <div class="mob mb-2">
-                                                                    <label class="mr-4">To</label>
-                                                                    <input class="ml-1" name="to" type="time">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row px-3">
-                                                            <div class="col-sm-2 list">
-                                                                <div class="form-check form-switch me-5">
-                                                                    <input class="form-check-input" id="switch4" role="switch" type="checkbox">
-                                                                    <label class="form-check-label" for="switch4">
-                                                                        Kamis
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-3">
-                                                                <div class="switch-text ms-4">Buka</div>
-                                                            </div>
-                                                            <div class="col-sm-7 d-flex time">
-                                                                <div class="mob">
-                                                                    <label class="mr-1">From</label>
-                                                                    <input class="ml-1" name="from" type="time">
-                                                                </div>
-                                                                <div class="mob mb-2">
-                                                                    <label class="mr-4">To</label>
-                                                                    <input class="ml-1" name="to" type="time">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row px-3">
-                                                            <div class="col-sm-2 list">
-                                                                <div class="form-check form-switch me-5">
-                                                                    <input class="form-check-input" id="switch5" role="switch" type="checkbox">
-                                                                    <label class="form-check-label" for="switch5">
-                                                                        Jumat
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-3">
-                                                                <div class="switch-text ms-4">Buka</div>
-                                                            </div>
-                                                            <div class="col-sm-7 d-flex time">
-                                                                <div class="mob">
-                                                                    <label class="mr-1">From</label>
-                                                                    <input class="ml-1" name="from" type="time">
-                                                                </div>
-                                                                <div class="mob mb-2">
-                                                                    <label class="mr-4">To</label>
-                                                                    <input class="ml-1" name="to" type="time">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row px-3">
-                                                            <div class="col-sm-2 list">
-                                                                <div class="form-check form-switch me-5">
-                                                                    <input class="form-check-input" id="switch6" role="switch" type="checkbox">
-                                                                    <label class="form-check-label" for="switch6">
-                                                                        Sabtu
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-3">
-                                                                <div class="switch-text ms-4">Buka</div>
-                                                            </div>
-                                                            <div class="col-sm-7 d-flex time">
-                                                                <div class="mob">
-                                                                    <label class="mr-1">From</label>
-                                                                    <input class="ml-1" name="from" type="time">
-                                                                </div>
-                                                                <div class="mob mb-2">
-                                                                    <label class="mr-4">To</label>
-                                                                    <input class="ml-1" name="to" type="time">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row px-3">
-                                                            <div class="col-sm-2 list">
-                                                                <div class="form-check form-switch me-5">
-                                                                    <input class="form-check-input" id="switch7" role="switch" type="checkbox">
-                                                                    <label class="form-check-label text-danger" for="switch7">
-                                                                        Minggu
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-3">
-                                                                <div class="switch-text ms-4">Buka</div>
-                                                            </div>
-                                                            <div class="col-sm-7 d-flex time">
-                                                                <div class="mob">
-                                                                    <label class="mr-1">From</label>
-                                                                    <input class="ml-1" name="from" type="time">
-                                                                </div>
-                                                                <div class="mob mb-2">
-                                                                    <label class="mr-4">To</label>
-                                                                    <input class="ml-1" name="to" type="time">
-                                                                </div>
-                                                            </div>
-                                                        </div> --}}
                                                     <div class="row px-3 mt-3 justify-content-center">
                                                         <button class="btn btn-success ml-2" type="submit">Upload</button>
                                                     </div>
@@ -532,27 +369,29 @@
                                 <div class="col-md-4">
                                     <div class="left border text-center bg-white shadow p-3 mb-5 bg-body rounded">
                                         <h4>Owner Perusahaan</h4>
-                                        {{-- empty aslinya false jika tidak kosong, true jika kosong --}}
-                                        {{-- !empty menjadi true jika false, false jika true --}}
-                                        @if (!empty($owners))
+                                        @if (!empty($owners->foto_owner || $owners->kata_sambutan || $owners->nama_owner))
                                         <div class="text-center">
                                             @if (!empty($owners->foto_owner))
-                                            <img alt="{{ $owners->nama_owner }}" class="rounded img-owner" src="/storage/{{ $owners->foto_owner }}">
+                                            <img alt="{{ $owners->nama_owner }}" class="rounded img-owner" src="{{ asset('storage/' . $owners->foto_owner) }}">
                                             @endif
                                         </div>
                                         <p>{{ $owners->kata_sambutan }}</p>
                                         <h6 class="fw-bolder text-capitalize">{{ $owners->nama_owner }}</h6>
+                                        @else
+                                        <p class="mt-3 text-danger">-- Data Owner Harap di Isi --</p>
                                         @endif
                                     </div>
                                     <div class="left border text-center bg-white shadow p-3 mb-5 bg-body rounded">
                                         <h4 class="card-title">Logo & Nama Perusahaan</h4>
-                                        @if (!empty($companies))
+                                        @if (!empty($companies) && ($companies->logo_perusahaan || $companies->nama_perusahaan))
                                         <div class="text-center">
                                             @if (!empty($companies->logo_perusahaan))
                                             <img alt="{{ $companies->nama_perusahaan }}" class="rounded-circle" src="/storage/{{ $companies->logo_perusahaan }}">
                                             @endif
                                         </div>
                                         <h6 class="fw-bolder">{{ $companies->nama_perusahaan }}</h6>
+                                        @else
+                                        <p class="mt-3 text-danger">-- Logo dan Nama Perusahaan Harap di Isi --</p>
                                         @endif
                                     </div>
                                     <div class="left border bg-white shadow p-3 mb-5 bg-body rounded">
@@ -562,7 +401,11 @@
                                         <div class="mb-4">
                                             <div class="d-flex" style="min-height: 30px; align-items: center;">
                                                 <i class="fa-sharp fa-solid fa-map-location-dot me-1" style="font-size: 2rem; height: 32px; width: 32px;"></i>
+                                                @if(!empty($addresses) && ($addresses->alamat_perusahaan))
                                                 <span class="ms-3">{{ $addresses->alamat_perusahaan ?? null }}</span>
+                                                @else
+                                                <span class="ms-3 text-danger">-- data kosong, harap isi alamat --</span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="mb-4">
