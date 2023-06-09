@@ -62,6 +62,41 @@
     transform: scale(1.1);
 }
 
+.card-pegawai {
+    position: relative;
+    overflow: hidden;
+}
+
+.card-img-top {
+    transition: all 0.3s ease;
+}
+
+.card-pegawai:hover .card-img-top {
+    transform: scale(1.1);
+}
+
+.card-body {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 10px;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.card-pegawai:hover .card-body {
+    opacity: 1;
+}
+
+.card-title,
+.card-text {
+    margin: 0;
+}
+
 /* css untuk bagian google maps dan  WA */
 .four-content {
     width: 85%;

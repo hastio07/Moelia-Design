@@ -77,13 +77,13 @@
                     @else
                     @foreach($employe as $employe)
                     <div class="col-lg-3 col-md-6 col-sm-6 mt-3">
-                        <div class="card h-100">
+                        <div class="card card-pegawai h-100">
                             <div class="p-2">
                                 <img src="/storage/employee-images{{ $employe->foto }}" class="card-img-top rounded-3" alt="{{ $employe->foto }}">
                             </div>
                             <div class="card-body text-center">
-                                <h5 class="card-title">{{ $employe -> nama}}</h5>
-                                <p class="card-text">{{ $employe->categoryjabatan->nama_jabatan}}</p>
+                                <h5 class="card-title">{{ $employe->nama }}</h5>
+                                <p class="card-text">{{ $employe->categoryjabatan->nama_jabatan }}</p>
                             </div>
                         </div>
                     </div>
@@ -94,7 +94,6 @@
 
         </div>
     </div>
-
     <!-- end konten -->
 
     <!-- konten 5 -->
@@ -162,7 +161,6 @@
         </div>
     </div>
     <!-- end konten -->
-
     <!-- content follow social media -->
     <div class="container text-center socmed rounded-4 shadow p-5 text-capitalize">
         <h4 class="fw-bold">Follow Us On Social Media</h4>
