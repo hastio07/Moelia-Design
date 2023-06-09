@@ -131,26 +131,26 @@
                             <div class="p-3 mb-5">
                                 <div class="form-inpt">
                                     <label class="form-label" for="nama">Nama</label>
-                                    <input class="form-control" id="nama" name="nama" placeholder="Masukan Nama" type="text">
+                                    <input class="form-control" id="nama" name="nama" placeholder="Masukan Nama" type="text" value="{{ old('nama') }}">
                                 </div>
                                 <div class="form-inpt mt-3">
                                     <label class="form-label" for="alamat">Alamat Domisili</label>
-                                    <input class="form-control" id="alamat" name="alamat" placeholder="Masukan Alamat Pegawai" type="text" value="">
+                                    <input class="form-control" id="alamat" name="alamat" placeholder="Masukan Alamat Pegawai" type="text" value="{{ old('alamat') }}">
                                 </div>
                                 <div class="form-inpt mt-3">
                                     <label class="form-label" for="kontak">No. Telephone</label>
-                                    <input class="form-control" id="kontak" name="kontak" placeholder="Masukan Nomor Telephone" type="text" value="">
+                                    <input class="form-control" id="kontak" name="kontak" placeholder="Masukan Nomor Telephone" type="text" value="{{ old('kontak') }}">
                                 </div>
                                 <div class="form-inpt mt-3">
                                     <label class="form-label" for="gaji">Gaji</label>
-                                    <input class="form-control" id="gaji" name="gaji" placeholder="Masukan Besaran Gaji" type="number" value="">
+                                    <input class="form-control" id="gaji" name="gaji" placeholder="Masukan Besaran Gaji" type="number" value="{{ old('gaji') }}">
                                 </div>
                                 <div class="form-inpt mt-3">
                                     <label class="form-label" for="jabatan">Jabatan</label>
                                     <select class="form-select" id="jabatan" name="jabatan">
                                         <option disabled selected value="">Pilih sesuai jabatan pegawai</option>
                                         @foreach ($get_jabatan as $value)
-                                            <option value="{{ $value->id }}">
+                                            <option @selected(old('jabatan') == $value->id) value="{{ $value->id }}" value="{{ $value->id }}">
                                                 {{ $value->nama_jabatan }}
                                             </option>
                                         @endforeach
@@ -204,19 +204,30 @@
         $(document).ready(function() {
             $('#table-pegawai').DataTable({
                 processing: true,
+                searching: true,
                 serverSide: true,
                 responsive: true,
-                ajax: '{{ url()->current() }}',
+                ordering: true,
+                ajax: {
+                    url: '{{ url()->current() }}'
+                },
                 columnDefs: [{
-                    targets: 0,
-                    className: "fw-bolder"
-                }],
+                        orderable: false,
+                        searchable: false,
+                        targets: 5
+                    },
+                    {
+                        orderable: false,
+                        searchable: false,
+                        targets: 6
+                    }
+                ],
                 columns: [{
-                        data: 'nama', // db
+                        data: 'nama',
                         name: 'nama'
                     },
                     {
-                        data: 'alamat_domisili', // db
+                        data: 'alamat_domisili',
                         name: 'alamat_domisili'
                     },
                     {
@@ -224,25 +235,23 @@
                         name: 'kontak'
                     },
                     {
-                        data: 'Besaran Gaji',
-                        name: 'Besaran Gaji',
+                        data: 'besaran_gaji',
+                        name: 'besaran_gaji',
                     },
                     {
-                        data: 'Jabatan',
-                        name: 'Jabatan'
+                        data: 'jabatan',
+                        name: 'jabatan'
                     },
                     {
-                        data: 'Foto',
-                        name: 'Foto'
+                        data: 'foto',
+                        name: 'foto'
                     },
                     {
-                        data: 'Aksi',
-                        name: 'Aksi'
+                        data: 'aksi',
+                        name: 'aksi'
                     },
                 ],
-                order: [
-                    [1, 'asc']
-                ],
+                order: [],
             });
         })
     </script>
@@ -299,7 +308,7 @@
             });
             if (btnID === 'btnUpdateModal') {
                 // Extract info from data-bs-* attributes
-                let rawData = button.getAttribute('data-bs-product');
+                let rawData = button.getAttribute('data-bs-pegawai');
                 let parseData = JSON.parse(rawData);
                 // The modal's content.
                 CUForm.action = route;

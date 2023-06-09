@@ -23,27 +23,7 @@
                                 <th>Aksi</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach ($services as $value)
-                                <tr>
-                                    <td>{{ $value->tipe_layanan }}</td>
-                                    <td>{{ $value->deskripsi }}</td>
-                                    <td>
-                                        @if ($value->gambar)
-                                            <img alt="{{ $value->tipe_layanan }}" height="150" src="/storage/compressed/{{ $value->gambar }}" width="180">
-                                        @else
-                                            <img alt="gambar" height="150" src="https://dummyimage.com/180x150.png" width="180">
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                                            <button class="btn btn-warning" data-bs-layanan="{{ $value }}" data-bs-route="{{ route('manage-layanan.update', $value->id) }}" data-bs-target="#CUModal" data-bs-toggle="modal" id="btnUpdate" type="button"><i class="bi bi-pencil-square"></i></button>
-                                            <button class="btn btn-danger" data-bs-route="{{ route('manage-layanan.destroy', $value->id) }}" data-bs-target="#DeleteModal" data-bs-toggle="modal" id="btnDelete" type="button"><i class="bi bi-trash"></i></button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
+                        <tbody></tbody>
                         <tfoot>
                             <tr>
                                 <th>Tipe Layanan</th>
@@ -56,6 +36,8 @@
                 </div>
             </div>
         </div>
+
+        {{-- Modal create and update layanan --}}
         <div aria-hidden="true" aria-labelledby="cuModalLabel" class="modal fade" id="CUModal" tabindex="-1">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -96,6 +78,8 @@
                 </div>
             </div>
         </div>
+
+        {{-- Modal delete layanan --}}
         <div aria-hidden="true" aria-labelledby="deleteModalLabel" class="modal fade" id="DeleteModal" tabindex="-1">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
@@ -232,8 +216,48 @@
     <script>
         $(document).ready(function() {
             $('#table-layanan').DataTable({
-                responsive: true
-            });
+                processing: true,
+                searching: true,
+                serverSide: true,
+                responsive: true,
+                ordering: true,
+                search: {
+                    regex: true
+                },
+                ajax: {
+                    url: '{{ url()->current() }}'
+                },
+                columnDefs: [{
+                    targets: 0,
+                    className: "fw-bolder",
+                }, {
+                    orderable: false,
+                    searchable: false,
+                    targets: 2
+                }, {
+                    orderable: false,
+                    searchable: false,
+                    targets: 3
+                }],
+                columns: [{
+                        data: 'tipe_layanan',
+                        name: 'tipe_layanan',
+                    },
+                    {
+                        data: 'deskripsi',
+                        name: 'Deskripsi'
+                    },
+                    {
+                        data: 'gambar',
+                        name: 'gambar'
+                    },
+                    {
+                        data: 'aksi',
+                        name: 'aksi'
+                    },
+                ],
+                order: [],
+            })
         })
     </script>
 @endpush

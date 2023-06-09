@@ -13,6 +13,7 @@ class CategoryBarang extends Model
     protected $table = 'category_barangs';
     protected $primaryKey = 'id';
     protected $fillable = ['nama_kategori_barang', 'slug_kategori'];
+
     public function sluggable(): array
     {
         return [

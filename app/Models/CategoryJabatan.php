@@ -9,9 +9,11 @@ use Illuminate\Database\Eloquent\Model;
 class CategoryJabatan extends Model
 {
     use HasFactory, Sluggable;
-    protected $primaryKey = 'id';
+
     protected $table = 'category_jabatans';
+    protected $primaryKey = 'id';
     protected $fillable = ['nama_jabatan', 'slug_jabatan'];
+
     /**
      * Menggantikan karakter-karakter khusus atau spasi dengan karakter yang lebih ramah untuk dibaca, seperti huruf kecil dan tanda hubung.
      */
@@ -23,6 +25,7 @@ class CategoryJabatan extends Model
             ],
         ];
     }
+
     /**
      * Relasi database table category_jabatans ke table employees (one-to-many)
      */

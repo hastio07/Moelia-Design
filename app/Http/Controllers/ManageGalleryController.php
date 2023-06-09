@@ -72,16 +72,28 @@ class ManageGalleryController extends Controller
 
         $activeTab = 'video-tab';
         if (request()->ajax()) {
-            $video = Video::get();
-            return DataTables::of($video)->addColumn('video_thumbnail', function ($video) {
+
+            $video = Video::query();
+
+            if (request()->has('order') && !empty(request()->input('order'))) {
+                $order = request()->input('order')[0];
+                $columnIndex = $order['column'];
+                $columnName = request()->input('columns')[$columnIndex]['data'];
+                $columnDirection = $order['dir'];
+                $video->orderBy($columnName, $columnDirection);
+            } else {
+                $video->orderBy('updated_at', 'desc');
+            }
+
+            return DataTables::eloquent($video)->editColumn('video_thumbnail', function ($video) {
                 return '<img src="' . $video->video_thumbnail . '" alt="' . $video->video_name . '" height="150" width="250"/>';
-            })->addColumn('created_at', function ($date) {
+            })->editColumn('created_at', function ($date) {
                 return $date->created_at->format('d-m-Y H:i:s');
             })->addColumn('aksi', function ($user) {
                 return '<div class="d-grid gap-2 d-md-flex justify-content-md-center">
                         <button class="btn btn-danger" data-bs-route="' . route('manage-gallery.destroyvideo', $user->id) . '" data-bs-target="#DeleteModal" data-bs-toggle="modal" id="btnDeleteModal" type="button"><i class="bi bi-trash"></i></button>
                     </div>';
-            })->rawColumns(['video_thumbnail', 'created_at', 'aksi'])->make();
+            })->rawColumns(['video_thumbnail', 'aksi'])->make(true);
         }
 
         return view('admin.managegallery', compact('activeTab'));

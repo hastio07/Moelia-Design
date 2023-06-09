@@ -74,7 +74,7 @@ form.formstyle {
 }
 
 /* Style untuk icon fa-circle-info */
-.fa-circle-info-help {
+.bi-question-help-circle-fill {
     display: flex;
     align-items: center;
     padding-left: 0.75rem;

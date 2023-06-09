@@ -20,7 +20,7 @@ class ManageProdukController extends Controller
         $get_category_product = CategoryProduct::latest()->get();
         if (request()->ajax()) {
             $get_products = Product::with('category_products')->orderBy('updated_at', 'desc');
-            return DataTables::eloquent($get_products)->editColumn('category_products.nama_kategori', function ($value) {
+            return DataTables::eloquent($get_products)->editColumn('kategori_id', function ($value) {
                 return $value->category_products->nama_kategori;
             })->editColumn('harga_sewa', function ($value) {
                 return $value->formatRupiah('harga_sewa');

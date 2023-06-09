@@ -128,7 +128,7 @@
             </div>
         </div>
 
-        <!-- modal add and update product -->
+        <!-- Modal create and update product -->
         <div aria-hidden="true" aria-labelledby="cuModalLabel" class="modal fade" id="CUModal" tabindex="-1">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -142,14 +142,14 @@
                             <div class="p-3 mb-5">
                                 <div class="form-inpt">
                                     <label class="form-label" for="namaproduk">Nama Produk<span class="text-danger">*</span></label>
-                                    <input class="form-control" id="namaproduk" name="namaproduk" placeholder="Masukan Nama Produk" type="text">
+                                    <input class="form-control" id="namaproduk" name="namaproduk" placeholder="Masukan Nama Produk" type="text" value="{{ old('namaproduk') }}">
                                 </div>
                                 <div class="form-inpt">
                                     <label class="form-label" for="kategori">Kategori<span class="text-danger">*</span></label>
                                     <select aria-label="Default select example" class="form-select form-select" id="kategori" name="kategori">
                                         <option disabled selected value="">-- Pilih Kategori --</option>
                                         @foreach ($get_category_product as $value_category)
-                                            <option value="{{ $value_category->id }}">
+                                            <option @selected(old('kategori') == $value->id) value="{{ $value_category->id }}" value="{{ $value->id }}">
                                                 {{ $value_category->nama_kategori }}
                                             </option>
                                         @endforeach
@@ -157,15 +157,15 @@
                                 </div>
                                 <div class="form-inpt">
                                     <label class="form-label" for="hargasewa">Harga Sewa<span class="text-danger">*</span></label>
-                                    <input class="form-control" id="hargasewa" name="hargasewa" placeholder="Masukan Harga Sewa" type="number">
+                                    <input class="form-control" id="hargasewa" name="hargasewa" placeholder="Masukan Harga Sewa" type="number" value="{{ old('hargasewa') }}">
                                 </div>
                                 <div class="form-inpt">
                                     <label class="form-label" for="rincianproduk">Rincian Produk<span class="text-danger">*</span></label>
-                                    <textarea id="rincianproduk" name="rincianproduk"></textarea>
+                                    <textarea id="rincianproduk" name="rincianproduk">{{ old('rincianproduk') }}</textarea>
                                 </div>
                                 <div class="form-inpt">
                                     <label class="form-label" for="deskripsi">Deskripsi<span class="text-danger">*</span></label>
-                                    <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3"></textarea>
+                                    <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3">{{ old('deskripsi') }}</textarea>
                                 </div>
                                 <div class="form-inpt">
                                     <label class="form-label" for="gambar">Upload Gambar</label>
@@ -363,8 +363,8 @@
                         name: 'nama_produk'
                     },
                     {
-                        data: 'category_products.nama_kategori',
-                        name: 'category_products.nama_kategori'
+                        data: 'kategori_id',
+                        name: 'kategori_id'
                     },
                     {
                         data: 'harga_sewa',

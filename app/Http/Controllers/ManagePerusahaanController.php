@@ -304,6 +304,8 @@ class ManagePerusahaanController extends Controller
             'l_facebook' => 'nullable|string|max:255',
             'u_twitter' => 'nullable|string|max:255',
             'l_twitter' => 'nullable|string|max:255',
+            'u_tiktok' => 'nullable|string|max:255',
+            'l_tiktok' => 'nullable|string|max:255',
             'u_youtube' => 'nullable|string|max:255',
             'l_youtube' => 'nullable|string|max:255',
         ];

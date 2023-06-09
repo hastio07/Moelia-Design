@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('l_facebook')->nullable();
             $table->string('u_twitter')->nullable();
             $table->string('l_twitter')->nullable();
+            $table->string('u_tiktok')->nullable();
+            $table->string('l_tiktok')->nullable();
             $table->string('u_youtube')->nullable();
             $table->string('l_youtube')->nullable();
             $table->timestamps();

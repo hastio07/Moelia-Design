@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Jadwal extends Model
 {
     use HasFactory;
+
+    protected $table = 'jadwal';
     protected $primaryKey = 'id';
     protected $fillable = ['nama', 'kegiatan', 'lokasi', 'waktu'];
-    protected $table = 'jadwal';
     protected $casts = [
         'waktu' => 'datetime',
     ];

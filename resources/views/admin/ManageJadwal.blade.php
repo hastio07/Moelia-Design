@@ -38,7 +38,6 @@
                         <table class="table display" id="table-jadwal">
                             <thead>
                                 <tr>
-                                    <th>No</th>
                                     <th>Nama Customer</th>
                                     <th>Kegiatan</th>
                                     <th>Lokasi</th>
@@ -50,7 +49,6 @@
                             <tbody></tbody>
                             <tfoot>
                                 <tr>
-                                    <th>No</th>
                                     <th>Nama Customer</th>
                                     <th>Kegiatan</th>
                                     <th>Lokasi</th>
@@ -64,7 +62,8 @@
                 </div>
             </div>
         </div>
-        {{-- Modal Create and Update Data --}}
+
+        {{-- Modal CRUD Jadwal --}}
         <div aria-hidden="true" aria-labelledby="jadwalModalLabel" class="modal fade" id="jadwalModal" tabindex="-1">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -133,16 +132,16 @@
                 searching: true,
                 serverSide: true,
                 responsive: true,
-                ajax: '{{ url()->current() }}',
+                ordering: true,
+                ajax: {
+                    url: '{{ url()->current() }}'
+                },
                 columnDefs: [{
                     orderable: false,
                     searchable: false,
-                    targets: 0
+                    targets: 5
                 }],
                 columns: [{
-                        data: 'DT_RowIndex',
-                        name: 'DT_RowIndex'
-                    }, {
                         data: 'nama',
                         name: 'nama',
                     },
@@ -165,10 +164,7 @@
                     {
                         data: 'aksi',
                         name: 'aksi',
-                        orderable: false,
-                        searchable: false,
                     },
-
                 ],
                 order: [],
             });

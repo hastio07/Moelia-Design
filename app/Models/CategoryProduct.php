@@ -10,8 +10,9 @@ class CategoryProduct extends Model
 {
     use HasFactory, Sluggable;
 
-    protected $fillable = ['nama_kategori', 'slug_kategori'];
+    protected $table = 'category_products';
     protected $primaryKey = 'id';
+    protected $fillable = ['nama_kategori', 'slug_kategori'];
     public function sluggable(): array
     {
         return [
@@ -20,6 +21,7 @@ class CategoryProduct extends Model
             ],
         ];
     }
+
     /**
      * Relasi database table category_products ke table products (one-to-many)
      */

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Sosmed extends Model
 {
     use HasFactory;
+    protected $table = 'sosmeds';
     protected $primaryKey = 'id';
     protected $fillable = [
         'u_instagram',
@@ -16,6 +17,8 @@ class Sosmed extends Model
         'l_facebook',
         'u_twitter',
         'l_twitter',
+        'u_tiktok',
+        'l_tiktok',
         'u_youtube',
         'l_youtube',
     ];
