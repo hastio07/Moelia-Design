@@ -25,6 +25,7 @@
 
     <!-- Css for spesific page -->
     @stack('styles')
+    @Stack('head-scripts')
 
     <title>Moelia | @yield('title')</title>
 </head>
@@ -69,7 +70,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/maintenance">Wedding Calculator</a>
+                            <a class="nav-link" href="/wedding-calculator">Wedding Calculator</a>
                         </li>
                         <li class="nav-item">
                             <a @class(['nav-link', 'active'=> Route::is('aboutus')]) href="/aboutus">Tentang Kami</a>
@@ -100,22 +101,28 @@
 
     <!-- footer -->
     <footer class="text-center mt-5 pt-5">
-        <h1>Moelia Design</h1>
+        <h1>{{ $companies->nama_perusahaan ?? 'Moelia Design' }}</h1>
         <div class="line-footer"></div><br>
-        <p>Gg. Cinta Damai No.31, Tj. Baru, Kec. Sukabumi, Kota Bandar Lampung, Lampung 35122</p>
+
+        @if (!empty($addresses->alamat_perusahaan))
+        <p>{{ $addresses->alamat_perusahaan }}</p>
+        @endif
+
         <div class="icon-socmed text-center my-4">
-            <a href=""><i class="bi bi-instagram"></i></a>
-            <a href=""><i class="bi bi-facebook"></i></a>
-            <a href=""><i class="bi bi-twitter"></i></a>
-            <a href=""><i class="bi bi-youtube"></i></a>
-            <a href=""><i class="bi bi-whatsapp"></i></a>
-            <a href=""><i class="bi bi-tiktok"></i></a>
+            @foreach($sosmed as $sosmed)
+            <a href="{{ $sosmed -> l_instagram }}"><i class="bi bi-instagram"></i></a>
+            <a href="{{ $sosmed -> l_facebook }}"><i class="bi bi-facebook"></i></a>
+            <a href="{{ $sosmed -> l_twitter }}"><i class="bi bi-twitter"></i></a>
+            <a href="{{ $sosmed -> l_youtube }}"><i class="bi bi-youtube"></i></a>
+            <a href="{{ $sosmed -> l_tiktok }}"><i class="bi bi-tiktok"></i></a>
+            @endforeach
         </div>
         <div class="d-flex flex-column flex-sm-row justify-content-center mb-3 fw-bold">
-            <a href="" class="me-sm-3 mb-2 mb-sm-0 menu-link">Home</a>
-            <a href="" class="me-sm-3 mb-2 mb-sm-0 menu-link">Gallery</a>
-            <a href="" class="me-sm-3 mb-2 mb-sm-0 menu-link">Wedding Calculator</a>
-            <a href="" class="me-sm-3 mb-2 mb-sm-0 menu-link">Tentang Kami</a>
+            <a href="/" class="me-sm-3 mb-2 mb-sm-0 menu-link">Home</a>
+            <a href="/foto" class="me-sm-3 mb-2 mb-sm-0 menu-link">Foto</a>
+            <a href="vidio" class="me-sm-3 mb-2 mb-sm-0 menu-link">Vidio</a>
+            <a href="/wedding-calculator" class="me-sm-3 mb-2 mb-sm-0 menu-link">Wedding Calculator</a>
+            <a href="/aboutus" class="me-sm-3 mb-2 mb-sm-0 menu-link">Tentang Kami</a>
             <a href="" class="me-sm-3 mb-2 mb-sm-0 menu-link">Pembayaran</a>
         </div>
 
