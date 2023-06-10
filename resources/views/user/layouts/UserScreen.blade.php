@@ -104,8 +104,10 @@
         <h1>{{ $companies->nama_perusahaan ?? 'Moelia Design' }}</h1>
         <div class="line-footer"></div><br>
 
-        @if (!empty($addresses->alamat_perusahaan))
+        @if (!empty($addresses) && ($addresses->alamat_perusahaan))
         <p>{{ $addresses->alamat_perusahaan }}</p>
+        @else
+        <p class="text-secondary"><i class="bi bi-exclamation-triangle-fill text-warning me-2"></i>Alamat Belum Tesedia</p>
         @endif
 
         <div class="icon-socmed text-center my-4">

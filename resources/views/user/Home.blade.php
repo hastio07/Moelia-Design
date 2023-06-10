@@ -91,6 +91,7 @@
                 @if($services->isEmpty())
                 <div class="container d-flex justify-content-center align-items-center" style="height: 10vh;">
                     <div class="text-center">
+                        <i class="bi bi-exclamation-triangle-fill fs-3 text-warning"></i>
                         <h6 class="fw-bold text-secondary">Maaf!!<br>Saat Ini Layanan Belum Tersedia</h6>
                     </div>
                 </div>
@@ -141,6 +142,7 @@
                 @if($products->isEmpty())
                 <div class="container d-flex justify-content-center align-items-center" style="height: 10vh;">
                     <div class="text-center">
+                        <i class="bi bi-exclamation-triangle-fill fs-3 text-warning"></i>
                         <h6 class="fw-bold text-secondary">Maaf!!<br>Saat Ini Tidak Ada Produk Terbaru</h6>
                     </div>
                 </div>
@@ -213,6 +215,7 @@
             @if($photos->isEmpty())
             <div class="container d-flex justify-content-center align-items-center" style="height: 10vh;">
                 <div class="text-center">
+                    <i class="bi bi-exclamation-triangle-fill fs-3 text-warning"></i>
                     <h6 class="fw-bold text-secondary">Maaf!!<br>Saat Ini Tidak Ada Foto Terbaru</h6>
                 </div>
             </div>
