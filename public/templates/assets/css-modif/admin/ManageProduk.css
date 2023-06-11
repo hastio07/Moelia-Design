@@ -3,20 +3,40 @@
     justify-content: end;
 }
 
-/* .thumbnail {
-    height: 192px;
+/* .preview-image {
+    margin: 10px 10px 0 0;
+    width: 150px;
+    height: 150px;
+    border: 5px solid rgb(153, 153, 153);
+    border-radius: 5%;
+    object-fit: cover;
 } */
+.image-container {
+    position: relative;
+    display: inline-block;
+}
 
-/* css form dinamis */
+.delete-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #00000057;
+    border: none;
+    color: rgb(214, 214, 214);
+    font-size: 20px;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 10%;
+}
 
-
-/* .wrap {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding-bottom: 15px;
-} */
+.preview-image {
+    margin: 10px 10px 0 0;
+    width: 150px;
+    height: 150px;
+    border: 5px solid rgb(153, 153, 153);
+    border-radius: 5%;
+    object-fit: cover;
+}
 
 .add-input-update {
     /* border-shadow: 0 3px 3px 0px rgba(0, 0, 0, 0.075); */
@@ -93,23 +113,6 @@ input:focus {
 a:hover {
     color: #ffffff;
 }
-
-/* div#CUModal>div>div.modal-content>svg#definition {
-    display: none;
-} */
-
-/* form#CUForm>label {
-    display: inline-block;
-    width: 120px;
-    vertical-align: top;
-} */
-
-/* form#CUForm>div.modal-body label>svg.icon {
-    width: 0.5em;
-    height: 0.5em;
-    fill: red;
-    vertical-align: top;
-} */
 
 form#CUForm>div.modal-body label>span.text-danger {
     font-size: 20px;
