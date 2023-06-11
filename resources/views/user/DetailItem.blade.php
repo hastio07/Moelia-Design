@@ -10,7 +10,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-7">
-                <h4>{{ $products->nama_produk }}</h4>
+                <h4 class="fw-bold">{{ $products->nama_produk }}</h4>
                 <div class="price text-success fw-bold mt-4"><i class="bi bi-tags-fill me-1"></i>{{$products->formatRupiah('harga_sewa')}}</div>
                 <div class="flex-row mt-4">
                     <h5 class="fw-bold">Deskripsi Produk</h5>
