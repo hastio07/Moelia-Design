@@ -39,7 +39,7 @@ class ManageAkunController extends Controller
                         $query->where('level', 'LIKE', "%$searchValue%");
                     });
             }
-        }, true)->rawColumns(['aksi'])->make(true);
+        })->rawColumns(['aksi'])->make(true);
     }
     /**
      * Display a listing of the resource.

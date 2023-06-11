@@ -61,7 +61,7 @@ class ManageJadwalController extends Controller
                         ->orWhereRaw("DATE_FORMAT(waktu, '%H:%i') LIKE ? ", ["%$searchValue%"])
                         ->orwhereRaw("DATE_FORMAT(waktu, '%d-%m-%Y') LIKE ?", ["%$searchValue%"]);
                 }
-            }, true)->rawColumns(['aksi'])->make(true);
+            })->rawColumns(['aksi'])->make(true);
         }
         return view('admin.ManageJadwal');
     }
