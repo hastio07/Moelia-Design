@@ -147,12 +147,12 @@
                         </a>
                     </li>
                     @can('akses_manage_akun', App\Models\Admin::class)
-                        <li class="{{ Route::is('manage-akun.*') ? 'active' : '' }}">
-                            <a class="link" href="{{ route('manage-akun.index') }}">
-                                <i class="ti-id-badge"></i>
-                                <span>Manage Akun</span>
-                            </a>
-                        </li>
+                    <li class="{{ Route::is('manage-akun.*') ? 'active' : '' }}">
+                        <a class="link" href="{{ route('manage-akun.index') }}">
+                            <i class="ti-id-badge"></i>
+                            <span>Manage Akun</span>
+                        </a>
+                    </li>
                     @endcan
                     <li class="{{ Route::is('manage-perusahaan.*') ? 'active' : '' }}">
                         <a class="link" href="{{ route('manage-perusahaan.index') }}">
@@ -242,7 +242,7 @@
     <div class="overlay action-toggle">
     </div>
 
-    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="{{ asset('templates') }}/vendor/bootstrap/dist/js/bootstrap.bundle.js"></script>
     <script src="{{ asset('templates') }}/vendor/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
     <script src="{{ asset('templates') }}/vendor/DataTables/DataTables-1.13.4/js/jquery.dataTables.min.js"></script>
