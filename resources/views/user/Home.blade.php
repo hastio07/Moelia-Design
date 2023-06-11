@@ -65,15 +65,21 @@
                 <div class="card text-center mb-5 bg-white h-100" data-aos="flip-down">
                     <div class=" card-body">
                         <h5 class="card-title card-perusahaan">Moelia Design</h5>
+                        @if(!empty($abouts) && ($abouts->judul) || ($abouts->katasambutan))
                         <h6 class="card-subtitle mb-2">{{ $abouts->judul }}</h6>
                         <p class="card-text  text-muted">{{ $abouts->katasambutan }} </p>
+                        @else
+                        <p class="mt-5 fw-bold text-secondary"><i class="bi bi-exclamation-triangle-fill fs-3 text-warning"></i><br>Data Kosong</p>
+                        @endif
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-12 mt-4 order-sm-1 order-lg-2">
                 <div class="card bg-transparent border border-0 h-100 image-konten-dua cover-img-dua" data-aos="flip-up">
-                    @if (!empty($abouts->fotobersama))
+                    @if (!empty($abouts) && ($abouts->fotobersama))
                     <img alt="fotobersama" class="image-konten-dua" src="{{ asset('storage') }}/{{ $abouts->fotobersama }}">
+                    @else
+                    <img alt="fotobersama" class="image-konten-dua my-5" src="{{ asset('templates') }}/assets/images/data-kosong.jpg">
                     @endif
                 </div>
             </div>
