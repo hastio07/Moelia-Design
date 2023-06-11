@@ -398,6 +398,7 @@ class ManagePerusahaanController extends Controller
         $data = [
             'katasambutan' => null,
             'fotobersama' => null,
+            'judul' => null,
         ];
 
         if ($db->fotobersama !== null) {
