@@ -17,7 +17,6 @@
     font-weight: bold;
 }
 
-
 /* css untuk bagian apa yang didapatkan */
 .second-contents h5 {
     color: #a39300;
@@ -47,18 +46,18 @@
     object-fit: cover;
 }
 
-.card {
+.employes .card {
     opacity: 0;
     transform: translateY(-50px);
     transition: opacity 0.5s ease-in, transform 0.5s ease-in;
 }
 
-.card.visible {
+.employes .card.visible {
     opacity: 1;
     transform: translateY(0);
 }
 
-.card:hover {
+.employes .card:hover {
     transform: scale(1.1);
 }
 
@@ -123,6 +122,10 @@
     position: relative;
 }
 
+.left-side i {
+    color: #a39300;
+}
+
 .content .left-side::before {
     content: '';
     position: absolute;
@@ -133,29 +136,6 @@
     transform: translateY(-50%);
     background: #afafb6;
 }
-
-.content .left-side .details {
-    margin: 14px;
-    text-align: center;
-}
-
-.content .left-side .details i {
-    font-size: 30px;
-    color: #746800;
-    margin-bottom: 10px;
-}
-
-.content .left-side .details .topic {
-    font-size: 18px;
-    font-weight: 500;
-}
-
-.content .left-side .details .text-one,
-.content .left-side .details .text-two {
-    font-size: 14px;
-    color: #afafb6;
-}
-
 
 .four-content .content .right-side {
     width: 75%;

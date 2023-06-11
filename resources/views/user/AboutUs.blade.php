@@ -17,26 +17,32 @@
     <!-- end konten -->
 
     <!-- konten2 -->
-    <div class="div second-contents container">
+    <div class="div second-contents container" data-aos="fade-down">
         <div class="row same-height mt-3 p-3">
-            <div class="col-md-7 text-center align-self-center" data-aos="fade-up">
-                <div class="card bg-transparent border border-0 h-100" data-aos="flip-up">
-                    @if (!empty($offers->foto_bersama))
+            <div class="col-md-7 text-center align-self-center">
+                <div class="card bg-transparent border border-0 h-100 shadow-0">
+                    @if (!empty($offers) && ($offers->foto_bersama))
                     <img alt="foto_bersama" class="left-image" src="/storage/{{ $offers->foto_bersama }}">
+                    @else
+                    <img src="{{ asset('templates') }}/assets/images/data-kosong.jpg" class="left-image mt-5">
                     @endif
                 </div>
             </div>
             <div class="col-md-5" data-aos="fade-down">
                 <h5 class="text-center">Moelia Design</h5>
                 <div class="line"></div><br>
-                <h4 class="card-subtitle fw-bold my-3">
+                <h4 class="card-subtitle fw-bold my-2 text-center">
                     Apa saja yang akan anda dapatkan dari kami?
                 </h4>
-                <p class="a">
-                    @if (!empty($offers->penawaran))
-                    {!! $offers->penawaran !!}
-                    @endif
-                </p>
+                @if (!empty($offers) && ($offers->penawaran))
+                <p> {!! $offers->penawaran !!}</p>
+                @else
+                <div class="text-center mt-5">
+                    <i class="bi bi-exclamation-triangle-fill fs-3 text-warning"></i>
+                    <p class="fw-bold text-secondary">Maaf!!<br>Saat ini penawaran belum tersedia</p>
+                </div>
+                @endif
+
             </div>
         </div>
     </div>
@@ -66,12 +72,13 @@
                     </div>
                 </div>
             </div>
-            <div class="container my-3">
+            <div class="container employes my-3">
                 <div class="row">
                     @if($employe->isEmpty())
                     <div class="container d-flex justify-content-center align-items-center" style="height: 10vh;">
                         <div class="text-center">
-                            <h6 class="fw-bold text-secondary">Data Pegawai Belum Diinputkan!</h6>
+                            <i class="bi bi-exclamation-triangle-fill fs-3 text-warning"></i>
+                            <h6 class="fw-bold text-secondary">Maaf!!<br>Pegawai Belum Diinputkan!</h6>
                         </div>
                     </div>
                     @else
@@ -99,33 +106,65 @@
     <!-- konten 5 -->
     <div class="container four-content mb-5 mt-5" data-aos="fade-down">
         <div class="content">
-            <div class="left-side">
-                <div class="address details">
-                    <i class="bi bi-geo-alt-fill"></i>
-                    <div class="topic">Alamat</div>
-                    @if (!empty($addresses->alamat_perusahaan))
-                    <div class="text-one">{{ $addresses->alamat_perusahaan }}</div>
-                    @endif
+            <div class="left-side text-center">
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <div class="p-3">
+                            <i class="bi bi-geo-alt-fill fs-2"></i>
+                            <h6 class="fw-bold">Alamat</h6>
+                            @if (!empty($addresses) && ($addresses->alamat_perusahaan))
+                            <div class="alamat">{{ $addresses->alamat_perusahaan }}</div>
+                            @else
+                            <p class="text-secondary"><i class="bi bi-exclamation-triangle-fill text-warning me-2"></i>Alamat Belum Tesedia</p>
+                            @endif
+                        </div>
+                    </div>
                 </div>
-                @if (!empty($contacts->whatsapp))
-                <div class="phone details">
-                    <i class="bi bi-whatsapp"></i>
-                    <div class="topic">Whatsapp</div>
-                    <div class="text-one">{{$contacts->whatsapp}}</div>
+                <div class="col-12">
+                    <div class="p-3">
+                        <i class="bi bi-whatsapp fs-2"></i>
+                        <h6 class="fw-bold">Whatsapp</h6>
+                        <div class="whatsapp-details d-flex justify-content-center">
+                            <ol class="text-start">
+                                @if(!empty($contacts))
+                                @php
+                                $data_contact_whatsapp = [['name' => $contacts->whatsapp1_name, 'number' => $contacts->whatsapp1_number], ['name' => $contacts->whatsapp2_name, 'number' => $contacts->whatsapp2_number], ['name' => $contacts->whatsapp3_name, 'number' => $contacts->whatsapp3_number], ['name' => $contacts->whatsapp4_name, 'number' => $contacts->whatsapp4_number]];
+                                @endphp
+                                @foreach ($data_contact_whatsapp as $contact)
+                                @if ($contact['name'] || $contact['number'])
+                                <li>{{ $contact['number'] ?? null }} ({{ $contact['name'] ?? null }})</li>
+                                @endif
+                                @endforeach
+                                @endif
+                            </ol>
+                        </div>
+                    </div>
                 </div>
-                @endif
-                @if (!empty($contacts->email))
-                <div class="email details">
-                    <i class="fas fa-envelope"></i>
-                    <div class="topic">Email</div>
-                    <div class="text-one">{{ $contacts->email }}</div>
+                <div class="col-12">
+                    <div class="p-3">
+                        <i class="bi bi-envelope-fill fs-2"></i>
+                        <h6 class="fw-bold">Email</h6>
+                        @if (!empty($contacts) && ($contacts->email))
+                        <div class="text-one">{{ $contacts->email }}</div>
+                        @else
+                        <p class="text-secondary"><i class="bi bi-exclamation-triangle-fill text-warning me-2"></i>Kontak EMail Belum Tesedia</p>
+                        @endif
+                    </div>
                 </div>
-                @endif
             </div>
             <div class="right-side">
-                @if (!empty($addresses->link_gmap))
+                @if (!empty($addresses) && ($addresses->link_gmap))
                 <div class="embed-responsive embed-responsive-16by9 location-container">
                     {!! $addresses->link_gmap !!}
+                </div>
+                @else
+                <div class="container d-flex justify-content-center align-items-center" style="height: 10vh;">
+                    <div class="text-center">
+                        <div class="container">
+                            <img src="{{ asset('templates') }}/assets/images/route-notfound.png" class="mt-5" alt="Phone image" style="max-width: 100px; max-height: 100px;">
+                        </div>
+                        <h6 class="fw-bold text-secondary mt-2">Maaf!!<br>Maps Belum Tersedia</h6>
+                    </div>
                 </div>
                 @endif
             </div>
