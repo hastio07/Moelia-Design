@@ -34,7 +34,7 @@ class ManageLayananController extends Controller
                 $query->where('tipe_layanan', 'LIKE', "%$searchValue%")
                     ->orWhere('deskripsi', 'LIKE', "%$searchValue%");
             }
-        }, true)
+        })
             ->rawColumns(['gambar', 'aksi'])
             ->make(true);
     }

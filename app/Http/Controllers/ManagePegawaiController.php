@@ -46,7 +46,7 @@ class ManagePegawaiController extends Controller
                         $query->where('nama_jabatan', 'LIKE', "%$searchValue%");
                     });
             }
-        }, true)
+        })
             ->rawColumns(['foto', 'aksi'])
             ->make(true);
     }

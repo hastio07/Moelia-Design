@@ -53,7 +53,7 @@ class ManageProdukController extends Controller
                             ->orWhere('deskripsi', 'LIKE', "%$searchValue%");
                     });
                 }
-            }, true)->rawColumns(['gambar', 'aksi'])->make(true);
+            })->rawColumns(['gambar', 'aksi'])->make(true);
         }
         return view('admin.manageproduk', compact('get_category_product'));
     }
