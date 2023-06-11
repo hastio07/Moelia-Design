@@ -47,6 +47,11 @@ body {
     color: #a39300;
 }
 
+.navbar-brand h5 {
+    font-family: 'Suwannaphum', serif;
+    color: #888888;
+}
+
 .navbar-toggler {
     font-size: 18px;
     line-height: 0.3;
