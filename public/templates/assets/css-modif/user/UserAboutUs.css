@@ -96,7 +96,7 @@
     margin: 0;
 }
 
-/* css untuk bagian google maps dan  WA */
+/* css untuk google maps */
 .four-content {
     width: 85%;
     background: #fff;
@@ -243,12 +243,16 @@
     }
 }
 
-
-/* css untuk follow us */
-.socmed {
-    background-color: #0000001f;
+/* css untuk contact us */
+.contact-wraper {
+    transition: transform 0.3s ease;
 }
 
+.contact-wraper:hover {
+    transform: scale(1.1);
+}
+
+/* css untuk follow us */
 .socmed a {
     color: inherit;
     text-decoration: none;

@@ -7,7 +7,7 @@
 
 @section('konten')
 <section>
-    <!-- konten 1 about us -->
+    <!-- konten  bradcrumbs -->
     <div class="first-content text-center align-self-center">
         <h1>Tentang Kami</h1>
         <div class="d-flex justify-content-center">
@@ -16,7 +16,7 @@
     </div>
     <!-- end konten -->
 
-    <!-- konten2 -->
+    <!-- konten apa yang didapatkan?-->
     <div class="div second-contents container" data-aos="fade-down">
         <div class="row same-height mt-3 p-3">
             <div class="col-md-7 text-center align-self-center">
@@ -48,7 +48,7 @@
     </div>
     <!-- end konten -->
 
-    <!-- konten3 -->
+    <!-- konten our team-->
     <div class="third-content mt-5 shadow pt-4">
         <h1 class="text-center head-ourt fw-bold">Our Team</h1>
         <div class="line"></div>
@@ -103,53 +103,20 @@
     </div>
     <!-- end konten -->
 
-    <!-- konten 5 -->
+    <!-- konten google maps-->
     <div class="container four-content mb-5 mt-5" data-aos="fade-down">
         <div class="content">
             <div class="left-side text-center">
-                <div class="row mt-3">
-                    <div class="col-12">
-                        <div class="p-3">
-                            <i class="bi bi-geo-alt-fill fs-2"></i>
-                            <h6 class="fw-bold">Alamat</h6>
-                            @if (!empty($addresses) && ($addresses->alamat_perusahaan))
-                            <div class="alamat">{{ $addresses->alamat_perusahaan }}</div>
-                            @else
-                            <p class="text-secondary"><i class="bi bi-exclamation-triangle-fill text-warning me-2"></i>Alamat Belum Tesedia</p>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="p-3">
-                        <i class="bi bi-whatsapp fs-2"></i>
-                        <h6 class="fw-bold">Whatsapp</h6>
-                        <div class="whatsapp-details d-flex justify-content-center">
-                            <ol class="text-start">
-                                @if(!empty($contacts))
-                                @php
-                                $data_contact_whatsapp = [['name' => $contacts->whatsapp1_name, 'number' => $contacts->whatsapp1_number], ['name' => $contacts->whatsapp2_name, 'number' => $contacts->whatsapp2_number], ['name' => $contacts->whatsapp3_name, 'number' => $contacts->whatsapp3_number], ['name' => $contacts->whatsapp4_name, 'number' => $contacts->whatsapp4_number]];
-                                @endphp
-                                @foreach ($data_contact_whatsapp as $contact)
-                                @if ($contact['name'] || $contact['number'])
-                                <li>{{ $contact['number'] ?? null }} ({{ $contact['name'] ?? null }})</li>
-                                @endif
-                                @endforeach
-                                @endif
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="p-3">
-                        <i class="bi bi-envelope-fill fs-2"></i>
-                        <h6 class="fw-bold">Email</h6>
-                        @if (!empty($contacts) && ($contacts->email))
-                        <div class="text-one">{{ $contacts->email }}</div>
-                        @else
-                        <p class="text-secondary"><i class="bi bi-exclamation-triangle-fill text-warning me-2"></i>Kontak EMail Belum Tesedia</p>
-                        @endif
-                    </div>
+
+                <div class="p-3">
+                    <i class="bi bi-geo-alt-fill fs-2"></i>
+                    <h6 class="fw-bold">Alamat</h6>
+                    @if (!empty($addresses) && ($addresses->alamat_perusahaan))
+                    <div class="alamat">{{ $addresses->alamat_perusahaan }}</div>
+                    @else
+                    <p class="text-secondary"><i class="bi bi-exclamation-triangle-fill text-warning me-2"></i>Alamat Belum Tesedia</p>
+                    @endif
+
                 </div>
             </div>
             <div class="right-side">
@@ -200,6 +167,68 @@
         </div>
     </div>
     <!-- end konten -->
+
+    <!-- content contact us -->
+    <div class="container contactUs shadow mb-5 py-3 text-center">
+        <h4 class="fw-bold">Contact Us</h4>
+        <div class="line"></div>
+        <div class="row mt-3" data-aos="fade-down">
+            <div class="col-md-4 mt-3">
+                <div class="p-3 shadow h-100 rounded contact-wraper">
+                    <i class="bi bi-telephone-plus-fill fs-2" style="color: #00abe9;"></i>
+                    <h6 class="fw-bold">Telephone</h6>
+                    <div class="d-flex justify-content-center mt-3">
+                        <ol class="text-start">
+                            @if(!empty($contacts))
+                            @php
+                            $data_contact_whatsapp = [['name' => $contacts->telephone1_name, 'number' => $contacts->telephone1_number], ['name' => $contacts->telephone2_name, 'number' => $contacts->telephone2_number]];
+                            @endphp
+                            @foreach ($data_contact_whatsapp as $contact)
+                            @if ($contact['name'] || $contact['number'])
+                            <li>{{ $contact['number'] ?? null }} ({{ $contact['name'] ?? null }})</li>
+                            @endif
+                            @endforeach
+                            @endif
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-3">
+                <div class="p-3 text-center shadow h-100 rounded contact-wraper">
+                    <i class="bi bi-whatsapp fs-2" style="color: #25d366;"></i>
+                    <h6 class="fw-bold">Whatsapp</h6>
+                    <div class="d-flex justify-content-center mt-3">
+                        <ol class="text-start">
+                            @if(!empty($contacts))
+                            @php
+                            $data_contact_whatsapp = [['name' => $contacts->whatsapp1_name, 'number' => $contacts->whatsapp1_number], ['name' => $contacts->whatsapp2_name, 'number' => $contacts->whatsapp2_number], ['name' => $contacts->whatsapp3_name, 'number' => $contacts->whatsapp3_number], ['name' => $contacts->whatsapp4_name, 'number' => $contacts->whatsapp4_number]];
+                            @endphp
+                            @foreach ($data_contact_whatsapp as $contact)
+                            @if ($contact['name'] || $contact['number'])
+                            <li>{{ $contact['number'] ?? null }} ({{ $contact['name'] ?? null }})</li>
+                            @endif
+                            @endforeach
+                            @endif
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mt-3">
+                <div class="p-3 text-center shadow h-100 rounded contact-wraper">
+                    <i class="bi bi-envelope fs-2" style="color: #f84437;"></i>
+                    <h6 class="fw-bold">Email</h6>
+                    @if (!empty($contacts) && ($contacts->email))
+                    <div class="text-one">{{ $contacts->email }}</div>
+                    @else
+                    <p class="text-secondary"><i class="bi bi-exclamation-triangle-fill text-warning me-2"></i>Kontak EMail Belum Tesedia</p>
+                    @endif
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- endcontent -->
+
     <!-- content follow social media -->
     <div class="container text-center socmed rounded-4 shadow p-5 text-capitalize">
         <h4 class="fw-bold">Follow Us On Social Media</h4>
