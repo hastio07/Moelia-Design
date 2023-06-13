@@ -17,8 +17,7 @@ class AboutController extends Controller
     {
         //Offer
         $offers = Offer::first();
-        //Address
-        $addresses = Address::first();
+
         //Contact
         $contacts = Contact::first();
         //Owner
@@ -30,6 +29,6 @@ class AboutController extends Controller
 
         $sosmed = Sosmed::get();
 
-        return view('user.aboutus', compact('offers', 'addresses', 'contacts', 'owners', 'employe', 'workinghour', 'sosmed'));
+        return view('user.aboutus', compact('offers', 'contacts', 'owners', 'employe', 'workinghour', 'sosmed'));
     }
 }
