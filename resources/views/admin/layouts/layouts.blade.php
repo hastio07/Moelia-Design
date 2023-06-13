@@ -220,6 +220,12 @@
                             <span>Manange Gudang</span>
                         </a>
                     </li>
+                    <li class="{{ Route::is('manage-gudang.*') ? 'active' : '' }}">
+                        <a class="link" href="/wedding-calculator">
+                            <i class="ti-pencil-alt"></i>
+                            <span>Wedding Calculator</span>
+                        </a>
+                    </li>
                 </ul>
 
             </div>

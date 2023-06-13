@@ -108,6 +108,9 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
         Route::get('/ProfileAdmin', function () {
             return view('admin.profileadmin');
         });
+        Route::get('/weddingcalculator', function () {
+            return view('admin.ManageWeddingCal');
+        });
     });
 });
 /** Akhir kode **/
