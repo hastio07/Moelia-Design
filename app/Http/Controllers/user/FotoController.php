@@ -10,7 +10,7 @@ class FotoController extends Controller
     //
     public function index()
     {
-        $photos = Photo::latest()->paginate($perPage = 6, $columns = ['*'], $pageName = 'photo');
+        $photos = Photo::latest()->paginate($perPage = 10, $columns = ['*'], $pageName = 'photo');
         return view('user.foto', compact('photos'));
     }
 }
