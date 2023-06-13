@@ -57,6 +57,13 @@ form.formstyle {
     margin: 10px;
 }
 
+
+/* text area */
+textarea {
+    width: 100%;
+    resize: none;
+}
+
 /* Style untuk icon fa-circle-info */
 .bi-question-help-circle-fill {
     display: flex;

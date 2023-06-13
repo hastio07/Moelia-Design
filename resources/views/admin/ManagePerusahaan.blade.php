@@ -31,7 +31,7 @@
                                                     <label class="form-label" for="nama_owner">Nama Owner</label>
                                                     <input class="form-control" id="nama_owner" name="nama_owner" placeholder="Masukkan nama owner" type="text" value="{{ $owners->nama_owner ?? null }}">
                                                     <label class="form-label" for="kata_sambutan">Kata Sambutan</label>
-                                                    <textarea class="form-control" id="kata_sambutan" name="kata_sambutan" rows="3">{{ $owners->kata_sambutan ?? null }}</textarea>
+                                                    <textarea class="form-control" id="kata_sambutan" name="kata_sambutan" rows="3" oninput="autoResizeTextarea(this)">{{ $owners->kata_sambutan ?? null }}</textarea>
                                                     <label class="form-label" for="foto_owner">Foto Owner</label>
                                                     <input class="form-control" id="foto_owner" name="foto_owner" type="file">
                                                 </div>
@@ -254,7 +254,7 @@
                                                                 <div class="input-group-prepend">
                                                                     <div class="input-group-text">@</div>
                                                                 </div>
-                                                                <input class="form-control" id="u_youtube" name="u_youtube" placeholder="Masukkan link channel youtube" type="text" value="{{ $sosmeds->u_youtube ?? null }}">
+                                                                <input class="form-control" id="u_youtube" name="u_youtube" placeholder="Masukkan username youtube" type="text" value="{{ $sosmeds->u_youtube ?? null }}">
                                                                 <span class="bi-question-help-circle-fill"><i class="bi bi-question-circle-fill" data-bs-toggle="tooltip" title="Username"></i></span>
                                                             </div>
                                                         </div>
@@ -301,7 +301,7 @@
                                                 <label class="form-label mt-2" for="judul_siapa">Judul</label>
                                                 <input class="form-control" id="judul_siapa" name="judul_siapa" placeholder="Masukan Judul" type="text" value="{{ $abouts->judul ?? null }}">
                                                 <label class="form-label" for="katasambutan">Kata Sambutan</label>
-                                                <textarea class="form-control" id="katasambutan" name="katasambutan" rows="3">{{ $abouts->katasambutan ?? null }}</textarea>
+                                                <textarea class="form-control" id="katasambutan" name="katasambutan" rows="3" oninput="autoResizeTextarea(this)">{{ $abouts->katasambutan ?? null }}</textarea>
                                                 <label class="form-label" for="fotobersama">Foto Bersama</label>
                                                 <input accept="image/jpg, image/png, image/jpeg" class="form-control" id="fotobersama" name="fotobersama" type="file">
                                                 <div class="mt-2 text-center">
@@ -388,8 +388,8 @@
                                                 <img alt="{{ $owners->nama_owner }}" class="rounded img-owner" src="{{ asset('storage/' . $owners->foto_owner) }}">
                                                 @endif
                                             </div>
-                                            <p>{{ $owners->kata_sambutan }}</p>
-                                            <h6 class="fw-bolder text-capitalize">{{ $owners->nama_owner }}</h6>
+                                            <h6 class="fw-bolder text-capitalize mb-4">{{ $owners->nama_owner }}</h6>
+                                            <p style="text-align: justify;">{{ $owners->kata_sambutan }}</p>
                                             @else
                                             <p class="mt-3 text-danger">-- Data Owner Harap di Isi --</p>
                                             @endif
@@ -531,7 +531,7 @@
                                             <img alt="fotobersama" class="rounded img-owner" src="/storage/{{ $abouts->fotobersama }}">
                                             @endif
                                             <h6 class="fw-bold">{{ $abouts->judul }}</h6>
-                                            <p class="mt-3">{{ $abouts->katasambutan }}</p>
+                                            <p class="mt-3" style="text-align: justify;">{{ $abouts->katasambutan }}</p>
                                             @else
                                             <p class="text-danger mt-4"> Data Kosong!!<br> isi pada bagian form input siapa kami</p>
                                             @endif
@@ -566,6 +566,14 @@
 @endsection
 
 @push('scripts')
+
+<script>
+    function autoResizeTextarea(textarea) {
+        textarea.style.height = 'auto';
+        textarea.style.height = textarea.scrollHeight + 'px';
+    }
+</script>
+
 {{-- script untuk seluruh tombol hapus  --}}
 <script>
     let btnDelete = document.querySelectorAll('#btnDelete');
