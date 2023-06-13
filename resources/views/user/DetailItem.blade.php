@@ -14,7 +14,7 @@
                 <div class="price text-success fw-bold mt-4"><i class="bi bi-tags-fill me-1"></i>{{$products->formatRupiah('harga_sewa')}}</div>
                 <div class="flex-row mt-4">
                     <h5 class="fw-bold">Deskripsi Produk</h5>
-                    {!! $products->deskripsi !!}
+                    <p style="text-align: justify;">{!! $products->deskripsi !!}</p>
                 </div>
                 <div class="align-items-center mt-4 offers mb-1">
                     <h6 class="fw-bold">Rician Produk</h6>

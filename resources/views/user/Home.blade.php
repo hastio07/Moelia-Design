@@ -66,8 +66,8 @@
                     <div class=" card-body">
                         <h5 class="card-title card-perusahaan">Moelia Design</h5>
                         @if(!empty($abouts) && ($abouts->judul) || ($abouts->katasambutan))
-                        <h6 class="card-subtitle mb-2">{{ $abouts->judul }}</h6>
-                        <p class="card-text  text-muted">{{ $abouts->katasambutan }} </p>
+                        <h6 class="card-subtitle mb-4">{{ $abouts->judul }}</h6>
+                        <p class="card-text  text-muted" style="text-align: justify;">{{ $abouts->katasambutan }} </p>
                         @else
                         <p class="mt-5 fw-bold text-secondary"><i class="bi bi-exclamation-triangle-fill fs-3 text-warning"></i><br>Data Kosong</p>
                         @endif
@@ -186,8 +186,8 @@
                                             {{ $value->updated_at->diffForHumans() }}
                                         </p>
                                     </div>
-                                    <p class="mb-4 mb-md-0 h-100">
-                                        {!! Str::words($value->deskripsi, 25) !!}e.
+                                    <p class="mb-4 mb-md-0 h-100" style="text-align: justify;">
+                                        {!! Str::words($value->deskripsi, 20) !!}.
                                     </p>
                                 </div>
                                 <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
@@ -227,9 +227,11 @@
             </div>
             @else
             @foreach ($photos as $value)
-            <a data-gallery="photo-gallery" data-toggle="lightbox" href="/storage/{{ $value->photo_path }}">
-                <img width="600" class="img-fluid item" height="600" src="/storage/{{ $value->photo_path }}">
-            </a>
+            <div class="d-flex justify-content-center align-items-center">
+                <a data-gallery="photo-gallery" data-toggle="lightbox" href="/storage/{{ $value->photo_path }}">
+                    <img width="600" class="img-fluid item" height="600" src="/storage/{{ $value->photo_path }}">
+                </a>
+            </div>
             @endforeach
             @endif
         </div>

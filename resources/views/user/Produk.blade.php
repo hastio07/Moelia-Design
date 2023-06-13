@@ -90,7 +90,7 @@
                                         {{ $value->updated_at->diffForHumans() }}
                                     </p>
                                 </div>
-                                <p class="mb-4 mb-md-0 h-100">
+                                <p class="mb-4 mb-md-0 h-100" style="text-align: justify;">
                                     {!! Str::words($value->deskripsi, 20) !!}
                                 </p>
                             </div>
