@@ -33,11 +33,12 @@
         <div class="shadow-header"></div>
         <header class="header-navbar fixed">
             <div class="toggle-mobile action-toggle"><i class="fas fa-bars"></i></div>
+
             <div class="header-wrapper">
-                <div class="header-left pt-2 text-capitalize">
-                    <marquee behavior="" direction="right">
-                        <h6 class="text-success">Selamat Datang {{ auth()->user()->nama_depan . ' ' . auth()->user()->nama_belakang }}!</h6>
-                    </marquee>
+                <div class="header-left pt-2 text-capitalize fs-6 ms-5 mt-1 text-success">
+                    <p id="informasi-hari"></p>
+                    <p>,</p>
+                    <p id="tanggal-hari-ini"></p>
                 </div>
                 <div class="header-content">
                     <div class="notification dropdown">
@@ -120,6 +121,9 @@
                     </div>
                 </div>
             </div>
+            <!-- <marquee behavior="" direction="right">
+                <h6 class="text-success">Selamat Datang {{ auth()->user()->nama_depan . ' ' . auth()->user()->nama_belakang }}!</h6>
+            </marquee> -->
         </header>
         <nav class="main-sidebar ps-menu">
             <div class="sidebar-toggle action-toggle">
@@ -258,6 +262,22 @@
 
     <script>
         Main.init()
+    </script>
+    <script>
+        var today = new Date();
+        var options = {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        };
+        var formatter = new Intl.DateTimeFormat('id-ID', options);
+        var formattedDate = formatter.format(today);
+        document.getElementById('tanggal-hari-ini').innerHTML = formattedDate;
+
+        var days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+        var dayIndex = today.getDay();
+        var dayName = days[dayIndex];
+        document.getElementById('informasi-hari').innerHTML = dayName;
     </script>
     @stack('scripts')
 </body>
