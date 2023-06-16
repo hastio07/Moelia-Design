@@ -5,9 +5,6 @@
 @endpush
 @section('content')
 <section class="manage-produk">
-    <div class="title">
-        <h5>Manage Produk</h5>
-    </div>
     <div class="row same-height">
         <div class="col-md-9">
             <div class="content-wrapper">
