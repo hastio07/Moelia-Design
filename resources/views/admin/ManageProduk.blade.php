@@ -47,6 +47,7 @@
                                         <th>Rincian Produk</th>
                                         <th>Deskripsi</th>
                                         <th>Gambar</th>
+                                        <th>Album Produk</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -59,6 +60,7 @@
                                         <th>Rincian Produk</th>
                                         <th>Deskripsi</th>
                                         <th>Gambar</th>
+                                        <th>Album Produk</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </tfoot>
