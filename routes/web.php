@@ -17,7 +17,7 @@ use App\Http\Controllers\user\HomeController;
 use App\Http\Controllers\user\ProdukController;
 use App\Http\Controllers\user\VideoController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\StrukController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,6 +28,13 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
  */
+
+Route::get('/struk', [StrukController::class, 'index'])->name('struk');
+Route::get('/cetak-struk', [StrukController::class, 'cetakStruk'])->name('cetak-struk');
+Route::get('/cetak-kontrak', function () {
+    return view('user.CetakKontrak');
+});
+
 
 Route::middleware(['no-redirect-if-authenticated:admins', 'prevent-back-history'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
