@@ -602,7 +602,7 @@
         ],
         menubar: 'edit insert format',
         toolbar: 'bullist numlist',
-        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
+        content_style: 'body { font-family:Suwannaphum, serif; font-size:16px }'
     });
 </script>
 {{-- script untuk tooltip icon help info --}}
