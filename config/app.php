@@ -197,6 +197,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\CompanyServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
     ],
 
     /*
@@ -214,6 +215,7 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'Hashids' => Vinkla\Hashids\Facades\Hashids::class,
         'ImageResize' => Intervention\Image\Facades\Image::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ])->toArray(),
 
 ];
