@@ -21,4 +21,12 @@ class Role extends Model
     {
         return $this->hasMany(Admin::class);
     }
+
+    /**
+     * Relasi database table roles ke table users (one-to-many)
+     */
+    public function user()
+    {
+        return $this->hasMany(User::class);
+    }
 }

@@ -5,13 +5,16 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 // use Hashids\Hashids;
+
+use App\Notifications\ResetPassword\SendResetPasswordLink;
+use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class Admin extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, CanResetPassword;
 
     // protected $table = 'admins';
     protected $primaryKey = 'id';
@@ -25,7 +28,7 @@ class Admin extends Authenticatable
         'remember_token',
         'role_id',
     ];
-
+    protected $guard = "admins";
     protected $hidden = [
         'password',
         'remember_token',
@@ -34,12 +37,16 @@ class Admin extends Authenticatable
         'nama_depan',
         'nama_belakang',
         'email',
+        'role_id',
         'phone_number',
     ];
     protected $casts = [
         'email_virified_status',
     ];
-
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new SendResetPasswordLink($token));
+    }
     /**
      * Relasi database table admins ke table roles (one-to-many (invers))
      */

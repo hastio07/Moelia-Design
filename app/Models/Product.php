@@ -22,6 +22,7 @@ class Product extends Model
         'rincian_produk',
         'deskripsi',
         'gambar',
+        'album_produk',
     ];
 
     public function sluggable(): array

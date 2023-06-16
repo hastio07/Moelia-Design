@@ -10,14 +10,17 @@ use App\Http\Controllers\ManagePegawaiController;
 use App\Http\Controllers\ManagePerusahaanController;
 use App\Http\Controllers\ManagePesananProsesController;
 use App\Http\Controllers\ManageProdukController;
+use App\Http\Controllers\StrukController;
 use App\Http\Controllers\user\AboutController;
 use App\Http\Controllers\user\CalculatorController;
 use App\Http\Controllers\user\FotoController;
 use App\Http\Controllers\user\HomeController;
 use App\Http\Controllers\user\ProdukController;
 use App\Http\Controllers\user\VideoController;
+use App\Notifications\ResetPassword\SendResetPasswordLink;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\StrukController;
+use Illuminate\Support\Str;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,7 +38,6 @@ Route::get('/cetak-kontrak', function () {
     return view('user.CetakKontrak');
 });
 
-
 Route::middleware(['no-redirect-if-authenticated:admins', 'prevent-back-history'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/aboutus', [AboutController::class, 'index'])->name('aboutus');
@@ -49,6 +51,17 @@ Route::middleware(['no-redirect-if-authenticated:admins', 'prevent-back-history'
     Route::resource('/produk', ProdukController::class)->except(['create', 'store', 'edit', 'update', 'destroy']);
     Route::get('/foto', [FotoController::class, 'index'])->name('foto');
     Route::get('/vidio', [VideoController::class, 'index'])->name('vidio');
+
+    Route::get('/email', function () {
+        $token = Str::random(60);
+        $user = new \App\Models\User (); // Ganti dengan model pengguna yang sesuai
+        $user->email = 'test@example.com'; // Ganti dengan alamat email pengguna yang sesuai
+        $notification = new SendResetPasswordLink($token);
+        $message = $notification->toMail($user);
+
+        return $message->render();
+
+    });
 });
 
 /** Awal kode untuk rute super_admin & admin**/

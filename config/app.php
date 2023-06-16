@@ -58,6 +58,8 @@ return [
 
     'asset_url' => env('ASSET_URL'),
 
+    'frontend_url' => env('FRONTEND_URL', 'http://localhost'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
@@ -95,7 +97,7 @@ return [
     |
      */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'id',
 
     /*
     |--------------------------------------------------------------------------
