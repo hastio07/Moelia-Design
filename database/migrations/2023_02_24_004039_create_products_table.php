@@ -23,6 +23,7 @@ return new class extends Migration
             $table->longText('rincian_produk');
             $table->text('deskripsi');
             $table->string('gambar')->nullable();
+            $table->json('album_produk')->nullable();
             $table->timestamps();
         });
     }

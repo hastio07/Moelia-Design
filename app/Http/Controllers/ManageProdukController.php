@@ -34,6 +34,19 @@ class ManageProdukController extends Controller
                 } else {
                     return '<img alt="' . $value->nama_produk . '" height="150" src="https://dummyimage.com/180x150.png" width="180">';
                 }
+            })->editColumn('album_produk', function ($value) {
+                $album = json_decode($value->album_produk, true);
+                if (is_array($album)) {
+                    $output = '<ul>';
+                    foreach ($album as $item) {
+                        $output .= '<li>' . $item . '</li>';
+                    }
+                    $output .= '</ul>';
+                    return $output;
+                } else {
+                    return '';
+                }
+
             })->addColumn('aksi', function ($value) {
                 $json = htmlspecialchars(json_encode($value), ENT_QUOTES, 'UTF-8');
                 return ' <div class="d-grid gap-2 d-md-flex justify-content-md-center">
@@ -53,13 +66,15 @@ class ManageProdukController extends Controller
                             ->orWhere('deskripsi', 'LIKE', "%$searchValue%");
                     });
                 }
-            })->rawColumns(['gambar', 'aksi'])->make(true);
+            })->rawColumns(['gambar', 'album_produk', 'aksi'])->make(true);
         }
         return view('admin.manageproduk', compact('get_category_product'));
     }
 
     public function store(Request $request)
     {
+        // dd($request->all());
+
         // return dd($request->all());
         // $array = array();
         // foreach ($request->rincianproduk as $i => $value) {
@@ -73,6 +88,7 @@ class ManageProdukController extends Controller
             'rincianproduk' => 'required|string',
             'deskripsi' => 'required|string',
             'gambar' => 'file|image|mimetypes:image/jpeg,image/jpg,image/png|max:2048',
+            'albumproduk.*' => 'file|image|mimetypes:image/jpeg,image/jpg,image/png|max:2048',
         ];
         $massages = [
             'required' => ':attribute wajib diisi.',
@@ -85,7 +101,6 @@ class ManageProdukController extends Controller
 
         //Jika gagal
         if ($validator->fails()) {
-
             return back()->withErrors($validator)->withInput()->with('error_add_product', 'Gagal menambahkan data produk'); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
         }
 
@@ -93,7 +108,7 @@ class ManageProdukController extends Controller
 
         //Menampung data request setelah validasi
         $data = [
-            'created_by' => Auth::id(),
+            'created_by' => Auth::user()->role_id,
             'nama_produk' => $validatedData['namaproduk'],
             'kategori_id' => (int) $validatedData['kategori'],
             'harga_sewa' => (int) $validatedData['hargasewa'],
@@ -112,6 +127,17 @@ class ManageProdukController extends Controller
             $thumbImage->save($thumbPath, 20);
             $data['gambar'] = '/' . $fileName;
         }
+
+        if ($request->hasFile('albumproduk')) {
+            $thumbnails = [];
+            foreach ($request->file('albumproduk') as $file) {
+                $oriPathsAlbumProduk = $file->store('album-produk');
+                $thumbnails[] = $oriPathsAlbumProduk;
+            }
+
+            $thumbnailsJson = json_encode($thumbnails, JSON_UNESCAPED_SLASHES);
+            $data['album_produk'] = $thumbnailsJson;
+        }
         //Simpan produk
         Product::create($data);
 
@@ -121,14 +147,14 @@ class ManageProdukController extends Controller
     public function update(Request $request, $id)
     {
         //
-
         $rules = [
             'namaproduk' => 'required|string|max:255',
             'kategori' => 'required|string|max:255',
-            'hargasewa' => 'required|numeric|integer',
+            'hargasewa' => 'required|numeric|max:9999999999|integer',
             'rincianproduk' => 'required|string',
             'deskripsi' => 'required|string',
             'gambar' => 'file|image|mimetypes:image/jpeg,image/jpg,image/png|max:2048',
+            'albumproduk.*' => 'file|image|mimetypes:image/jpeg,image/jpg,image/png|max:2048',
         ];
         $massages = [
             'required' => ':attribute wajib diisi.',
@@ -168,6 +194,28 @@ class ManageProdukController extends Controller
             $thumbImage->save($thumbPath, 20);
             $data['gambar'] = '/' . $fileName;
         }
+
+        if ($request->hasFile('albumproduk')) {
+            $album_produk = Product::findOrFail($id);
+            // Jika sebelumnya di db kolom album_produk sudah ada isinya
+            if (!is_null($album_produk->album_produk)) {
+                $gambar = json_decode($album_produk->album_produk, true);
+                // Menghapus gambar sebelumnya dari storage
+                foreach ($gambar as $index => $value) {
+                    Storage::delete($value);
+                }
+                // Mengosongkan gambar sebelumnya dari kolom album_produk
+                $album_produk->album_produk = null;
+                $album_produk->save();
+            }
+            $thumbnails = [];
+            foreach ($request->file('albumproduk') as $file) {
+                $oriPathsAlbumProduk = $file->store('album-produk');
+                $thumbnails[] = $oriPathsAlbumProduk;
+            }
+            $thumbnailsJson = json_encode($thumbnails, JSON_UNESCAPED_SLASHES);
+            $data['album_produk'] = $thumbnailsJson;
+        }
         //Simpan produk
         Product::where('id', $id)->update($data);
 
@@ -176,11 +224,16 @@ class ManageProdukController extends Controller
 
     public function destroy($id)
     {
-        //
         $get_products = Product::findOrFail($id);
         if ($get_products->gambar) {
             $path = $get_products->gambar;
             Storage::delete(['compressed/' . $path, 'post-images/' . $path]);
+        }
+        if (!is_null($get_products->album_produk)) {
+            $path2 = json_decode($get_products->album_produk, true);
+            foreach ($path2 as $index => $value) {
+                Storage::delete($value);
+            }
         }
         Product::destroy($id);
         return redirect()->route('manage-produk.index')->with('success_delete_product', 'Data berhasil dihapus');

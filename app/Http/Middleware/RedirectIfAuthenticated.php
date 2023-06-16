@@ -26,6 +26,11 @@ class RedirectIfAuthenticated
         // dd($response = $next($request));
         //Looping value dari variabel $guards
         foreach ($guards as $guard) {
+
+            if ($guard == "admins" && Auth::guard($guard)->check()) {
+                return redirect('/dashboard');
+            }
+
             //Cek apakah terautentikasi
             if (Auth::guard($guard)->check()) {
                 return redirect(RouteServiceProvider::HOME);

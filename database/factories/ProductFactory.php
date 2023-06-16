@@ -29,6 +29,7 @@ class ProductFactory extends Factory
             'rincian_produk' => fake()->words(2, true),
             'deskripsi' => $this->faker->paragraph(),
             'gambar' => $this->faker->imageUrl(100, 100, 'produk', false, 'wedding', true),
+            'album_produk' => $this->faker->imageUrl(100, 100, 'produk', false, 'wedding', true),
         ];
     }
 

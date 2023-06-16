@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="UTF-8">
@@ -7,21 +7,21 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" referrerpolicy="no-referrer" rel="stylesheet" />
-    <link href="{{ asset('templates') }}/vendor/themify-icons/themify-icons.css" rel="stylesheet">
+    <link href="{{ asset('templates/vendor/themify-icons/themify-icons.css') }}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet">
 
-    <link href="{{ asset('templates') }}/vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{ asset('templates') }}/assets/css/bootstrap-override.min.css" rel="stylesheet">
+    <link href="{{ asset('templates/vendor/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('templates/assets/css/bootstrap-override.min.css') }}" rel="stylesheet">
 
-    <link href="{{ asset('templates') }}/vendor/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
+    <link href="{{ asset('templates/vendor/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet">
 
-    <link href="{{ asset('templates') }}/vendor/DataTables/datatables.min.css" rel="stylesheet">
-    <link href="{{ asset('templates') }}/vendor/DataTables/DataTables-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="{{ asset('templates') }}/vendor/DataTables/Responsive-2.4.1/css/responsive.dataTables.min.css" rel="stylesheet">
+    <link href="{{ asset('templates/vendor/DataTables/datatables.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('templates/vendor/DataTables/DataTables-1.13.4/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('templates/vendor/DataTables/Responsive-2.4.1/css/responsive.dataTables.min.css') }}" rel="stylesheet">
 
-    <link href="{{ asset('templates') }}/assets/css/style.min.css" rel="stylesheet">
+    <link href="{{ asset('templates/assets/css/style.min.css') }}" rel="stylesheet">
 
-    <link href="{{ asset('templates') }}/assets/css-modif/admin/AdminLayout.css" rel="stylesheet">
+    <link href="{{ asset('templates/assets/css-modif/admin/AdminLayout.css') }}" rel="stylesheet">
 
     @stack('styles')
 
@@ -35,7 +35,7 @@
             <div class="toggle-mobile action-toggle"><i class="fas fa-bars"></i></div>
 
             <div class="header-wrapper">
-                <div class="header-left pt-2 text-capitalize fs-6 ms-5 mt-1 text-success">
+                <div class="header-left text-capitalize fs-6 ms-5 text-success mt-1 pt-2">
                     <p id="informasi-hari"></p>
                     <p>,</p>
                     <p id="tanggal-hari-ini"></p>
@@ -151,12 +151,12 @@
                         </a>
                     </li>
                     @can('akses_manage_akun', App\Models\Admin::class)
-                    <li class="{{ Route::is('manage-akun.*') ? 'active' : '' }}">
-                        <a class="link" href="{{ route('manage-akun.index') }}">
-                            <i class="ti-id-badge"></i>
-                            <span>Manage Akun</span>
-                        </a>
-                    </li>
+                        <li class="{{ Route::is('manage-akun.*') ? 'active' : '' }}">
+                            <a class="link" href="{{ route('manage-akun.index') }}">
+                                <i class="ti-id-badge"></i>
+                                <span>Manage Akun</span>
+                            </a>
+                        </li>
                     @endcan
                     <li class="{{ Route::is('manage-perusahaan.*') ? 'active' : '' }}">
                         <a class="link" href="{{ route('manage-perusahaan.index') }}">
@@ -253,12 +253,12 @@
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <script src="{{ asset('templates') }}/vendor/bootstrap/dist/js/bootstrap.bundle.js"></script>
-    <script src="{{ asset('templates') }}/vendor/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
-    <script src="{{ asset('templates') }}/vendor/DataTables/DataTables-1.13.4/js/jquery.dataTables.min.js"></script>
-    <script src="{{ asset('templates') }}/vendor/DataTables/datatables.min.js"></script>
-    <script src="{{ asset('templates') }}/vendor/DataTables/Responsive-2.4.1/js/dataTables.responsive.min.js"></script>
-    <script src="{{ asset('templates') }}/assets/js/main.js"></script>
+    <script src="{{ asset('templates/vendor/bootstrap/dist/js/bootstrap.bundle.js') }}"></script>
+    <script src="{{ asset('templates/vendor/perfect-scrollbar/dist/perfect-scrollbar.min.js') }}"></script>
+    <script src="{{ asset('templates/vendor/DataTables/DataTables-1.13.4/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('templates/vendor/DataTables/datatables.min.js') }}"></script>
+    <script src="{{ asset('templates/vendor/DataTables/Responsive-2.4.1/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('templates/assets/js/main.js') }}"></script>
 
     <script>
         Main.init()
