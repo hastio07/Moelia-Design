@@ -89,7 +89,6 @@
     padding-top: 30px;
     margin-bottom: 20px;
     padding-bottom: 40px;
-    border-bottom: 2px solid #a39300;
 }
 
 .image-konten-dua {
@@ -113,10 +112,6 @@
     font-size: larger;
     text-transform: capitalize;
     margin: 30px;
-}
-
-.second-konten .card {
-    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
 
 @media screen and (max-width: 767px) {

@@ -102,7 +102,7 @@
     background: #fff;
     border-radius: 6px;
     padding: 20px 60px 30px 40px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 .four-content .content {
@@ -197,9 +197,8 @@
 }
 
 /* css untuk jam operasional */
-.back-bg {
-    background: #fff;
-    margin-top: 60px;
+.hours {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 .business-hours {
@@ -259,8 +258,8 @@
 }
 
 .icon-wrapper {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     display: flex;
     justify-content: center;
     align-items: center;

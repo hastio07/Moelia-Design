@@ -49,8 +49,8 @@
     <!-- end konten -->
 
     <!-- konten our team-->
-    <div class="third-content mt-5 shadow pt-4">
-        <h1 class="text-center head-ourt fw-bold">Our Team</h1>
+    <div class="third-content mt-5 pt-4">
+        <h3 class="text-center head-ourt fw-bold">Our Team</h3>
         <div class="line"></div>
         <div class="container-fluid container-team py-5 mt-3">
             <div class="container">
@@ -63,11 +63,11 @@
                     </div>
                     <div class="col-md-6 wow fadeIn">
                         @if (!empty($owners->nama_owner))
-                        <h4 class="display-6 mb-3 fw-bold">{{ $owners->nama_owner }}</h4>
+                        <h4 class=" mb-3 fw-bold">{{ $owners->nama_owner }}</h4>
                         <p class="mb-1">CEO & Founder</p>
                         @endif
                         @if (!empty($owners->kata_sambutan))
-                        <p class="mb-4 mt-3">{{ $owners->kata_sambutan }}</p>
+                        <p class="mb-4 mt-3" style="text-align: justify; text-indent: 30px;">{{ $owners->kata_sambutan }}</p>
                         @endif
                     </div>
                 </div>
@@ -107,7 +107,6 @@
     <div class="container four-content mb-5 mt-5" data-aos="fade-down">
         <div class="content">
             <div class="left-side text-center">
-
                 <div class="p-3">
                     <i class="bi bi-geo-alt-fill fs-2"></i>
                     <h6 class="fw-bold">Alamat</h6>
@@ -116,7 +115,6 @@
                     @else
                     <p class="text-secondary"><i class="bi bi-exclamation-triangle-fill text-warning me-2"></i>Alamat Belum Tesedia</p>
                     @endif
-
                 </div>
             </div>
             <div class="right-side">
@@ -140,7 +138,7 @@
     <!-- end konten -->
 
     <!-- content jam operasional -->
-    <div class="container back-bg shadow mb-5">
+    <div class="container back-bg hours mb-5">
         <div class="row">
             <div class="col-sm-4"><img src="{{ asset('templates') }}/assets/images/time.jpg" class="img-fluid" alt="Phone image"></div>
             <div class="col-sm-8">
@@ -169,52 +167,52 @@
     <!-- end konten -->
 
     <!-- content contact us -->
-    <div class="container contactUs shadow mb-5 py-3 text-center">
+    <div class="container contactUs py-3 text-center">
         <h4 class="fw-bold">Contact Us</h4>
         <div class="line"></div>
         <div class="row mt-3" data-aos="fade-down">
             <div class="col-md-4 mt-3">
-                <div class="p-3 shadow h-100 rounded contact-wraper">
+                <div class="p-3 h-100 contact-wraper">
                     <i class="bi bi-telephone-plus-fill fs-2" style="color: #00abe9;"></i>
                     <h6 class="fw-bold">Telephone</h6>
                     <div class="d-flex justify-content-center mt-3">
-                        <ol class="text-start">
+                        <div class="text-start">
                             @if(!empty($contacts))
                             @php
                             $data_contact_whatsapp = [['name' => $contacts->telephone1_name, 'number' => $contacts->telephone1_number], ['name' => $contacts->telephone2_name, 'number' => $contacts->telephone2_number]];
                             @endphp
                             @foreach ($data_contact_whatsapp as $contact)
                             @if ($contact['name'] || $contact['number'])
-                            <li>{{ $contact['number'] ?? null }} ({{ $contact['name'] ?? null }})</li>
+                            <p class="m-0 text-capitalize">{{ $contact['number'] ?? null }} ({{ $contact['name'] ?? null }})</p>
                             @endif
                             @endforeach
                             @endif
-                        </ol>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 mt-3">
-                <div class="p-3 text-center shadow h-100 rounded contact-wraper">
+                <div class="p-3 text-center h-100 contact-wraper">
                     <i class="bi bi-whatsapp fs-2" style="color: #25d366;"></i>
                     <h6 class="fw-bold">Whatsapp</h6>
                     <div class="d-flex justify-content-center mt-3">
-                        <ol class="text-start">
+                        <div class="text-start">
                             @if(!empty($contacts))
                             @php
                             $data_contact_whatsapp = [['name' => $contacts->whatsapp1_name, 'number' => $contacts->whatsapp1_number], ['name' => $contacts->whatsapp2_name, 'number' => $contacts->whatsapp2_number], ['name' => $contacts->whatsapp3_name, 'number' => $contacts->whatsapp3_number], ['name' => $contacts->whatsapp4_name, 'number' => $contacts->whatsapp4_number]];
                             @endphp
                             @foreach ($data_contact_whatsapp as $contact)
                             @if ($contact['name'] || $contact['number'])
-                            <li>{{ $contact['number'] ?? null }} ({{ $contact['name'] ?? null }})</li>
+                            <p class="m-0 text-capitalize">{{ $contact['number'] ?? null }} ({{ $contact['name'] ?? null }})</p>
                             @endif
                             @endforeach
                             @endif
-                        </ol>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 mt-3">
-                <div class="p-3 text-center shadow h-100 rounded contact-wraper">
+                <div class="p-3 text-center h-100 contact-wraper">
                     <i class="bi bi-envelope fs-2" style="color: #f84437;"></i>
                     <h6 class="fw-bold">Email</h6>
                     @if (!empty($contacts) && ($contacts->email))
@@ -230,36 +228,36 @@
     <!-- endcontent -->
 
     <!-- content follow social media -->
-    <div class="container text-center socmed rounded-4 shadow p-5 text-capitalize">
+    <div class="container text-center socmed p-5 text-capitalize">
         <h4 class="fw-bold">Follow Us On Social Media</h4>
         <p>untuk mendapatkan informasi lebih banayak ikuti sosial media kami</p>
         <div class="row justify-content-center text-white" data-aos="fade-up">
             @foreach($sosmed as $sosmed)
             <div class="col-auto d-flex justify-content-center mt-3">
                 <a href="{{ $sosmed -> l_instagram }}">
-                    <div class="p-3 shadow rounded-circle icon-wrapper instagram">
-                        <i class="bi bi-instagram fs-2"></i>
+                    <div class="shadow rounded-circle icon-wrapper instagram">
+                        <i class="bi bi-instagram fs-4"></i>
                     </div>
                 </a>
             </div>
             <div class="col-auto d-flex justify-content-center mt-3">
                 <a href="">
-                    <div class="p-3 shadow rounded-circle icon-wrapper" style="background-color: #3b5998;">
-                        <i class="bi bi-facebook fs-2"></i>
+                    <div class="shadow rounded-circle icon-wrapper" style="background-color: #3b5998;">
+                        <i class="bi bi-facebook fs-4"></i>
                     </div>
                 </a>
             </div>
             <div class="col-auto d-flex justify-content-center mt-3">
                 <a href="">
-                    <div class="p-3 shadow rounded-circle icon-wrapper" style="background-color:#55acee;">
-                        <i class="bi bi-twitter fs-2"></i>
+                    <div class="shadow rounded-circle icon-wrapper" style="background-color:#55acee;">
+                        <i class="bi bi-twitter fs-4"></i>
                     </div>
                 </a>
             </div>
             <div class="col-auto d-flex justify-content-center mt-3">
                 <a href="">
-                    <div class="p-3 shadow rounded-circle icon-wrapper bg-dark">
-                        <i class="bi bi-tiktok fs-2"></i>
+                    <div class="shadow rounded-circle icon-wrapper bg-dark">
+                        <i class="bi bi-tiktok fs-4"></i>
                     </div>
                 </a>
             </div>

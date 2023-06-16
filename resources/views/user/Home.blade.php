@@ -60,14 +60,14 @@
     </div>
     <!-- konten 2 bigrafi-->
     <div class="second-konten container">
-        <div class="row same-height" data-aos="fade-down-right">
+        <div class="row same-height">
             <div class="col-lg-8 col-md-12 mt-4 order-sm-2 order-lg-1">
-                <div class="card text-center mb-5 bg-white h-100" data-aos="flip-down">
+                <div class="card text-center mb-5 bg-white h-100">
                     <div class=" card-body">
                         <h5 class="card-title card-perusahaan">Moelia Design</h5>
                         @if(!empty($abouts) && ($abouts->judul) || ($abouts->katasambutan))
                         <h6 class="card-subtitle mb-4">{{ $abouts->judul }}</h6>
-                        <p class="card-text  text-muted" style="text-align: justify;">{{ $abouts->katasambutan }} </p>
+                        <p class="card-text  text-muted" style="text-align: justify; text-indent: 30px;">{{ $abouts->katasambutan }} </p>
                         @else
                         <p class="mt-5 fw-bold text-secondary"><i class="bi bi-exclamation-triangle-fill fs-3 text-warning"></i><br>Data Kosong</p>
                         @endif
@@ -75,7 +75,7 @@
                 </div>
             </div>
             <div class="col-lg-4 col-md-12 mt-4 order-sm-1 order-lg-2">
-                <div class="card bg-transparent border border-0 h-100 image-konten-dua cover-img-dua" data-aos="flip-up">
+                <div class="card bg-transparent border border-0 h-100 image-konten-dua cover-img-dua">
                     @if (!empty($abouts) && ($abouts->fotobersama))
                     <img alt="fotobersama" class="image-konten-dua" src="{{ asset('storage') }}/{{ $abouts->fotobersama }}">
                     @else
@@ -123,7 +123,7 @@
     <!-- akhir konten 3 -->
 
     <!-- konten 4 vidio promosi-->
-    <div class="row same-height mt-5 shadow p-3 mb-5">
+    <div class="row same-height mt-5 p-3 mb-5">
         <div class="col-md-6 text-center align-self-center" data-aos="fade-up">
             <h5 class="card-title card-perusahaan">Moelia Design</h5>
             <img alt="" class="image-garis" src="img/gariskonten.png">
@@ -140,7 +140,7 @@
     <!-- akhir konten 4 -->
 
     <!-- konten 5 produk terbaru -->
-    <div class="mb-5 shadow pt-5">
+    <div class="mb-5 pt-5">
         <h5 class="text-center card-perusahaan">Moelia Design</h5>
         <h6 class="text-center card-subtitle">Produk Terbaru Kami</h6>
         <div class="container pb-5">
@@ -169,7 +169,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-lg-6 col-xl-6">
-                                    <h5>{{ Str::words($value->nama_produk, 5) }}</h5>
+                                    <h5 class="text-capitalize">{{ Str::words($value->nama_produk, 5) }}</h5>
                                     <div class="d-flex flex-row">
                                         <div class="kategori d-flex">
                                             <i class="bi bi-calendar-event d-flex me-2">
@@ -211,8 +211,8 @@
             </div>
         </div>
     </div>
-
     <!-- akhir konten 5 -->
+
     <!-- konten 6 gallery -->
     <div data-aos="fade-down">
         <h5 class="text-center card-perusahaan">Moelia Design</h5>
