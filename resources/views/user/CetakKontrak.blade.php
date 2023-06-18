@@ -40,7 +40,7 @@
 <body>
     <section class="container">
         <a href="/pembayaran" class="btn mt-4"><i class="bi bi-arrow-left"></i></a>
-        <a href="#" onclick="printWindow(event)" class="btn mt-4">Cetak Struk<i class="bi bi-printer-fill ms-2"></i></a>
+        <a href="#" onclick="printWindow(event)" class="btn mt-4">Cetak Surat Kontrak <i class="bi bi-printer-fill ms-2"></i></a>
         <div class="header m-3 mt-5 d-flex justify-content-center">
             <div class="img">
                 <img src="{{ asset('templates') }}/assets/images/header.jpg" alt="" style="width: 100px;" class="mb-3 me-3">

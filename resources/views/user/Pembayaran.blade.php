@@ -141,8 +141,8 @@
                                 </div>
                                 <div class="text-center">
                                     <a href="#" class="btn btn-primary mt-3">Request Perubahan<i class="bi bi-pencil-square ms-2"></i></a>
-                                    <a href="/cetak-kontrak" class="btn btn-primary mt-2">Lihat Surat Kontrak</a>
-                                    <a href="{{ route('struk') }}" class="btn btn-primary mt-4">lihat Struk</a>
+                                    <a href="/cetak-kontrak" class="btn btn-primary mt-2">Lihat Surat Kontrak <i class="bi bi-journal-text"></i></a>
+                                    <a href="/cetak-struk" class="btn btn-primary mt-4">lihat Struk <i class="bi bi-receipt"></i></a>
                                 </div>
                             </div>
 
@@ -150,65 +150,6 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="col-lg-4 mt-3">
-                <div class="shadow rounded text-center p-3">
-                    <div class="text-start">
-                        <div class="d-flex justify-content-center">
-                            <div class="rounded-circle overflow-hidden">
-                                <img src="{{ asset('templates') }}/assets/images/payment.png" class="img-fluid" alt="Phone image" style="width: 150px; height: 150px;">
-                            </div>
-                        </div>
-                        <div class="text-center" style="font-size: smaller;">
-                            <p class="mb-0 fw-bold">Moelia Design</p>
-                            <p>-- Tlp. 081258655551 --</p>
-                        </div>
-
-                        <hr>
-                        <div class="isi ps-2" style="font-size: small;">
-                            <div class="row mt-2">
-                                <div class="col-6">No. Referensi:</div>
-                                <div class="col-6">571234568987655</div>
-                            </div>
-                            <div class="row mt-2">
-                                <div class="col-6">Tgl Pembayaran:</div>
-                                <div class="col-6">22/04/2024</div>
-                            </div>
-                            <div class="row mt-2">
-                                <div class="col-6">Waktu Pembayaran:</div>
-                                <div class="col-6">13:05:31 WIB</div>
-                            </div>
-                            <div class="row mt-2">
-                                <div class="col-6">No. VA:</div>
-                                <div class="col-6">0777 8907 32</div>
-                            </div>
-                            <div class="row mt-2">
-                                <div class="col-6">Nama:</div>
-                                <div class="col-6">Muhammad Ardi</div>
-                            </div>
-                            <hr>
-                            <div class="row mt-2">
-                                <div class="col-6">Total Bayar:</div>
-                                <div class="col-6">Rp 10.000.000</div>
-                            </div>
-                            <div class="row mt-2">
-                                <div class="col-6">Biaya Admin:</div>
-                                <div class="col-6">Rp 5000</div>
-                            </div>
-                            <div class="row mt-2">
-                                <div class="col-6">Total Bayar:</div>
-                                <div class="col-6 fw-bold">Rp 10.00.5000</div>
-                            </div>
-                            <div class="row mt-2">
-                                <div class="col-6">Rekening Debet:</div>
-                                <div class="col-6">**** 1362</div>
-                            </div>
-                        </div>
-                        <hr>
-                        <p class="mb-0 text-center" style="font-size: smaller;">Terima kasih atas pembayaran Anda!</p>
-                    </div>
-                    <a href="{{ route('struk') }}" class="btn btn-primary mt-4">lihat Struk<i class="bi bi-printer-fill ms-2"></i></a>
-                </div>
-            </div> -->
         </div>
     </div>
     </div>

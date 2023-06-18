@@ -97,7 +97,7 @@
                                 {{ auth()->user()->nama_depan . ' ' . auth()->user()->nama_belakang }}
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> Profil</a></li>
+                                <li><a class="dropdown-item" href="/profile"><i class="bi bi-person"></i> Profil</a></li>
                                 <li>
                                     <form action="{{ route('logout') }}" id="logout" method="post">
                                         @csrf

@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <style>
         /* CSS lainnya */
 
@@ -12,8 +13,13 @@
             display: block;
         }
 
+        .btn {
+            background-color: #a39300;
+            color: white;
+        }
+
         @media print {
-            .print-button {
+            .btn {
                 display: none;
             }
         }
@@ -22,7 +28,9 @@
 
 <body>
 
-    <div class=" container text-center p-3">
+    <div class=" container p-3">
+        <a href="/pembayaran" class="btn mt-4"><i class="bi bi-arrow-left"></i></a>
+        <a href="#" onclick="printWindow(event)" class="btn mt-4">Cetak Struk<i class="bi bi-printer-fill ms-2"></i></a>
         <div class="text-start">
             <div class="d-flex justify-content-center">
                 <div class="rounded-circle overflow-hidden">
@@ -77,7 +85,6 @@
             <hr>
             <p class="mb-0 text-center" style="font-size: smaller;">Terima kasih atas pembayaran Anda!</p>
         </div>
-        <a href="#" onclick="printWindow(event)" class="btn btn-primary mt-4 print-button">Cetak Struk<i class="bi bi-printer-fill ms-2"></i></a>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <script>

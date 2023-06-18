@@ -31,11 +31,17 @@ use Illuminate\Support\Str;
 |
  */
 
-//Route::get('/struk', [StrukController::class, 'index'])->name('struk');
-// Route::get('/cetak-struk', [StrukController::class, 'cetakStruk'])->name('cetak-struk');
-// Route::get('/cetak-kontrak', function () {
-//     return view('user.CetakKontrak');
-// });
+Route::get('/cetak-kontrak', function () {
+    return view('user.CetakKontrak');
+});
+
+Route::get('/cetak-struk', function () {
+    return view('user.struk');
+});
+
+Route::get('/profile', function () {
+    return view('user.Profile');
+});
 
 Route::middleware(['no-redirect-if-authenticated:admins,web', 'prevent-back-history'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
