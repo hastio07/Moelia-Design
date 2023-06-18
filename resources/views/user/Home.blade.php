@@ -133,7 +133,9 @@
         </div>
         <div class="col-md-6" data-aos="fade-down">
             <div class="embed-responsive embed-responsive-16by9 video-container">
-                <iframe allowfullscreen class="embed-responsive-item" src="https://www.youtube-nocookie.com/embed/1-GLrbJzG3A"></iframe>
+                @if(!empty($videopromosi->judul || $videopromosi->link_video))
+                <iframe allowfullscreen class="embed-responsive-item" src="https://www.youtube-nocookie.com/embed/{{$videopromosi->link_video}}"></iframe>
+                @endif
             </div>
         </div>
     </div>

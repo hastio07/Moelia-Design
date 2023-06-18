@@ -53,13 +53,12 @@ Route::middleware(['no-redirect-if-authenticated:admins,web', 'prevent-back-hist
 
     Route::get('/email', function () {
         $token = Str::random(60);
-        $user = new \App\Models\User (); // Ganti dengan model pengguna yang sesuai
+        $user = new \App\Models\User(); // Ganti dengan model pengguna yang sesuai
         $user->email = 'test@example.com'; // Ganti dengan alamat email pengguna yang sesuai
         $notification = new SendResetPasswordLink($token);
         $message = $notification->toMail($user);
 
         return $message->render();
-
     });
 });
 
@@ -86,6 +85,8 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
             Route::delete('manage-perusahaan/deleteoffer/{id}', 'deleteoffer')->name('manage-perusahaan.deleteoffer');
             Route::post('manage-perusahaan/updateorcreatejo', 'updateorcreatejo')->name('manage-perusahaan.updateorcreatejo');
         });
+        Route::post('manage-perusahaan/addvideopromosi', [VidioPromosiController::class, 'createvideo'])->name('manage-videopromosi');
+        Route::delete('manage-perusahaan/addvideopromosi/{id}', [VidioPromosiController::class, 'deletevideopromosi'])->name('manage-videopromosi.delete');
         Route::controller(ManageProdukController::class)->group(function () {
             Route::get('manage-produk', 'index')->name('manage-produk.index');
             Route::post('manage-produk', 'store')->name('manage-produk.store');

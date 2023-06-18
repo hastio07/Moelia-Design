@@ -77,10 +77,20 @@
                                             <h4 class="text-center">
                                                 Vidio Promosi
                                             </h4>
-                                            <label class="form-label" for="judul_promosi">Judul Vidio</label>
-                                            <input class="form-control" id="judul_promosi" name="judul_promosi" placeholder="Masukkan Judul/Intro" type="text" value="">
-                                            <label class="form-label" for="vidio_promosi">Link Google Maps</label>
-                                            <input aria-label="default input example" class="form-control" id="vidio_promosi" name="vidio_promosi" placeholder="Link Vidio" type="text" value="">
+                                            <form method="post" action="{{ route('manage-videopromosi') }}">
+                                                @csrf
+                                                <input name="id_video" type="hidden" value="{{ $videopromosi->id ?? null }}">
+                                                <label class="form-label" for="judul_promosi">Judul Vidio</label>
+                                                <input class="form-control" id="judul_promosi" name="judul" placeholder="Masukkan Judul/Intro" type="text" value="{{ $videopromosi->judul ?? null }}">
+                                                <label class="form-label" for="vidio_promosi">Link vidio</label>
+                                                <input aria-label="default input example" class="form-control" id="vidio_promosi" name="link_video" placeholder="Link Vidio" type="text" value="{{ $videopromosi->link_video ?? null }}">
+                                                <div class="text-center mt-3">
+                                                    <button class="btn btn-success" type="submit">Upload</button>
+                                                    @if ((!empty($videopromosi) && ($videopromosi->judul || $videopromosi->link_video)))
+                                                    <button class="btn btn-danger" data-bs-route="{{ route('manage-videopromosi.delete', $videopromosi->id) }}" id="btnDelete" type="submit">Hapus</i></button>
+                                                    @endif
+                                                </div>
+                                            </form>
                                         </div>
 
                                         <!-- alamat perusahaan -->
@@ -413,10 +423,13 @@
                                         <!-- output vidio promosi -->
                                         <div class="left vidio-pro border text-center bg-white shadow p-3 mb-3 bg-body rounded">
                                             <h4>Vidio Promosi</h4>
+                                            @if(!empty($videopromosi->judul || $videopromosi->link_video))
                                             <div class="mt-3">
-                                                <h6 class="fw-bold my-3">Sebelum Melakukan Pemesanan Kepada Kami Alangkah Baiknya Untuk Melihat Vidio Kami Terlebih Dahulu.</h6>
-                                                <iframe class="embed-responsive-item rounded" src="https://www.youtube-nocookie.com/embed/1-GLrbJzG3A" allowfullscreen></iframe>
+                                                <h6 class="fw-bold my-3">{{$videopromosi->judul}}</h6>
+                                                <iframe src="https://www.youtube-nocookie.com/embed/{{$videopromosi->link_video}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                                <!-- <iframe class="embed-responsive-item rounded" src="https://www.youtube.com/embed/{{$videopromosi->link_video}}" allowfullscreen></iframe> -->
                                             </div>
+                                            @endif
                                         </div>
 
                                         <!-- output alamat, kontak & sosmed -->

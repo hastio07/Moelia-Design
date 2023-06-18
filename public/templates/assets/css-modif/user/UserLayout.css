@@ -58,23 +58,18 @@ body {
     background: #ffffff;
 }
 
-.dropdown-menu {
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.5s ease;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 1;
-    background-color: #ffffff;
-    padding: 0.5rem;
-    border: 1px solid #cccccc;
+
+@media only screen and (max-width: 991px) {
+    .dropdown-gallery {
+        position: relative !important;
+        text-align: left !important;
+    }
 }
 
-.nav-item.dropdown:hover .dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(5px);
+@media only screen and (max-width: 768px) {
+    .dropdown-gallery {
+        text-align: center !important;
+    }
 }
 
 @media only screen and (max-width: 767px) {

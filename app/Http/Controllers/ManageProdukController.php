@@ -46,7 +46,6 @@ class ManageProdukController extends Controller
                 } else {
                     return '';
                 }
-
             })->addColumn('aksi', function ($value) {
                 $json = htmlspecialchars(json_encode($value), ENT_QUOTES, 'UTF-8');
                 return ' <div class="d-grid gap-2 d-md-flex justify-content-md-center">

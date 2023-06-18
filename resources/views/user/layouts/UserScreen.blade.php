@@ -62,17 +62,23 @@
                         <li class="nav-item">
                             <a @class(['nav-link', 'active'=> Route::is('produk.*')]) href="/produk">Produk</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a @class([ 'nav-link' , 'dropdown-toggle' , 'active'=> Route::is('foto') || Route::is('vidio'),
-                                ]) aria-expanded="false" data-bs-toggle="dropdown" href="#" role="button">
-                                Gallery
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a @class([ 'nav-link' , 'dropdown-item' , 'bg-light active'=> Route::is('foto'),
-                                        ]) href="/foto">Foto</a></li>
-                                <li><a @class([ 'nav-link' , 'dropdown-item' , 'bg-light active'=> Route::is('vidio'),
-                                        ]) href="/vidio">Vidio</a></li>
-                            </ul>
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <a @class([ 'nav-link' , 'dropdown-toggle' , 'active'=> Route::is('foto') || Route::is('vidio'),
+                                    ]) aria-expanded="false" data-bs-toggle="dropdown" href="#" role="button">
+                                    Gallery
+                                </a>
+                                <ul class="dropdown-menu text-center dropdown-gallery">
+                                    <li>
+                                        <a @class([ 'nav-link' , 'dropdown-item' , 'bg-light active'=> Route::is('foto'),
+                                            ]) href="/foto">Foto</a>
+                                    </li>
+                                    <li>
+                                        <a @class([ 'nav-link' , 'dropdown-item' , 'bg-light active'=> Route::is('vidio'),
+                                            ]) href="/vidio">Vidio</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/wedding-calculator">Wedding Calculator</a>
@@ -84,11 +90,27 @@
                             <a class="nav-link" href="/pembayaran">Pembayaran</a>
                         </li>
                     </ul>
-                    <div class="d-flex center">
+                    <div class="text-center">
                         @auth
-                        <a href="{{ route('dashboard') }}"><button class="btn btn-color text-capitalize">{{ auth()->user()->nama_depan . ' ' . auth()->user()->nama_belakang }}</button></a>
+                        <div class="dropdown">
+                            <a href="{{ route('dashboard') }}" class="btn btn-color dropdown-toggle text-capitalize" id="logoutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ auth()->user()->nama_depan . ' ' . auth()->user()->nama_belakang }}
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> Profil</a></li>
+                                <li>
+                                    <form action="{{ route('logout') }}" id="logout" method="post">
+                                        @csrf
+                                        <a href="#" class="dropdown-item" onclick="document.getElementById('logout').submit();">
+                                            <div class="text-dark">
+                                                <i class="bi bi-box-arrow-left"></i> Logout
+                                            </div>
+                                        </a>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
                         @else
-
                         <a href="{{ route('login') }}">
                             <button class="btn btn-color" type="submit">Login <i class="fa-solid fa-right-to-bracket"></i></button>
                         </a>
@@ -146,6 +168,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- end bootstrap -->
     @stack('scripts')
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
@@ -155,7 +179,19 @@
             duration: 1000
         });
     </script>
-
+    <script>
+        $(document).ready(function() {
+            // Munculkan dropdown saat kursor diarahkan
+            $(".dropdown").hover(
+                function() {
+                    $(this).find(".dropdown-menu").addClass("show");
+                },
+                function() {
+                    $(this).find(".dropdown-menu").removeClass("show");
+                }
+            );
+        });
+    </script>
 </body>
 
 </html>

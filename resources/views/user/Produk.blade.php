@@ -29,7 +29,7 @@
                         <button class="btn btn-link btn-lg dropdown-toggle" type="button" data-mdb-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-funnel-fill"></i>
                         </button>
-                        <ul class="dropdown-menu">
+                        <ul class="nav-item dropdown-menu">
                             <li><a class="dropdown-item" href="#">Action</a></li>
                             <li><a class="dropdown-item" href="#">Another action</a></li>
                             <li><a class="dropdown-item" href="#">Something else here</a></li>

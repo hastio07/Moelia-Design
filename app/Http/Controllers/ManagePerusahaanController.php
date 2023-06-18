@@ -9,6 +9,7 @@ use App\Models\Contact;
 use App\Models\Offer;
 use App\Models\Owner;
 use App\Models\Sosmed;
+use App\Models\VideoPromosi;
 use App\Models\WorkingHour;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -24,8 +25,9 @@ class ManagePerusahaanController extends Controller
     protected $abouts;
     protected $offers;
     protected $workinghours;
+    protected $videopromosi;
 
-    public function __construct(Company $companies, Contact $contacts, Sosmed $sosmeds, Owner $owners, Address $addresses, About $abouts, Offer $offers, WorkingHour $workinghours)
+    public function __construct(Company $companies, Contact $contacts, Sosmed $sosmeds, Owner $owners, Address $addresses, About $abouts, Offer $offers, WorkingHour $workinghours, Videopromosi $videopromosi)
     {
         $this->companies = $companies;
         $this->contacts = $contacts;
@@ -35,6 +37,7 @@ class ManagePerusahaanController extends Controller
         $this->abouts = $abouts;
         $this->offers = $offers;
         $this->workinghours = $workinghours;
+        $this->videopromosi = $videopromosi;
     }
     public function index()
     {
@@ -47,6 +50,7 @@ class ManagePerusahaanController extends Controller
             'addresses' => $this->addresses->first(),
             'abouts' => $this->abouts->first(),
             'offers' => $this->offers->first(),
+            'videopromosi' => $this->videopromosi->first(),
             'workinghours' => $this->workinghours->whereIn('day', $days)->orderBy('day')->get(),
         ];
 

@@ -8,6 +8,7 @@ use App\Models\Photo;
 use App\Models\Product;
 use App\Models\Service;
 use App\Models\About;
+use App\Models\VideoPromosi;
 
 class HomeController extends Controller
 {
@@ -20,6 +21,8 @@ class HomeController extends Controller
         $services = Service::latest()->get();
         $companies = Company::first();
         $abouts = About::first();
-        return view('user.home', compact('galleries', 'photos', 'products', 'services', 'companies', 'abouts'));
+        $videopromosi = VideoPromosi::first();
+
+        return view('user.home', compact('galleries', 'photos', 'products', 'services', 'companies', 'abouts', 'videopromosi'));
     }
 }
