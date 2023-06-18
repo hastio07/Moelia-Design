@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'role' => \App\Http\Middleware\CheckRoles::class,
         'prevent-back-history' => \App\Http\Middleware\PreventBackHistory::class,
         'no-redirect-if-authenticated' => \App\Http\Middleware\NoRedirectIfAuthenticated::class,
+        'redirect-if-direct-access' => \App\Http\Middleware\RedirectIfDirectAccess::class,
     ];
 }

@@ -108,7 +108,7 @@ class ManageProdukController extends Controller
 
         //Menampung data request setelah validasi
         $data = [
-            'created_by' => Auth::user()->role_id,
+            'created_by' => Auth::user()->id,
             'nama_produk' => $validatedData['namaproduk'],
             'kategori_id' => (int) $validatedData['kategori'],
             'harga_sewa' => (int) $validatedData['hargasewa'],

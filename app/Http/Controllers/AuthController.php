@@ -59,11 +59,12 @@ class AuthController extends Controller
 
         // Memeriksa apakah data yang diberikan valid.
         if ($guardAdmin || $guardUser) {
-            $request->session()->regenerate();
             if (Auth::guard('admins')->check()) {
+                $request->session()->regenerate();
                 return redirect()->intended('dashboard');
             } else {
-                return redirect()->intended('u/dashboard');
+                $request->session()->regenerate();
+                return redirect()->intended(RouteServiceProvider::HOME);
             }
         } else {
             $key = Str::transliterate(Str::lower($request->input('email')) . '|' . $request->ip());
@@ -104,7 +105,9 @@ class AuthController extends Controller
      */
     public function destroy(Request $request)
     {
-        Auth::logout();
+        // Mendapatkan Guard Saat ini
+        $getCurrentGuard = Auth::getDefaultDriver();
+        Auth::guard($getCurrentGuard)->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect()->route('home');
@@ -152,6 +155,8 @@ class AuthController extends Controller
         }
 
         $validatedData = $validator->validated();
+        $validatedData['role_id'] = 3;
+        $validatedData['password'] = Hash::make($validatedData['password']);
 
         $user = User::create($validatedData);
 

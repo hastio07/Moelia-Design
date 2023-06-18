@@ -10,7 +10,6 @@ use App\Http\Controllers\ManagePegawaiController;
 use App\Http\Controllers\ManagePerusahaanController;
 use App\Http\Controllers\ManagePesananProsesController;
 use App\Http\Controllers\ManageProdukController;
-use App\Http\Controllers\StrukController;
 use App\Http\Controllers\user\AboutController;
 use App\Http\Controllers\user\CalculatorController;
 use App\Http\Controllers\user\FotoController;
@@ -32,13 +31,13 @@ use Illuminate\Support\Str;
 |
  */
 
-Route::get('/struk', [StrukController::class, 'index'])->name('struk');
-Route::get('/cetak-struk', [StrukController::class, 'cetakStruk'])->name('cetak-struk');
-Route::get('/cetak-kontrak', function () {
-    return view('user.CetakKontrak');
-});
+//Route::get('/struk', [StrukController::class, 'index'])->name('struk');
+// Route::get('/cetak-struk', [StrukController::class, 'cetakStruk'])->name('cetak-struk');
+// Route::get('/cetak-kontrak', function () {
+//     return view('user.CetakKontrak');
+// });
 
-Route::middleware(['no-redirect-if-authenticated:admins', 'prevent-back-history'])->group(function () {
+Route::middleware(['no-redirect-if-authenticated:admins,web', 'prevent-back-history'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/aboutus', [AboutController::class, 'index'])->name('aboutus');
     Route::get('/maintenance', function () {

@@ -2,10 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
-use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Http\Request;
-
 class StrukController extends Controller
 {
     public function index()
@@ -21,7 +17,7 @@ class StrukController extends Controller
                 'biaya_admin' => 'Rp 5.000',
                 'total_bayar_final' => 'Rp 10.00.5000',
                 'rekening_debet' => '**** 1362',
-            ]
+            ],
         ];
         return view('user.struk', compact('data'));
     }
@@ -39,10 +35,10 @@ class StrukController extends Controller
                 'biaya_admin' => 'Rp 5.000',
                 'total_bayar_final' => 'Rp 10.00.5000',
                 'rekening_debet' => '**** 1362',
-            ]
+            ],
         ];
 
-        $pdf = Pdf::loadView('user.struk', ['data' => $data]);
-        return $pdf->download('struk_pembayaran.pdf');
+        //$pdf = Pdf::loadView('user.struk', ['data' => $data]);
+        // return $pdf->download('struk_pembayaran.pdf');
     }
 }

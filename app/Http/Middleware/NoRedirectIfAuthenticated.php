@@ -43,16 +43,27 @@ class NoRedirectIfAuthenticated
      */
     public function handle(Request $request, Closure $next, ...$guards)
     {
+        // true jika kosong
+        // false jika ada
         if (empty($guards)) {
             $guards = [null];
         }
 
         foreach ($guards as $guard) {
+            // Jika guard di web.php didefinisikan
+            // Jika ya login maka gunakan data loginnya sesuai guard
+            // Jika tidak login maka tetap bisa akses halaman
             if ($this->auth->guard($guard)->check()) {
+                // untuk mengubah guard yang aktif saat ini ke guard yang ditentukan agar dapat melalukan operasi berikutnya
                 $this->auth->shouldUse($guard);
                 return $next($request);
+            } else {
+                return $next($request);
             }
-            return $next($request);
+            // Jika guard di web.php tidak didefinisikan
+            if ($guard == 'null') {
+                return $next($request);
+            }
         }
 
     }
