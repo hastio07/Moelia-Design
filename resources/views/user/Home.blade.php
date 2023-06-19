@@ -26,7 +26,7 @@
                         <h5 class="caption-text">{{$companies->nama_perusahaan ?? null}}</h5>
                         <h4>Wedding Organizer</h4>
                         <p>Bersama Kami mewujudkan impian pernikahan anda</p>
-                        <button class="mt-3 px-5 btn btn fw-bold">About Us <i class="bi bi-box-arrow-up-right ms-2"></i></button>
+                        <a href="/aboutus" class="mt-3 px-5 btn btn fw-bold">About Us <i class="bi bi-box-arrow-up-right ms-2"></i></a>
                     </div>
                 </div>
                 <div class="carousel-item">
@@ -35,7 +35,7 @@
                         <h5>{{ $companies->nama_perusahaan ?? null}}</h5>
                         <h4>Wedding Organizer</h4>
                         <p>Bersama Kami mewujudkan impian pernikahan anda</p>
-                        <button class="mt-3 px-5 btn btn fw-bold">About Us<i class="bi bi-box-arrow-up-right ms-2"></i></button>
+                        <a href="/aboutus" class="mt-3 px-5 btn btn fw-bold">About Us <i class="bi bi-box-arrow-up-right ms-2"></i></a>
                     </div>
                 </div>
                 <div class="carousel-item">
@@ -44,7 +44,7 @@
                         <h5>{{ $companies->nama_perusahaan ?? null}}</h5>
                         <h4>Wedding Organizer</h4>
                         <p>Bersama Kami mewujudkan impian pernikahan anda</p>
-                        <button class="mt-3 px-5 btn btn fw-bold">About Us<i class="bi bi-box-arrow-up-right ms-2"></i></button>
+                        <a href="/aboutus" class="mt-3 px-5 btn btn fw-bold">About Us <i class="bi bi-box-arrow-up-right ms-2"></i></a>
                     </div>
                 </div>
             </div>
