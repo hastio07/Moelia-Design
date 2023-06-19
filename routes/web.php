@@ -31,6 +31,8 @@ use Illuminate\Support\Str;
 |
  */
 
+Route::get('/produk/search', [ProdukController::class, 'search'])->name('produk.search');
+
 Route::get('/cetak-kontrak', function () {
     return view('user.CetakKontrak');
 });

@@ -10,11 +10,10 @@
     <div class="container">
         <div class="row height d-flex justify-content-center align-items-center">
             <div class="col-md-6">
-                <div class="form">
-                    <i class="fa fa-search"></i>
-                    <input type="text" class="form-control form-input" placeholder="Search anything...">
-                    <span class="left-pan"><i class="fa fa-microphone"></i></span>
-                </div>
+                <form action="{{ route('produk.search') }}" method="GET" class="d-flex p-1 rounded-3 border shadow">
+                    <input type="text" class="form-control form-input bg-transparent border-0 btn-outline-info" name="searchInput" placeholder="Cari produk, kategori, atau harga...">
+                    <button type="submit" class="btn bg-transparent ms-1 shadow-0"><i class="bi bi-search fs-6"></i></button>
+                </form>
             </div>
         </div>
     </div>
@@ -25,25 +24,23 @@
                     {{ Breadcrumbs::render('produk') }}
                 </nav>
                 <div class="navbar-nav ml-auto">
-                    <div class="btn-group shadow-0">
-                        <button class="btn btn-link btn-lg dropdown-toggle" type="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                    <div class="dropdown">
+                        <a href="{{ route('dashboard') }}" class="btn btn-link btn-lg dropdown-toggle text-secondary" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-funnel-fill"></i>
-                        </button>
-                        <ul class="nav-item dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            <li>
-                                <hr class="dropdown-divider" />
-                            </li>
-                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-arrow-up"></i> Harga Tertinggi</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-arrow-down"></i> Harga Terendah</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-bookmark"></i> Kategori</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-calendar-event"></i> Tanggal</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
+
         </nav>
         <div class="pt-2 pb-5">
-            <div class="row justify-content-center mb-3">
+            <div class="row justify-content-center mb-3" id="cardContainer">
                 @if ($products->isEmpty())
                 <div class="container d-flex justify-content-center align-items-center" style="height: 50vh;">
                     <div class="text-center">
@@ -62,7 +59,7 @@
                             <div class="row">
                                 <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
                                     <div class="bg-image hover-zoom ripple rounded ripple-surface">
-                                        <img src="storage/post-images/{{ $value->gambar }}" class="w-100" alt="produk-{{ $key }}" />
+                                        <img src="{{ asset('storage/post-images/' . $value->gambar) }}" class="w-100" alt="produk-{{ $key }}" />
                                         <a href={{ route('produk.show', $value->id) }}>
                                             <div class="hover-overlay">
                                                 <div class="mask" style="background-color: rgba(253, 253, 253, 0.15);"></div>
@@ -117,4 +114,38 @@
         </div>
     </div>
 </section>
+@section('scripts')
+<script>
+    function searchProducts() {
+        var input, filter, cards, cardContainer, title, category, price, i;
+        input = document.getElementById("searchInput");
+        filter = input.value.toUpperCase();
+        cardContainer = document.getElementById("cardContainer");
+        cards = cardContainer.getElementsByClassName("card");
+
+        for (i = 0; i < cards.length; i++) {
+            title = cards[i].querySelector(".card-body h5.text-capitalize");
+            category = cards[i].querySelector(".card-body .kategori p");
+            price = cards[i].querySelector(".card-body .harga h4");
+
+            var titleText = title.innerText.toUpperCase();
+            var categoryText = category.innerText.toUpperCase();
+            var priceText = price.innerText.toUpperCase().replace(/[^0-9.]/g, '');
+
+            if (titleText.includes(filter) || categoryText.includes(filter) || priceText.includes(filter)) {
+                cards[i].style.display = "";
+            } else {
+                cards[i].style.display = "none";
+            }
+        }
+    }
+
+    var searchInput = document.getElementById("searchInput");
+    searchInput.addEventListener("input", function() {
+        searchProducts();
+    });
+</script>
+@endsection
+
+
 @endsection
