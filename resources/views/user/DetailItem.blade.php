@@ -39,21 +39,16 @@
             <div class="col-md-5">
                 <img alt="{{ $products->slug_produk }}" class="img-fluid rounded" src="/storage/post-images/{{ $products->gambar }}">
                 <div class="row mt-1 photo-product">
+                    @php
+                    $data_album=json_decode($products->album_produk)
+                    @endphp
+                    @foreach($data_album as $album_produk)
                     <div class="col-lg-4 col-md-4 col-sm-6 mt-2 px-2">
-                        <a data-gallery="photo-gallery" data-toggle="lightbox" href="/storage/post-images/{{ $products->gambar }}">
-                            <img alt="{{ $products->slug_produk }}" class="img-fluid rounded" height="600" src="/storage/post-images/{{ $products->gambar }}" width="600">
+                        <a data-gallery="photo-gallery" data-toggle="lightbox" href="{{ asset('storage/' .$album_produk) }}">
+                            <img alt="{{ $products->slug_produk }}" class="img-fluid rounded" height="600" src="{{ asset('storage/' .$album_produk) }}" width="600">
                         </a>
                     </div>
-                    <div class="col-lg-4 col-md-4 col-sm-6 mt-2 px-2">
-                        <a data-gallery="photo-gallery" data-toggle="lightbox" href="/storage/post-images/{{ $products->gambar }}">
-                            <img alt="{{ $products->slug_produk }}" class="img-fluid rounded" height="600" src="/storage/post-images/{{ $products->gambar }}" width="600">
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-6 mt-2 px-2">
-                        <a data-gallery="photo-gallery" data-toggle="lightbox" href="/storage/post-images/{{ $products->gambar }}">
-                            <img alt="{{ $products->slug_produk }}" class="img-fluid rounded" height="600" src="/storage/post-images/{{ $products->gambar }}" width="600">
-                        </a>
-                    </div>
+                    @endforeach
                 </div>
 
             </div>
