@@ -29,17 +29,17 @@ class ManageAkunController extends Controller
                 <button class="btn btn-danger" data-route="' . route('manage-akun.destroy', $hashids->encode($value->id)) . '" id="delete-button"><i class="bi bi-trash"></i></button>
             </div>';
             })->filter(function ($query) {
-            if (request()->has('search') && !empty(request()->get('search')['value'])) {
-                $searchValue = request()->get('search')['value'];
-                $query->where(function ($query) use ($searchValue) {
-                    $query->where('nama_depan', 'LIKE', "%$searchValue%")
-                        ->orWhere('nama_belakang', 'LIKE', "%$searchValue%");
-                })->orWhere('email', 'LIKE', "%$searchValue%")->orWhere('phone_number', 'LIKE', "%$searchValue%")
-                    ->orWhereHas('role', function ($query) use ($searchValue) {
-                        $query->where('level', 'LIKE', "%$searchValue%");
-                    });
-            }
-        })->rawColumns(['aksi'])->make(true);
+                if (request()->has('search') && !empty(request()->get('search')['value'])) {
+                    $searchValue = request()->get('search')['value'];
+                    $query->where(function ($query) use ($searchValue) {
+                        $query->where('nama_depan', 'LIKE', "%$searchValue%")
+                            ->orWhere('nama_belakang', 'LIKE', "%$searchValue%");
+                    })->orWhere('email', 'LIKE', "%$searchValue%")->orWhere('phone_number', 'LIKE', "%$searchValue%")
+                        ->orWhereHas('role', function ($query) use ($searchValue) {
+                            $query->where('level', 'LIKE', "%$searchValue%");
+                        });
+                }
+            })->rawColumns(['aksi'])->make(true);
     }
     /**
      * Display a listing of the resource.

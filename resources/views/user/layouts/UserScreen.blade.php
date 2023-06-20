@@ -95,7 +95,7 @@
                             <a href="{{ route('dashboard') }}" class="btn btn-color dropdown-toggle text-capitalize" id="logoutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 {{ auth()->user()->nama_depan . ' ' . auth()->user()->nama_belakang }}
                             </a>
-                            <ul class="dropdown-menu dropdown-gallery mt-2">
+                            <ul class="dropdown-menu dropdown-gallery mt-1">
                                 <li><a class="dropdown-item" href="/profile"><i class="bi bi-person"></i> Profil</a></li>
                                 <li>
                                     <form action="{{ route('logout') }}" id="logout" method="post">
