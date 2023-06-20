@@ -14,26 +14,26 @@
                     <i class="bi bi-person-vcard-fill fs-1"></i>
                 </div>
                 <div class="namemail">
-                    <h6 class="fw-bold mb-0">Hastio Wahyu</h6>
-                    <p class="text-muted mb-0">hastiowahyu@gmail.com</p>
+                    <h6 class="fw-bold mb-0  text-capitalize">{{ $user->nama_depan }} {{ $user->nama_belakang }}</h6>
+                    <p class="text-muted mb-0">{{ $user->email }}</p>
                 </div>
             </div>
 
             <div class="bio shadow rounded-5 border-5 p-3 mt-3">
-                <div class="row">
+                <div class="row  text-capitalize">
                     <div class="col-md-6">
                         <p class="fw-bold mb-0">Nama Depan</p>
-                        <p>Hastio</p>
+                        <p>{{ $user->nama_depan }}</p>
                     </div>
                     <div class="col-md-6">
                         <p class="fw-bold mb-0">Nama Belakang</p>
-                        <p class="text-muted">Wahyu</p>
+                        <p class="text-muted">{{ $user->nama_belakang }}</p>
                     </div>
                 </div>
                 <p class="fw-bold mb-0">Email</p>
-                <p class="text-muted">hastiowahyu@gmail.com</p>
+                <p class="text-muted">{{ $user->email }}</p>
                 <p class="fw-bold mb-0">No. Handphone</p>
-                <p class="text-muted">081258655551</p>
+                <p class="text-muted">{{ $user->phone }}</p>
             </div>
         </div>
         <div class="col-md-7">
@@ -41,16 +41,16 @@
                 <h6 class="fw-bold">Account Settings</h6>
                 <div class="row">
                     <div class="col-md-6 mt-2">
-                        <input type="text" class="form-control" placeholder="First name" aria-label="First name">
+                        <input type="text" class="form-control" placeholder="First name" aria-label="First name" value="{{ $user->nama_depan }}">
                     </div>
                     <div class="col-md-6 mt-2">
-                        <input type="text" class="form-control" placeholder="Last name" aria-label="Last name">
+                        <input type="text" class="form-control" placeholder="Last name" aria-label="Last name" value="{{ $user->nama_belakang }}">
                     </div>
                 </div>
-                <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-                <input type="email" class="form-control" id="inputEmail">
-                <label for="inputPhone" class="col-sm-2 col-form-label">Phone Number</label>
-                <input type="number" class="form-control" id="inputPhone">
+                <label for="inputEmail" class="col-form-label mt-2">Email</label>
+                <input type="email" class="form-control" id="inputEmail" value="{{ $user->email }}">
+                <label for="inputPhone" class="col-form-label mt-2">Phone Number</label>
+                <input type="number" class="form-control" id="inputPhone" value="{{ $user->phone }}">
                 <button class="btn btn-warning mt-3">Submit</button>
                 <button class="btn btn-info">Ubah Password</button>
             </div>
