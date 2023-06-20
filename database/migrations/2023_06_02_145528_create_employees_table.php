@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('kontak');
             $table->decimal('besaran_gaji', 10, 0, true);
             $table->foreignId('jabatan')->constrained('category_jabatans', 'id')->restrictOnDelete()->cascadeOnUpdate();
+            $table->string('show_data')->default('tidak');
             $table->string('foto')->nullable();
             $table->timestamps();
         });

@@ -36,17 +36,17 @@ class ManagePegawaiController extends Controller
                 <button class="btn btn-danger" data-bs-route="' . route('manage-pegawai.destroy', $value->id) . '" data-bs-target="#DeleteModal" data-bs-toggle="modal" id="btnDeleteModal" type="button"><i class="bi bi-trash"></i></button>
                 </div>';
             })->filter(function ($query) {
-            if (request()->has('search') && !empty(request()->get('search')['value'])) {
-                $searchValue = request()->get('search')['value'];
-                $query->where('nama', 'LIKE', "%$searchValue%")
-                    ->orWhere('alamat_domisili', 'LIKE', "%$searchValue%")
-                    ->orWhere('kontak', 'LIKE', "%$searchValue%")
-                    ->orWhere('besaran_gaji', 'LIKE', "%$searchValue%")
-                    ->orWhereHas('categoryjabatan', function ($query) use ($searchValue) {
-                        $query->where('nama_jabatan', 'LIKE', "%$searchValue%");
-                    });
-            }
-        })
+                if (request()->has('search') && !empty(request()->get('search')['value'])) {
+                    $searchValue = request()->get('search')['value'];
+                    $query->where('nama', 'LIKE', "%$searchValue%")
+                        ->orWhere('alamat_domisili', 'LIKE', "%$searchValue%")
+                        ->orWhere('kontak', 'LIKE', "%$searchValue%")
+                        ->orWhere('besaran_gaji', 'LIKE', "%$searchValue%")
+                        ->orWhereHas('categoryjabatan', function ($query) use ($searchValue) {
+                            $query->where('nama_jabatan', 'LIKE', "%$searchValue%");
+                        });
+                }
+            })
             ->rawColumns(['foto', 'aksi'])
             ->make(true);
     }
@@ -82,6 +82,7 @@ class ManagePegawaiController extends Controller
             'kontak' => 'required|numeric|max:99999999999999|regex:/^(?:\+62)?\d{9,12}$/',
             'gaji' => 'required|numeric|max:9999999999',
             'jabatan' => 'required|string',
+            'show_data' => 'required|in:ya,tidak',
             'foto' => 'file|image|mimetypes:image/jpeg,image/jpg,image/png|max:2048',
         ];
         $massages = [
@@ -118,6 +119,7 @@ class ManagePegawaiController extends Controller
             'kontak' => $validatedData['kontak'],
             'besaran_gaji' => (int) $validatedData['gaji'],
             'jabatan' => $validatedData['jabatan'],
+            'show_data' => $validatedData['show_data'],
         ];
         // Menyimpan foto ke folder storage/app/public
         if ($request->hasFile('foto')) {
@@ -144,6 +146,7 @@ class ManagePegawaiController extends Controller
             'kontak' => 'required|numeric|max:99999999999999|regex:/^(?:\+62)?\d{9,12}$/',
             'gaji' => 'required|numeric|integer',
             'jabatan' => 'required|string',
+            'show_data' => 'required|in:ya,tidak',
             'foto' => 'file|image|mimetypes:image/jpeg,image/jpg,image/png|max:2048',
         ];
         $massages = [
@@ -177,6 +180,7 @@ class ManagePegawaiController extends Controller
             'kontak' => $validatedData['kontak'],
             'besaran_gaji' => (int) $validatedData['gaji'],
             'jabatan' => $validatedData['jabatan'],
+            'show_data' => $validatedData['show_data'],
         ];
         // Menyimpan foto ke folder storage/app/public
         if ($request->hasFile('foto')) {

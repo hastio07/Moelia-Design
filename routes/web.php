@@ -48,7 +48,11 @@ Route::get('/cetak-struk', function () {
 
 Route::controller(UserController::class)->group(function () {
     Route::get('/profile', 'index')->name('user-profile.index');
+    // Rute untuk pembaruan data pengguna
+    Route::put('/profile/user/update', 'update')->name('user.profile');
 });
+
+
 
 Route::middleware(['no-redirect-if-authenticated:admins,web', 'prevent-back-history'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');

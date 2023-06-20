@@ -47,6 +47,7 @@
                                 <th>Kontak</th>
                                 <th>Besaran Gaji</th>
                                 <th>Jabatan</th>
+                                <th>Show</th>
                                 <th>Foto</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
@@ -60,6 +61,7 @@
                                 <th>No. Telephone</th>
                                 <th>Besaran Gaji</th>
                                 <th>Jabatan</th>
+                                <th>Show</th>
                                 <th>Foto</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
@@ -156,6 +158,22 @@
                                     @endforeach
                                 </select>
                             </div>
+                            <div class="mt-3 border p-1 rounded d-flex">
+                                <p class="ms-2 mb-0">Apakah akan ditampilkan di halaman depan?</p>
+                                <div class="form-check mx-3">
+                                    <input class="form-check-input" type="radio" name="show_data" id="flexRadioDefault1" value="ya">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        Ya
+                                    </label>
+
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="show_data" id="flexRadioDefault2" value="tidak">
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                        Tidak
+                                    </label>
+                                </div>
+                            </div>
                             <div class="mt-3">
                                 <label class="form-label" for="foto">Foto Pegawai</label>
                                 <input id="oldImage" name="oldImage" type="hidden">
@@ -243,6 +261,10 @@
                     name: 'jabatan'
                 },
                 {
+                    data: 'show_data',
+                    name: 'show-data'
+                },
+                {
                     data: 'foto',
                     name: 'foto'
                 },
@@ -273,6 +295,8 @@
     let oldImageField = document.querySelector('.modal-content .modal-body input#oldImage');
     let imgFile = CUModal.querySelector('.modal-content .modal-body input#foto');
     let output = CUModal.querySelector('.modal-content .modal-body output#result');
+    let radioYa = CUModal.querySelector('.modal-content .modal-body input#flexRadioDefault1');
+    let radioTidak = CUModal.querySelector('.modal-content .modal-body input#flexRadioDefault2');
 
     CUModal.addEventListener('show.bs.modal', (event) => {
         let button = event.relatedTarget;
@@ -324,6 +348,14 @@
             gajiPegawai.value = parseData.besaran_gaji;
             jabatanPegawai.value = parseData.jabatan;
 
+            if (parseData.show_data == 'ya') {
+                radioYa.checked = true;
+                radioTidak.checked = false;
+            } else {
+                radioYa.checked = false;
+                radioTidak.checked = true;
+            }
+
             if (parseData.foto) {
                 let picFile = parseData.foto;
                 let src = `/storage/compressed${picFile}`;
@@ -372,4 +404,6 @@
         deleteModal.querySelector('.modal-content .modal-footer form').setAttribute('action', route);
     });
 </script>
+
+
 @endpush
