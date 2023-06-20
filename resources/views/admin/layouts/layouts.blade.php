@@ -103,7 +103,7 @@
                         </a>
                         <ul class="dropdown-menu small">
                             <li class="menu-content ps-menu">
-                                <a href="/ProfileAdmin">
+                                <a href="{{ route('profile-admin') }}">
                                     <div class="description">
                                         <i class="ti-user"></i> Profile
                                     </div>

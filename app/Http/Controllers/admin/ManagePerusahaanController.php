@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\About;
 use App\Models\Address;
 use App\Models\Company;
@@ -11,33 +12,34 @@ use App\Models\Owner;
 use App\Models\Sosmed;
 use App\Models\VideoPromosi;
 use App\Models\WorkingHour;
+use App\Rules\YouTubeUrl;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class ManagePerusahaanController extends Controller
 {
+    protected $owners;
     protected $companies;
+    protected $videopromosi;
+    protected $addresses;
     protected $contacts;
     protected $sosmeds;
-    protected $owners;
-    protected $addresses;
     protected $abouts;
     protected $offers;
     protected $workinghours;
-    protected $videopromosi;
 
-    public function __construct(Company $companies, Contact $contacts, Sosmed $sosmeds, Owner $owners, Address $addresses, About $abouts, Offer $offers, WorkingHour $workinghours, Videopromosi $videopromosi)
+    public function __construct(Contact $contacts, Sosmed $sosmeds, Owner $owners, Address $addresses, About $abouts, Offer $offers, WorkingHour $workinghours, Videopromosi $videopromosi)
     {
-        $this->companies = $companies;
-        $this->contacts = $contacts;
-        $this->sosmeds = $sosmeds;
-        $this->owners = $owners;
-        $this->addresses = $addresses;
-        $this->abouts = $abouts;
-        $this->offers = $offers;
-        $this->workinghours = $workinghours;
+        $this->owners = Owner::get();
+        $this->companies = Company::get();
         $this->videopromosi = $videopromosi;
+        $this->addresses = Address::get();
+        $this->contacts = Contact::get();
+        $this->sosmeds = Sosmed::get();
+        $this->abouts = About::get();
+        $this->offers = Offer::get();
+        $this->workinghours = WorkingHour::get();
     }
     public function index()
     {
@@ -56,72 +58,6 @@ class ManagePerusahaanController extends Controller
 
         return view('admin.manageperusahaan', $data);
     }
-
-    public function updateorcreatecompany(Request $request)
-    {
-
-        $rules = [
-            'nama_perusahaan' => 'nullable|string|max:255',
-            'logo_perusahaan' => 'nullable|file|image|mimetypes:image/jpeg,image/jpg,image/png|max:2048',
-            'oldlogo_perusahaan' => [
-                'nullable',
-                'string',
-                function ($attribute, $value, $fail) {
-                    if (!empty($value)) {
-                        $company = $this->companies->where('logo_perusahaan', $value)->first();
-                        if (!$company) {
-                            $fail('sesuatu nilai tidak valid');
-                        }
-                    }
-                },
-            ],
-        ];
-        $massages = [
-            'max' => ':attribute harus diisi maksimal :max karakter.',
-            'string' => ':attribute harus berupa teks.',
-            'required' => ':attribute wajib diisi.',
-        ];
-        //Validasi
-        $validator = Validator::make($request->all(), $rules, $massages);
-
-        //Jika gagal
-        if ($validator->fails()) {
-            return dd(back()->withErrors($validator)->withInput()); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
-        }
-        $validatedData = $validator->validated();
-        // dd($validatedData);
-        if ($request->has('nama_perusahaan')) {
-            $filterData['nama_perusahaan'] = $validatedData['nama_perusahaan'];
-        }
-
-        if ($request->hasFile('logo_perusahaan')) {
-            if ($validatedData['oldlogo_perusahaan']) {
-                $path = $validatedData['oldlogo_perusahaan'];
-                Storage::delete($path);
-            }
-
-            $imagefile = $validatedData['logo_perusahaan'];
-            $imageFileName = date("Y-m-d", time()) . '-' . $imagefile->getClientOriginalName();
-            $oriPath = $imagefile->storeAs('logo-images', $imageFileName); // -> logo-images/<nama_files.ext>
-            $filterData['logo_perusahaan'] = $oriPath;
-        }
-        $id = (int) $request->input('id_perusahaan');
-        // dd($id);
-        // update atau create record dengan data yang diberikan
-        $this->companies->updateOrCreate(['id' => $id], $filterData);
-        return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil Disimpan');
-    }
-    public function deletecompany($id)
-    {
-        $data = $this->companies->findOrFail($id);
-        if ($data->logo_perusahaan !== null) {
-            $path = $data->logo_perusahaan;
-            Storage::delete($path);
-        }
-        $data->delete();
-        return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil DiHapus!');
-    }
-
     public function updateorcreateowner(Request $request)
     {
 
@@ -190,6 +126,125 @@ class ManagePerusahaanController extends Controller
             'kata_sambutan' => null,
             'foto_owner' => null,
         ];
+        $db->update($data);
+        return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil DiHapus!');
+    }
+    public function updateorcreatecompany(Request $request)
+    {
+
+        $rules = [
+            'nama_perusahaan' => 'nullable|string|max:255',
+            'logo_perusahaan' => 'nullable|file|image|mimetypes:image/jpeg,image/jpg,image/png|max:2048',
+            'oldlogo_perusahaan' => [
+                'nullable',
+                'string',
+                function ($attribute, $value, $fail) {
+                    if (!empty($value)) {
+                        $company = $this->companies->where('logo_perusahaan', $value)->first();
+                        if (!$company) {
+                            $fail('sesuatu nilai tidak valid');
+                        }
+                    }
+                },
+            ],
+        ];
+        $massages = [
+            'max' => ':attribute harus diisi maksimal :max karakter.',
+            'string' => ':attribute harus berupa teks.',
+            'required' => ':attribute wajib diisi.',
+        ];
+        //Validasi
+        $validator = Validator::make($request->all(), $rules, $massages);
+
+        //Jika gagal
+        if ($validator->fails()) {
+            return dd(back()->withErrors($validator)->withInput()); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
+        }
+        $validatedData = $validator->validated();
+        // dd($validatedData);
+        if ($request->has('nama_perusahaan')) {
+            $filterData['nama_perusahaan'] = $validatedData['nama_perusahaan'];
+        }
+
+        if ($request->hasFile('logo_perusahaan')) {
+            if ($validatedData['oldlogo_perusahaan']) {
+                $path = $validatedData['oldlogo_perusahaan'];
+                Storage::delete($path);
+            }
+
+            $imagefile = $validatedData['logo_perusahaan'];
+            $imageFileName = date("Y-m-d", time()) . '-' . $imagefile->getClientOriginalName();
+            $oriPath = $imagefile->storeAs('logo-images', $imageFileName); // -> logo-images/<nama_files.ext>
+            $filterData['logo_perusahaan'] = $oriPath;
+        }
+        $id = (int) $request->input('id_perusahaan');
+        // dd($id);
+        // update atau create record dengan data yang diberikan
+        $this->companies->updateOrCreate(['id' => $id], $filterData);
+        return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil Disimpan');
+    }
+    public function deletecompany($id)
+    {
+        $data = $this->companies->findOrFail($id);
+        if ($data->logo_perusahaan !== null) {
+            $path = $data->logo_perusahaan;
+            Storage::delete($path);
+        }
+        $data->delete();
+        return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil DiHapus!');
+    }
+    public function updateorcreatevideopromosi(Request $request)
+    {
+        $rules = [
+            'judul' => 'required|string|max:255',
+            'link_video' => ['required', 'string', 'url', 'max:255', new YouTubeUrl],
+        ];
+        $massages = [
+            'max' => ':attribute harus diisi maksimal :max karakter.',
+            'string' => ':attribute harus berupa teks.',
+            'required' => ':attribute wajib diisi.',
+            'url' => ':attribute harus berupa url valid',
+        ];
+        //Validasi
+        $validator = Validator::make($request->all(), $rules, $massages);
+
+        //Jika gagal
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput(); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
+        }
+
+        $validatedData = $validator->validated();
+
+        $data['judul'] = $validatedData['judul'];
+        $parsed_url = parse_url($validatedData['link_video']);
+        if ($parsed_url['host'] === 'youtu.be') {
+            $id = ltrim($parsed_url['path'], '/');
+        } elseif ($parsed_url['host'] === 'www.youtube.com' && isset($parsed_url['query'])) {
+            parse_str($parsed_url['query'], $query_vars);
+            if (isset($query_vars['v'])) {
+                $id = $query_vars['v'];
+            }
+        } else {
+            $id = basename($parsed_url['path']);
+        }
+
+        $data['thumbnail_video'] = 'https://img.youtube.com/vi/' . $id . '/maxresdefault.jpg';
+        $data['link_video'] = $id;
+
+        $id_video = (int) $request->input('id_video');
+        VideoPromosi::updateOrCreate(['id' => $id_video], $data);
+        return redirect()->route('manage-perusahaan.index')->with('success', 'data berhasil disimpan');
+    }
+
+    public function deletevideopromosi($id)
+    {
+        $db = VideoPromosi::findOrFail($id);
+        $data = [
+            'judul' => null,
+            'thumbnail_video' => null,
+            'link_video' => null,
+        ];
+
         $db->update($data);
         return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil DiHapus!');
     }
@@ -523,4 +578,5 @@ class ManagePerusahaanController extends Controller
 
         return redirect()->route('manage-perusahaan.index')->with('success', 'Jam Operasional Berhasil di Perbarui');
     }
+
 }

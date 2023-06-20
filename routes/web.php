@@ -1,21 +1,22 @@
 <?php
 
-use App\Http\Controllers\DashboardAdminsController;
-use App\Http\Controllers\ManageAkunController;
-use App\Http\Controllers\ManageGalleryController;
-use App\Http\Controllers\ManageGudangController;
-use App\Http\Controllers\ManageJadwalController;
-use App\Http\Controllers\ManageLayananController;
-use App\Http\Controllers\ManagePegawaiController;
-use App\Http\Controllers\ManagePerusahaanController;
-use App\Http\Controllers\ManagePesananProsesController;
-use App\Http\Controllers\ManageProdukController;
-use App\Http\Controllers\user\UserController;
+use App\Http\Controllers\admin\DashboardAdminsController;
+use App\Http\Controllers\admin\ManageAkunController;
+use App\Http\Controllers\admin\ManageGalleryController;
+use App\Http\Controllers\admin\ManageGudangController;
+use App\Http\Controllers\admin\ManageJadwalController;
+use App\Http\Controllers\admin\ManageLayananController;
+use App\Http\Controllers\admin\ManagePegawaiController;
+use App\Http\Controllers\admin\ManagePerusahaanController;
+use App\Http\Controllers\admin\ManagePesananProsesController;
+use App\Http\Controllers\admin\ManageProdukController;
+use App\Http\Controllers\admin\ProfileAdminController;
 use App\Http\Controllers\user\AboutController;
 use App\Http\Controllers\user\CalculatorController;
 use App\Http\Controllers\user\FotoController;
 use App\Http\Controllers\user\HomeController;
 use App\Http\Controllers\user\ProdukController;
+use App\Http\Controllers\user\UserController;
 use App\Http\Controllers\user\VideoController;
 use App\Notifications\ResetPassword\SendResetPasswordLink;
 use Illuminate\Support\Facades\Route;
@@ -31,7 +32,6 @@ use Illuminate\Support\Str;
 | contains the "web" middleware group. Now create something great!
 |
  */
-
 
 Route::get('/produk/sort/{sort}', [ProdukController::class, 'sortProducts'])->name('produk.sort');
 
@@ -52,8 +52,6 @@ Route::controller(UserController::class)->group(function () {
     Route::put('/profile/user/update', 'update')->name('user.profile');
 });
 
-
-
 Route::middleware(['no-redirect-if-authenticated:admins,web', 'prevent-back-history'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/aboutus', [AboutController::class, 'index'])->name('aboutus');
@@ -70,7 +68,7 @@ Route::middleware(['no-redirect-if-authenticated:admins,web', 'prevent-back-hist
 
     Route::get('/email', function () {
         $token = Str::random(60);
-        $user = new \App\Models\User(); // Ganti dengan model pengguna yang sesuai
+        $user = new \App\Models\User (); // Ganti dengan model pengguna yang sesuai
         $user->email = 'test@example.com'; // Ganti dengan alamat email pengguna yang sesuai
         $notification = new SendResetPasswordLink($token);
         $message = $notification->toMail($user);
@@ -100,10 +98,10 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
             Route::delete('manage-perusahaan/deleteabout/{id}', 'deleteabout')->name('manage-perusahaan.deleteabout');
             Route::post('manage-perusahaan/updateorcreateoffer', 'updateorcreateoffer')->name('manage-perusahaan.updateorcreateoffer');
             Route::delete('manage-perusahaan/deleteoffer/{id}', 'deleteoffer')->name('manage-perusahaan.deleteoffer');
+            Route::post('manage-perusahaan/addvideopromosi', 'updateorcreatevideopromosi')->name('manage-perusahaan.updateorcreatevideopromosi');
+            Route::delete('manage-perusahaan/addvideopromosi/{id}', 'deletevideopromosi')->name('manage-perusahaan.deletevideopromosi');
             Route::post('manage-perusahaan/updateorcreatejo', 'updateorcreatejo')->name('manage-perusahaan.updateorcreatejo');
         });
-        Route::post('manage-perusahaan/addvideopromosi', [VidioPromosiController::class, 'createvideo'])->name('manage-videopromosi');
-        Route::delete('manage-perusahaan/addvideopromosi/{id}', [VidioPromosiController::class, 'deletevideopromosi'])->name('manage-videopromosi.delete');
         Route::controller(ManageProdukController::class)->group(function () {
             Route::get('manage-produk', 'index')->name('manage-produk.index');
             Route::post('manage-produk', 'store')->name('manage-produk.store');
@@ -142,8 +140,10 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
             Route::post('manage-gudang/kategori', 'createcategorybarang')->name('manage-gudang.createcategorybarang');
             Route::delete('manage-gudang/kategori/{id}', 'destroycategorybarang')->name('manage-gudang.destroycategorybarang');
         });
-        Route::get('/ProfileAdmin', function () {
-            return view('admin.profileadmin');
+        Route::controller(ProfileAdminController::class)->group(function () {
+            Route::get('profile-admin', 'index')->name('profile-admin');
+            Route::post('profile-admin', 'savedata')->name('profile-admin.save');
+            Route::post('profile-admin/new-password', 'newpassword')->name('profile-admin.new-password');
         });
         Route::get('/weddingcalculator', function () {
             return view('admin.ManageWeddingCal');
