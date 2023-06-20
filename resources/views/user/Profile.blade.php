@@ -58,9 +58,19 @@
                     <label for="inputEmail" class="col-form-label mt-2">Email</label>
                     <input type="email" name="email" class="form-control" id="inputEmail" value="{{ $user->email }}">
                     <label for="inputPhone" class="col-form-label mt-2">Phone Number</label>
-                    <input type="number" name="phone" class="form-control" id="inputPhone" value="{{ $user->phone }}">
-                    <label for="inputPassword" class="col-form-label mt-2">Password</label>
-                    <input type="Password" name="phone" class="form-control" id="inputPhone" value="{{ $user->phone }}">
+                    <input type="phone" name="phone" class="form-control" id="inputPhone" value="{{ $user->phone }}">
+                    <div class="input-group d-flex justify-content-center align-items-center">
+                        <div class="row">
+                            <div class="col-sm-6 mt-1">
+                                <label for="inputPassword1" class="col-form-label">Password Lama</label>
+                                <input type="password" name="password" class="form-control border-1 me-2 rounded" id="inputPassword1">
+                            </div>
+                            <div class="col-sm-6 mt-1">
+                                <label for="inputPassword2" class="col-form-label">Password Baru</label>
+                                <input type="password" name="password" class="form-control border-1 rounded" id="inputPassword2">
+                            </div>
+                        </div>
+                    </div>
                     <input type="text" hidden value="{{$user->id}}" name="id">
                     <button type="submit" class="btn btn-warning mt-3">Submit</button>
                 </form>
