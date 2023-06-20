@@ -83,6 +83,7 @@
                     </div>
                     @else
                     @foreach($employe as $employe)
+
                     <div class="col-lg-3 col-md-6 col-sm-6 mt-3">
                         <div class="card card-pegawai h-100">
                             <div class="p-2">
