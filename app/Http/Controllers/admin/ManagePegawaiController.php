@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\CategoryJabatan;
 use App\Models\Employee;
 use Illuminate\Http\Request;
@@ -36,17 +37,17 @@ class ManagePegawaiController extends Controller
                 <button class="btn btn-danger" data-bs-route="' . route('manage-pegawai.destroy', $value->id) . '" data-bs-target="#DeleteModal" data-bs-toggle="modal" id="btnDeleteModal" type="button"><i class="bi bi-trash"></i></button>
                 </div>';
             })->filter(function ($query) {
-                if (request()->has('search') && !empty(request()->get('search')['value'])) {
-                    $searchValue = request()->get('search')['value'];
-                    $query->where('nama', 'LIKE', "%$searchValue%")
-                        ->orWhere('alamat_domisili', 'LIKE', "%$searchValue%")
-                        ->orWhere('kontak', 'LIKE', "%$searchValue%")
-                        ->orWhere('besaran_gaji', 'LIKE', "%$searchValue%")
-                        ->orWhereHas('categoryjabatan', function ($query) use ($searchValue) {
-                            $query->where('nama_jabatan', 'LIKE', "%$searchValue%");
-                        });
-                }
-            })
+            if (request()->has('search') && !empty(request()->get('search')['value'])) {
+                $searchValue = request()->get('search')['value'];
+                $query->where('nama', 'LIKE', "%$searchValue%")
+                    ->orWhere('alamat_domisili', 'LIKE', "%$searchValue%")
+                    ->orWhere('kontak', 'LIKE', "%$searchValue%")
+                    ->orWhere('besaran_gaji', 'LIKE', "%$searchValue%")
+                    ->orWhereHas('categoryjabatan', function ($query) use ($searchValue) {
+                        $query->where('nama_jabatan', 'LIKE', "%$searchValue%");
+                    });
+            }
+        })
             ->rawColumns(['foto', 'aksi'])
             ->make(true);
     }

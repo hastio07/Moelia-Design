@@ -29,7 +29,7 @@
                             <div class="mb-3">
                                 <div class="input-group input-group-join mb-3">
                                     <div class="form-outline">
-                                        <input autofocus class="form-control @error('email')is-invalid @enderror" id="email" name="email" placeholder="name@example.com" required type="email" value="{{ old('email') }}">
+                                        <input autocomplete="email" autofocus class="form-control @error('email')is-invalid @enderror" id="email" name="email" placeholder="name@example.com" required type="email" value="{{ old('email') }}">
                                         <label class="form-label" for="email">Email</label>
                                     </div>
                                 </div>
