@@ -24,7 +24,7 @@ class AboutController extends Controller
         //Owner
         $owners = Owner::first();
         //pegawai
-        $employe = Employee::with('categoryjabatan')->get();
+        $employe = Employee::with('categoryjabatan')->where('show_data', '=', 'ya')->get();
 
         $workinghour = WorkingHour::get();
 
