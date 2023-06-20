@@ -10,6 +10,7 @@ use App\Http\Controllers\ManagePegawaiController;
 use App\Http\Controllers\ManagePerusahaanController;
 use App\Http\Controllers\ManagePesananProsesController;
 use App\Http\Controllers\ManageProdukController;
+use App\Http\Controllers\user\UserController;
 use App\Http\Controllers\user\AboutController;
 use App\Http\Controllers\user\CalculatorController;
 use App\Http\Controllers\user\FotoController;
@@ -31,6 +32,10 @@ use Illuminate\Support\Str;
 |
  */
 
+
+Route::get('/produk/sort/{sort}', [ProdukController::class, 'sortProducts'])->name('produk.sort');
+
+// Route untuk search produk
 Route::get('/produk/search', [ProdukController::class, 'search'])->name('produk.search');
 
 Route::get('/cetak-kontrak', function () {
@@ -41,8 +46,8 @@ Route::get('/cetak-struk', function () {
     return view('user.struk');
 });
 
-Route::get('/profile', function () {
-    return view('user.Profile');
+Route::controller(UserController::class)->group(function () {
+    Route::get('/profile', 'index')->name('user-profile.index');
 });
 
 Route::middleware(['no-redirect-if-authenticated:admins,web', 'prevent-back-history'])->group(function () {

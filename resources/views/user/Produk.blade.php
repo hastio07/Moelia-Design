@@ -29,10 +29,11 @@
                             <i class="bi bi-funnel-fill"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-arrow-up"></i> Harga Tertinggi</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-arrow-down"></i> Harga Terendah</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-bookmark"></i> Kategori</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-calendar-event"></i> Tanggal</a></li>
+                            <li><a class="dropdown-item" href="{{ route('produk.sort', 'harga-tertinggi') }}"><i class="bi bi-arrow-up"></i> Harga Tertinggi</a></li>
+                            <li><a class="dropdown-item" href="{{ route('produk.sort', 'harga-terendah') }}"><i class="bi bi-arrow-down"></i> Harga Terendah</a></li>
+                            <li><a class="dropdown-item" href="{{ route('produk.sort', 'kategori') }}"><i class="bi bi-bookmark"></i> Kategori</a></li>
+                            <li><a class="dropdown-item" href="{{ route('produk.sort', 'tanggal') }}"><i class="bi bi-calendar-event"></i> Tanggal</a></li>
+
                         </ul>
                     </div>
                 </div>

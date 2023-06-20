@@ -34,4 +34,24 @@ class ProdukController extends Controller
 
         return view('user.Produk', compact('products', 'searchInput'));
     }
+
+    public function sortProducts($sort)
+    {
+        $products = null;
+
+        if ($sort === 'harga-tertinggi') {
+            $products = Product::orderBy('harga_sewa', 'desc')->paginate(4);
+        } elseif ($sort === 'harga-terendah') {
+            $products = Product::orderBy('harga_sewa')->paginate(4);
+        } elseif ($sort === 'kategori') {
+            $products = Product::with('category_products')
+                ->orderBy('kategori_id', 'desc')
+                ->paginate(4);
+        } elseif ($sort === 'tanggal') {
+            $products = Product::orderBy('created_at', 'desc')->paginate(4);
+        }
+
+        // Mengirim data produk yang telah disortir ke tampilan
+        return view('user.Produk', compact('products'));
+    }
 }
