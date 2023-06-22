@@ -158,10 +158,8 @@
                                     checkSpan.remove();
                                     // Hapus kelas d-none untuk menampilkan tombol
                                     e.classList.remove('d-none');
-                                    setTimeout(function() {
-                                        location.reload();
-                                    }, 1000);
-                                }, 3000);
+                                    location.reload();
+                                }, 100);
                             } else {
                                 const isErrorContainer = document.querySelector(`.col-lg-8 div#error-container`);
                                 // Jika isErrorContainer tidak null
