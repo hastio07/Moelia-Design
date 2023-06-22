@@ -102,7 +102,7 @@
                     // Lakukan proses AJAX ke route di Laravel
                     // Gantikan URL_Route dengan URL route Anda
                     // Gantikan dataName dengan nama data yang ingin Anda gunakan di route tersebut
-                    fetch('{{ route('profile-admin.save') }}', {
+                    fetch("{{ route('profile-admin.save') }}", {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -264,7 +264,7 @@
 
                     console.log(oldPassword);
                     const additionalData = 'password';
-                    fetch('{{ route('profile-admin.save') }}', {
+                    fetch("{{ route('profile-admin.save') }}", {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
