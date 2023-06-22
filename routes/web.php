@@ -16,7 +16,7 @@ use App\Http\Controllers\user\CalculatorController;
 use App\Http\Controllers\user\FotoController;
 use App\Http\Controllers\user\HomeController;
 use App\Http\Controllers\user\ProdukController;
-use App\Http\Controllers\user\UserController;
+use App\Http\Controllers\user\ProfileUserController;
 use App\Http\Controllers\user\VideoController;
 use App\Notifications\ResetPassword\SendResetPasswordLink;
 use Illuminate\Support\Facades\Route;
@@ -33,36 +33,30 @@ use Illuminate\Support\Str;
 |
  */
 
-Route::get('/produk/sort/{sort}', [ProdukController::class, 'sortProducts'])->name('produk.sort');
-
-// Route untuk search produk
-Route::get('/produk/search', [ProdukController::class, 'search'])->name('produk.search');
-
-Route::get('/cetak-kontrak', function () {
-    return view('user.CetakKontrak');
-});
-
-Route::get('/cetak-struk', function () {
-    return view('user.struk');
-});
-
-Route::controller(UserController::class)->group(function () {
-    Route::get('/profile', 'index')->name('user-profile.index');
-    // Rute untuk pembaruan data pengguna
-    Route::put('/profile/user/update', 'update')->name('user.profile');
-});
-
 Route::middleware(['no-redirect-if-authenticated:admins,web', 'prevent-back-history'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/aboutus', [AboutController::class, 'index'])->name('aboutus');
     Route::get('/maintenance', function () {
         return view('user.maintenance');
     });
-    Route::get('/pembayaran', function () {
-        return view('user.pembayaran');
+    Route::middleware(['auth:web'])->group(function () {
+        Route::controller(ProfileUserController::class)->group(function () {
+            Route::get('/profile', 'index')->name('user-profile.index');
+            Route::put('/profile/user/update', 'update')->name('user.profile');
+        });
+
+        Route::get('/cetak-struk', function () {
+            return view('user.struk');
+        });
+
+        Route::get('/pembayaran', function () {
+            return view('user.pembayaran');
+        });
     });
     Route::resource('/wedding-calculator', CalculatorController::class);
     Route::resource('/produk', ProdukController::class)->except(['create', 'store', 'edit', 'update', 'destroy']);
+    Route::get('/produk/sort/{sort}', [ProdukController::class, 'sortProducts'])->name('produk.sort');
+    Route::get('/produk/search', [ProdukController::class, 'search'])->name('produk.search');
     Route::get('/foto', [FotoController::class, 'index'])->name('foto');
     Route::get('/vidio', [VideoController::class, 'index'])->name('vidio');
 
@@ -148,6 +142,10 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
         Route::get('/weddingcalculator', function () {
             return view('admin.ManageWeddingCal');
         });
+        Route::get('/cetak-kontrak', function () {
+            return view('admin.cetakkontrak');
+        });
+
     });
 });
 /** Akhir kode **/

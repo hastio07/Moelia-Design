@@ -151,7 +151,7 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), $rules, $massages, $customAttributes);
 
         if ($validator->fails()) {
-            return dd(back()->withErrors($validator)->withInput());
+            return back()->withErrors($validator)->withInput();
         }
 
         $validatedData = $validator->validated();
@@ -211,8 +211,8 @@ class AuthController extends Controller
         );
 
         return $status == Password::RESET_LINK_SENT
-            ? back()->with('status', trans($status))
-            : back()->withErrors(['email' => trans($status)])->withInput($request->only('email'));
+        ? back()->with('status', trans($status))
+        : back()->withErrors(['email' => trans($status)])->withInput($request->only('email'));
     }
 
     /**

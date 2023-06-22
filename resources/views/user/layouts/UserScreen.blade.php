@@ -6,7 +6,7 @@
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <!-- bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css" rel="stylesheet">
     <!-- end bootstrap -->
 
@@ -33,48 +33,57 @@
 <body>
     <Header>
         <!-- icon wa -->
-        <a href="https://wa.me/+62{{$contact->telephone1_number}}?text=Selamat Datang DiMoelia Design">
+        <a href="https://wa.me/+62{{ $contact->telephone1_number }}?text=Selamat Datang DiMoelia Design">
             <div class="floating-icon">
                 <i class="bi bi-whatsapp"></i>
             </div>
         </a>
         <!-- batas icon wa -->
         <!-- navbar -->
-        <nav class="navbar navbar-expand-lg bg-white shadow-sm rounded-bottom fixed-top">
+        <nav class="navbar navbar-expand-lg rounded-bottom fixed-top bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="/">
-                    @if(!empty($companies) && ($companies->logo_perusahaan))
-                    <img alt="{{ $companies->nama_perusahaan ?? 'logo' }}" class="d-inline-block align-text-top rounded-circle me-3" src="/storage/{{ $companies->logo_perusahaan ?? '#' }}" width="30">
+                    @if (!empty($companies) && $companies->logo_perusahaan)
+                        <img alt="{{ $companies->nama_perusahaan ?? 'logo' }}" class="d-inline-block rounded-circle me-3 align-text-top" src="/storage/{{ $companies->logo_perusahaan ?? '#' }}" width="30">
                     @else
-                    <h5 class="me-3">logo</h5>
+                        <h5 class="me-3">logo</h5>
                     @endif
                     {{ $companies->nama_perusahaan ?? 'Nama perusahaan' }}
                 </a>
                 <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler border-0" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
+                <div class="navbar-collapse collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-lg-0 mx-auto mb-2">
                         <li class="nav-item">
-                            <a @class(['nav-link', 'active'=> Route::is('home')]) aria-current="page" href="/">Home</a>
+                            <a @class(['nav-link', 'active' => Route::is('home')]) aria-current="page" href="/">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a @class(['nav-link', 'active'=> Route::is('produk.*')]) href="/produk">Produk</a>
+                            <a @class(['nav-link', 'active' => Route::is('produk.*')]) href="/produk">Produk</a>
                         </li>
                         <li class="nav-item">
                             <div class="dropdown">
-                                <a @class([ 'nav-link' , 'dropdown-toggle' , 'active'=> Route::is('foto') || Route::is('vidio'),
-                                    ]) aria-expanded="false" data-bs-toggle="dropdown" href="#" role="button">
+                                <a @class([
+                                    'nav-link',
+                                    'dropdown-toggle',
+                                    'active' => Route::is('foto') || Route::is('vidio'),
+                                ]) aria-expanded="false" data-bs-toggle="dropdown" href="#" role="button">
                                     Gallery
                                 </a>
-                                <ul class="dropdown-menu text-center dropdown-gallery">
+                                <ul class="dropdown-menu dropdown-gallery text-center">
                                     <li>
-                                        <a @class([ 'nav-link' , 'dropdown-item' , 'bg-light active'=> Route::is('foto'),
-                                            ]) href="/foto">Foto</a>
+                                        <a @class([
+                                            'nav-link',
+                                            'dropdown-item',
+                                            'bg-light active' => Route::is('foto'),
+                                        ]) href="/foto">Foto</a>
                                     </li>
                                     <li>
-                                        <a @class([ 'nav-link' , 'dropdown-item' , 'bg-light active'=> Route::is('vidio'),
-                                            ]) href="/vidio">Vidio</a>
+                                        <a @class([
+                                            'nav-link',
+                                            'dropdown-item',
+                                            'bg-light active' => Route::is('vidio'),
+                                        ]) href="/vidio">Vidio</a>
                                     </li>
                                 </ul>
                             </div>
@@ -83,42 +92,44 @@
                             <a class="nav-link" href="/wedding-calculator">Wedding Calculator</a>
                         </li>
                         <li class="nav-item">
-                            <a @class(['nav-link', 'active'=> Route::is('aboutus')]) href="/aboutus">Tentang Kami</a>
+                            <a @class(['nav-link', 'active' => Route::is('aboutus')]) href="/aboutus">Tentang Kami</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/pembayaran">Pembayaran</a>
-                        </li>
+                        @auth('web')
+                            <li class="nav-item">
+                                <a class="nav-link" href="/pembayaran">Pembayaran</a>
+                            </li>
+                        @endauth
                     </ul>
                     <div class="text-center">
                         @auth
-                        @if(auth()->user()->role_id==3)
-                        <a href="{{ route('dashboard') }}" class="btn btn-color dropdown-toggle text-capitalize" id="logoutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ auth()->user()->nama_depan . ' ' . auth()->user()->nama_belakang }}
-                        </a>
-                        <div class="dropdown">
-                            <ul class="dropdown-menu dropdown-gallery mt-1">
-                                <li><a class="dropdown-item" href="/profile"><i class="bi bi-person"></i> Profil</a></li>
-                                <li>
-                                    <form action="{{ route('logout') }}" id="logout" method="post">
-                                        @csrf
-                                        <a href="#" class="dropdown-item" onclick="document.getElementById('logout').submit();">
-                                            <div class="text-dark">
-                                                <i class="bi bi-box-arrow-left"></i> Logout
-                                            </div>
-                                        </a>
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
+                            @if (auth()->user()->role_id == 3)
+                                <a aria-expanded="false" class="btn btn-color dropdown-toggle text-capitalize" data-bs-toggle="dropdown" href="{{ route('dashboard') }}" id="logoutDropdown" role="button">
+                                    {{ auth()->user()->nama_depan . ' ' . auth()->user()->nama_belakang }}
+                                </a>
+                                <div class="dropdown">
+                                    <ul class="dropdown-menu dropdown-gallery mt-1">
+                                        <li><a class="dropdown-item" href="/profile"><i class="bi bi-person"></i> Profil</a></li>
+                                        <li>
+                                            <form action="{{ route('logout') }}" id="logout" method="post">
+                                                @csrf
+                                                <a class="dropdown-item" href="#" onclick="document.getElementById('logout').submit();">
+                                                    <div class="text-dark">
+                                                        <i class="bi bi-box-arrow-left"></i> Logout
+                                                    </div>
+                                                </a>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </div>
+                            @else
+                                <a class="btn btn-color text-capitalize" href="{{ route('dashboard') }}">
+                                    {{ auth()->user()->nama_depan . ' ' . auth()->user()->nama_belakang }}
+                                </a>
+                            @endif
                         @else
-                        <a href="{{ route('dashboard') }}" class="btn btn-color text-capitalize">
-                            {{ auth()->user()->nama_depan . ' ' . auth()->user()->nama_belakang }}
-                        </a>
-                        @endif
-                        @else
-                        <a href="{{ route('login') }}">
-                            <button class="btn btn-color" type="submit">Login <i class="fa-solid fa-right-to-bracket"></i></button>
-                        </a>
+                            <a href="{{ route('login') }}">
+                                <button class="btn btn-color" type="submit">Login <i class="fa-solid fa-right-to-bracket"></i></button>
+                            </a>
                         @endauth
                     </div>
                 </div>
@@ -132,32 +143,32 @@
     <!-- end konten -->
 
     <!-- footer -->
-    <footer class="text-center mt-5 pt-5">
+    <footer class="mt-5 pt-5 text-center">
         <h1>{{ $companies->nama_perusahaan ?? 'Moelia Design' }}</h1>
         <div class="line-footer"></div><br>
 
-        @if (!empty($addresses) && ($addresses->alamat_perusahaan))
-        <p>{{ $addresses->alamat_perusahaan }}</p>
+        @if (!empty($addresses) && $addresses->alamat_perusahaan)
+            <p>{{ $addresses->alamat_perusahaan }}</p>
         @else
-        <p class="text-secondary"><i class="bi bi-exclamation-triangle-fill text-warning me-2"></i>Alamat Belum Tesedia</p>
+            <p class="text-secondary"><i class="bi bi-exclamation-triangle-fill text-warning me-2"></i>Alamat Belum Tesedia</p>
         @endif
 
-        <div class="icon-socmed text-center my-4">
-            @foreach($sosmed as $sosmed)
-            <a href="{{ $sosmed -> l_instagram }}"><i class="bi bi-instagram"></i></a>
-            <a href="{{ $sosmed -> l_facebook }}"><i class="bi bi-facebook"></i></a>
-            <a href="{{ $sosmed -> l_twitter }}"><i class="bi bi-twitter"></i></a>
-            <a href="{{ $sosmed -> l_youtube }}"><i class="bi bi-youtube"></i></a>
-            <a href="{{ $sosmed -> l_tiktok }}"><i class="bi bi-tiktok"></i></a>
+        <div class="icon-socmed my-4 text-center">
+            @foreach ($sosmed as $sosmed)
+                <a href="{{ $sosmed->l_instagram }}"><i class="bi bi-instagram"></i></a>
+                <a href="{{ $sosmed->l_facebook }}"><i class="bi bi-facebook"></i></a>
+                <a href="{{ $sosmed->l_twitter }}"><i class="bi bi-twitter"></i></a>
+                <a href="{{ $sosmed->l_youtube }}"><i class="bi bi-youtube"></i></a>
+                <a href="{{ $sosmed->l_tiktok }}"><i class="bi bi-tiktok"></i></a>
             @endforeach
         </div>
-        <div class="d-flex flex-column flex-sm-row justify-content-center mb-3 fw-bold">
-            <a href="/" class="me-sm-3 mb-2 mb-sm-0 menu-link">Home</a>
-            <a href="/foto" class="me-sm-3 mb-2 mb-sm-0 menu-link">Foto</a>
-            <a href="vidio" class="me-sm-3 mb-2 mb-sm-0 menu-link">Vidio</a>
-            <a href="/wedding-calculator" class="me-sm-3 mb-2 mb-sm-0 menu-link">Wedding Calculator</a>
-            <a href="/aboutus" class="me-sm-3 mb-2 mb-sm-0 menu-link">Tentang Kami</a>
-            <a href="" class="me-sm-3 mb-2 mb-sm-0 menu-link">Pembayaran</a>
+        <div class="d-flex flex-column flex-sm-row justify-content-center fw-bold mb-3">
+            <a class="me-sm-3 mb-sm-0 menu-link mb-2" href="/">Home</a>
+            <a class="me-sm-3 mb-sm-0 menu-link mb-2" href="/foto">Foto</a>
+            <a class="me-sm-3 mb-sm-0 menu-link mb-2" href="vidio">Vidio</a>
+            <a class="me-sm-3 mb-sm-0 menu-link mb-2" href="/wedding-calculator">Wedding Calculator</a>
+            <a class="me-sm-3 mb-sm-0 menu-link mb-2" href="/aboutus">Tentang Kami</a>
+            <a class="me-sm-3 mb-sm-0 menu-link mb-2" href="">Pembayaran</a>
         </div>
 
         <div class="copyright-wrapper">

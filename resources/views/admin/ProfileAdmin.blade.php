@@ -140,7 +140,10 @@
                                 if (ajaxButton) {
                                     ajaxButton.remove();
                                 }
-
+                                const errorContainer = document.querySelector(`.col-lg-8 div#error-container`);
+                                if (errorContainer) {
+                                    errorContainer.remove();
+                                }
                                 const checkIcon = document.createElement('i');
                                 checkIcon.className = 'bi bi-check-circle';
                                 const checkSpan = document.createElement('span');
@@ -159,6 +162,32 @@
                                         location.reload();
                                     }, 1000);
                                 }, 3000);
+                            } else {
+                                const isErrorContainer = document.querySelector(`.col-lg-8 div#error-container`);
+                                // Jika isErrorContainer tidak null
+                                if (isErrorContainer) {
+                                    isErrorContainer.remove();
+                                }
+                                const ErrorContainer = document.createElement('div');
+                                ErrorContainer.id = 'error-container';
+                                const ulElement = document.createElement('ul');
+                                ulElement.className = 'list-unstyled';
+                                const errors = data.errors;
+                                if (errors) {
+                                    for (const key in errors) {
+                                        if (errors.hasOwnProperty(key)) {
+                                            const errorMessages = errors[key];
+                                            for (const errorMessage of errorMessages) {
+                                                const liElement = document.createElement('li');
+                                                liElement.textContent = errorMessage;
+                                                ulElement.appendChild(liElement);
+                                            }
+                                        }
+                                    }
+                                }
+
+                                ErrorContainer.appendChild(ulElement);
+                                inputElement.insertAdjacentElement('afterend', ErrorContainer);
                             }
                         })
                         .catch(error => {
@@ -180,6 +209,11 @@
                 if (ajaxButton) {
                     ajaxButton.remove();
                 }
+
+                const errorContainer = document.querySelector(`.col-lg-8 div#error-container`);
+                if (errorContainer) {
+                    errorContainer.remove();
+                }
             }
         }
 
@@ -187,12 +221,7 @@
             const editButton = e.getAttribute('data-btn-id'); // misal btn-id-nama-depan
             const btnId = editButton.substring(9); // Menghapus kata "btn-id-"
             const status = e.getAttribute('data-status');
-
-
             const paragrafElement = document.querySelector(`.col-lg-8 p#${btnId}`);
-
-
-
             if (status === 'edit') {
                 // Ubah icon dan text button
                 e.innerHTML = '<i class="bi bi-x"></i>';
@@ -293,10 +322,10 @@
                                     checkSpan.remove();
                                     // Hapus kelas d-none untuk menampilkan tombol
                                     e.classList.remove('d-none');
-                                    setTimeout(function() {
-                                        location.reload();
-                                    }, 1000);
-                                }, 2000);
+
+                                    location.reload();
+
+                                }, 100);
                             } else {
                                 const isErrorContainer = document.querySelector(`.col-lg-8 div#error-container`);
                                 // Jika isErrorContainer tidak null
