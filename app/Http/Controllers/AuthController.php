@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use App\Rules\UniqueEmail;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Auth\Events\Registered;
@@ -128,7 +129,7 @@ class AuthController extends Controller
         $rules = [
             'nama_depan' => 'required|string|max:255',
             'nama_belakang' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:' . User::class,
+            'email' => ['required', 'string', 'email:dns', new UniqueEmail, 'max:255'],
             'phone' => 'required|numeric|max:99999999999999|regex:/^(?:\+62)?\d{9,12}$/',
             'password' => ['required', 'min:5', 'max:255', 'confirmed', RulesPassword::min(5)->letters()->mixedCase()->symbols()],
         ];
@@ -137,7 +138,7 @@ class AuthController extends Controller
             'string' => ':attribute harus berupa teks.',
             'max' => ':attribute harus diisi maksimal :max karakter.',
             'confirmed' => 'konfirmasi :attribute tidak cocok.',
-            'email' => ':attribute harus berupa alamat surel yang valid.',
+            'email.email' => ':attribute harus berupa alamat surel yang valid.',
             'numeric' => ':attribute harus dalam format numerik.',
             'password.min' => ':attribute harus terdiri dari minimal :min karakter.',
         ];

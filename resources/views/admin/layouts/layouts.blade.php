@@ -150,11 +150,11 @@
                             <span>Dashboard</span>
                         </a>
                     </li>
-                    @can('akses_manage_akun', App\Models\Admin::class)
-                        <li class="{{ Route::is('manage-akun.*') ? 'active' : '' }}">
-                            <a class="link" href="{{ route('manage-akun.index') }}">
+                    @can('akses_manage_admin', App\Models\Admin::class)
+                        <li class="{{ Route::is('manage-admin.*') ? 'active' : '' }}">
+                            <a class="link" href="{{ route('manage-admin.index') }}">
                                 <i class="ti-id-badge"></i>
-                                <span>Manage Akun</span>
+                                <span>Manage Admin</span>
                             </a>
                         </li>
                     @endcan

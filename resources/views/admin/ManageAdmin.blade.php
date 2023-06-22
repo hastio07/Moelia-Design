@@ -1,5 +1,5 @@
 @extends('admin.layouts.layouts')
-@section('title', 'Manage Akun')
+@section('title', 'Manage Admin')
 @push('styles')
     <link href="{{ asset('templates') }}/assets/css-modif/admin/ManageAkun.css" rel="stylesheet">
 @endpush
@@ -30,8 +30,8 @@
                             </div>
                         @endif
                         <div class="card-body">
-                            <form action="{{ Route::is('manage-akun.edit') ? route('manage-akun.update', $hashids->encode($adminedit->id)) : route('manage-akun.store') }}" enctype='multipart/form-data' method="post">
-                                @if (Route::is('manage-akun.edit'))
+                            <form action="{{ Route::is('manage-admin.edit') ? route('manage-admin.update', $hashids->encode($adminedit->id)) : route('manage-admin.store') }}" enctype='multipart/form-data' method="post">
+                                @if (Route::is('manage-admin.edit'))
                                     @method('put')
                                 @endif
                                 @csrf
@@ -66,7 +66,7 @@
                                         <option {{ isset($adminedit) && $adminedit->role_id == 2 ? 'selected' : '' }} value="2">Admin
                                         </option>
                                     </select>
-                                    @if (!Route::is('manage-akun.edit'))
+                                    @if (!Route::is('manage-admin.edit'))
                                         <!-- Password Input-->
                                         <div class="row">
                                             <div class="col">
@@ -80,13 +80,13 @@
                                             </div>
                                         </div>
                                     @endif
-                                    @if (Route::is('manage-akun.edit'))
-                                        <div class="mt-3 btn-add row justify-content-center align-content-center">
-                                            <button class="btn mb-2 icon-left btn-success" type="submit"><i class="ti-check"></i>update</i></button>
+                                    @if (Route::is('manage-admin.edit'))
+                                        <div class="btn-add row justify-content-center align-content-center mt-3">
+                                            <button class="btn icon-left btn-success mb-2" type="submit"><i class="ti-check"></i>update</i></button>
                                         </div>
                                     @else
-                                        <div class="mt-3 btn-add row justify-content-center align-content-center">
-                                            <button class="btn mb-2 icon-left btn-success" type="submit"><i class="ti-check"></i>Simpan</i></button>
+                                        <div class="btn-add row justify-content-center align-content-center mt-3">
+                                            <button class="btn icon-left btn-success mb-2" type="submit"><i class="ti-check"></i>Simpan</i></button>
                                         </div>
                                     @endif
                                 </div>
@@ -100,7 +100,7 @@
                             <h4>List Produk</h4>
                         </div>
                         <div class="card-body">
-                            <table class="table display" id="table-admins">
+                            <table class="display table" id="table-admins">
                                 <thead>
                                     <tr>
                                         <th>Nama Admin</th>

@@ -66,7 +66,7 @@
                             </div>
                             <div class="mb-3">
                                 <div class="form-outline d-flex">
-                                    <input class="form-control bg-transparent" id="phone" name="phone" placeholder="Nomor" required type="text" value="{{ old('phone') }}">
+                                    <input class="form-control bg-transparent" id="phone" name="phone" placeholder="Nomor" required type="number" value="{{ old('phone') }}">
                                     <span class="input-group-text rounded-end cursor-pointer border-0 bg-white"><i class="fa fa-phone"></i></span>
                                     <label class="form-label" for="phone">No. Handphone</label>
                                 </div>

@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
-class ManageAkunController extends Controller
+class ManageAdminController extends Controller
 {
     private function renderDataTables($data)
     {
@@ -26,8 +26,8 @@ class ManageAkunController extends Controller
             })
             ->addColumn('aksi', function ($value) use ($hashids) {
                 return ' <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                <button class="btn btn-warning" data-route="' . route('manage-akun.edit', $hashids->encode($value->id)) . '" id="edit-button"><i class="bi bi-pencil-square"></i></button>
-                <button class="btn btn-danger" data-route="' . route('manage-akun.destroy', $hashids->encode($value->id)) . '" id="delete-button"><i class="bi bi-trash"></i></button>
+                <button class="btn btn-warning" data-route="' . route('manage-admin.edit', $hashids->encode($value->id)) . '" id="edit-button"><i class="bi bi-pencil-square"></i></button>
+                <button class="btn btn-danger" data-route="' . route('manage-admin.destroy', $hashids->encode($value->id)) . '" id="delete-button"><i class="bi bi-trash"></i></button>
             </div>';
             })->filter(function ($query) {
             if (request()->has('search') && !empty(request()->get('search')['value'])) {
@@ -50,7 +50,7 @@ class ManageAkunController extends Controller
     public function index()
     {
 
-        $this->authorize('akses_manage_akun', Admin::class);
+        $this->authorize('akses_manage_admin', Admin::class);
 
         $hashids = new Hashids(env('HASHIDS_KEY'), 20);
         if (request()->ajax()) {
@@ -74,7 +74,7 @@ class ManageAkunController extends Controller
             return $this->renderDataTables($akun);
         }
 
-        return view('admin.manageakun', compact('hashids'));
+        return view('admin.manageadmin', compact('hashids'));
     }
 
     /**
@@ -131,7 +131,7 @@ class ManageAkunController extends Controller
         ];
         Admin::create($data_admin);
 
-        return redirect()->route('manage-akun.index')->with('success_add_account', 'berhasil menambahkan akun');
+        return redirect()->route('manage-admin.index')->with('success_add_account', 'berhasil menambahkan akun');
     }
 
     /**
@@ -169,7 +169,7 @@ class ManageAkunController extends Controller
         }
 
         // $get_admins = Admin::with('role')->where('role_id', '=', 2)->latest('created_at')->get();
-        return view('admin.manageakun', compact('adminedit', 'hashids'));
+        return view('admin.manageadmin', compact('adminedit', 'hashids'));
     }
 
     /**
@@ -229,7 +229,7 @@ class ManageAkunController extends Controller
             'email' => $request->input('email'),
         ]);
 
-        return redirect()->route('manage-akun.index')->with('massage', 'data berhasil diubah');
+        return redirect()->route('manage-admin.index')->with('massage', 'data berhasil diubah');
     }
 
     /**
@@ -247,6 +247,6 @@ class ManageAkunController extends Controller
         // $admin->delete();
         Admin::where('id', $decryptID[0])->delete();
 
-        return redirect()->route('manage-akun.index')->with('massage', 'data berhasil dihapus');
+        return redirect()->route('manage-admin.index')->with('massage', 'data berhasil dihapus');
     }
 }

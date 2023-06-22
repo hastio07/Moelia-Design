@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\DashboardAdminsController;
-use App\Http\Controllers\admin\ManageAkunController;
+use App\Http\Controllers\admin\ManageAdminController;
 use App\Http\Controllers\admin\ManageGalleryController;
 use App\Http\Controllers\admin\ManageGudangController;
 use App\Http\Controllers\admin\ManageJadwalController;
@@ -75,7 +75,7 @@ Route::middleware(['no-redirect-if-authenticated:admins,web', 'prevent-back-hist
 Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
     Route::middleware(['role:super_admin,admin'])->group(function () {
         Route::get('dashboard', [DashboardAdminsController::class, 'index'])->name('dashboard');
-        Route::resource('manage-akun', ManageAkunController::class)->except('create'); // Pakai Policy
+        Route::resource('manage-admin', ManageAdminController::class)->except('create'); // Pakai Policy
         Route::controller(ManagePerusahaanController::class)->group(function () {
             Route::get('manage-perusahaan', 'index')->name('manage-perusahaan.index');
             Route::post('manage-perusahaan/updateorcreatecompany', 'updateorcreatecompany')->name('manage-perusahaan.updateorcreatecompany');
