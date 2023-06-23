@@ -10,11 +10,39 @@
             <div class="btn-modal">
                 <button class="btn icon-left btn-success mb-2" data-bs-route="" data-bs-target="#CUModal" data-bs-toggle="modal" id="btnCreateModal" type="button"><i class="bi bi-plus-lg"></i>Tambah Data</i></button>
             </div>
-            <div class="row mt-2">
-                <div class="col-md-4">
-                    <div class="all-in-paket">
+
+            <div class="all-in-paket">
+                <div class="card p-4">
+                    <h5 class="fw-bold">Paket AllIn</h5>
+                    <table class="display mt-2 table" id="table-admins">
+                        <thead>
+                            <tr>
+                                <th>Nama Paket</th>
+                                <th>Harga</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <td>Paket Allin 1</td>
+                            <td>135.000.000</td>
+                            <td><button class="btn btn-danger"><i class="bi bi-trash3-fill"></i></button> <button class="btn btn-warning"><i class="bi bi-pencil-square"></i></button></td>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Nama Paket</th>
+                                <th>Harga</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+            <div class="custom-paket">
+                <div class="row">
+                    <div class="col-md-9">
                         <div class="card p-4">
-                            <h5 class="fw-bold">Paket AllIn</h5>
+                            <h5 class="fw-bold">Custom Venue</h5>
                             <table class="display mt-2 table" id="table-admins">
                                 <thead>
                                     <tr>
@@ -38,37 +66,33 @@
                             </table>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="custom-paket">
-                        <div class="card p-4">
-                            <h5 class="fw-bold">Custom Paket</h5>
-                            <table class="display mt-2 table" id="table-admins">
-                                <thead>
-                                    <tr>
-                                        <th>Nama Paket</th>
-                                        <th>Harga</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <td>Paket Allin 1</td>
-                                    <td>135.000.000</td>
-                                    <td><button class="btn btn-danger"><i class="bi bi-trash3-fill"></i></button> <button class="btn btn-warning"><i class="bi bi-pencil-square"></i></button></td>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Nama Paket</th>
-                                        <th>Harga</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
+                    <div class="col-md-3">
+                        <div class="card p-3">
+                            <h6 class="fw-bold text-center">Kategori Custom Venue</h6>
+                            <form action="" class="text-center" method="POST">
+                                <input class="form-control mb-3" id="kategori-custom" name="nama_kategori" placeholder="Buat kategori" required type="text" value="">
+                                <button class="btn btn-success" type="submit">Tambah</button>
+                            </form>
+                            <div class="list-kategori mt-2">
+                                <table class="caption-top mt-3 table border">
+                                    <tbody>
+                                        <tr>
+                                            <td class="">Gedung</td>
+                                            <td class="text-end">
+                                                <button class="btn text-danger" data-bs-route="" data-bs-target="#DeleteModal" data-bs-toggle="modal" id="btnDeleteModal" type="button"><i class="bi bi-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="additional-venue">
+            </div>
+
+            <div class="additional-venue">
+                <div class="row">
+                    <div class="col-md-9">
                         <div class="card p-4">
                             <h5 class="fw-bold">Additional Venue</h5>
                             <table class="display mt-2 table" id="table-admins">
@@ -94,8 +118,31 @@
                             </table>
                         </div>
                     </div>
+
+                    <div class="col-md-3">
+                        <div class="card p-3">
+                            <h6 class="fw-bold text-center">Kategori Additional Vanue</h6>
+                            <form action="" class="text-center" method="POST">
+                                <input class="form-control mb-3" id="kategori-aditional" name="nama_kategori" placeholder="Buat kategori" required type="text" value="">
+                                <button class="btn btn-success" type="submit">Tambah</button>
+                            </form>
+                            <div class="list-kategori mt-2">
+                                <table class="caption-top mt-3 table border">
+                                    <tbody>
+                                        <tr>
+                                            <td class="">Gedung</td>
+                                            <td class="text-end">
+                                                <button class="btn text-danger" data-bs-route="" data-bs-target="#DeleteModal" data-bs-toggle="modal" id="btnDeleteModal" type="button"><i class="bi bi-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
             <div aria-hidden="true" aria-labelledby="cuModalLabel" class="modal fade" id="CUModal" tabindex="-1">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
