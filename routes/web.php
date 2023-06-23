@@ -54,9 +54,9 @@ Route::middleware(['no-redirect-if-authenticated:admins,web', 'prevent-back-hist
         });
     });
     Route::resource('/wedding-calculator', CalculatorController::class);
-    Route::resource('/produk', ProdukController::class)->except(['create', 'store', 'edit', 'update', 'destroy']);
-    Route::get('/produk/sort/{sort}', [ProdukController::class, 'sortProducts'])->name('produk.sort');
     Route::get('/produk/search', [ProdukController::class, 'search'])->name('produk.search');
+    Route::get('/produk/sort/{sort}', [ProdukController::class, 'sortProducts'])->name('produk.sort');
+    Route::resource('/produk', ProdukController::class)->except(['create', 'store', 'edit', 'update', 'destroy']);
     Route::get('/foto', [FotoController::class, 'index'])->name('foto');
     Route::get('/vidio', [VideoController::class, 'index'])->name('vidio');
 

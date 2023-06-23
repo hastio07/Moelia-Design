@@ -225,7 +225,7 @@
                         </a>
                     </li>
                     <li class="{{ Route::is('manage-gudang.*') ? 'active' : '' }}">
-                        <a class="link" href="/wedding-calculator">
+                        <a class="link" href="/weddingcalculator">
                             <i class="ti-pencil-alt"></i>
                             <span>Wedding Calculator</span>
                         </a>
