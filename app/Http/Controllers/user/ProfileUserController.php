@@ -16,7 +16,7 @@ class ProfileUserController extends Controller
     {
         $user = Auth::user();
 
-        return view('user.Profile', compact('user'));
+        return view('user.ProfileUser', compact('user'));
     }
 
     public function update(Request $request)

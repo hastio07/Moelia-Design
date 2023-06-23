@@ -159,7 +159,8 @@ class ManageLayananController extends Controller
             $data['gambar'] = $fileName;
         }
         //Simpan produk
-        Service::where('id', $id)->update($data);
+        $service = Service::findOrFail($id);
+        $service->update($data);
 
         return redirect()->route('manage-layanan.index')->with('success', 'data berhasil diubah');
 
@@ -167,13 +168,11 @@ class ManageLayananController extends Controller
 
     public function destroy($id)
     {
-        $cek = Service::findOrFail($id);
-
-        if ($cek->gambar) {
-            $path = $cek->gambar;
-            Storage::delete(['compressed/' . $path, 'service-images/' . $path]);
+        $service = Service::findOrFail($id);
+        if ($service->gambar) {
+            Storage::delete(['compressed/' . $service->gambar, 'service-images/' . $service->gambar]);
         }
-        Service::destroy($id);
+        $service->delete();
         return redirect()->route('manage-layanan.index')->with('success', 'Data Berhasil DiHapus!');
 
     }

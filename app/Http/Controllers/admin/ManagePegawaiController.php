@@ -199,7 +199,8 @@ class ManagePegawaiController extends Controller
             $data['foto'] = '/' . $fileName;
         }
         // Menyimpan Pegawai
-        Employee::where('id', $id)->update($data);
+        $employee = Employee::findOrFail($id);
+        $employee->update($data);
         return redirect()->route('manage-pegawai.index')->with('success_edit_employee', 'Data berhasil diubah');
     }
 

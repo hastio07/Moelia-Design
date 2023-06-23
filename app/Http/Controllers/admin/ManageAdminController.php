@@ -78,17 +78,6 @@ class ManageAdminController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -132,17 +121,6 @@ class ManageAdminController extends Controller
         Admin::create($data_admin);
 
         return redirect()->route('manage-admin.index')->with('success_add_account', 'berhasil menambahkan akun');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -221,7 +199,9 @@ class ManageAdminController extends Controller
         }
 
         // dd(back()->withErrors($validator)->withInput());
-        Admin::where('id', $decryptID[0])->update([
+
+        $admin = Admin::findOrFail($decryptID[0]);
+        $admin->update([
             'nama_depan' => $request->input('nama_depan'),
             'nama_belakang' => $request->input('nama_belakang'),
             'role_id' => $request->input('role_id'),
@@ -245,7 +225,9 @@ class ManageAdminController extends Controller
         $decryptID = $hashids->decode($id); //decrypt menjadi string
         // $admin = Admin::findOrFail($decryptID); //cari user berdasarkan id pada model app/Models/Admin
         // $admin->delete();
-        Admin::where('id', $decryptID[0])->delete();
+        // Admin::where('id', $decryptID[0])->delete();
+        $admin = Admin::findOrFail($decryptID[0]); //cari user berdasarkan id pada model app/Models/Admin
+        $admin->delete();
 
         return redirect()->route('manage-admin.index')->with('massage', 'data berhasil dihapus');
     }

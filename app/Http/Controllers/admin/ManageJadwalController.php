@@ -68,16 +68,6 @@ class ManageJadwalController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -124,28 +114,6 @@ class ManageJadwalController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -188,7 +156,9 @@ class ManageJadwalController extends Controller
             'waktu' => $combinedDT,
         ];
 
-        Jadwal::where('id', $id)->update($data);
+        $jadwal = Jadwal::findOrFail($id);
+        $jadwal->update($data);
+
         return redirect()->route('manage-jadwal.index')->with('success', 'Data Berhasil Diperbarui!');
     }
 
@@ -200,8 +170,8 @@ class ManageJadwalController extends Controller
      */
     public function destroy($id)
     {
-        $value = Jadwal::findOrFail($id);
-        $value->delete();
+        $jadwal = Jadwal::findOrFail($id);
+        $jadwal->delete();
 
         return redirect()->route('manage-jadwal.index')->with('success', 'Data Berhasil DiHapus!');
     }

@@ -10,6 +10,7 @@ use App\Http\Controllers\admin\ManagePegawaiController;
 use App\Http\Controllers\admin\ManagePerusahaanController;
 use App\Http\Controllers\admin\ManagePesananProsesController;
 use App\Http\Controllers\admin\ManageProdukController;
+use App\Http\Controllers\admin\ManageWeddingCalulatorController;
 use App\Http\Controllers\admin\ProfileAdminController;
 use App\Http\Controllers\user\AboutController;
 use App\Http\Controllers\user\CalculatorController;
@@ -36,13 +37,10 @@ use Illuminate\Support\Str;
 Route::middleware(['no-redirect-if-authenticated:admins,web', 'prevent-back-history'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/aboutus', [AboutController::class, 'index'])->name('aboutus');
-    Route::get('/maintenance', function () {
-        return view('user.maintenance');
-    });
     Route::middleware(['auth:web'])->group(function () {
         Route::controller(ProfileUserController::class)->group(function () {
             Route::get('/profile', 'index')->name('user-profile.index');
-            Route::put('/profile/user/update', 'update')->name('user.profile');
+            Route::put('/profile/user/update', 'update')->name('user-profile.update');
         });
 
         Route::get('/cetak-struk', function () {
@@ -59,6 +57,10 @@ Route::middleware(['no-redirect-if-authenticated:admins,web', 'prevent-back-hist
     Route::resource('/produk', ProdukController::class)->except(['create', 'store', 'edit', 'update', 'destroy']);
     Route::get('/foto', [FotoController::class, 'index'])->name('foto');
     Route::get('/vidio', [VideoController::class, 'index'])->name('vidio');
+
+    Route::get('/maintenance', function () {
+        return view('user.maintenance');
+    });
 
     Route::get('/email', function () {
         $token = Str::random(60);
@@ -104,7 +106,7 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
             Route::post('manage-produk/kategori', 'createcategory')->name('manage-produk.createcategory');
             Route::delete('manage-produk/kategori/{id}', 'destroycategory')->name('manage-produk.destroycategory');
         });
-        Route::resource('manage-jadwal', ManageJadwalController::class);
+        Route::resource('manage-jadwal', ManageJadwalController::class)->except(['create', 'show', 'edit']);
         Route::controller(ManagePesananProsesController::class)->group(function () {
             Route::get('manage-pesanan-proses', 'index')->name('manage-pesanan-proses.index');
         });
@@ -139,8 +141,19 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
             Route::post('profile-admin', 'savedata')->name('profile-admin.save');
             Route::post('profile-admin/new-password', 'newpassword')->name('profile-admin.new-password');
         });
-        Route::get('/weddingcalculator', function () {
-            return view('admin.ManageWeddingCal');
+        Route::controller(ManageWeddingCalulatorController::class)->group(function () {
+            Route::get('manage-wedding-calculator', 'index')->name('manage-wedding-calculator.index');
+            Route::post('manage-wedding-calculator/cal-all-in', 'cAllIn')->name('manage-wedding-calculator.cAllIn');
+            Route::post('manage-wedding-calculator/cal-custom-paket', 'cCustomPaket')->name('manage-wedding-calculator.cCustomPaket');
+            Route::post('manage-wedding-calculator/cal-additional-venue', 'cAdditionalVenue')->name('manage-wedding-calculator.cAdditionalVenue');
+
+            Route::put('manage-wedding-calculator/cal-all-in/update', 'uAllIn')->name('manage-wedding-calculator.uAllIn');
+            Route::put('manage-wedding-calculator/cal-custom-paket/update', 'uCustomPaket')->name('manage-wedding-calculator.uCustomPaket');
+            Route::put('manage-wedding-calculator/cal-additional-venue/update', 'uAdditionalVenue')->name('manage-wedding-calculator.uAdditionalVenue');
+
+            Route::delete('manage-wedding-calculator/cal-all-in/delete', 'dAllIn')->name('manage-wedding-calculator.dAllIn');
+            Route::delete('manage-wedding-calculator/cal-custom-paket/delete', 'dCustomPaket')->name('manage-wedding-calculator.dCustomPaket');
+            Route::delete('manage-wedding-calculator/cal-additional-venue/delete', 'dAdditionalVenue')->name('manage-wedding-calculator.dAdditionalVenue');
         });
         Route::get('/cetak-kontrak', function () {
             return view('admin.cetakkontrak');
@@ -149,5 +162,10 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
     });
 });
 /** Akhir kode **/
+
+Route::fallback(function () {
+    // Logika untuk menangani NotFoundHttpException
+    abort(404); // Not Found
+});
 
 require __DIR__ . '/auth.php';

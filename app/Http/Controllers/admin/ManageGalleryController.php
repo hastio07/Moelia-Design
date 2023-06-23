@@ -59,13 +59,13 @@ class ManageGalleryController extends Controller
     public function destroyphoto($id)
     {
         //
-        $get_products = Photo::findOrFail($id);
+        $getPhoto = Photo::findOrFail($id);
 
-        if ($get_products) {
-            $path = $get_products->photo_path;
+        if ($getPhoto) {
+            $path = $getPhoto->photo_path;
             Storage::delete($path);
         }
-        Photo::destroy($id);
+        $getPhoto->delete();
         return redirect()->route('manage-gallery.phototab')->with('success', 'Data Berhasil DiHapus!');
     }
     public function videotab()
@@ -143,7 +143,8 @@ class ManageGalleryController extends Controller
 
     public function destroyvideo($id)
     {
-        Video::destroy($id);
+        $getVideo = Video::findOrFail($id);
+        $getVideo->delete();
         return redirect()->route('manage-gallery.videotab')->with('success', 'Data Berhasil DiHapus!');
     }
 }

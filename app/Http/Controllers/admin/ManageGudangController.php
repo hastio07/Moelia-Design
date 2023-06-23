@@ -138,7 +138,8 @@ class ManageGudangController extends Controller
             'stok' => (int) $validatedData['stok'],
         ];
         //Simpan barang
-        Barang::where('id', $id)->update($data);
+        $barang = Barang::findOrFail($id);
+        $barang->update($data);
 
         return redirect()->route('manage-gudang.index')->with('success_edit_barang', 'Data berhasil diubah');
     }

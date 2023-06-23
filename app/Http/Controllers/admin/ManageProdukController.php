@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\admin;
-use App\Http\Controllers\Controller;
 
+use App\Http\Controllers\Controller;
 use App\Models\CategoryProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -84,7 +84,7 @@ class ManageProdukController extends Controller
         $rules = [
             'namaproduk' => 'required|string|max:255',
             'kategori' => 'required|string|max:255',
-            'hargasewa' => 'required|numeric|integer',
+            'hargasewa' => 'required|numeric|max:9999999999|integer',
             'rincianproduk' => 'required|string',
             'deskripsi' => 'required|string',
             'gambar' => 'file|image|mimetypes:image/jpeg,image/jpg,image/png|max:2048',
@@ -146,7 +146,8 @@ class ManageProdukController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $product = Product::findOrFail($id);
+
         $rules = [
             'namaproduk' => 'required|string|max:255',
             'kategori' => 'required|string|max:255',
@@ -196,17 +197,17 @@ class ManageProdukController extends Controller
         }
 
         if ($request->hasFile('albumproduk')) {
-            $album_produk = Product::findOrFail($id);
+
             // Jika sebelumnya di db kolom album_produk sudah ada isinya
-            if (!is_null($album_produk->album_produk)) {
-                $gambar = json_decode($album_produk->album_produk, true);
+            if (!is_null($product->album_produk)) {
+                $gambar = json_decode($product->album_produk, true);
                 // Menghapus gambar sebelumnya dari storage
                 foreach ($gambar as $index => $value) {
                     Storage::delete($value);
                 }
                 // Mengosongkan gambar sebelumnya dari kolom album_produk
-                $album_produk->album_produk = null;
-                $album_produk->save();
+                $product->album_produk = null;
+                $product->save();
             }
             $thumbnails = [];
             foreach ($request->file('albumproduk') as $file) {
@@ -217,25 +218,25 @@ class ManageProdukController extends Controller
             $data['album_produk'] = $thumbnailsJson;
         }
         //Simpan produk
-        Product::where('id', $id)->update($data);
+        $product->update($data);
 
         return redirect()->route('manage-produk.index')->with('success_edit_product', 'Data berhasil diubah');
     }
 
     public function destroy($id)
     {
-        $get_products = Product::findOrFail($id);
-        if ($get_products->gambar) {
-            $path = $get_products->gambar;
+        $getProduct = Product::findOrFail($id);
+        if ($getProduct->gambar) {
+            $path = $getProduct->gambar;
             Storage::delete(['compressed/' . $path, 'post-images/' . $path]);
         }
-        if (!is_null($get_products->album_produk)) {
-            $path2 = json_decode($get_products->album_produk, true);
+        if (!is_null($getProduct->album_produk)) {
+            $path2 = json_decode($getProduct->album_produk, true);
             foreach ($path2 as $index => $value) {
                 Storage::delete($value);
             }
         }
-        Product::destroy($id);
+        $getProduct->delete();
         return redirect()->route('manage-produk.index')->with('success_delete_product', 'Data berhasil dihapus');
     }
 
@@ -272,14 +273,14 @@ class ManageProdukController extends Controller
     }
     public function destroycategory($id)
     {
-        $get_category = CategoryProduct::findOrFail($id);
+        $getCategory = CategoryProduct::findOrFail($id);
         // cek apakah ada produk yang menggunakan kategori ini
-        $products = $get_category->product()->get();
+        $products = $getCategory->product()->get();
         if ($products->count() > 0) {
             return redirect()->route('manage-produk.index')->with('error_delete_categoryproduct', 'Kategori produk ini tidak dapat dihapus karena saat ini masih digunakan oleh beberapa produk');
         }
         // jika tidak ada produk yang menggunakan kategori ini, maka hapus kategori
-        $get_category->delete();
+        $getCategory->delete();
         return redirect()->route('manage-produk.index')->with('success_delete_categoryproduct', 'Data berhasil dihapus');
     }
 }

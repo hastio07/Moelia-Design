@@ -57,7 +57,7 @@
                         </div>
                     @endif
                     <h6 class="fw-bold">Account Settings</h6>
-                    <form action="{{ route('user.profile') }}" method="POST">
+                    <form action="{{ route('user-profile.update') }}" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="row">
