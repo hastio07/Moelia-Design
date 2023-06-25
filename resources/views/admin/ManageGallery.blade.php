@@ -24,6 +24,17 @@
                             'fade',
                             'show active' => $activeTab === 'photo-tab',
                         ]) aria-labelledby="photo-tab" id="photo-tab-pane" role="tabpanel" tabindex="0">
+                            @if ($errors->any())
+                                <div class="m-3 pt-1">
+                                    <div class="alert alert-danger">
+                                        <ul style="list-style:none;">
+                                            @foreach ($errors->all() as $message)
+                                                <li>{{ $message }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                            @endif
                             <form action="{{ route('manage-gallery.createphoto') }}" enctype="multipart/form-data" method="post">
                                 @csrf
                                 <div class="form-inpt">
@@ -57,6 +68,7 @@
                             'fade',
                             'show active' => $activeTab === 'video-tab',
                         ]) aria-labelledby="video-tab" id="video-tab-pane" role="tabpanel" tabindex="0">
+
                             <form action="{{ route('manage-gallery.createvideo') }}" enctype="multipart/form-data" method="post">
                                 @csrf
                                 <div class="form-inpt">
@@ -71,7 +83,7 @@
                                     <button class="btn btn-success" type="submit">Simpan</button>
                                 </div>
                             </form>
-                            <table class="table display" id="table-video">
+                            <table class="display table" id="table-video">
                                 <thead>
                                     <tr>
                                         <th>Judul Video</th>

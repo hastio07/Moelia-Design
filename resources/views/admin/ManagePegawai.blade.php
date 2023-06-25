@@ -124,7 +124,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="cuModalLabel">Tambah Pegawai</h5>
+                    <h5 class="modal-title">Tambah Pegawai</h5>
                     <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
                 </div>
                 <form enctype="multipart/form-data" id="CUForm" method="post">
