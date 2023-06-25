@@ -7,14 +7,14 @@
     <section class="container">
         <div class="content-wrapper">
             <div class="card">
-                <div class="card-header ">
+                <div class="card-header">
                     <h4>List Layanan</h4>
                 </div>
                 <div class="card-body">
                     <div class="btn-modal">
-                        <button class="btn mb-2 icon-left btn-success" data-bs-route="{{ route('manage-layanan.store') }}" data-bs-target="#CUModal" data-bs-toggle="modal" id="btnCreate" type="button"><i class="bi bi-plus-lg"></i>Tambah Layanan</i></button>
+                        <button class="btn icon-left btn-success mb-2" data-bs-route="{{ route('manage-layanan.store') }}" data-bs-target="#CUModal" data-bs-toggle="modal" id="btnCreateModal" type="button"><i class="bi bi-plus-lg"></i>Tambah Layanan</i></button>
                     </div>
-                    <table class="table display text-center" id="table-layanan">
+                    <table class="display table text-center" id="table-layanan">
                         <thead>
                             <tr>
                                 <th>Tipe Layanan</th>
@@ -48,7 +48,7 @@
                     <form enctype="multipart/form-data" id="CUForm" method="post">
                         @csrf
                         <div class="modal-body">
-                            <div class="p-3 mb-5">
+                            <div class="mb-5 p-3">
                                 <div class="add-services">
                                     <div class="link-png">
                                         <p class="text-capitalize">Untuk PNG logo layanan dapat didownload <a href="https://www.flaticon.com">disini</a></p>
@@ -72,7 +72,7 @@
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-secondary" data-bs-dismiss="modal" type="submit">Tutup</button>
-                            <button class="btn mb-2 icon-left  btn-success" type="button "><i class="ti-check"></i>selesai</button>
+                            <button class="btn icon-left btn-success mb-2" type="button "><i class="ti-check"></i>selesai</button>
                         </div>
                     </form>
                 </div>
@@ -153,7 +153,7 @@
                 }
             });
 
-            if (btnID === 'btnUpdate') {
+            if (btnID === 'btnUpdateModal') {
                 // Extract info from data-bs-* attributes
                 let rawData = button.getAttribute('data-bs-layanan');
                 let parseData = JSON.parse(rawData);
@@ -181,7 +181,7 @@
                 }
                 btnSubmit.textContent = 'Ubah'; // Ubah text tombol submit
             }
-            if (btnID === 'btnCreate') {
+            if (btnID === 'btnCreateModal') {
                 CUForm.action = route;
                 titleModal.textContent = 'Tambah Layanan';
             }

@@ -26,8 +26,8 @@ class ManageLayananController extends Controller
             ->editColumn('aksi', function ($value) {
                 $json = htmlspecialchars(json_encode($value), ENT_QUOTES, 'UTF-8');
                 return ' <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                <button class="btn btn-warning" data-bs-barang="' . $json . '" data-bs-route="' . route('manage-gudang.update', $value->id) . '" data-bs-target="#CUModal" data-bs-toggle="modal" id="btnUpdateModal" type="button"><i class="bi bi-pencil-square"></i></button>
-                <button class="btn btn-danger" data-bs-route="' . route('manage-gudang.destroy', $value->id) . '" data-bs-target="#DeleteModal" data-bs-toggle="modal" id="btnDeleteModal" type="button"><i class="bi bi-trash"></i></button>
+                <button class="btn btn-warning" data-bs-layanan="' . $json . '" data-bs-route="' . route('manage-layanan.update', $value->id) . '" data-bs-target="#CUModal" data-bs-toggle="modal" id="btnUpdateModal" type="button"><i class="bi bi-pencil-square"></i></button>
+                <button class="btn btn-danger" data-bs-route="' . route('manage-layanan.destroy', $value->id) . '" data-bs-target="#DeleteModal" data-bs-toggle="modal" id="btnDeleteModal" type="button"><i class="bi bi-trash"></i></button>
                 </div>';
             })->filter(function ($query) {
             if (request()->has('search') && !empty(request()->get('search')['value'])) {

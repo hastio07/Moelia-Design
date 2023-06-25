@@ -19,41 +19,20 @@ use Illuminate\Support\Facades\Validator;
 
 class ManagePerusahaanController extends Controller
 {
-    protected $owners;
-    protected $companies;
-    protected $videopromosi;
-    protected $addresses;
-    protected $contacts;
-    protected $sosmeds;
-    protected $abouts;
-    protected $offers;
-    protected $workinghours;
 
-    public function __construct(Contact $contacts, Sosmed $sosmeds, Owner $owners, Address $addresses, About $abouts, Offer $offers, WorkingHour $workinghours, Videopromosi $videopromosi)
-    {
-        $this->owners = Owner::get();
-        $this->companies = Company::get();
-        $this->videopromosi = $videopromosi;
-        $this->addresses = Address::get();
-        $this->contacts = Contact::get();
-        $this->sosmeds = Sosmed::get();
-        $this->abouts = About::get();
-        $this->offers = Offer::get();
-        $this->workinghours = WorkingHour::get();
-    }
     public function index()
     {
         $days = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'];
         $data = [
-            'companies' => $this->companies->first(),
-            'contacts' => $this->contacts->first(),
-            'sosmeds' => $this->sosmeds->first(),
-            'owners' => $this->owners->first(),
-            'addresses' => $this->addresses->first(),
-            'abouts' => $this->abouts->first(),
-            'offers' => $this->offers->first(),
-            'videopromosi' => $this->videopromosi->first(),
-            'workinghours' => $this->workinghours->whereIn('day', $days)->orderBy('day')->get(),
+            'owners' => Owner::first(),
+            'companies' => Company::first(),
+            'videopromosi' => Videopromosi::first(),
+            'addresses' => Address::first(),
+            'contacts' => Contact::first(),
+            'sosmeds' => Sosmed::first(),
+            'abouts' => About::first(),
+            'offers' => Offer::first(),
+            'workinghours' => WorkingHour::whereIn('day', $days)->orderBy('day')->get(),
         ];
 
         return view('admin.manageperusahaan', $data);
@@ -70,7 +49,7 @@ class ManagePerusahaanController extends Controller
                 'string',
                 function ($attribute, $value, $fail) {
                     if (!empty($value)) {
-                        $owner = $this->owners->where('foto_owner', $value)->first();
+                        $owner = Owner::where('foto_owner', $value)->first();
                         if (!$owner) {
                             $fail("nilai tidak valid");
                         }
@@ -110,13 +89,13 @@ class ManagePerusahaanController extends Controller
         $id = (int) $request->input('id_owner');
         // dd($id);
         // update atau create record dengan data yang diberikan
-        $this->owners->updateOrCreate(['id' => $id], $filterData);
+        Owner::updateOrCreate(['id' => $id], $filterData);
         return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil Disimpan');
     }
 
     public function deleteowner($id)
     {
-        $db = $this->owners->findOrFail($id);
+        $db = Owner::findOrFail($id);
         if ($db->foto_owner !== null) {
             $path = $db->foto_owner;
             Storage::delete($path);
@@ -140,7 +119,7 @@ class ManagePerusahaanController extends Controller
                 'string',
                 function ($attribute, $value, $fail) {
                     if (!empty($value)) {
-                        $company = $this->companies->where('logo_perusahaan', $value)->first();
+                        $company = Company::where('logo_perusahaan', $value)->first();
                         if (!$company) {
                             $fail('sesuatu nilai tidak valid');
                         }
@@ -180,12 +159,12 @@ class ManagePerusahaanController extends Controller
         $id = (int) $request->input('id_perusahaan');
         // dd($id);
         // update atau create record dengan data yang diberikan
-        $this->companies->updateOrCreate(['id' => $id], $filterData);
+        Company::updateOrCreate(['id' => $id], $filterData);
         return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil Disimpan');
     }
     public function deletecompany($id)
     {
-        $data = $this->companies->findOrFail($id);
+        $data = Company::findOrFail($id);
         if ($data->logo_perusahaan !== null) {
             $path = $data->logo_perusahaan;
             Storage::delete($path);
@@ -269,7 +248,7 @@ class ManagePerusahaanController extends Controller
         $id = (int) $request->input('id_alamat');
         // dd($id);
         // update atau create record dengan data yang diberikan
-        $this->addresses->updateOrCreate(['id' => $id], $validatedData);
+        Address::updateOrCreate(['id' => $id], $validatedData);
         return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil Disimpan');
     }
     public function deleteaddress($id)
@@ -279,7 +258,7 @@ class ManagePerusahaanController extends Controller
             'link_gmap' => null,
         ];
 
-        $this->addresses->findOrFail($id)->update($data);
+        Address::findOrFail($id)->update($data);
         return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil DiHapus!');
     }
 
@@ -340,7 +319,7 @@ class ManagePerusahaanController extends Controller
         $id = (int) $request->input('id_contact');
         // dd($id);
         // update atau create record dengan data yang diberikan
-        $this->contacts->updateOrCreate(['id' => $id], $validatedData);
+        Contact::updateOrCreate(['id' => $id], $validatedData);
         return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil Disimpan');
     }
     public function deletecontact($id)
@@ -350,7 +329,7 @@ class ManagePerusahaanController extends Controller
             'whatsapp' => null,
             'email' => null,
         ];
-        $this->contacts->findOrFail($id)->update($data);
+        Contact::findOrFail($id)->update($data);
         return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil DiHapus!');
     }
 
@@ -382,7 +361,7 @@ class ManagePerusahaanController extends Controller
         $id = (int) $request->input('id_sosmed');
         // dd($id);
         // update atau create record dengan data yang diberikan
-        $this->sosmeds->updateOrCreate(['id' => $id], $validatedData);
+        Sosmed::updateOrCreate(['id' => $id], $validatedData);
         return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil Disimpan');
     }
 
@@ -400,7 +379,7 @@ class ManagePerusahaanController extends Controller
             'u_youtube' => null,
             'l_youtube' => null,
         ];
-        $this->sosmeds->findOrFail($id)->update($data);
+        Sosmed::findOrFail($id)->update($data);
         return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil DiHapus!');
     }
 
@@ -412,7 +391,7 @@ class ManagePerusahaanController extends Controller
             'fotobersama' => 'nullable|file|image|mimetypes:image/jpeg,image/jpg,image/png|max:2048',
             'oldfotobersama' => ['nullable', 'string', function ($attribute, $value, $fail) {
                 if (!empty($value)) {
-                    $about = $this->abouts->where('fotobersama', $value)->first();
+                    $about = About::where('fotobersama', $value)->first();
                     if (!$about) {
                         $fail("nilai tidak valid");
                     }
@@ -447,13 +426,13 @@ class ManagePerusahaanController extends Controller
         $id = (int) $request->input('id_about');
         // dd($id);
         // update atau create record dengan data yang diberikan
-        $this->abouts->updateOrCreate(['id' => $id], $filterData);
+        About::updateOrCreate(['id' => $id], $filterData);
         return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil Disimpan');
     }
 
     public function deleteabout($id)
     {
-        $db = $this->abouts->findOrFail($id);
+        $db = About::findOrFail($id);
         $data = [
             'katasambutan' => null,
             'fotobersama' => null,
@@ -476,7 +455,7 @@ class ManagePerusahaanController extends Controller
             'foto_bersama' => 'nullable|file|image|mimetypes:image/jpeg,image/jpg,image/png|max:2048',
             'oldfoto_bersama' => ['nullable', 'string', function ($attribute, $value, $fail) {
                 if (!empty($value)) {
-                    $offers = $this->offers->where('foto_bersama', $value)->first();
+                    $offers = Offer::where('foto_bersama', $value)->first();
                     if (!$offers) {
                         $fail("nilai tidak valid");
                     }
@@ -513,13 +492,13 @@ class ManagePerusahaanController extends Controller
         $id = (int) $request->input('id_offer');
         // dd($filterData);
         // update atau create record dengan data yang diberikan
-        $this->offers->updateOrCreate(['id' => $id], $filterData);
+        Offer::updateOrCreate(['id' => $id], $filterData);
         return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil Disimpan');
     }
 
     public function deleteoffer($id)
     {
-        $db = $this->offers->findOrFail($id);
+        $db = Offer::findOrFail($id);
         $data = [
             'penawaran' => null,
             'foto_bersama' => null,
@@ -560,7 +539,7 @@ class ManagePerusahaanController extends Controller
                 $filterData = [
                     'status' => false,
                 ];
-                $this->workinghours->updateOrCreate(['id' => $daysId], $filterData);
+                WorkingHour::updateOrCreate(['id' => $daysId], $filterData);
             } else {
                 foreach ($validatedData['day'][$daysId] as $index => $isChecked) {
                     // Konversi nilai 'true' menjadi true
@@ -571,7 +550,7 @@ class ManagePerusahaanController extends Controller
                         'time_from' => isset($validatedData['from'][$daysId][$index]) ? $validatedData['from'][$daysId][$index] : null,
                         'time_to' => isset($validatedData['to'][$daysId][$index]) ? $validatedData['to'][$daysId][$index] : null,
                     ];
-                    $this->workinghours->updateOrCreate(['id' => $daysId], $filterData);
+                    WorkingHour::updateOrCreate(['id' => $daysId], $filterData);
                 }
             }
         }

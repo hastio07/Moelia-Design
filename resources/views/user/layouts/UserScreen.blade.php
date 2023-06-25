@@ -33,11 +33,13 @@
 <body>
     <Header>
         <!-- icon wa -->
-        <a href="https://wa.me/+62{{ $contact->telephone1_number }}?text=Selamat Datang DiMoelia Design">
-            <div class="floating-icon">
-                <i class="bi bi-whatsapp"></i>
-            </div>
-        </a>
+        @if (!empty($contact) && $contact->telephone1_number)
+            <a href="https://wa.me/+62{{ $contact->telephone1_number }}?text=Selamat Datang DiMoelia Design">
+                <div class="floating-icon">
+                    <i class="bi bi-whatsapp"></i>
+                </div>
+            </a>
+        @endif
         <!-- batas icon wa -->
         <!-- navbar -->
         <nav class="navbar navbar-expand-lg rounded-bottom fixed-top bg-white shadow-sm">

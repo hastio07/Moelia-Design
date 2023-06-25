@@ -13,11 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('cal_custom_pakets', function (Blueprint $table) {
+        Schema::create('category_additional_venues', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('created_by')->constrained('admins', 'id')->restrictOnDelete()->restrictOnUpdate();
-            $table->string('nama_paket');
-            $table->string('harga');
+            $table->string('nama')->unique('nama');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cal_custom_pakets');
+        Schema::dropIfExists('category_additional_venues');
     }
 };

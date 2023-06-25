@@ -20,7 +20,7 @@ class SuperAdminSeeder extends Seeder
             'nama_belakang' => 'Admin',
             'email' => 'superadmin@moeliadesign.my.id',
             'phone_number' => fake()->phoneNumber(),
-            'password' => bcrypt('superadmin'),
+            'password' => bcrypt('@Superadmin'),
         ]);
     }
 }

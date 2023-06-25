@@ -64,7 +64,7 @@
                         <div class="card h-100 mb-5 bg-white text-center">
                             <div class="card-body">
                                 <h5 class="card-title card-perusahaan">Moelia Design</h5>
-                                @if ((!empty($abouts) && $abouts->judul) || $abouts->katasambutan)
+                                @if (!empty($abouts) && ($abouts->judul || $abouts->katasambutan))
                                     <h6 class="card-subtitle mb-4">{{ $abouts->judul }}</h6>
                                     <p class="card-text text-muted" style="text-align: justify; text-indent: 30px;">{{ $abouts->katasambutan }} </p>
                                 @else

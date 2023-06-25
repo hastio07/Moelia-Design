@@ -10,7 +10,7 @@ use App\Http\Controllers\admin\ManagePegawaiController;
 use App\Http\Controllers\admin\ManagePerusahaanController;
 use App\Http\Controllers\admin\ManagePesananProsesController;
 use App\Http\Controllers\admin\ManageProdukController;
-use App\Http\Controllers\admin\ManageWeddingCalulatorController;
+use App\Http\Controllers\admin\ManageWeddingCalculatorController;
 use App\Http\Controllers\admin\ProfileAdminController;
 use App\Http\Controllers\user\AboutController;
 use App\Http\Controllers\user\CalculatorController;
@@ -94,8 +94,8 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
             Route::delete('manage-perusahaan/deleteabout/{id}', 'deleteabout')->name('manage-perusahaan.deleteabout');
             Route::post('manage-perusahaan/updateorcreateoffer', 'updateorcreateoffer')->name('manage-perusahaan.updateorcreateoffer');
             Route::delete('manage-perusahaan/deleteoffer/{id}', 'deleteoffer')->name('manage-perusahaan.deleteoffer');
-            Route::post('manage-perusahaan/addvideopromosi', 'updateorcreatevideopromosi')->name('manage-perusahaan.updateorcreatevideopromosi');
-            Route::delete('manage-perusahaan/addvideopromosi/{id}', 'deletevideopromosi')->name('manage-perusahaan.deletevideopromosi');
+            Route::post('manage-perusahaan/updateorcreatevideopromosi', 'updateorcreatevideopromosi')->name('manage-perusahaan.updateorcreatevideopromosi');
+            Route::delete('manage-perusahaan/deletevideopromosi/{id}', 'deletevideopromosi')->name('manage-perusahaan.deletevideopromosi');
             Route::post('manage-perusahaan/updateorcreatejo', 'updateorcreatejo')->name('manage-perusahaan.updateorcreatejo');
         });
         Route::controller(ManageProdukController::class)->group(function () {
@@ -141,19 +141,38 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
             Route::post('profile-admin', 'savedata')->name('profile-admin.save');
             Route::post('profile-admin/new-password', 'newpassword')->name('profile-admin.new-password');
         });
-        Route::controller(ManageWeddingCalulatorController::class)->group(function () {
+        Route::controller(ManageWeddingCalculatorController::class)->group(function () {
+            # Rute root
             Route::get('manage-wedding-calculator', 'index')->name('manage-wedding-calculator.index');
-            Route::post('manage-wedding-calculator/cal-all-in', 'cAllIn')->name('manage-wedding-calculator.cAllIn');
-            Route::post('manage-wedding-calculator/cal-custom-paket', 'cCustomPaket')->name('manage-wedding-calculator.cCustomPaket');
-            Route::post('manage-wedding-calculator/cal-additional-venue', 'cAdditionalVenue')->name('manage-wedding-calculator.cAdditionalVenue');
+            # Rute get data untuk DataTables
+            Route::get('manage-wedding-calculator/get-all-in', 'getAllIn')->name('manage-wedding-calculator.getAllIn');
+            Route::get('manage-wedding-calculator/get-custom-venue', 'getCustomVenue')->name('manage-wedding-calculator.getCustomVenue');
+            Route::get('manage-wedding-calculator/get-additional-venue', 'getAdditionalVenue')->name('manage-wedding-calculator.getAdditionalVenue');
+            # Rute create paket all-in, custom venue, additional venue
+            Route::post('manage-wedding-calculator/cat-all-in', 'catAllIn')->name('manage-wedding-calculator.catAllIn');
+            Route::post('manage-wedding-calculator/cat-custom-venue', 'catCustomVenue')->name('manage-wedding-calculator.catCustomVenue');
+            Route::post('manage-wedding-calculator/cat-additional-venue', 'catAdditionalVenue')->name('manage-wedding-calculator.catAdditionalVenue');
+            # Rute update paket
+            Route::put('manage-wedding-calculator/uat-all-in/{id}', 'uatAllIn')->name('manage-wedding-calculator.uatAllIn');
+            Route::put('manage-wedding-calculator/uat-custom-venue/{id}', 'uatCustomVenue')->name('manage-wedding-calculator.uatCustomVenue');
+            Route::put('manage-wedding-calculator/uat-additional-venue/{id}', 'uatAdditionalVenue')->name('manage-wedding-calculator.uatAdditionalVenue');
+            # Rute delete paket
+            Route::delete('manage-wedding-calculator/del-all-in/{id}', 'dAllIn')->name('manage-wedding-calculator.dAllIn');
+            Route::delete('manage-wedding-calculator/del-custom-venue/{id}', 'dCustomVenue')->name('manage-wedding-calculator.dCustomVenue');
+            Route::delete('manage-wedding-calculator/del-additional-venue/{id}', 'dAdditionalVenue')->name('manage-wedding-calculator.dAdditionalVenue');
 
-            Route::put('manage-wedding-calculator/cal-all-in/update', 'uAllIn')->name('manage-wedding-calculator.uAllIn');
-            Route::put('manage-wedding-calculator/cal-custom-paket/update', 'uCustomPaket')->name('manage-wedding-calculator.uCustomPaket');
-            Route::put('manage-wedding-calculator/cal-additional-venue/update', 'uAdditionalVenue')->name('manage-wedding-calculator.uAdditionalVenue');
+            # Rute kategori custom venue dan additional venue
+            Route::get('manage-wedding-calculator/data-category-custom-venue', 'dataCategoryCustomVenue')->name('manage-wedding-calculator.dataCategoryCustomVenue');
+            Route::get('manage-wedding-calculator/data-category-additional-venue', 'dataCategoryAdditionalVenue')->name('manage-wedding-calculator.dataCategoryAdditionalVenue');
 
-            Route::delete('manage-wedding-calculator/cal-all-in/delete', 'dAllIn')->name('manage-wedding-calculator.dAllIn');
-            Route::delete('manage-wedding-calculator/cal-custom-paket/delete', 'dCustomPaket')->name('manage-wedding-calculator.dCustomPaket');
-            Route::delete('manage-wedding-calculator/cal-additional-venue/delete', 'dAdditionalVenue')->name('manage-wedding-calculator.dAdditionalVenue');
+            Route::get('manage-wedding-calculator/get-category-custom-venue', 'getCategoryCustomVenue')->name('manage-wedding-calculator.getCategoryCustomVenue');
+            Route::get('manage-wedding-calculator/get-category-additional-venue', 'getCategoryAdditionalVenue')->name('manage-wedding-calculator.getCategoryAdditionalVenue');
+
+            Route::post('manage-wedding-calculator/cat-category-custom-venue', 'catCategoryCustomVenue')->name('manage-wedding-calculator.catCategoryCustomVenue');
+            Route::post('manage-wedding-calculator/cat-category-additional-venue', 'catCategoryAdditionalVenue')->name('manage-wedding-calculator.catCategoryAdditionalVenue');
+            Route::delete('manage-wedding-calculator/del-category-custom-venue/{id}', 'delCategoryCustomVenue')->name('manage-wedding-calculator.delCategoryCustomVenue');
+            Route::delete('manage-wedding-calculator/del-category-additional-venue/{id}', 'delCategoryAdditionalVenue')->name('manage-wedding-calculator.delCategoryAdditionalVenue');
+
         });
         Route::get('/cetak-kontrak', function () {
             return view('admin.cetakkontrak');
