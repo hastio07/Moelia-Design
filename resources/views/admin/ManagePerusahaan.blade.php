@@ -23,6 +23,22 @@
                                                 <h4 class="text-center">
                                                     Foto & Nama Owner
                                                 </h4>
+                                                @if (session('success_owner'))
+                                                    <div class="alert alert-success text-center" id="success-alert">
+                                                        {{ session('success_owner') }}
+                                                    </div>
+                                                @endif
+                                                @if ($errors->has('nama_owner') || $errors->has('kata_sambutan') || $errors->has('foto_owner') || $errors->has('oldfoto_owner'))
+                                                    <div class="m-3 pt-1">
+                                                        <div class="alert alert-danger">
+                                                            <ul style="list-style:none;">
+                                                                @foreach ($errors->all() as $message)
+                                                                    <li>{{ $message }}</li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                @endif
                                                 <form action="{{ route('manage-perusahaan.updateorcreateowner') }}" class="formstyle" enctype="multipart/form-data" id="formOwner" method="POST">
                                                     <div class="flex-item form">
                                                         @csrf
@@ -51,6 +67,22 @@
                                                 <h4 class="text-center">
                                                     Logo & Nama Perusahaan
                                                 </h4>
+                                                @if (session('success_company'))
+                                                    <div class="alert alert-success text-center" id="success-alert">
+                                                        {{ session('success_company') }}
+                                                    </div>
+                                                @endif
+                                                @if ($errors->has('nama_perusahaan') || $errors->has('logo_perusahaan') || $errors->has('oldlogo_perusahaan'))
+                                                    <div class="m-3 pt-1">
+                                                        <div class="alert alert-danger">
+                                                            <ul style="list-style:none;">
+                                                                @foreach ($errors->all() as $message)
+                                                                    <li>{{ $message }}</li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                @endif
                                                 <form action="{{ route('manage-perusahaan.updateorcreatecompany') }}" class="formstyle" enctype="multipart/form-data" id="formCompany" method="POST">
                                                     <div class="flex-item form">
                                                         @csrf
@@ -77,6 +109,22 @@
                                                 <h4 class="text-center">
                                                     Video Promosi
                                                 </h4>
+                                                @if (session('success_promosi'))
+                                                    <div class="alert alert-success text-center" id="success-alert">
+                                                        {{ session('success_promosi') }}
+                                                    </div>
+                                                @endif
+                                                @if ($errors->has('judul-video-promosi') || $errors->has('link-video-promosi'))
+                                                    <div class="m-3 pt-1">
+                                                        <div class="alert alert-danger">
+                                                            <ul style="list-style:none;">
+                                                                @foreach ($errors->all() as $message)
+                                                                    <li>{{ $message }}</li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                @endif
                                                 <form action="{{ route('manage-perusahaan.updateorcreatevideopromosi') }}" enctype="multipart/form-data" method="post">
                                                     @csrf
                                                     <input name="id_video" type="hidden" value="{{ $videopromosi->id ?? null }}">
@@ -96,6 +144,22 @@
                                             <!-- alamat perusahaan -->
                                             <div class="bg-body container mb-3 rounded border p-3 shadow">
                                                 <h4 class="text-center">Alamat Perusahaan</h4>
+                                                @if (session('success_address'))
+                                                    <div class="alert alert-success text-center" id="success-alert">
+                                                        {{ session('success_address') }}
+                                                    </div>
+                                                @endif
+                                                @if ($errors->has('alamat_perusahaan') || $errors->has('link_gmap'))
+                                                    <div class="m-3 pt-1">
+                                                        <div class="alert alert-danger">
+                                                            <ul style="list-style:none;">
+                                                                @foreach ($errors->all() as $message)
+                                                                    <li>{{ $message }}</li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                @endif
                                                 <form action="{{ route('manage-perusahaan.updateorcreateaddress') }}" class="formstyle" enctype="multipart/form-data" id="formAlamat" method="POST">
                                                     <div class="flex-item form">
                                                         @csrf
@@ -121,6 +185,22 @@
                                                 <h4 class="text-center">
                                                     Kontak
                                                 </h4>
+                                                @if (session('success_contact'))
+                                                    <div class="alert alert-success text-center" id="success-alert">
+                                                        {{ session('success_contact') }}
+                                                    </div>
+                                                @endif
+                                                @if ($errors->has('telephone1_name') || $errors->has('telephone1_number') || $errors->has('telephone2_name') || $errors->has('telephone2_number') || $errors->has('whatsapp1_name') || $errors->has('whatsapp1_number') || $errors->has('whatsapp2_name') || $errors->has('whatsapp2_number') || $errors->has('whatsapp3_name') || $errors->has('whatsapp3_number') || $errors->has('whatsapp4_name') || $errors->has('whatsapp4_number') || $errors->has('email'))
+                                                    <div class="m-3 pt-1">
+                                                        <div class="alert alert-danger">
+                                                            <ul style="list-style:none;">
+                                                                @foreach ($errors->all() as $message)
+                                                                    <li>{{ $message }}</li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                @endif
                                                 <form action="{{ route('manage-perusahaan.updateorcreatecontact') }}" class="formstyle" enctype="multipart/form-data" id="formContact" method="POST">
                                                     <div class="flex-item form">
                                                         @csrf
@@ -178,6 +258,22 @@
                                                 <h4 class="text-center">
                                                     Social Media
                                                 </h4>
+                                                @if (session('success_sosmed'))
+                                                    <div class="alert alert-success text-center" id="success-alert">
+                                                        {{ session('success_sosmed') }}
+                                                    </div>
+                                                @endif
+                                                @if ($errors->has('u_instagram') || $errors->has('l_instagram') || $errors->has('u_facebook') || $errors->has('l_facebook') || $errors->has('u_twitter') || $errors->has('l_twitter') || $errors->has('u_tiktok') || $errors->has('l_tiktok') || $errors->has('u_youtube') || $errors->has('l_youtube'))
+                                                    <div class="m-3 pt-1">
+                                                        <div class="alert alert-danger">
+                                                            <ul style="list-style:none;">
+                                                                @foreach ($errors->all() as $message)
+                                                                    <li>{{ $message }}</li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                @endif
                                                 <form action="{{ route('manage-perusahaan.updateorcreatesosmed') }}" class="formstyle" enctype="multipart/form-data" id="formSosmed" method="POST">
                                                     <div class="flex-item form">
                                                         @csrf
@@ -314,6 +410,22 @@
                                                 <h4 class="text-center">
                                                     Siapa Kami?
                                                 </h4>
+                                                @if (session('success_about'))
+                                                    <div class="alert alert-success text-center" id="success-alert">
+                                                        {{ session('success_about') }}
+                                                    </div>
+                                                @endif
+                                                @if ($errors->has('katasambutan') || $errors->has('judul_siapa') || $errors->has('fotobersama') || $errors->has('oldfotobersama'))
+                                                    <div class="m-3 pt-1">
+                                                        <div class="alert alert-danger">
+                                                            <ul style="list-style:none;">
+                                                                @foreach ($errors->all() as $message)
+                                                                    <li>{{ $message }}</li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                @endif
                                                 <form action="{{ route('manage-perusahaan.updateorcreateabout') }}" class="formstyle" enctype="multipart/form-data" id="formAbout" method="POST">
                                                     @csrf
                                                     <input name="id_about" readonly type="hidden" value="{{ $abouts->id ?? null }}">
@@ -338,6 +450,22 @@
                                                 <h4 class="text-center">
                                                     Apa Saja Yang Didapatkan?
                                                 </h4>
+                                                @if (session('success_offer'))
+                                                    <div class="alert alert-success text-center" id="success-alert">
+                                                        {{ session('success_offer') }}
+                                                    </div>
+                                                @endif
+                                                @if ($errors->has('penawaran') || $errors->has('foto_bersama') || $errors->has('oldfoto_bersama'))
+                                                    <div class="m-3 pt-1">
+                                                        <div class="alert alert-danger">
+                                                            <ul style="list-style:none;">
+                                                                @foreach ($errors->all() as $message)
+                                                                    <li>{{ $message }}</li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                @endif
                                                 <form action="{{ route('manage-perusahaan.updateorcreateoffer') }}" class="formstyle" enctype="multipart/form-data" id="formOffer" method="POST">
                                                     @csrf
                                                     <input name="id_offer" readonly type="hidden" value="{{ $offers->id ?? null }}">
@@ -359,6 +487,22 @@
                                                 <h4 class="text-center">
                                                     Jam Operasional Perusahaan
                                                 </h4>
+                                                @if (session('success_jo'))
+                                                    <div class="alert alert-success text-center" id="success-alert">
+                                                        {{ session('success_jo') }}
+                                                    </div>
+                                                @endif
+                                                @if ($errors->has('day') || $errors->has('from') || $errors->has('to'))
+                                                    <div class="m-3 pt-1">
+                                                        <div class="alert alert-danger">
+                                                            <ul style="list-style:none;">
+                                                                @foreach ($errors->all() as $message)
+                                                                    <li>{{ $message }}</li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                @endif
                                                 <div class="ms-3 hours-operation mt-5">
                                                     <form action="{{ route('manage-perusahaan.updateorcreatejo') }}" id="formJamOperasional" method="POST">
                                                         @csrf

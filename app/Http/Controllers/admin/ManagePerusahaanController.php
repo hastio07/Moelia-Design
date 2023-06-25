@@ -67,7 +67,7 @@ class ManagePerusahaanController extends Controller
 
         //Jika gagal
         if ($validator->fails()) {
-            return dd(back()->withErrors($validator)->withInput()); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
+            return back()->withErrors($validator)->withInput(); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
         }
         $validatedData = $validator->validated();
         // dd($validatedData);
@@ -90,7 +90,7 @@ class ManagePerusahaanController extends Controller
         // dd($id);
         // update atau create record dengan data yang diberikan
         Owner::updateOrCreate(['id' => $id], $filterData);
-        return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil Disimpan');
+        return redirect()->route('manage-perusahaan.index')->with('success_owner', 'Data berhasil disimpan');
     }
 
     public function deleteowner($id)
@@ -106,7 +106,7 @@ class ManagePerusahaanController extends Controller
             'foto_owner' => null,
         ];
         $db->update($data);
-        return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil DiHapus!');
+        return redirect()->route('manage-perusahaan.index')->with('success_owner', 'Data berhasil dihapus!');
     }
     public function updateorcreatecompany(Request $request)
     {
@@ -160,7 +160,7 @@ class ManagePerusahaanController extends Controller
         // dd($id);
         // update atau create record dengan data yang diberikan
         Company::updateOrCreate(['id' => $id], $filterData);
-        return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil Disimpan');
+        return redirect()->route('manage-perusahaan.index')->with('success_company', 'Data berhasil disimpan');
     }
     public function deletecompany($id)
     {
@@ -170,7 +170,7 @@ class ManagePerusahaanController extends Controller
             Storage::delete($path);
         }
         $data->delete();
-        return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil DiHapus!');
+        return redirect()->route('manage-perusahaan.index')->with('success_company', 'Data berhasil dihapus!');
     }
     public function updateorcreatevideopromosi(Request $request)
     {
@@ -212,7 +212,7 @@ class ManagePerusahaanController extends Controller
 
         $id = (int) $request->input('id_video');
         VideoPromosi::updateOrCreate(['id' => $id], $data);
-        return redirect()->route('manage-perusahaan.index')->with('success', 'data berhasil disimpan');
+        return redirect()->route('manage-perusahaan.index')->with('success_promosi', 'Data berhasil disimpan');
     }
 
     public function deletevideopromosi($id)
@@ -225,7 +225,7 @@ class ManagePerusahaanController extends Controller
         ];
 
         $db->update($data);
-        return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil DiHapus!');
+        return redirect()->route('manage-perusahaan.index')->with('success_promosi', 'Data berhasil dihapus!');
     }
 
     public function updateorcreateaddress(Request $request)
@@ -249,7 +249,7 @@ class ManagePerusahaanController extends Controller
         // dd($id);
         // update atau create record dengan data yang diberikan
         Address::updateOrCreate(['id' => $id], $validatedData);
-        return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil Disimpan');
+        return redirect()->route('manage-perusahaan.index')->with('success_address', 'Data berhasil disimpan');
     }
     public function deleteaddress($id)
     {
@@ -259,7 +259,7 @@ class ManagePerusahaanController extends Controller
         ];
 
         Address::findOrFail($id)->update($data);
-        return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil DiHapus!');
+        return redirect()->route('manage-perusahaan.index')->with('success_address', 'Data berhasil dihapus!');
     }
 
     public function updateorcreatecontact(Request $request)
@@ -320,7 +320,7 @@ class ManagePerusahaanController extends Controller
         // dd($id);
         // update atau create record dengan data yang diberikan
         Contact::updateOrCreate(['id' => $id], $validatedData);
-        return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil Disimpan');
+        return redirect()->route('manage-perusahaan.index')->with('success_contact', 'Data berhasil disimpan');
     }
     public function deletecontact($id)
     {
@@ -340,7 +340,7 @@ class ManagePerusahaanController extends Controller
             'email' => null,
         ];
         Contact::findOrFail($id)->update($data);
-        return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil DiHapus!');
+        return redirect()->route('manage-perusahaan.index')->with('success_contact', 'Data berhasil dihapus!');
     }
 
     public function updateorcreatesosmed(Request $request)
@@ -372,7 +372,7 @@ class ManagePerusahaanController extends Controller
         // dd($id);
         // update atau create record dengan data yang diberikan
         Sosmed::updateOrCreate(['id' => $id], $validatedData);
-        return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil Disimpan');
+        return redirect()->route('manage-perusahaan.index')->with('success_sosmed', 'Data berhasil disimpan');
     }
 
     public function deletesosmed($id)
@@ -390,7 +390,7 @@ class ManagePerusahaanController extends Controller
             'l_youtube' => null,
         ];
         Sosmed::findOrFail($id)->update($data);
-        return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil DiHapus!');
+        return redirect()->route('manage-perusahaan.index')->with('success_sosmed', 'Data berhasil dihapus!');
     }
 
     public function updateorcreateabout(Request $request)
@@ -437,7 +437,7 @@ class ManagePerusahaanController extends Controller
         // dd($id);
         // update atau create record dengan data yang diberikan
         About::updateOrCreate(['id' => $id], $filterData);
-        return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil Disimpan');
+        return redirect()->route('manage-perusahaan.index')->with('success_about', 'Data berhasil disimpan');
     }
 
     public function deleteabout($id)
@@ -455,7 +455,7 @@ class ManagePerusahaanController extends Controller
         }
 
         $db->update($data);
-        return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil DiHapus!');
+        return redirect()->route('manage-perusahaan.index')->with('success_about', 'Data berhasil dihapus!');
     }
 
     public function updateorcreateoffer(Request $request)
@@ -503,7 +503,7 @@ class ManagePerusahaanController extends Controller
         // dd($filterData);
         // update atau create record dengan data yang diberikan
         Offer::updateOrCreate(['id' => $id], $filterData);
-        return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil Disimpan');
+        return redirect()->route('manage-perusahaan.index')->with('success_offer', 'Data berhasil disimpan');
     }
 
     public function deleteoffer($id)
@@ -520,7 +520,7 @@ class ManagePerusahaanController extends Controller
         }
 
         $db->update($data);
-        return redirect()->route('manage-perusahaan.index')->with('success', 'Data Berhasil DiHapus!');
+        return redirect()->route('manage-perusahaan.index')->with('success_offer', 'Data berhasil dihapus!');
     }
     public function updateorcreatejo(Request $request)
     {
@@ -565,7 +565,7 @@ class ManagePerusahaanController extends Controller
             }
         }
 
-        return redirect()->route('manage-perusahaan.index')->with('success', 'Jam Operasional Berhasil di Perbarui');
+        return redirect()->route('manage-perusahaan.index')->with('success_jo', 'Jam operasional berhasil diperbarui');
     }
 
 }
