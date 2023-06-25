@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('video_promosis', function (Blueprint $table) {
             $table->id();
-            $table->string('judul');
-            $table->string('thumbnail_video');
-            $table->string('link_video');
+            $table->string('judul')->nullable();
+            $table->string('thumbnail_video')->nullable();
+            $table->string('link_video')->nullable();
             $table->timestamps();
         });
     }

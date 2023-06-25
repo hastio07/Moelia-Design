@@ -175,8 +175,8 @@ class ManagePerusahaanController extends Controller
     public function updateorcreatevideopromosi(Request $request)
     {
         $rules = [
-            'judul' => 'required|string|max:255',
-            'link_video' => ['required', 'string', 'url', 'max:255', new YouTubeUrl],
+            'judul-video-promosi' => 'required|string|max:255',
+            'link-video-promosi' => ['required', 'string', 'url', 'max:255', new YouTubeUrl],
         ];
         $massages = [
             'max' => ':attribute harus diisi maksimal :max karakter.',
@@ -194,8 +194,8 @@ class ManagePerusahaanController extends Controller
 
         $validatedData = $validator->validated();
 
-        $data['judul'] = $validatedData['judul'];
-        $parsed_url = parse_url($validatedData['link_video']);
+        $data['judul'] = $validatedData['judul-video-promosi'];
+        $parsed_url = parse_url($validatedData['link-video-promosi']);
         if ($parsed_url['host'] === 'youtu.be') {
             $id = ltrim($parsed_url['path'], '/');
         } elseif ($parsed_url['host'] === 'www.youtube.com' && isset($parsed_url['query'])) {
@@ -210,8 +210,8 @@ class ManagePerusahaanController extends Controller
         $data['thumbnail_video'] = 'https://img.youtube.com/vi/' . $id . '/maxresdefault.jpg';
         $data['link_video'] = $id;
 
-        $id_video = (int) $request->input('id_video');
-        VideoPromosi::updateOrCreate(['id' => $id_video], $data);
+        $id = (int) $request->input('id_video');
+        VideoPromosi::updateOrCreate(['id' => $id], $data);
         return redirect()->route('manage-perusahaan.index')->with('success', 'data berhasil disimpan');
     }
 
@@ -325,8 +325,18 @@ class ManagePerusahaanController extends Controller
     public function deletecontact($id)
     {
         $data = [
-            'telephone' => null,
-            'whatsapp' => null,
+            'telephone1_name' => null,
+            'telephone1_number' => null,
+            'telephone2_name' => null,
+            'telephone2_number' => null,
+            'whatsapp1_name' => null,
+            'whatsapp1_number' => null,
+            'whatsapp2_name' => null,
+            'whatsapp2_number' => null,
+            'whatsapp3_name' => null,
+            'whatsapp3_number' => null,
+            'whatsapp4_name' => null,
+            'whatsapp4_number' => null,
             'email' => null,
         ];
         Contact::findOrFail($id)->update($data);

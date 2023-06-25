@@ -72,18 +72,18 @@
                                                 </form>
                                             </div>
 
-                                            <!-- vidio promosi -->
+                                            <!-- video promosi -->
                                             <div class="bg-body container mb-3 rounded border p-3 shadow">
                                                 <h4 class="text-center">
-                                                    Vidio Promosi
+                                                    Video Promosi
                                                 </h4>
-                                                <form action="{{ route('manage-perusahaan.updateorcreatevideopromosi') }}" method="post">
+                                                <form action="{{ route('manage-perusahaan.updateorcreatevideopromosi') }}" enctype="multipart/form-data" method="post">
                                                     @csrf
                                                     <input name="id_video" type="hidden" value="{{ $videopromosi->id ?? null }}">
                                                     <label class="form-label" for="judul_promosi">Judul Vidio</label>
-                                                    <input class="form-control" id="judul_promosi" name="judul" placeholder="Masukkan Judul/Intro" type="text" value="{{ $videopromosi->judul ?? null }}">
-                                                    <label class="form-label" for="vidio_promosi">Link vidio</label>
-                                                    <input aria-label="default input example" class="form-control" id="vidio_promosi" name="link_video" placeholder="Link Vidio" type="text" value="{{ $videopromosi->link_video ?? null }}">
+                                                    <input class="form-control" id="judul_promosi" name="judul-video-promosi" placeholder="Masukkan Judul/Intro" type="text" value="{{ $videopromosi->judul ?? null }}">
+                                                    <label class="form-label" for="video_promosi">Link vidio</label>
+                                                    <input class="form-control" id="video_promosi" name="link-video-promosi" placeholder="Link Vidio" type="text" value="{{ $videopromosi->link_video ?? null }}">
                                                     <div class="mt-3 text-center">
                                                         <button class="btn btn-success" type="submit">Upload</button>
                                                         @if (!empty($videopromosi) && ($videopromosi->judul || $videopromosi->link_video))
@@ -155,7 +155,17 @@
                                                     <div class="flex-item button">
                                                         <div class="d-grid d-md-flex justify-content-md-center gap-2">
                                                             <button class="btn btn-success" type="submit">Upload</button>
-                                                            @if (!empty($contacts) && ($contacts->telephone || $contacts->whatsapp || $contacts->email))
+                                                            @php
+                                                                $kontak = ['telephone1_name', 'telephone1_number', 'telephone2_name', 'telephone2_number', 'whatsapp1_name', 'whatsapp1_number', 'whatsapp2_name', 'whatsapp2_number', 'whatsapp3_name', 'whatsapp3_number', 'whatsapp4_name', 'whatsapp4_number', 'email'];
+                                                                $show_button = false;
+                                                                foreach ($kontak as $media) {
+                                                                    if (!empty($contacts->$media)) {
+                                                                        $show_button = true;
+                                                                        break;
+                                                                    }
+                                                                }
+                                                            @endphp
+                                                            @if (!empty($contacts) && $show_button)
                                                                 <button class="btn btn-danger" data-bs-route="{{ route('manage-perusahaan.deletecontact', $contacts->id) }}" id="btnDelete" type="submit">Hapus</button>
                                                             @endif
                                                         </div>
