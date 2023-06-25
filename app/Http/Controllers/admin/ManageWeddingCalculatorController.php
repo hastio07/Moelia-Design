@@ -449,7 +449,7 @@ class ManageWeddingCalculatorController extends Controller
             'required' => ':attribute wajib diisi.',
             'max' => ':attribute melebihi panjang maksimum yang diizinkan',
             'string' => ':attribute hanya boleh berupa karakter teks.',
-            'unique' => 'Kategori :attribute sudah digunakan',
+            'unique' => 'Kategori :attribute sudah ada',
         ];
         // Custom Attribute Name
         $customAttributes = [
@@ -486,7 +486,7 @@ class ManageWeddingCalculatorController extends Controller
             'required' => ':attribute wajib diisi.',
             'max' => ':attribute melebihi panjang maksimum yang diizinkan',
             'string' => ':attribute hanya boleh berupa karakter teks.',
-            'unique' => 'Kategori :attribute sudah digunakan',
+            'unique' => 'Kategori :attribute sudah ada',
         ];
         // Custom Attribute Name
         $customAttributes = [
