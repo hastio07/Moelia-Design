@@ -411,6 +411,17 @@ h3 {
     color: tomato;
 }
 
+/* css untuk shadow today */
+.today {
+    transition: transform 0.3s ease;
+    background-color: #0000000e;
+    border-radius: 3%;
+}
+
+.today:hover {
+    transform: scale(1.1);
+}
+
 @media (max-width: 641px) {
     .date {
         width: 100%;
