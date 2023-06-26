@@ -12,7 +12,7 @@
                     <h4>Rincian Jadwal Kegiatan</h4>
                 </div>
                 <div class="card-body">
-                    <div class="btn-modal mt-3 mb-2 gap-3 d-flex">
+                    <div class="btn-modal d-flex mt-3 mb-2 gap-3">
                         <button class="btn icon-left btn-success d-flex" data-bs-target="#CUModal" data-bs-toggle="modal" type="button "><i class="bi bi-plus-lg"></i>
                             Pesanan
                         </button>
@@ -23,71 +23,51 @@
                             Reset
                         </button>
                     </div>
-                    <table class="table display" id="table-pesanan">
+                    <table class="display table" id="table-pesanan">
                         <thead>
                             <tr>
-                                <th>Nama Customer</th>
-                                <th>Alamat</th>
-                                <th>Tanggal Acara</th>
-                                <th>Detail Pesanan</th>
-                                <th>Biaya Sewa</th>
-                                <th>Uang Muka</th>
+                                <th>Nama Pemesan</th>
+                                <th>Telp/HP</th>
+                                <th>Hari/Tgl</th>
+                                <th>Tempat/Gedung</th>
+                                <th>Total Biaya Awal</th>
+                                <th>Total Biaya Seluruh</th>
+                                <th>DP1</th>
                                 <th>Status Pembayaran(DP)</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="fw-bolder">Lutfi Aziz</td>
-                                <td>Jl. Purnawirawan</td>
-                                <td>30/06/2023</td>
-                                <td></td>
-                                <td>Rp.100.000.000</td>
-                                <td>Rp.10.000.000;- </td>
-                                <td class="text-danger">
-                                    <div class="spinner-grow spinner-grow-sm text-danger" role="status"></div>
-                                    Belum Dibayar
-                                </td>
-                                <td>
-                                    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                                        <button class="btn btn-danger" data-bs-target="#smallModaljadwal" data-bs-toggle="modal" type="button"><i class="bi bi-trash"></i></button>
-                                        <button class="btn btn-warning" data-bs-target="#UpdateModaljadwal" data-bs-toggle="modal" type="button"><i class="bi bi-pencil-square"></i></button>
-                                        <button class="btn btn-info" data-bs-target="#UpdateModaljadwal" data-bs-toggle="modal" type="button"><i class="bi bi-send"></i></button>
-                                        <button class="btn btn-secondary" data-bs-target="#UpdateModaljadwal" data-bs-toggle="modal" type="button"><i class="bi bi-check2"></i></i></button>
-                                        <button class="btn btn-success" data-bs-target="#UpdateModaljadwal" data-bs-toggle="modal" type="button"><i class="bi bi-printer"></i></i></button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="fw-bolder">Muhammad</td>
-                                <td>Jl. Purnawirawan Gg. Man 1</td>
-                                <td>30/01/2023</td>
-                                <td></td>
+                                <td class="fw-bolder"><a href="/detail-pesanan">Muhammad & aisyah</a></td>
+                                <td>08125865551</td>
+                                <td>Jumat/30-01-2023</td>
+                                <td>Bagas Raya</td>
                                 <td>Rp.150.000.000</td>
-                                <td>Rp.15.000.000;- </td>
+                                <td>Rp.180.000.000;- </td>
+                                <td>Rp.18.000.000;- </td>
                                 <td class="text-success">
                                     <div class="spinner-grow spinner-grow-sm text-success" role="status"></div>
                                     Dibayar
                                 </td>
                                 <td>
-                                    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                                    <div class="d-grid d-md-flex justify-content-md-center gap-2">
                                         <button class="btn btn-danger" data-bs-target="#smallModaljadwal" data-bs-toggle="modal" type="button"><i class="bi bi-trash"></i></button>
                                         <button class="btn btn-warning" data-bs-target="#UpdateModaljadwal" data-bs-toggle="modal" type="button"><i class="bi bi-pencil-square"></i></button>
-                                        <button class="btn btn-info" data-bs-target="#UpdateModaljadwal" data-bs-toggle="modal" type="button"><i class="bi bi-send"></i></button>
-                                        <button class="btn btn-secondary" data-bs-target="#UpdateModaljadwal" data-bs-toggle="modal" type="button"><i class="bi bi-check2"></i></i></button>
-                                        <button class="btn btn-success" data-bs-target="#UpdateModaljadwal" data-bs-toggle="modal" type="button"><i class="bi bi-printer"></i></i></button>
+                                        <button class="btn btn-secondary" data-bs-target="#UpdateModaljadwal" data-bs-toggle="modal" type="button"><i class="bi bi-check2"></i></button>
                                     </div>
                                 </td>
                             </tr>
                         </tbody>
                         <tfoot>
-                            <tr>
-                                <th>Nama Customer</th>
-                                <th>Alamat</th>
-                                <th>Tanggal Acara</th>
-                                <th>Detail Pesanan</th>
-                                <th>Biaya Sewa</th>
-                                <th>Uang Muka</th>
+                            <tr class="text center">
+                                <th>Nama Pemesan</th>
+                                <th>Telp/HP</th>
+                                <th>Hari/Tgl</th>
+                                <th>Tempat/Gedung</th>
+                                <th>Total Biaya Awal</th>
+                                <th>Total Biaya Seluruh</th>
+                                <th>DP1</th>
                                 <th>Status Pembayaran(DP)</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
@@ -108,17 +88,21 @@
                     <form method="post">
                         @csrf
                         <div class="modal-body">
-                            <div class="p-3 mb-5">
-                                <div class="form-inpt">
-                                    <label class="form-label" for="nama">Nama<span class="text-danger">*</span></label>
+                            <div class="mb-5 p-3">
+                                <div class="form-inpt mt-1">
+                                    <label class="form-label" for="nama">Nama Pemesan<span class="text-danger">*</span></label>
                                     <input class="form-control" id="nama" name="nama" placeholder="Masukkan nama" required type="text" value="{{ old('nama') }}">
                                 </div>
-                                <div class="form-inpt">
-                                    <label class="form-label" for="alamat">Alamat<span class="text-danger">*</span></label>
-                                    <input class="form-control" id="alamat" name="alamat" placeholder="Masukkan alamat" required type="text" value="{{ old('alamat') }}">
+                                <div class="form-inpt mt-1">
+                                    <label class="form-label" for="nama-pesanan">Nama Pesanan<span class="text-danger">*</span></label>
+                                    <input class="form-control" id="nama-pesanan" name="nama-pesanan" placeholder="Masukkan nama pesanan" required type="text" value="{{ old('nama-pesanan') }}">
                                 </div>
-                                <div class="form-inpt">
-                                    <label class="form-label" for="tanggal">Tanggal Acara<span class="text-danger">*</span></label>
+                                <div class="form-inpt mt-1">
+                                    <label class="form-label" for="telp">Telp/HP<span class="text-danger">*</span></label>
+                                    <input class="form-control" id="telp" name="telp" placeholder="Masukkan nomor telephone" required type="number" value="{{ old('telp') }}">
+                                </div>
+                                <div class="form-inpt mt-1">
+                                    <label class="form-label" for="tanggal">Tanggal Akad & Resepsi<span class="text-danger">*</span></label>
                                     <div class="input-group input-append date" data-date-format="dd-mm-yyyy">
                                         <input class="form-control" id="tanggal" name="tanggal" placeholder="Masukan tanggal acara" required type="text" value="{{ old('tanggal') }}">
                                         <button class="btn btn-outline-secondary" type="button">
@@ -126,23 +110,39 @@
                                         </button>
                                     </div>
                                 </div>
-                                <div class="form-inpt">
-                                    <label class="form-label" for="rincianproduk">Rincian Produk<span class="text-danger">*</span></label>
-                                    <textarea id="rincianproduk" name="rincianproduk" required>{{ old('rincianproduk') }}</textarea>
+                                <div class="form-inpt mt-1">
+                                    <label class="form-label" for="alamat">Alamat Akad & Resepsi<span class="text-danger">*</span></label>
+                                    <input class="form-control" id="alamat" name="alamat" placeholder="Masukkan alamat" required type="text" value="{{ old('alamat') }}">
                                 </div>
-                                <div class="form-inpt">
-                                    <label class="form-label" for="biaya">Biaya Sewa<span class="text-danger">*</span></label>
-                                    <input class="form-control" id="biaya" name="biaya" placeholder="Masukkan biaya sewa" required type="number" value="{{ old('biaya') }}">
+                                <div class="form-inpt mt-1">
+                                    <label class="form-label" for="biaya-awal">Total Biaya Awal<span class="text-danger">*</span></label>
+                                    <input class="form-control" id="biaya-awal" name="biaya-awal" placeholder="Masukkan biaya sewa" required type="number" value="{{ old('biaya-awal') }}">
                                 </div>
-                                <div class="form-inpt">
-                                    <label class="form-label" for="uang">Uang Muka<span class="text-danger">*</span></label>
-                                    <input class="form-control" id="uang" name="uang" placeholder="Masukkan uang muka" required type="number" value="{{ old('uang') }}">
+                                <div class="form-inpt mt-1">
+                                    <label class="form-label" for="biaya-seluruh">Total Biaya Seluruh<span class="text-danger">*</span></label>
+                                    <input class="form-control" id="biaya-seluruh" name="biaya-seluruh" placeholder="Masukkan biaya sewa" required type="number" value="{{ old('biaya-seluruh') }}">
+                                </div>
+                                <div class="form-inpt mt-1">
+                                    <label class="form-label" for="dp">Uang Muka(DP) <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="dp" name="uang" placeholder="Masukkan uang muka" required type="number" value="{{ old('uang') }}">
+                                </div>
+                                <div class="form-inpt mt-1">
+                                    <label class="form-label" for="materikerja">Materi Kerja<span class="text-danger">*</span></label>
+                                    <textarea id="rincianproduk" name="materikerja" required>{{ old('materikerja') }}</textarea>
+                                </div>
+                                <div class="form-inpt mt-2">
+                                    <label class="form-label" for="rincianproduk">Additional<span class="text-danger">*</span></label>
+                                    <textarea id="rincianproduk" name="additional" required>{{ old('additional') }}</textarea>
+                                </div>
+                                <div class="form-inpt mt-2">
+                                    <label class="form-label" for="rincianproduk">Bonus<span class="text-danger">*</span></label>
+                                    <textarea id="rincianproduk" name="materikerja" required>{{ old('materikerja') }}</textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Tutup</button>
-                            <button class="btn mb-2 icon-left  btn-success" type="submit"><i class="ti-plus"></i>Tambah</button>
+                            <button class="btn icon-left btn-success mb-2" type="submit"><i class="ti-plus"></i>Tambah</button>
                         </div>
                     </form>
                 </div>
@@ -159,9 +159,9 @@
                     <div class="modal-body">
                         <div class="col-md-12">
                             {{-- DATE RANGE PICKER --}}
-                            <div class="input-group mb-3 input-daterange datepicker date" data-date-format="dd-mm-yyyy">
+                            <div class="input-group input-daterange datepicker date mb-3" data-date-format="dd-mm-yyyy">
                                 <input class="form-control" id="start_date" name="start_date" readonly="" required="" type="text" value="">
-                                <span class="bg-primary text-light px-3 justify-content-center align-items-center d-flex">to</span>
+                                <span class="bg-primary text-light justify-content-center align-items-center d-flex px-3">to</span>
                                 <input class="form-control" id="end_date" name="end_date" readonly="" required="" type="text" value="">
                             </div>
                             {{-- DATE RANGE PICKER --}}
