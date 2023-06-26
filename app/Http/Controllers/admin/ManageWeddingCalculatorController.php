@@ -237,7 +237,7 @@ class ManageWeddingCalculatorController extends Controller
         //Simpan paket custom paket
         CalAdditionalVenue::create($data);
 
-        return redirect()->route('manage-wedding-calculator.index')->with('success_add_paket_additionalvenue', 'Paket Additional Venue berhasil disimpan');
+        return redirect()->route('manage-wedding-calculator.index')->with('success_add_paket_additionalvenue', 'Item berhasil ditambahkan');
     }
 
     public function uatAllIn(Request $request, $id)

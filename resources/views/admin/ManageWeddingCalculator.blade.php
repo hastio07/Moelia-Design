@@ -7,9 +7,7 @@
 @section('content')
     <section class="">
         <div class="card p-3">
-            <div class="btn-modal">
-                <button class="btn icon-left btn-success mb-2" data-bs-name="All-In" data-bs-route="{{ route('manage-wedding-calculator.catAllIn') }}" data-bs-target="#CUModal" data-bs-toggle="modal" id="btnCreateModal" type="button"><i class="bi bi-plus-lg"></i>Tambah Data</i></button>
-            </div>
+
             <div class="all-in-paket">
                 @php
                     $messages = [
@@ -39,6 +37,10 @@
                 @endif
                 <div class="card p-4">
                     <h5 class="fw-bold">Paket All-In</h5>
+
+                    <div class="btn-modal">
+                        <button class="btn icon-left btn-success mb-2" data-bs-name="All-In" data-bs-route="{{ route('manage-wedding-calculator.catAllIn') }}" data-bs-target="#CUModal" data-bs-toggle="modal" id="btnCreateModal" type="button"><i class="bi bi-plus-lg"></i>Tambah Data</i></button>
+                    </div>
                     <table class="display mt-2 table" id="table-paket-all-in">
                         <thead>
                             <tr>
@@ -62,9 +64,7 @@
                     </table>
                 </div>
             </div>
-            <div class="btn-modal">
-                <button class="btn icon-left btn-success mb-2" data-bs-category="{{ route('manage-wedding-calculator.dataCategoryCustomVenue') }}" data-bs-name="Custom Venue" data-bs-route="{{ route('manage-wedding-calculator.catCustomVenue') }}" data-bs-target="#CUModal" data-bs-toggle="modal" id="btnCreateModal" type="button"><i class="bi bi-plus-lg"></i>Tambah Data</i></button>
-            </div>
+
             <div class="custom-paket">
                 @php
                     $messages = [
@@ -96,6 +96,10 @@
                     <div class="col-md-9">
                         <div class="card p-4">
                             <h5 class="fw-bold">Custom Venue</h5>
+
+                            <div class="btn-modal">
+                                <button class="btn icon-left btn-success mb-2" data-bs-category="{{ route('manage-wedding-calculator.dataCategoryCustomVenue') }}" data-bs-name="Custom Venue" data-bs-route="{{ route('manage-wedding-calculator.catCustomVenue') }}" data-bs-target="#CUModal" data-bs-toggle="modal" id="btnCreateModal" type="button"><i class="bi bi-plus-lg"></i>Tambah Data</i></button>
+                            </div>
                             <table class="display mt-2 table" id="table-paket-custom-venue">
                                 <thead>
                                     <tr>
@@ -174,9 +178,7 @@
                     </div>
                 </div>
             </div>
-            <div class="btn-modal">
-                <button class="btn icon-left btn-success mb-2" data-bs-category="{{ route('manage-wedding-calculator.dataCategoryAdditionalVenue') }}" data-bs-name="Additional Venue" data-bs-route="{{ route('manage-wedding-calculator.catAdditionalVenue') }}" data-bs-target="#CUModal" data-bs-toggle="modal" id="btnCreateModal" type="button"><i class="bi bi-plus-lg"></i>Tambah Data</i></button>
-            </div>
+
             <div class="additional-venue">
                 @php
                     $messages = [
@@ -208,6 +210,9 @@
                     <div class="col-md-9">
                         <div class="card p-4">
                             <h5 class="fw-bold">Additional Venue</h5>
+                            <div class="btn-modal">
+                                <button class="btn icon-left btn-success mb-2" data-bs-category="{{ route('manage-wedding-calculator.dataCategoryAdditionalVenue') }}" data-bs-name="Additional Venue" data-bs-route="{{ route('manage-wedding-calculator.catAdditionalVenue') }}" data-bs-target="#CUModal" data-bs-toggle="modal" id="btnCreateModal" type="button"><i class="bi bi-plus-lg"></i>Tambah Data</i></button>
+                            </div>
                             <table class="display mt-2 table" id="table-paket-additional-venue">
                                 <thead>
                                     <tr>

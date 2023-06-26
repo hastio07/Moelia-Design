@@ -177,7 +177,9 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
         Route::get('/cetak-kontrak', function () {
             return view('admin.cetakkontrak');
         });
-
+        Route::get('/detail-pesanan', function () {
+            return view('admin.DetailPesanan');
+        });
     });
 });
 /** Akhir kode **/
