@@ -6,72 +6,9 @@
     color: #fff;
 }
 
-.marquee {
-    width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    transition: opacity 1s;
-}
-
-.marquee h6 {
-    color: rgb(163, 163, 163);
-}
-
-.marquee-hidden {
-    opacity: 0;
-}
 
 .content-payment .btn {
     background-color: #a39300b0;
-}
-
-.instruction {
-    background-color: #97ff9959;
-}
-
-.noted {
-    background-color: #f7989850;
-}
-
-.noted h6 {
-    color: #a50000;
-}
-
-.pay-virtual {
-    background-color: rgba(147, 230, 255, 0.507);
-}
-
-.warning-pay {
-    background-color: #f7989850;
-}
-
-.warning-pay h6 {
-    color: #a50000;
-}
-
-#copyText {
-    text-align: center;
-    margin-bottom: 10px;
-    font-weight: bold;
-    color: green;
-}
-
-#copyButton {
-    font-weight: bold;
-    cursor: pointer;
-    color: rgb(143, 143, 143);
-}
-
-.alert {
-    display: none;
-    margin-top: 10px;
-    padding: 10px;
-    font-weight: bold;
-}
-
-.alert-success {
-    background-color: #dff0d8;
-    color: #3c763d;
 }
 
 @media (max-width: 768px) {
@@ -89,7 +26,7 @@
     }
 
     .content-payment {
-        margin-top: 50px;
+        margin-top: 75px;
     }
 }
 
