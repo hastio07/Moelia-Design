@@ -179,7 +179,7 @@
                                             ->sortBy(function ($group, $date) {
                                                 return \Carbon\Carbon::parse($date);
                                             });
-                                        
+
                                         $startDate = \Carbon\Carbon::now()->subDay(2); // Tanggal 1 hari sebelumnya
                                         $endDate = \Carbon\Carbon::now()->addDays(4); // Tanggal 4 hari ke depan
                                         $today = \Carbon\Carbon::now()->format('Y-m-d'); // Tanggal hari ini
@@ -207,7 +207,7 @@
                                                         @endphp
 
                                                         @foreach ($sortedGroup as $jadwal)
-                                                            <li>
+                                                            <li style="list-style:none;">
                                                                 <a href="#">
                                                                     <span class="event-time">{{ date('H:i', strtotime($jadwal->waktu)) }} WIB - </span>
                                                                     <span class="event-name">{{ $jadwal->kegiatan }}</span>
