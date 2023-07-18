@@ -10,7 +10,7 @@ use App\Models\Offer;
 use App\Models\Owner;
 use App\Models\Sosmed;
 use App\Models\WorkingHour;
-
+use App\Models\Certificate;
 class AboutController extends Controller
 {
     public function index()
@@ -25,10 +25,12 @@ class AboutController extends Controller
         $owners = Owner::first();
         //pegawai
         $employe = Employee::with('categoryjabatan')->where('show_data', '=', 'ya')->get();
-
+        //jam operasional
         $workinghour = WorkingHour::get();
-
+        //sosial media
         $sosmed = Sosmed::get();
+
+        $certificate = Certificate::first();
 
         return view('user.aboutus', compact('offers', 'addresses', 'contacts', 'owners', 'employe', 'workinghour', 'sosmed'));
     }
