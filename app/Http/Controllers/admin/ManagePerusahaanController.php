@@ -8,6 +8,7 @@ use App\Models\Address;
 use App\Models\Company;
 use App\Models\Contact;
 use App\Models\Offer;
+use App\Models\Certificate;
 use App\Models\Owner;
 use App\Models\Sosmed;
 use App\Models\VideoPromosi;
@@ -32,6 +33,7 @@ class ManagePerusahaanController extends Controller
             'sosmeds' => Sosmed::first(),
             'abouts' => About::first(),
             'offers' => Offer::first(),
+            'certificate' => Certificate::first(),
             'workinghours' => WorkingHour::whereIn('day', $days)->orderBy('day')->get(),
         ];
 
@@ -522,6 +524,73 @@ class ManagePerusahaanController extends Controller
         $db->update($data);
         return redirect()->route('manage-perusahaan.index')->with('success_offer', 'Data berhasil dihapus!');
     }
+
+    public function updateorcreatecertificate(Request $request)
+    {
+        $rules = [
+            'pengantar' => 'nullable|string',
+            'foto_sertifikat' => 'nullable|file|image|mimetypes:image/jpeg,image/jpg,image/png|max:2048',
+            'oldfoto_sertifikat' => ['nullable', 'string', function ($attribute, $value, $fail) {
+                if (!empty($value)) {
+                    $certificates = Certificate::where('foto_sertifikat', $value)->first();
+                    if (!$certificates) {
+                        $fail("nilai tidak valid");
+                    }
+                }
+            }],
+        ];
+        $massages = [
+            'max' => ':attribute harus diisi maksimal :max karakter.',
+            'string' => ':attribute harus berupa teks.',
+        ];
+        //Validasi
+        $validator = Validator::make($request->all(), $rules, $massages);
+        //Jika gagal
+        if ($validator->fails()) {
+            return dd(back()->withErrors($validator)->withInput()); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
+        }
+        $validatedData = $validator->validated();
+
+        $filterData['pengantar'] = $validatedData['pengantar'];
+
+        if ($request->hasFile('foto_sertifikat')) {
+            if ($validatedData['oldfoto_sertifikat']) {
+                $path = $validatedData['oldfoto_sertifikat'];
+                Storage::delete($path);
+            }
+
+            $imagefile = $validatedData['foto_sertifikat'];
+            $imageFileName = 'certificates' . '-' . date("Y-m-d", time()) . '-' . $imagefile->getClientOriginalName();
+            $oriPath = $imagefile->storeAs('fotosertifikat', $imageFileName); // -> fotosertifikat/<nama_files.ext>
+            // dd($oriPath);
+            $filterData['foto_sertifikat'] = $oriPath;
+        }
+
+        $id = (int) $request->input('id_certificate');
+        // dd($filterData);
+        // update atau create record dengan data yang diberikan
+        Offer::updateOrCreate(['id' => $id], $filterData);
+        return redirect()->route('manage-perusahaan.index')->with('success_certificate', 'Data berhasil disimpan');
+    }
+
+    public function deletecertificate($id)
+    {
+        $db = Certificate::findOrFail($id);
+        $data = [
+            'pengantar' => null,
+            'foto_sertifikat' => null,
+        ];
+
+        if ($db->foto_sertifikat !== null) {
+            $path = $db->foto_sertifikat;
+            Storage::delete($path);
+        }
+
+        $db->update($data);
+        return redirect()->route('manage-perusahaan.index')->with('success_certificate', 'Data berhasil dihapus!');
+    }
+
+
     public function updateorcreatejo(Request $request)
     {
         $rules = [
