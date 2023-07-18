@@ -237,7 +237,7 @@
                                             </div>
                                             <div class="col-md-5">
                                                 <div class="h-100 rounded border p-3 shadow">
-                                                    <div class="mt-3 mb-4">
+                                                    <div class="mb-4 mt-3">
                                                         <h4 class="text-center">Alamat Perusahaan</h4>
                                                     </div>
                                                     <div class="mb-4">
@@ -246,7 +246,7 @@
                                                             @if (!empty($addresses) && $addresses->alamat_perusahaan)
                                                                 <span class="ms-3">{{ $addresses->alamat_perusahaan ?? null }}</span>
                                                             @else
-                                                                <span class="ms-3 text-danger">-- data kosong, harap isi alamat --</span>
+                                                                <span class="text-danger ms-3">-- data kosong, harap isi alamat --</span>
                                                             @endif
                                                         </div>
                                                     </div>
@@ -541,7 +541,7 @@
                                                             @if (!empty($sosmeds) && $sosmeds->u_instagram)
                                                                 <span class="ms-3">{{ $sosmeds->u_instagram ?? null }}</span>
                                                             @else
-                                                                <span class="ms-3 text-danger">-- data kosong, harap isi data instagram --</span>
+                                                                <span class="text-danger ms-3">-- data kosong, harap isi data instagram --</span>
                                                             @endif
                                                         </div>
                                                     </div>
@@ -551,7 +551,7 @@
                                                             @if (!empty($sosmeds) && $sosmeds->u_facebook)
                                                                 <span class="ms-3">{{ $sosmeds->u_facebook ?? null }}</span>
                                                             @else
-                                                                <span class="ms-3 text-danger">-- data kosong, harap isi data facebook --</span>
+                                                                <span class="text-danger ms-3">-- data kosong, harap isi data facebook --</span>
                                                             @endif
                                                         </div>
                                                     </div>
@@ -561,7 +561,7 @@
                                                             @if (!empty($sosmeds) && $sosmeds->u_twitter)
                                                                 <span class="ms-3">{{ $sosmeds->u_twitter ?? null }}</span>
                                                             @else
-                                                                <span class="ms-3 text-danger">-- data kosong, harap isi data facebook --</span>
+                                                                <span class="text-danger ms-3">-- data kosong, harap isi data facebook --</span>
                                                             @endif
                                                         </div>
                                                     </div>
@@ -571,7 +571,7 @@
                                                             @if (!empty($sosmeds) && $sosmeds->u_tiktok)
                                                                 <span class="ms-3">{{ $sosmeds->u_tiktok ?? null }}</span>
                                                             @else
-                                                                <span class="ms-3 text-danger">-- data kosong, harap isi data tiktok --</span>
+                                                                <span class="text-danger ms-3">-- data kosong, harap isi data tiktok --</span>
                                                             @endif
                                                         </div>
                                                     </div>
@@ -581,7 +581,7 @@
                                                             @if (!empty($sosmeds) && $sosmeds->u_youtube)
                                                                 <span class="ms-3">{{ $sosmeds->u_youtube ?? null }}</span>
                                                             @else
-                                                                <span class="ms-3 text-danger">-- data kosong, harap isi data youtube --</span>
+                                                                <span class="text-danger ms-3">-- data kosong, harap isi data youtube --</span>
                                                             @endif
                                                         </div>
                                                     </div>
@@ -706,7 +706,63 @@
                                                 </div>
                                             </div>
                                         </div>
-
+                                        {{-- legalitas perusahaan --}}
+                                        <div class="row mt-3">
+                                            <div class="col-md-7">
+                                                <div class="h-100 rounded border p-3 shadow">
+                                                    <h4 class="text-center">Sertifikat Legalitas Perusahaan</h4>
+                                                    @if (session('success_certificate'))
+                                                        <div class="alert alert-success text-center" id="success-alert">
+                                                            {{ session('success_certificate') }}
+                                                        </div>
+                                                    @endif
+                                                    @if ($errors->has('pengantar') || $errors->has('foto_sertifikat') || $errors->has('oldfoto_sertifikat'))
+                                                        <div class="m-3 pt-1">
+                                                            <div class="alert alert-danger">
+                                                                <ul style="list-style:none;">
+                                                                    @foreach ($errors->all() as $message)
+                                                                        <li>{{ $message }}</li>
+                                                                    @endforeach
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    @endif
+                                                    <form action="{{ route('manage-perusahaan.updateorcreatecertificate') }}" class="formstyle" enctype="multipart/form-data" id="formCertificate" method="POST">
+                                                        @csrf
+                                                        <input name="id_certificate" readonly type="hidden" value="{{ $certificates->id ?? null }}">
+                                                        <input name="oldfoto_sertifikat" type="hidden" value="{{ $certificates->foto_bersama ?? null }}">
+                                                        <label class="form-label" for="foto_sertifikat">Foto Konten</label>
+                                                        <input accept="image/jpg, image/png, image/jpeg" class="form-control mb-3" id="foto_sertifikat" name="foto_sertifikat" type="file">
+                                                        <textarea class="form-control" id="pengantar" name="pengantar">{{ $certificates->pengantar ?? null }}</textarea>
+                                                        <div class="mt-2 text-center">
+                                                            <button class="btn btn-success" type="submit">Upload</button>
+                                                            @if (!empty($certificates) && ($certificates->pengantar || $certificates->foto_sertifikat))
+                                                                <button class="btn btn-danger" data-bs-route="{{ route('manage-perusahaan.deletecertificate', $certificates->id) }}" id="btnDelete" type="submit">hapus</button>
+                                                            @endif
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="h-100 rounded border p-3 text-center shadow">
+                                                    <div class="left bg-body h-100 mb-3 rounded border bg-white p-3 shadow">
+                                                        <h4 class="text-center">Sertifikat Legalitas Perusahaan</h4>
+                                                        @if (!empty($certificates) && ($certificates->penawaran || $certificates->foto_sertifikat))
+                                                            <div class="text-center">
+                                                                @if (!empty($certificates->foto_sertifikat))
+                                                                    <img alt="fotosertifikat" class="img-services mt-3 rounded" src="/storage/{{ $certificates->foto_sertifikat }}">
+                                                                @endif
+                                                            </div>
+                                                            <div class="p-5">
+                                                                {!! $certificates->pengantar !!}
+                                                            </div>
+                                                        @else
+                                                            <p class="text-danger mt-4 text-center"> Data Kosong!!<br> isi pada bagian form input "Apa saja yang didapatkan?"</p>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <!-- jam operasional -->
                                         <div class="bg-body container mb-3 mt-3 rounded border p-3 shadow">
                                             <h4 class="text-center">
@@ -728,7 +784,7 @@
                                                     </div>
                                                 </div>
                                             @endif
-                                            <div class="ms-3 hours-operation mt-5">
+                                            <div class="hours-operation ms-3 mt-5">
                                                 <form action="{{ route('manage-perusahaan.updateorcreatejo') }}" id="formJamOperasional" method="POST">
                                                     @csrf
                                                     @foreach ($workinghours as $i => $value)
