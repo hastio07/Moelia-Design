@@ -23,7 +23,7 @@ class ManageWeddingCalculatorController extends Controller
     public function getAllIn()
     {
         if (request()->ajax()) {
-            $paketAllIn = CalAllIn::orderBy('updated_at', 'desc');
+            $paketAllIn = CalAllIn::query();
             return DataTables::eloquent($paketAllIn)->editColumn('harga', function ($value) {
                 return $value->formatRupiah('harga');
             })->addColumn('aksi', function ($value) {
@@ -46,7 +46,7 @@ class ManageWeddingCalculatorController extends Controller
     public function getCustomVenue()
     {
         if (request()->ajax()) {
-            $paketCustomVenue = CalCustomVenue::with('categorycustomvenue')->orderBy('updated_at', 'desc');
+            $paketCustomVenue = CalCustomVenue::with('categorycustomvenue');
             return DataTables::eloquent($paketCustomVenue)->editColumn('kategori_id', function ($value) {
                 return $value->categorycustomvenue->nama;
             })->editColumn('harga', function ($value) {
@@ -72,7 +72,7 @@ class ManageWeddingCalculatorController extends Controller
     public function getAdditionalVenue()
     {
         if (request()->ajax()) {
-            $paketAdditionalVenue = CalAdditionalVenue::with('categoryadditionalvenue')->orderBy('updated_at', 'desc');
+            $paketAdditionalVenue = CalAdditionalVenue::with('categoryadditionalvenue');
             return DataTables::eloquent($paketAdditionalVenue)->editColumn('kategori_id', function ($value) {
                 return $value->categoryadditionalvenue->nama;
             })->editColumn('harga', function ($value) {
@@ -422,7 +422,7 @@ class ManageWeddingCalculatorController extends Controller
     public function getCategoryCustomVenue()
     {
         if (request()->ajax()) {
-            $categoryCustomVenue = CategoryCustomVenue::orderBy('updated_at', 'desc');
+            $categoryCustomVenue = CategoryCustomVenue::query();
             return DataTables::eloquent($categoryCustomVenue)->addColumn('aksi', function ($value) {
                 return '<button class="btn text-danger" data-bs-route="' . route('manage-wedding-calculator.delCategoryCustomVenue', $value->id) . '" data-bs-target="#DeleteModal" data-bs-toggle="modal" id="btnDeleteModal" type="button"><i class="bi bi-trash"></i></button>';
             })->rawColumns(['aksi'])->make(true);
@@ -432,7 +432,7 @@ class ManageWeddingCalculatorController extends Controller
     public function getCategoryAdditionalVenue()
     {
         if (request()->ajax()) {
-            $categoryAdditionalVenue = CategoryAdditionalVenue::orderBy('updated_at', 'desc');
+            $categoryAdditionalVenue = CategoryAdditionalVenue::query();
             return DataTables::eloquent($categoryAdditionalVenue)->addColumn('aksi', function ($value) {
                 return '<button class="btn text-danger" data-bs-route="' . route('manage-wedding-calculator.delCategoryAdditionalVenue', $value->id) . '" data-bs-target="#DeleteModal" data-bs-toggle="modal" id="btnDeleteModal" type="button"><i class="bi bi-trash"></i></button>';
             })->rawColumns(['aksi'])->make(true);
