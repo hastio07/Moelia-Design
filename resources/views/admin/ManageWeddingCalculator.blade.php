@@ -26,7 +26,7 @@
                 @endforeach
                 @if ($errors->has('nama-paket-allin') || $errors->has('harga-paket-allin'))
                     <div class="m-3 pt-1">
-                        <div class="alert alert-danger">
+                        <div class="alert alert-danger text-capitalize">
                             <ul style="list-style:none;">
                                 @foreach ($errors->all() as $message)
                                     <li>{{ $message }}</li>
@@ -83,7 +83,7 @@
                 @endforeach
                 @if ($errors->has('nama-paket-customvenue') || $errors->has('kategori-customvenue') || $errors->has('harga-paket-customvenue'))
                     <div class="m-3 pt-1">
-                        <div class="alert alert-danger">
+                        <div class="alert alert-danger text-capitalize">
                             <ul style="list-style:none;">
                                 @foreach ($errors->all() as $message)
                                     <li>{{ $message }}</li>
@@ -136,7 +136,7 @@
                             @endif
                             @if ($errors->has('nama-kategori-customvenue'))
                                 <div class="m-3 pt-1">
-                                    <div class="alert alert-danger">
+                                    <div class="alert alert-danger text-capitalize">
                                         <ul style="list-style:none;">
                                             @foreach ($errors->all() as $message)
                                                 <li>{{ $message }}</li>
@@ -197,7 +197,7 @@
                 @endforeach
                 @if ($errors->has('nama-paket-additionalvenue') || $errors->has('kategori-additionalvenue') || $errors->has('harga-paket-additionalvenue'))
                     <div class="m-3 pt-1">
-                        <div class="alert alert-danger">
+                        <div class="alert alert-danger text-capitalize">
                             <ul style="list-style:none;">
                                 @foreach ($errors->all() as $message)
                                     <li>{{ $message }}</li>
@@ -250,7 +250,7 @@
                             @endif
                             @if ($errors->has('nama-kategori-additionalvenue'))
                                 <div class="m-3 pt-1">
-                                    <div class="alert alert-danger">
+                                    <div class="alert alert-danger text-capitalize">
                                         <ul style="list-style:none;">
                                             @foreach ($errors->all() as $message)
                                                 <li>{{ $message }}</li>
@@ -362,7 +362,7 @@
                 serverSide: true,
                 responsive: true,
                 ajax: {
-                    url: '{{ route('manage-wedding-calculator.getAllIn') }}'
+                    url: "{{ route('manage-wedding-calculator.getAllIn') }}"
                 },
                 columnDefs: [{
                     orderable: false,
@@ -392,7 +392,7 @@
                 serverSide: true,
                 responsive: true,
                 ajax: {
-                    url: '{{ route('manage-wedding-calculator.getCustomVenue') }}'
+                    url: "{{ route('manage-wedding-calculator.getCustomVenue') }}"
                 },
                 columnDefs: [{
                     orderable: false,
@@ -426,7 +426,7 @@
                 serverSide: true,
                 responsive: true,
                 ajax: {
-                    url: '{{ route('manage-wedding-calculator.getAdditionalVenue') }}'
+                    url: "{{ route('manage-wedding-calculator.getAdditionalVenue') }}"
                 },
                 columnDefs: [{
                     orderable: false,
@@ -464,7 +464,7 @@
                      $(this.api().table().footer()).hide();
                  }, */
                 ajax: {
-                    url: '{{ route('manage-wedding-calculator.getCategoryCustomVenue') }}'
+                    url: "{{ route('manage-wedding-calculator.getCategoryCustomVenue') }}"
                 },
                 columnDefs: [{
                     orderable: false,
@@ -490,15 +490,15 @@
                 serverSide: true,
                 responsive: true,
                 ajax: {
-                    url: '{{ route('manage-wedding-calculator.getCategoryAdditionalVenue') }}'
+                    url: "{{ route('manage-wedding-calculator.getCategoryAdditionalVenue') }}"
                 },
-                columnDefs: [{
+                'columnDefs': [{
                     orderable: false,
                     searchable: false,
                     targets: 1,
                     className: "text-end"
                 }],
-                columns: [{
+                'columns': [{
                         data: 'nama',
                         name: 'nama',
                     },
