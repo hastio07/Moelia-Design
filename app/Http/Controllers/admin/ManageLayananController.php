@@ -80,7 +80,7 @@ class ManageLayananController extends Controller
         //Jika gagal
         if ($validator->fails()) {
 
-            return dd(back()->withErrors($validator)->withInput()); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
+            return back()->withErrors($validator)->withInput(); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
         }
 
         $validatedData = $validator->validated();

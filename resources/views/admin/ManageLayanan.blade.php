@@ -11,6 +11,23 @@
                     <h4>List Layanan</h4>
                 </div>
                 <div class="card-body">
+                    @if ($errors->any())
+                        <div class="pt-3">
+                            <div class="alert alert-danger text-capitalize">
+                                <p>Lengkapi Data Secara lengkap!</p>
+                                <ul class="pt=10" style="list-style:none;">
+                                    @foreach ($errors->all() as $item)
+                                        <li>{{ $item }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    @endif
+                    @if (session()->has('success'))
+                        <div class="alert alert-success">
+                            {{ session()->get('success') }}
+                        </div>
+                    @endif
                     <div class="btn-modal">
                         <button class="btn icon-left btn-success mb-2" data-bs-route="{{ route('manage-layanan.store') }}" data-bs-target="#CUModal" data-bs-toggle="modal" id="btnCreateModal" type="button"><i class="bi bi-plus-lg"></i>Tambah Layanan</i></button>
                     </div>
@@ -45,6 +62,7 @@
                         <h5 class="modal-title" id="cuModalLabel">Tambah Layanan</h5>
                         <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
                     </div>
+
                     <form enctype="multipart/form-data" id="CUForm" method="post">
                         @csrf
                         <div class="modal-body">
