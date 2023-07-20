@@ -753,11 +753,11 @@
                                                                     <img alt="fotosertifikat" class="img-services mt-3 rounded" src="/storage/{{ $certificates->foto_sertifikat }}">
                                                                 @endif
                                                             </div>
-                                                            <div class="p-5">
+                                                            <div class="p-3">
                                                                 {!! $certificates->pengantar !!}
                                                             </div>
                                                         @else
-                                                            <p class="text-danger mt-4 text-center"> Data Kosong!!<br> isi pada bagian form input "Apa saja yang didapatkan?"</p>
+                                                            <p class="text-danger mt-4 text-center"> Data Kosong!!<br> isi pada bagian form input "Sertifikat Legalitas Perusahaan"</p>
                                                         @endif
                                                     </div>
                                                 </div>
