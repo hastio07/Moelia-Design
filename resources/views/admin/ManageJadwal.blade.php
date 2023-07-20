@@ -13,7 +13,7 @@
                 </div>
                 @if ($errors->any())
                 <div class="pt-3">
-                    <div class="alert alert-danger">
+                    <div class="alert alert-danger text-capitalize">
                         <p>Lengkapi Data Secara lengkap!</p>
                         <ul class="pt=10" style="list-style:none;">
                             @foreach ($errors->all() as $item)

@@ -26,7 +26,7 @@
                         ]) aria-labelledby="photo-tab" id="photo-tab-pane" role="tabpanel" tabindex="0">
                             @if ($errors->any())
                                 <div class="m-3 pt-1">
-                                    <div class="alert alert-danger">
+                                    <div class="alert alert-danger text-capitalize">
                                         <ul style="list-style:none;">
                                             @foreach ($errors->all() as $message)
                                                 <li>{{ $message }}</li>

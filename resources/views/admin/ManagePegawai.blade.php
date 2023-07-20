@@ -86,7 +86,7 @@
                         @endif
                         @if ($errors->has('nama_jabatan'))
                         <div class="pt-1 m-3">
-                            <div class="alert alert-danger">
+                            <div class="alert alert-danger text-capitalize">
                                 <ul style="list-style:none;">
                                     @foreach ($errors->all() as $message)
                                     <li>{{ $message }}</li>
