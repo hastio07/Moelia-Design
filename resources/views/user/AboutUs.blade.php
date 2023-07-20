@@ -141,12 +141,25 @@
         <div class="container mt-3 rounded border">
             <div class="row">
                 <div class="col-md-4 d-flex justify-content-center align-items-center container">
-                    <img alt="Phone image" class="mt-2 rounded" src="{{ asset('templates') }}/assets/images/sertifikat-2.jpg" style="width: 100%;">
+                    @if (!empty($certificates) && $certificates->foto_sertifikat)
+                        <img alt="foto_sertifikat" class="image-fluid" src="/storage/{{ $certificates->foto_sertifikat }}" style="max-width: 90%; max-height: 90%;">
+                    @else
+                        <img class="mt-5" src="{{ asset('templates') }}/assets/images/data-kosong.jpg" style="max-width: 90%; max-height: 90%;">
+                    @endif
                 </div>
                 <div class="col-md-8 p-3">
                     <h4 class="head-ourt fw-bold text-center">Sertifikat/Piagam Kami</h4>
                     <div class="line"></div>
-                    <p class="mt-4">Merek kami telah dipercaya untuk digunakan di jutaan ruang keluarga, dapur, ruang cuci, dan kamar mandi—dan telah diwariskan dari generasi ke generasi. Selama lebih dari 181 tahun, merek kami telah menantang konvensi, memimpin inovasi, dan membantu membentuk budaya. Seberapa banyak pun kami berkembang, kami selalu berusaha untuk menanamkan tujuan, nilai, dan prinsip kami ke dalam setiap pekerjaan yang kami lakukan. Kami telah melakukan upaya ini selama lebih dari 66.000 hari, dan kami tidak akan pernah berhenti.</p>
+                    <div class="mt-3">
+                        @if (!empty($certificates) && $certificates->pengantar)
+                            <p> {!! $certificates->pengantar !!}</p>
+                        @else
+                            <div class="mt-5 text-center">
+                                <i class="bi bi-exclamation-triangle-fill fs-3 text-warning"></i>
+                                <p class="fw-bold text-secondary">Maaf!!<br>Saat ini penawaran belum tersedia</p>
+                            </div>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>

@@ -33,7 +33,7 @@ class ManagePerusahaanController extends Controller
             'sosmeds' => Sosmed::first(),
             'abouts' => About::first(),
             'offers' => Offer::first(),
-            'certificate' => Certificate::first(),
+            'certificates' => Certificate::first(),
             'workinghours' => WorkingHour::whereIn('day', $days)->orderBy('day')->get(),
         ];
 
@@ -569,7 +569,7 @@ class ManagePerusahaanController extends Controller
         $id = (int) $request->input('id_certificate');
         // dd($filterData);
         // update atau create record dengan data yang diberikan
-        Offer::updateOrCreate(['id' => $id], $filterData);
+        Certificate::updateOrCreate(['id' => $id], $filterData);
         return redirect()->route('manage-perusahaan.index')->with('success_certificate', 'Data berhasil disimpan');
     }
 

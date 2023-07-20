@@ -29,9 +29,9 @@ class AboutController extends Controller
         $workinghour = WorkingHour::get();
         //sosial media
         $sosmed = Sosmed::get();
+        //sertifikat
+        $certificates = Certificate::first();
 
-        $certificate = Certificate::first();
-
-        return view('user.aboutus', compact('offers', 'addresses', 'contacts', 'owners', 'employe', 'workinghour', 'sosmed'));
+        return view('user.aboutus', compact('offers', 'addresses', 'contacts', 'owners', 'employe', 'workinghour', 'sosmed', 'certificates'));
     }
 }
