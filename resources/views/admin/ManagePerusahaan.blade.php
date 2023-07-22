@@ -74,25 +74,25 @@
                                                     @if (!empty($owners->foto_owner))
                                                     <img alt="{{ $owners->nama_owner }}" class="img-owner rounded" src="{{ asset('storage/' . $owners->foto_owner) }}">
                                                     @else
-                                                    <p class="text-danger mt-3">-- Foto Kosong --</p>
+                                                    <p class="bg-warning rounded p-3 border text-white mt-3">-- Foto Kosong --</p>
                                                     @endif
                                                 </div>
                                                 <h6 class="fw-bolder text-capitalize mb-4">
                                                     @if (!empty($owners->nama_owner))
                                                     {{ $owners->nama_owner }}
                                                     @else
-                                                    <p class="text-danger mt-3">-- Nama Kosong --</p>
+                                                    <p class="bg-warning rounded p-3 border text-white mt-3">-- Nama Kosong --</p>
                                                     @endif
                                                 </h6>
                                                 <p style="text-align: justify;">
                                                     @if (!empty($owners->kata_sambutan))
                                                     {{ $owners->kata_sambutan }}
                                                     @else
-                                                    <p class="text-danger mt-3">-- Kata Sambutan Kosong --</p>
+                                                    <p class="bg-warning rounded p-3 border text-white mt-3">-- Kata Sambutan Kosong --</p>
                                                     @endif
                                                 </p>
                                                 @else
-                                                <p class="text-danger mt-3">-- Data Owner Harap di Isi --</p>
+                                                <p class="bg-warning rounded p-3 border text-white mt-3">-- Data Owner Harap di Isi --</p>
                                                 @endif
                                             </div>
                                         </div>
@@ -153,18 +153,18 @@
                                                     @if (!empty($companies->logo_perusahaan))
                                                     <img alt="{{ $companies->nama_perusahaan }}" class="rounded-circle" src="/storage/{{ $companies->logo_perusahaan }}">
                                                     @else
-                                                    <p class="text-danger mt-3">-- Logo Kosong --</p>
+                                                    <p class="bg-warning rounded p-3 border text-white  mt-3">-- Logo Kosong --</p>
                                                     @endif
                                                 </div>
                                                 <h6 class="fw-bolder">
                                                     @if (!empty($companies->nama_perusahaan))
                                                     {{ $companies->nama_perusahaan }}
                                                     @else
-                                                    <p class="text-danger mt-3">-- Nama Perusahaan Kosong --</p>
+                                                    <p class="bg-warning rounded p-3 border text-white mt-3">-- Nama Perusahaan Kosong --</p>
                                                     @endif
                                                 </h6>
                                                 @else
-                                                <p class="text-danger mt-3">-- Logo dan Nama Perusahaan Harap di Isi --
+                                                <p class="bg-warning rounded p-3 border text-white mt-3">-- Logo dan Nama Perusahaan Harap di Isi --
                                                 </p>
                                                 @endif
                                             </div>
@@ -216,7 +216,7 @@
                                             <div class="left vidio-pro bg-body h-100 mb-3 rounded border bg-white p-3 text-center shadow">
                                                 <h4>Vidio Promosi</h4>
                                                 @if (empty($videopromosi->judul) || empty($videopromosi->link_video))
-                                                <div class="mt-3 text-danger">
+                                                <div class="mt-3 bg-warning rounded p-3 border text-white ">
                                                     <p>Data video promosi belum tersedia. Silakan unggah judul dan link
                                                         video untuk menampilkan promosi.</p>
                                                 </div>
@@ -291,13 +291,13 @@
                                                     @if (!empty($addresses) && ($addresses->alamat_perusahaan || $addresses->link_gmap))
                                                     <div class="d-flex mb-3">
                                                         <i class="bi bi-geo-alt-fill me-1" style="font-size: 2rem; height: 32px; width: 32px;"></i>
-                                                        {!! $addresses->alamat_perusahaan ?? '<p class="text-danger text-center mt-3">-- Alamat Kosong --</p>' !!}
+                                                        {!! $addresses->alamat_perusahaan ?? '<p class="bg-warning rounded p-3 border text-white text-center mt-3">-- Alamat Kosong --</p>' !!}
                                                     </div>
                                                     <div class="maps text danger" style="max-width: 100%; max-height: 300px; overflow: hidden;">
-                                                        {!! $addresses->link_gmap ?? ' <p class="text-danger text-center mt-3">-- Link Google Maps Kosong --</p>' !!}
+                                                        {!! $addresses->link_gmap ?? ' <p class="bg-warning rounded p-3 border text-white r text-center mt-3">-- Link Google Maps Kosong --</p>' !!}
                                                     </div>
                                                     @else
-                                                    <p class="text-danger ms-3 text-center">-- Data Alamat Kosong --</p>
+                                                    <p class="bg-warning rounded p-3 border text-white ms-3 text-center">-- Data Alamat Kosong --</p>
                                                     @endif
                                                 </div>
 
@@ -632,7 +632,7 @@
                                                         @if (!empty($sosmeds) && $sosmeds->u_instagram)
                                                         <span class="ms-3">{{ $sosmeds->u_instagram ?? null }}</span>
                                                         @else
-                                                        <span class="text-danger ms-3">-- data kosong, harap isi data
+                                                        <span class="bg-warning rounded p-3 border text-white ms-3">-- data kosong, harap isi data
                                                             instagram --</span>
                                                         @endif
                                                     </div>
@@ -643,7 +643,7 @@
                                                         @if (!empty($sosmeds) && $sosmeds->u_facebook)
                                                         <span class="ms-3">{{ $sosmeds->u_facebook ?? null }}</span>
                                                         @else
-                                                        <span class="text-danger ms-3">-- data kosong, harap isi data
+                                                        <span class="bg-warning rounded p-3 border text-white  ms-3">-- data kosong, harap isi data
                                                             facebook --</span>
                                                         @endif
                                                     </div>
@@ -654,7 +654,7 @@
                                                         @if (!empty($sosmeds) && $sosmeds->u_twitter)
                                                         <span class="ms-3">{{ $sosmeds->u_twitter ?? null }}</span>
                                                         @else
-                                                        <span class="text-danger ms-3">-- data kosong, harap isi data
+                                                        <span class="bg-warning rounded p-3 border text-white  ms-3">-- data kosong, harap isi data
                                                             twitter --</span>
                                                         @endif
                                                     </div>
@@ -665,7 +665,7 @@
                                                         @if (!empty($sosmeds) && $sosmeds->u_tiktok)
                                                         <span class="ms-3">{{ $sosmeds->u_tiktok ?? null }}</span>
                                                         @else
-                                                        <span class="text-danger ms-3">-- data kosong, harap isi data
+                                                        <span class="bg-warning rounded p-3 border text-white ms-3">-- data kosong, harap isi data
                                                             tiktok --</span>
                                                         @endif
                                                     </div>
@@ -676,7 +676,7 @@
                                                         @if (!empty($sosmeds) && $sosmeds->u_youtube)
                                                         <span class="ms-3">{{ $sosmeds->u_youtube ?? null }}</span>
                                                         @else
-                                                        <span class="text-danger ms-3">-- data kosong, harap isi data
+                                                        <span class="bg-warning rounded p-3 border text-white ms-3">-- data kosong, harap isi data
                                                             youtube --</span>
                                                         @endif
                                                     </div>
@@ -737,23 +737,23 @@
                                                 @if (!empty($abouts->fotobersama))
                                                 <img alt="fotobersama" class="img-owner rounded" src="/storage/{{ $abouts->fotobersama }}">
                                                 @else
-                                                <p class="text-danger mt-4">Foto Bersama Kosong!!</p>
+                                                <p class="text-center bg-warning rounded p-3 border text-white mt-4">Foto Bersama Kosong!!</p>
                                                 @endif
 
                                                 @if (!empty($abouts->judul))
                                                 <h6 class="fw-bold">{{ $abouts->judul }}</h6>
                                                 @else
-                                                <p class="text-danger mt-4">Judul Kosong!!</p>
+                                                <p class="text-center bg-warning rounded p-3 border text-white mt-4">Judul Kosong!!</p>
                                                 @endif
 
                                                 @if (!empty($abouts->katasambutan))
                                                 <p class="mt-3" style="text-align: justify;">{{ $abouts->katasambutan }}</p>
                                                 @else
-                                                <p class="text-danger mt-4">Kata Sambutan Kosong!!</p>
+                                                <p class="text-center bg-warning rounded p-3 border text-white mt-4">Kata Sambutan Kosong!!</p>
                                                 @endif
 
                                                 @else
-                                                <p class="text-danger mt-4">Siapa Kami Kosong!!<br>Isi pada bagian form input Siapa Kami</p>
+                                                <p class="text-center bg-warning rounded p-3 border text-white mt-4">Siapa Kami Kosong!!<br>Isi pada bagian form input Siapa Kami</p>
                                                 @endif
                                             </div>
                                         </div>
@@ -811,24 +811,25 @@
                                                     @if (!empty($offers->foto_bersama))
                                                     <img alt="fotobersama" class="img-services mt-3 rounded" src="/storage/{{ $offers->foto_bersama }}">
                                                     @else
-                                                    <p class="text-danger mt-4">-- Foto Kosong --</p>
+                                                    <p class="text-center bg-warning rounded p-3 border text-white mt-4">-- Foto Kosong --</p>
                                                     @endif
                                                 </div>
                                                 <div class="p-5">
-                                                    {!! $offers->penawaran ?? '<p class="text-danger text-center">-- Penawaran kosong --</p>'!!}
+                                                    {!! $offers->penawaran ?? '<p class="text-center bg-warning rounded p-3 border text-white">-- Penawaran kosong --</p>'!!}
                                                 </div>
                                                 @else
-                                                <p class="text-danger mt-4 text-center"> Data Kosong!!<br> isi pada
+                                                <p class="text-center bg-warning rounded p-3 border text-white mt-4"> Data Kosong!!<br> isi pada
                                                     bagian form input "Apa saja yang didapatkan?"</p>
                                                 @endif
                                             </div>
                                         </div>
                                     </div>
-                                    {{-- legalitas perusahaan --}}
+                                    {{-- Sertifikat legalitas perusahaan --}}
                                     <div class="row mt-3">
                                         <div class="col-md-7">
                                             <div class="h-100 rounded border p-3 shadow">
                                                 <h4 class="text-center">Sertifikat Legalitas Perusahaan</h4>
+                                                <p class="text-center bg-danger p-3 text-white border rounded mt-2">Jika tidak ingin menampilkan sertifikat legalitas kosongkan form dibawah ini !</p>
                                                 @if (session('success_certificate'))
                                                 <div class="alert alert-success text-center" id="success-alert">
                                                     {{ session('success_certificate') }}
@@ -868,24 +869,24 @@
                                             <div class="h-100 rounded border p-3 text-center shadow">
                                                 <div class="left bg-body h-100 mb-3 rounded border bg-white p-3 shadow">
                                                     <h4 class="text-center">Sertifikat Legalitas Perusahaan</h4>
-                                                    @if (!empty($certificates) && ($certificates->penawaran ||
-                                                    $certificates->foto_sertifikat))
+                                                    @if (!empty($certificates->foto_sertifikat) || !empty($certificates->pengantar))
                                                     <div class="text-center">
                                                         @if (!empty($certificates->foto_sertifikat))
                                                         <img alt="fotosertifikat" class="img-services mt-3 rounded" src="/storage/{{ $certificates->foto_sertifikat }}">
                                                         @else
-                                                        <p class="text-danger mt-4">-- Foto Kosong --</p>
+                                                        <p class="text-center bg-warning rounded p-3 border text-white mt-4">-- Foto Kosong --</p>
                                                         @endif
                                                     </div>
                                                     <div class="p-3">
-                                                        {!! $certificates->pengantar ?? '<p class="text-danger text-center">-- Penjelasan Sertifikat Kosong --</p>'!!}
+                                                        {!! $certificates->pengantar ?? '<p class="text-center bg-warning rounded p-3 border text-white">-- Penjelasan Sertifikat Kosong --</p>'!!}
                                                     </div>
                                                     @else
-                                                    <p class="text-danger mt-4 text-center"> Data Kosong!!<br> Isi pada bagian form input "Sertifikat Legalitas Perusahaan"</p>
+                                                    <p class="mt-4 text-center bg-warning rounded p-3 border text-white"> Data Kosong!!<br> Isi pada bagian form input "Sertifikat Legalitas Perusahaan"</p>
                                                     @endif
                                                 </div>
                                             </div>
                                         </div>
+
                                     </div>
                                     <!-- jam operasional -->
                                     <div class="bg-body container mb-3 mt-3 rounded border p-3 shadow">
