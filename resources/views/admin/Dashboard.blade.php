@@ -17,12 +17,12 @@
                                         <div class="card-statistic-3 p-4">
                                             <div class="card-icon card-icon-large"><i class="bi bi-cart4"></i></div>
                                             <div class="mb-4">
-                                                <h5 class="card-title mb-0">Pesanan Baru</h5>
+                                                <h5 class="card-title mb-0"><a href="/manage-pesanan-proses" class="text-white text-decoration-none">Pesanan Baru</a></h5>
                                             </div>
                                             <div class="row align-items-center d-flex mb-2">
                                                 <div class="col-8">
                                                     <h2 class="d-flex align-items-center mb-0">
-                                                        10
+                                                        -
                                                     </h2>
                                                 </div>
                                             </div>
@@ -39,7 +39,7 @@
                                             <div class="row align-items-center d-flex mb-2">
                                                 <div class="col-8">
                                                     <h2 class="d-flex align-items-center mb-0">
-                                                        100
+                                                        -
                                                     </h2>
                                                 </div>
                                             </div>
@@ -49,14 +49,14 @@
                                 <div class="col-xl-3 col-lg-6 col-md-6">
                                     <div class="card l-bg-blue-dark">
                                         <div class="card-statistic-3 p-4">
-                                            <div class="card-icon card-icon-large"><i class="bi bi-person-vcard-fill"></i></div>
+                                            <div class="card-icon card-icon-large"><i class="bi bi-gear-wide-connected"></i></div>
                                             <div class="mb-4">
-                                                <h5 class="card-title mb-0">Akun Customers</h5>
+                                                <h5 class="card-title mb-0"><a href="/manage-layanan" class="text-white text-decoration-none">Layanan</a></h5>
                                             </div>
                                             <div class="row align-items-center d-flex mb-2">
                                                 <div class="col-8">
                                                     <h2 class="d-flex align-items-center mb-0">
-                                                        15
+                                                        {{ $jumlahLayanan }}
                                                     </h2>
                                                 </div>
                                             </div>
@@ -68,12 +68,12 @@
                                         <div class="card-statistic-3 p-4">
                                             <div class="card-icon card-icon-large"><i class="bi bi-universal-access"></i></div>
                                             <div class="mb-4">
-                                                <h5 class="card-title mb-0">Pegawai</h5>
+                                                <h5 class="card-title mb-0"><a href="/manage-pegawai" class="text-white text-decoration-none">Pegawai</a></h5>
                                             </div>
                                             <div class="row align-items-center d-flex mb-2">
                                                 <div class="col-8">
                                                     <h2 class="d-flex align-items-center mb-0">
-                                                        57
+                                                        {{ $jumlahPegawai }}
                                                     </h2>
                                                 </div>
                                             </div>
@@ -85,13 +85,13 @@
                                         <div class="card-statistic-3 p-4">
                                             <div class="card-icon card-icon-large"><i class="bi bi-tags-fill"></i></div>
                                             <div class="mb-4">
-                                                <h5 class="card-title mb-0">Produk</h5>
+                                                <h5 class="card-title mb-0"><a href="/manage-produk" class="text-white text-decoration-none">Produk</a></h5>
                                             </div>
                                             <div class="row align-items-center d-flex mb-2">
                                                 <div class="col-8">
-                                                    <h2 class="d-flex align-items-center mb-0">
-                                                        25
-                                                    </h2>
+                                                <h2 class="d-flex align-items-center mb-0">
+                                                    {{ $jumlahProduk }}
+                                                </h2>
                                                 </div>
                                             </div>
                                         </div>
@@ -102,12 +102,12 @@
                                         <div class="card-statistic-3 p-4">
                                             <div class="card-icon card-icon-large"><i class="bi bi-card-image"></i></div>
                                             <div class="mb-4">
-                                                <h5 class="card-title mb-0">Foto</h5>
+                                                <h5 class="card-title mb-0"><a href="/manage-gallery/photo-tab" class="text-white text-decoration-none">Foto</a></h5>
                                             </div>
                                             <div class="row align-items-center d-flex mb-2">
                                                 <div class="col-8">
                                                     <h2 class="d-flex align-items-center mb-0">
-                                                        57
+                                                        {{ $jumlahPhoto }}
                                                     </h2>
                                                 </div>
                                             </div>
@@ -119,12 +119,12 @@
                                         <div class="card-statistic-3 p-4">
                                             <div class="card-icon card-icon-large"><i class="bi bi-camera-reels-fill"></i></div>
                                             <div class="mb-4">
-                                                <h5 class="card-title mb-0">Video</h5>
+                                                <h5 class="card-title mb-0"><a href="/manage-gallery/video-tab" class="text-white text-decoration-none">Video</a></h5>
                                             </div>
                                             <div class="row align-items-center d-flex mb-2">
                                                 <div class="col-8">
                                                     <h2 class="d-flex align-items-center mb-0">
-                                                        10
+                                                        {{ $jumlahVideo }}
                                                     </h2>
                                                 </div>
                                             </div>
@@ -136,12 +136,12 @@
                                         <div class="card-statistic-3 p-4">
                                             <div class="card-icon card-icon-large"><i class="bi bi-calendar-week"></i></div>
                                             <div class="mb-4">
-                                                <h5 class="card-title mb-0">Jadwal</h5>
+                                                <h5 class="card-title mb-0"><a href="/manage-jadwal" class="text-white text-decoration-none">Jadwal</a></h5>
                                             </div>
                                             <div class="row align-items-center d-flex mb-2">
                                                 <div class="col-8">
                                                     <h2 class="d-flex align-items-center mb-0">
-                                                        15
+                                                        {{ $jumlahJadwal }}
                                                     </h2>
                                                 </div>
                                             </div>
