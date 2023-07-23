@@ -80,7 +80,7 @@ class ManagePegawaiController extends Controller
         $rules = [
             'nama' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',
-            'kontak' => 'required|numeric|max:99999999999999|regex:/^(?:\+62)?\d{9,12}$/',
+            'kontak' => 'required|numeric|max:99999999999999|regex:/^(?:\+62)?\d{9,13}$/',
             'gaji' => 'required|numeric|max:9999999999',
             'jabatan' => 'required|string',
             'show_data' => 'required|in:ya,tidak',
@@ -144,7 +144,7 @@ class ManagePegawaiController extends Controller
         $rules = [
             'nama' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',
-            'kontak' => 'required|numeric|max:99999999999999|regex:/^(?:\+62)?\d{9,12}$/',
+            'kontak' => 'required|numeric|max:99999999999999|regex:/^(?:\+62)?\d{9,13}$/',
             'gaji' => 'required|numeric|integer',
             'jabatan' => 'required|string',
             'show_data' => 'required|in:ya,tidak',
