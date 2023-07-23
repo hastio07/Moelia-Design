@@ -366,7 +366,6 @@
                                                     <p class="bg-warning rounded p-3 border text-white ms-3 text-center">-- Data Alamat Kosong --</p>
                                                     @endif
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>

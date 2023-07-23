@@ -38,7 +38,7 @@
                             <form action="{{ route('manage-gallery.createphoto') }}" enctype="multipart/form-data" method="post">
                                 @csrf
                                 <div class="form-inpt">
-                                    <label class="form-label" for="namagambar">Judul foto<span class="text-danger">*</span></label>
+                                    <label class="form-label" for="namagambar">Judul/Album foto<span class="text-danger">*</span></label>
                                     <input class="form-control" id="namagambar" name="namagambar" placeholder="Masukan Judul Gambar" required type="text" value="{{ old('namagambar') }}">
                                 </div>
                                 <div class="form-inpt">
@@ -51,17 +51,30 @@
                             </form>
                             <div class="row mt-3">
                                 @if (isset($photos))
-                                    @foreach ($photos as $photo)
-                                        <div class="col-12 col-md-3 col-lg-2">
-                                            <div class="card card-gallery">
-                                                <img alt="{{ $photo->photo_name }}" class="card-img-top" src="/storage/{{ $photo->photo_path }}">
-                                                <button class="btn btn-danger" data-bs-route="{{ route('manage-gallery.destroyphoto', $photo->id) }}" data-bs-target="#DeleteModal" data-bs-toggle="modal" type="button"><i class="bi bi-trash"></i></button>
-                                            </div>
+                                    @php
+                                        // Mengelompokkan foto berdasarkan photo_name
+                                        $groupedPhotos = $photos->groupBy('photo_name');
+                                    @endphp
+
+                                    @foreach ($groupedPhotos as $photoName => $groupedPhotosByName)
+                                        <div class="col-12">
+                                            <h5 class="fw-bold mb-3 text-capitalize">{{ $photoName }}</h5>
                                         </div>
+
+                                        @foreach ($groupedPhotosByName as $photo)
+                                            <div class="col-12 col-md-3 col-lg-2">
+                                                <div class="card card-gallery">
+                                                    <img alt="{{ $photo->photo_name }}" class="card-img-top" src="/storage/{{ $photo->photo_path }}">
+                                                    <button class="btn btn-danger" data-bs-route="{{ route('manage-gallery.destroyphoto', $photo->id) }}" data-bs-target="#DeleteModal" data-bs-toggle="modal" type="button"><i class="bi bi-trash"></i></button>
+                                                </div>
+                                            </div>
+                                        @endforeach
                                     @endforeach
+
                                     {!! $photos->links('pagination::bootstrap-5') !!}
                                 @endif
                             </div>
+
                         </div>
                         <div @class([
                             'tab-pane',

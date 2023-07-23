@@ -13,7 +13,7 @@
                         <div class="col-md-10 mx-auto">
                             <div class="row">
                                 <div class="col-xl-3 col-lg-6 col-md-6">
-                                    <div class="card l-bg-cherry">
+                                    <div class="card bg-danger text-white">
                                         <div class="card-statistic-3 p-4">
                                             <div class="card-icon card-icon-large"><i class="bi bi-cart4"></i></div>
                                             <div class="mb-4">
@@ -30,11 +30,11 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-md-6">
-                                    <div class="card l-bg-orange-dark">
+                                    <div class="card bg-primary text-white">
                                         <div class="card-statistic-3 p-4">
                                             <div class="card-icon card-icon-large"><i class="bi bi-cart-check"></i></div>
                                             <div class="mb-4">
-                                                <h5 class="card-title mb-0">Total Pesanan</h5>
+                                                <h5 class="card-title mb-0"><a href="/PesananSelesai" class="text-white text-decoration-none">Pesanan Selesai</a></h5>
                                             </div>
                                             <div class="row align-items-center d-flex mb-2">
                                                 <div class="col-8">
@@ -47,7 +47,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-md-6">
-                                    <div class="card l-bg-blue-dark">
+                                    <div class="card bg-warning text-white">
                                         <div class="card-statistic-3 p-4">
                                             <div class="card-icon card-icon-large"><i class="bi bi-gear-wide-connected"></i></div>
                                             <div class="mb-4">
@@ -64,7 +64,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-md-6">
-                                    <div class="card l-bg-green-dark">
+                                    <div class="card bg-info text-white">
                                         <div class="card-statistic-3 p-4">
                                             <div class="card-icon card-icon-large"><i class="bi bi-universal-access"></i></div>
                                             <div class="mb-4">
@@ -81,7 +81,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-md-6">
-                                    <div class="card l-bg-orange-dark">
+                                    <div class="card bg-info text-white">
                                         <div class="card-statistic-3 p-4">
                                             <div class="card-icon card-icon-large"><i class="bi bi-tags-fill"></i></div>
                                             <div class="mb-4">
@@ -98,7 +98,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-md-6">
-                                    <div class="card l-bg-green-dark">
+                                    <div class="card bg-warning text-white">
                                         <div class="card-statistic-3 p-4">
                                             <div class="card-icon card-icon-large"><i class="bi bi-card-image"></i></div>
                                             <div class="mb-4">
@@ -115,7 +115,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-md-6">
-                                    <div class="card l-bg-cherry">
+                                    <div class="card bg-primary text-white">
                                         <div class="card-statistic-3 p-4">
                                             <div class="card-icon card-icon-large"><i class="bi bi-camera-reels-fill"></i></div>
                                             <div class="mb-4">
@@ -132,7 +132,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-lg-6 col-md-6">
-                                    <div class="card l-bg-blue-dark">
+                                    <div class="card bg-danger text-white">
                                         <div class="card-statistic-3 p-4">
                                             <div class="card-icon card-icon-large"><i class="bi bi-calendar-week"></i></div>
                                             <div class="mb-4">

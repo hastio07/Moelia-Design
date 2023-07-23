@@ -25,13 +25,27 @@
                 </div>
             </div>
             @else
-            @foreach ($photos as $key => $value)
-            <div class="col-sm-4">
-                <a data-gallery="photo-gallery" data-toggle="lightbox" href="/storage/{{ $value->photo_path }}">
-                    <img alt="foto-{{ $key }}" class="img-fluid" height="600" src="/storage/{{ $value->photo_path }}" width="600">
-                </a>
+            <!--kelompokkan fotoberdasarkan photo_name -->
+            @php
+            $groupedPhotos = $photos->groupBy('photo_name');
+            @endphp
+            <!-- Tampilkan foto yang dikelompokkan -->
+            @foreach ($groupedPhotos as $photoName => $group)
+            <div class="photo-group mb-5">
+                <h4 class="text-capitalize text-center fw-bold">{{ $photoName }}</h4>
+                <div class="line"></div>
+                <div class="row">
+                    @foreach ($group as $photo)
+                    <div class="col-sm-4">
+                        <a data-gallery="photo-gallery" data-toggle="lightbox" href="/storage/{{ $photo->photo_path }}">
+                            <img alt="foto-{{ $loop->index }}" class="img-fluid mt-4" height="600" src="/storage/{{ $photo->photo_path }}" width="600">
+                        </a>
+                    </div>
+                    @endforeach
+                </div>
             </div>
             @endforeach
+
             @endif
         </div>
         {!! $photos->links('pagination::bootstrap-5') !!}
