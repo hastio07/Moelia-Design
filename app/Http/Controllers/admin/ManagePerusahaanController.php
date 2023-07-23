@@ -5,10 +5,10 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\About;
 use App\Models\Address;
+use App\Models\Certificate;
 use App\Models\Company;
 use App\Models\Contact;
 use App\Models\Offer;
-use App\Models\Certificate;
 use App\Models\Owner;
 use App\Models\Sosmed;
 use App\Models\VideoPromosi;
@@ -304,17 +304,17 @@ class ManagePerusahaanController extends Controller
     {
         $rules = [
             'telephone1_name' => 'nullable|string|max:255',
-            'telephone1_number' => 'nullable|numeric|max:99999999999999|regex:/^(?:\+62)?\d{9,12}$/',
+            'telephone1_number' => 'nullable|numeric|max:99999999999999|regex:/^(?:\+62)?\d{9,13}$/',
             'telephone2_name' => 'nullable|string|max:255',
-            'telephone2_number' => 'nullable|numeric|max:99999999999999|regex:/^(?:\+62)?\d{9,12}$/',
+            'telephone2_number' => 'nullable|numeric|max:99999999999999|regex:/^(?:\+62)?\d{9,13}$/',
             'whatsapp1_name' => 'nullable|string|max:255',
-            'whatsapp1_number' => 'nullable|numeric|max:99999999999999|regex:/^(?:\+62)?\d{9,12}$/',
+            'whatsapp1_number' => 'nullable|numeric|max:99999999999999|regex:/^(?:\+62)?\d{9,13}$/',
             'whatsapp2_name' => 'nullable|string|max:255',
-            'whatsapp2_number' => 'nullable|numeric|max:99999999999999|regex:/^(?:\+62)?\d{9,12}$/',
+            'whatsapp2_number' => 'nullable|numeric|max:99999999999999|regex:/^(?:\+62)?\d{9,13}$/',
             'whatsapp3_name' => 'nullable|string|max:255',
-            'whatsapp3_number' => 'nullable|numeric|max:99999999999999|regex:/^(?:\+62)?\d{9,12}$/',
+            'whatsapp3_number' => 'nullable|numeric|max:99999999999999|regex:/^(?:\+62)?\d{9,13}$/',
             'whatsapp4_name' => 'nullable|string|max:255',
-            'whatsapp4_number' => 'nullable|numeric|max:99999999999999|regex:/^(?:\+62)?\d{9,12}$/',
+            'whatsapp4_number' => 'nullable|numeric|max:99999999999999|regex:/^(?:\+62)?\d{9,13}$/',
             'email' => 'nullable|email|max:255',
         ];
         $messages = [
@@ -625,7 +625,6 @@ class ManagePerusahaanController extends Controller
         $db->update($data);
         return redirect()->route('manage-perusahaan.index')->with('success_certificate', 'Data berhasil dihapus!');
     }
-
 
     public function updateorcreatejo(Request $request)
     {

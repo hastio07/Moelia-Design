@@ -27,7 +27,7 @@ class ProfileUserController extends Controller
             'nama_depan' => 'required|string|max:255',
             'nama_belakang' => 'required|string|max:255',
             'email' => "required|string|email:dns|max:255|unique:users,email," . $request->input('id'),
-            'phone' => 'required|numeric|max:99999999999999|regex:/^(?:\+62)?\d{9,12}$/',
+            'phone' => 'required|numeric|max:99999999999999|regex:/^(?:\+62)?\d{9,13}$/',
             'old_password' => 'required',
             'new_password' => ['nullable', 'min:5', 'max:255', RulesPassword::min(5)->letters()->mixedCase()->symbols()],
         ];

@@ -151,7 +151,7 @@
                                 <button class="btn btn-success" type="submit">Tambah</button>
                             </form>
                             <div class="list-kategori mt-2">
-                                <table class="caption-top mt-3 table border" id="table-category-custom-venue">
+                                <table class="mt-3 table caption-top border" id="table-category-custom-venue">
                                     <thead>
                                         <tr>
                                             <th>Nama Kategori</th>
@@ -265,7 +265,7 @@
                                 <button class="btn btn-success" type="submit">Tambah</button>
                             </form>
                             <div class="list-kategori mt-2">
-                                <table class="caption-top mt-3 table border" id="table-category-additional-venue">
+                                <table class="mt-3 table caption-top border" id="table-category-additional-venue">
                                     <thead>
                                         <tr>
                                             <th>Nama Kategori</th>
