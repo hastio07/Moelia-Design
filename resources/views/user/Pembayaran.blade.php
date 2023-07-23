@@ -41,7 +41,7 @@
                                         <p class="fw-bold"> Uang Muka(DP) </p>
                                     </div>
                                     <div class="col-6">
-                                        <p>Rp. 18.000.000,00</p>
+                                        <p>{{ $bayar_dp->formatRupiah('uang_muka') }}</p>
                                     </div>
                                 </div>
                                 <hr>
@@ -50,7 +50,7 @@
                                         <p class="fw-bold">Total</p>
                                     </div>
                                     <div class="col-6">
-                                        <p> RP. 18.000.000,00</p>
+                                        <p>{{ $bayar_dp->formatRupiah('uang_muka') }}</p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -58,12 +58,22 @@
                                         <p class="fw-bold">Status</p>
                                     </div>
                                     <div class="col-6">
-                                        <p class="fw-bold text-success">Lunas</p>
+                                        @if ($bayar_dp->status === 'unpaid' || $bayar_dp->status === 'pending')
+                                            <p class="fw-bold text-danger">Belum Lunas</p>
+                                        @elseif($bayar_dp->status === 'paid')
+                                            <p class="fw-bold text-success">Lunas</p>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-info">Bayar</button>
-
+                            @if ($bayar_dp->snap_token == null || $bayar_dp->status == 'expire')
+                                <button class="btn btn-info" id="request-bayar-dp">Minta tautan bayar DP Baru</button>
+                            @else
+                                @if ($bayar_dp->status == 'pending')
+                                    <button class="btn btn-info" id="bayar-dp">Bayar</button>
+                                    <button class="btn btn-info" id="cancel-bayar-dp">Cancel</button>
+                                @endif
+                            @endif
                         </div>
 
                         <div class="pay-virtual mt-3 rounded p-3 shadow">
@@ -214,6 +224,7 @@
     </section>
 
     @push('scripts')
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
         <script>
             function tampilkanStruk() {
                 // Membuat objek XMLHttpRequest
@@ -236,6 +247,106 @@
                 xhr.send();
             }
         </script>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+        @if ($bayar_dp->midtrans_token == null)
+            <script>
+                const btnRequestPembayaranDp = document.getElementById('request-bayar-dp');
+                btnRequestPembayaranDp.addEventListener('click', (e) => {
+                    // Ganti {data} dengan data yang ingin Anda kirimkan dalam URL
+                    const data = "{{ $bayar_dp->id }}";
+
+                    // URL untuk melakukan POST
+                    const url = `http://127.0.0.1:8000/pembayaran/refresh-dp-token/${data}`;
+
+                    // Mendapatkan nilai CSRF token dari meta tag
+                    const csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+                    // Konfigurasi untuk request POST
+                    const requestOptions = {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json', // Sesuaikan dengan jenis konten yang ingin Anda kirimkan
+                            'X-CSRF-TOKEN': csrfToken, // Menyertakan CSRF token di headers
+                        },
+                    };
+
+                    // Lakukan request POST menggunakan fetch()
+                    fetch(url, requestOptions)
+                        .then(response => response.json()) // Handle response dari server jika ingin mengambil data JSON
+                        .then(data => {
+                            // Lakukan sesuatu dengan data response dari server (opsional)
+                            window.location.reload();
+                        })
+                        .catch(error => {
+                            // Tangani jika terjadi kesalahan selama permintaan (opsional)
+                            console.error('Error:', error);
+                        });
+                });
+            </script>
+            <script>
+                const btnCancelPembayaranDp = document.getElementById('cancel-bayar-dp');
+                btnCancelPembayaranDp.addEventListener('click', (e) => {
+                    // Ganti {data} dengan data yang ingin Anda kirimkan dalam URL
+                    const data = "{{ $bayar_dp->id }}";
+
+                    // URL untuk melakukan POST
+                    const url = `http://127.0.0.1:8000/pembayaran/cancel/${data}`;
+
+                    // Mendapatkan nilai CSRF token dari meta tag
+                    const csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+                    // Konfigurasi untuk request POST
+                    const requestOptions = {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json', // Sesuaikan dengan jenis konten yang ingin Anda kirimkan
+                            'X-CSRF-TOKEN': csrfToken, // Menyertakan CSRF token di headers
+                        },
+                    };
+
+                    // Lakukan request POST menggunakan fetch()
+                    fetch(url, requestOptions)
+                        .then(response => response.json()) // Handle response dari server jika ingin mengambil data JSON
+                        .then(data => {
+                            // Lakukan sesuatu dengan data response dari server (opsional)
+                            window.location.reload();
+                        })
+                        .catch(error => {
+                            // Tangani jika terjadi kesalahan selama permintaan (opsional)
+                            console.error('Error:', error);
+                        });
+                });
+            </script>
+        @endif
+
+        <script>
+            // For example trigger on button clicked, or any time you need
+            const payButton = document.getElementById('bayar-dp');
+            payButton.addEventListener('click', function() {
+                // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
+                window.snap.pay('{{ $bayar_dp->snap_token }}', {
+                    onSuccess: function(result) {
+                        /* You may add your own implementation here */
+                        alert("payment success!");
+                        window.location.reload();
+                        console.log(result);
+                    },
+                    onPending: function(result) {
+                        /* You may add your own implementation here */
+                        alert("wating your payment!");
+                        console.log(result);
+                    },
+                    onError: function(result) {
+                        /* You may add your own implementation here */
+                        alert("payment failed!");
+                        console.log(result);
+                    },
+                    onClose: function() {
+                        /* You may add your own implementation here */
+                        alert('you closed the popup without finishing the payment');
+                    }
+                })
+            });
+        </script>
     @endpush
 @endsection

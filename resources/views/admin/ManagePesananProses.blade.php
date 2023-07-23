@@ -6,14 +6,18 @@
 @endpush
 @section('content')
     <div class="content-wrapper">
+        {{-- <form action="{{ route('manage-pesanan-proses.create') }}" method="post">
+            @csrf
+            <button type="submit">Test</button>
+        </form> --}}
         <div class="row same-height">
             <div class="card">
                 <div class="card-header">
                     <h4>Rincian Jadwal Kegiatan</h4>
                 </div>
                 <div class="card-body">
-                    <div class="btn-modal d-flex mt-3 mb-2 gap-3">
-                        <button class="btn icon-left btn-success d-flex" data-bs-target="#CUModal" data-bs-toggle="modal" type="button "><i class="bi bi-plus-lg"></i>
+                    <div class="btn-modal d-flex mb-2 mt-3 gap-3">
+                        <button class="btn icon-left btn-success d-flex" data-bs-route="{{ route('manage-pesanan-proses.create') }}" data-bs-target="#CUModal" data-bs-toggle="modal" id="btnCreateModal" type="button "><i class="bi bi-plus-lg"></i>
                             Pesanan
                         </button>
                         <button class="btn btn-primary icon-left d-flex" data-bs-target="#FilterModal" data-bs-toggle="modal" type="button "><i class="bi bi-filter"></i>
@@ -23,6 +27,28 @@
                             Reset
                         </button>
                     </div>
+                    @if (session()->has('success_add_pesanan'))
+                        <div class="alert alert-success m-3">{{ session()->get('success_add_pesanan') }}</div>
+                    @elseif (session()->has('error_add_pesanan'))
+                        <div class="alert alert-danger m-3">{{ session()->get('error_add_pesanan') }}</div>
+                    @elseif (session()->has('success_edit_pesanan'))
+                        <div class="alert alert-success m-3">{{ session()->get('success_edit_pesanan') }}</div>
+                    @elseif (session()->has('error_edit_pesanan'))
+                        <div class="alert alert-danger m-3">{{ session()->get('error_edit_pesanan') }}</div>
+                    @elseif (session()->has('success_delete_pesanan'))
+                        <div class="alert alert-success m-3">{{ session()->get('success_delete_pesanan') }}</div>
+                    @endif
+                    @if ($errors->has('nama-pemesan') || $errors->has('email-pemesan') || $errors->has('nama-pesanan') || $errors->has('telepon-pemesan') || $errors->has('tanggal') || $errors->has('alamat') || $errors->has('biaya-awal') || $errors->has('biaya-additional') || $errors->has('biaya-seluruh') || $errors->has('uang-muka') || $errors->has('materi-kerja') || $errors->has('additional') || $errors->has('bonus'))
+                        <div class="m-3 pt-1">
+                            <div class="alert alert-danger">
+                                <ul style="list-style:none;">
+                                    @foreach ($errors->all() as $message)
+                                        <li>{{ $message }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    @endif
                     <table class="display table" id="table-pesanan">
                         <thead>
                             <tr>
@@ -38,8 +64,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="fw-bolder"><a href="/detail-pesanan">Muhammad & aisyah</a></td>
+                            {{-- <tr>
+                                <td class="fw-bolder"><a href="{{ route('manage-pesanan-proses.detail', 1) }}">Muhammad & aisyah</a></td>
                                 <td>08125865551</td>
                                 <td>Jumat/30-01-2023</td>
                                 <td>Bagas Raya</td>
@@ -57,7 +83,7 @@
                                         <button class="btn btn-secondary" data-bs-target="#UpdateModaljadwal" data-bs-toggle="modal" type="button"><i class="bi bi-check2"></i></button>
                                     </div>
                                 </td>
-                            </tr>
+                            </tr> --}}
                         </tbody>
                         <tfoot>
                             <tr class="text center">
@@ -85,26 +111,42 @@
                         <h5 class="modal-title" id="cuModalLabel">Tambah Pesanan</h5>
                         <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
                     </div>
-                    <form method="post">
+                    <form autocomplete="on" id="CUForm" method="post">
                         @csrf
                         <div class="modal-body">
                             <div class="mb-5 p-3">
                                 <div class="form-inpt mt-1">
-                                    <label class="form-label" for="nama">Nama Pemesan<span class="text-danger">*</span></label>
-                                    <input class="form-control" id="nama" name="nama" placeholder="Masukkan nama" required type="text" value="{{ old('nama') }}">
+                                    <label class="form-label" for="nama-pemesan">Nama Pemesan<span class="text-danger">*</span></label>
+                                    <input class="form-control" id="nama-pemesan" name="nama-pemesan" required type="text" value="{{ old('nama-pemesan') }}">
+                                </div>
+                                <div class="form-inpt mt-1">
+                                    <label class="form-label" for="email-pemesan">Email Pemesan<span class="text-danger">*</span></label>
+                                    <input class="form-control" id="email-pemesan" name="email-pemesan"required type="email" value="{{ old('email-pemesan') }}">
                                 </div>
                                 <div class="form-inpt mt-1">
                                     <label class="form-label" for="nama-pesanan">Nama Pesanan<span class="text-danger">*</span></label>
-                                    <input class="form-control" id="nama-pesanan" name="nama-pesanan" placeholder="Masukkan nama pesanan" required type="text" value="{{ old('nama-pesanan') }}">
+                                    <input class="form-control" id="nama-pesanan" name="nama-pesanan" required type="text" value="{{ old('nama-pesanan') }}">
                                 </div>
                                 <div class="form-inpt mt-1">
-                                    <label class="form-label" for="telp">Telp/HP<span class="text-danger">*</span></label>
-                                    <input class="form-control" id="telp" name="telp" placeholder="Masukkan nomor telephone" required type="number" value="{{ old('telp') }}">
+                                    <label class="form-label" for="jenis-pembayaran">Jenis Pembayaran<span class="text-danger">*</span></label>
+                                    <select id="jenis-pembayaran" name="jenis-pembayaran">
+                                        <option disabled selected value="">-- pilih --</option>
+                                        <option @selected(old('jenis-pembayaran') == 'dp') value="dp">
+                                            Uang Muka
+                                        </option>
+                                        <option @selected(old('jenis-pembayaran') == 'fp') value="fp">
+                                            Penuh
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-inpt mt-1">
+                                    <label class="form-label" for="telepon-pemesan">Telepon/HP<span class="text-danger">*</span></label>
+                                    <input class="form-control" id="telepon-pemesan" name="telepon-pemesan" required type="tel" value="{{ old('telepon-pemesan') }}">
                                 </div>
                                 <div class="form-inpt mt-1">
                                     <label class="form-label" for="tanggal">Tanggal Akad & Resepsi<span class="text-danger">*</span></label>
-                                    <div class="input-group input-append date" data-date-format="dd-mm-yyyy">
-                                        <input class="form-control" id="tanggal" name="tanggal" placeholder="Masukan tanggal acara" required type="text" value="{{ old('tanggal') }}">
+                                    <div class="input-group input-datecreate input-append date" data-date-format="dd-mm-yyyy">
+                                        <input class="form-control" id="tanggal" name="tanggal" required type="text" value="{{ old('tanggal') }}">
                                         <button class="btn btn-outline-secondary" type="button">
                                             <i class="far fa-calendar-alt"></i>
                                         </button>
@@ -112,31 +154,35 @@
                                 </div>
                                 <div class="form-inpt mt-1">
                                     <label class="form-label" for="alamat">Alamat Akad & Resepsi<span class="text-danger">*</span></label>
-                                    <input class="form-control" id="alamat" name="alamat" placeholder="Masukkan alamat" required type="text" value="{{ old('alamat') }}">
+                                    <textarea class="form-control" id="alamat" name="alamat" required>{{ old('alamat') }}</textarea>
                                 </div>
                                 <div class="form-inpt mt-1">
                                     <label class="form-label" for="biaya-awal">Total Biaya Awal<span class="text-danger">*</span></label>
-                                    <input class="form-control" id="biaya-awal" name="biaya-awal" placeholder="Masukkan biaya sewa" required type="number" value="{{ old('biaya-awal') }}">
+                                    <input class="form-control" id="biaya-awal" name="biaya-awal" required type="number" value="{{ old('biaya-awal') }}">
+                                </div>
+                                <div class="form-inpt mt-1">
+                                    <label class="form-label" for="biaya-additional">Total Biaya Additional<span class="text-danger">*</span></label>
+                                    <input class="form-control" id="biaya-additional" name="biaya-additional" required type="number" value="{{ old('biaya-additional') }}">
                                 </div>
                                 <div class="form-inpt mt-1">
                                     <label class="form-label" for="biaya-seluruh">Total Biaya Seluruh<span class="text-danger">*</span></label>
-                                    <input class="form-control" id="biaya-seluruh" name="biaya-seluruh" placeholder="Masukkan biaya sewa" required type="number" value="{{ old('biaya-seluruh') }}">
+                                    <input class="form-control" id="biaya-seluruh" name="biaya-seluruh" required type="number" value="{{ old('biaya-seluruh') }}">
                                 </div>
                                 <div class="form-inpt mt-1">
-                                    <label class="form-label" for="dp">Uang Muka(DP) <span class="text-danger">*</span></label>
-                                    <input class="form-control" id="dp" name="uang" placeholder="Masukkan uang muka" required type="number" value="{{ old('uang') }}">
+                                    <label class="form-label" for="uang-muka">Uang Muka(DP) <span class="text-danger">*</span></label>
+                                    <input class="form-control" id="uang-muka" name="uang-muka" required type="number" value="{{ old('uang-muka') }}">
                                 </div>
                                 <div class="form-inpt mt-1">
-                                    <label class="form-label" for="materikerja">Materi Kerja<span class="text-danger">*</span></label>
-                                    <textarea id="rincianproduk" name="materikerja" required>{{ old('materikerja') }}</textarea>
+                                    <label class="form-label" for="materi-kerja">Materi Kerja<span class="text-danger">*</span></label>
+                                    <textarea id="materi-kerja" name="materi-kerja">{{ old('materi-kerja') }}</textarea>
                                 </div>
                                 <div class="form-inpt mt-2">
-                                    <label class="form-label" for="rincianproduk">Additional<span class="text-danger">*</span></label>
-                                    <textarea id="rincianproduk" name="additional" required>{{ old('additional') }}</textarea>
+                                    <label class="form-label" for="additional">Additional<span class="text-danger">*</span></label>
+                                    <textarea id="additional" name="additional">{{ old('additional') }}</textarea>
                                 </div>
                                 <div class="form-inpt mt-2">
-                                    <label class="form-label" for="rincianproduk">Bonus<span class="text-danger">*</span></label>
-                                    <textarea id="rincianproduk" name="materikerja" required>{{ old('materikerja') }}</textarea>
+                                    <label class="form-label" for="bonus">Bonus<span class="text-danger">*</span></label>
+                                    <textarea id="bonus" name="bonus">{{ old('bonus') }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -148,6 +194,30 @@
                 </div>
             </div>
         </div>
+
+        <!-- modal delete product dan category -->
+        <div aria-hidden="true" aria-labelledby="deleteModalLabel" class="modal fade" id="DeleteModal" tabindex="-1">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-danger" id="deleteModalLabel">Peringatan!</h5>
+                        <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h6>Yakin Ingin Menghapusnya?</h6>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" data-bs-dismiss="modal" id="closeModal" type="button">Tutup</button>
+                        <form method="post">
+                            @method('delete')
+                            @csrf
+                            <button class="btn btn-danger" type="submit">YA</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         {{-- Modal Date Filter Pesanan --}}
         <div aria-hidden="true" aria-labelledby="filterModalLabel" class="modal fade" id="FilterModal" tabindex="-1">
             <div class="modal-dialog">
@@ -177,108 +247,246 @@
 @endsection
 @push('scripts')
     <script src="{{ asset('templates') }}/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <script src="{{ asset('templates') }}/vendor/bootstrap-datepicker/dist/locales/bootstrap-datepicker.id.min.js" charset="UTF-8"></script>
     <script>
         $(document).ready(function() {
             //Iniliasi datepicker pada class input
-            $('.date').datepicker({
+            $('.input-datecreate').datepicker({
                 autoclose: true,
                 todayHighlight: true,
-                format: 'dd-mm-yyyy'
-            }).on('changeDate', function(e) {
-                console.log(e.target.value);
+                format: 'dd-mm-yyyy',
+                language: 'id-ID'
+            });
+
+            $('.input-daterange').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                format: 'yyyy-mm-dd',
+                language: 'id-ID'
+            });
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
             });
 
             //LOAD DATATABLE
             //script untuk memanggil data json dari server dan menampilkannya berupa datatable
             //load data menggunakan parameter tanggal dari dan tanggal hingga
             function load_data(start_date = '', end_date = '') {
-                $('#table-pesanan').DataTable({
-                    url: '{{ url()->current() }}',
-                    responsive: true,
-                })
-
                 // Script untuk dari server
-                /*  $('#table-pesanan').DataTable({
-                      processing: true,
-                      responsive: true,
-                      //  serverSide: true, //aktifkan server-side
-                      ajax: {
-                          url: '{{ url()->current() }}',
-                          type: 'GET',
-                          data: {
-                              start_date: start_date,
-                              end_date: end_date
-                          } //jangan lupa kirim parameter tanggal
-                      },
-                      columns: [{
-                                   data: 'nama_customer',
-                                   name: 'nama_customer'
-                               },
-                               {
-                                   data: 'alamat',
-                                   name: 'alamat'
-                               },
-                               {
-                                   data: 'Tanggal Acara',
-                                   name: 'Tanggal Acara'
-                               },
-                               {
-                                   data: 'Detail Pesanan',
-                                   name: 'Detail Pesanan'
-                               },
-                               {
-                                   data: 'Biaya Sewa',
-                                   name: 'Biaya Sewa'
-                               },
-                               {
-                                   data: 'Uang Muka',
-                                   name: 'Uang Muka'
-                               },
-                               {
-                                   data: 'Aksi',
-                                   name: 'Aksi'
-                               },
-                           ],
-                      order: [
-                          [0, 'asc']
-                      ]
+                $('#table-pesanan').DataTable({
+                    processing: true,
+                    responsive: true,
+                    //  serverSide: true, //aktifkan server-side
+                    ajax: {
+                        url: '{{ route('manage-pesanan-proses.index') }}',
+                        type: 'GET',
+                        data: {
+                            start_date: start_date,
+                            end_date: end_date
+                        } //jangan lupa kirim parameter tanggal
+                    },
+                    columnDefs: [{
+                        targets: 0,
+                        className: "fw-bolder"
+                    }, {
+                        targets: 7,
+                        className: "text-success"
+                    }, {
+                        orderable: false,
+                        searchable: false,
+                        targets: 8
+                    }],
+                    columns: [{
+                            data: 'nama_pemesan',
+                            name: 'nama_pemesan'
+                        },
+                        {
+                            data: 'telepon_pemesan',
+                            name: 'telepon_pemesan'
+                        },
+                        {
+                            data: 'tanggal_akad_dan_resepsi',
+                            name: 'tanggal_akad_dan_resepsi'
+                        },
+                        {
+                            data: 'alamat_akad_dan_resepsi',
+                            name: 'alamat_akad_dan_resepsi'
+                        },
+                        {
+                            data: 'total_biaya_awal',
+                            name: 'total_biaya_awal'
+                        },
+                        {
+                            data: 'total_biaya_seluruh',
+                            name: 'total_biaya_seluruh'
+                        },
+                        {
+                            data: 'uang_muka',
+                            name: 'uang_muka'
+                        },
+                        {
+                            data: 'status',
+                            name: 'status'
+                        },
+                        {
+                            data: 'aksi',
+                            name: 'aksi'
+                        },
+                    ],
+                    order: []
 
-                  });*/
+                });
             }
             load_data();
 
             // Ketika button filter diklik
-            /* document.getElementById('filter').addEventListener('click', function() {
-                var start_date = document.getElementById('start_date').value;
-                var end_date = document.getElementById('end_date').value;
-                if (start_date !== '' && end_date !== '') {
+            document.getElementById('filter').addEventListener('click', function() {
+                const start_date = document.getElementById('start_date').value;
+                const end_date = document.getElementById('end_date').value;
+                if (start_date != '' && end_date != '') {
                     document.getElementById('table-pesanan').DataTable().destroy();
                     load_data(start_date, end_date);
                 } else {
                     alert('Both Date is required');
                 }
             });
-                */
+
             // Ketika button reset diklik
-            /* document.getElementById('refresh').addEventListener('click', function() {
-                 document.getElementById('start_date').value = '';
-                 document.getElementById('end_date').value = '';
-                 document.getElementById('table-pesanan').DataTable().destroy();
-                 load_data();
-             });
-             */
+            document.getElementById('refresh').addEventListener('click', function() {
+                document.getElementById('start_date').value = '';
+                document.getElementById('end_date').value = '';
+                document.getElementById('table-pesanan').DataTable().destroy();
+                load_data();
+            });
         })
     </script>
     <script src="{{ asset('templates') }}/vendor/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
         tinymce.init({
-            selector: 'textarea#rincianproduk',
+            selector: 'textarea#materi-kerja',
             plugins: [
                 'lists', 'wordcount'
             ],
             menubar: 'edit insert format',
             toolbar: 'bullist numlist',
             content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
+        });
+        tinymce.init({
+            selector: 'textarea#additional',
+            plugins: [
+                'lists', 'wordcount'
+            ],
+            menubar: 'edit insert format',
+            toolbar: 'bullist numlist',
+            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
+        });
+        tinymce.init({
+            selector: 'textarea#bonus',
+            plugins: [
+                'lists', 'wordcount'
+            ],
+            menubar: 'edit insert format',
+            toolbar: 'bullist numlist',
+            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
+        });
+    </script>
+    <script>
+        /**
+         * Buat pesanan & Ubah Pesanan
+         */
+        const CUModal = document.getElementById('CUModal'); // abmil elemen div modal-nya
+        const CUForm = CUModal.querySelector('.modal-content form#CUForm'); // ambil elemen form-nya
+        const titleModal = CUModal.querySelector('.modal-content .modal-header h5#cuModalLabel.modal-title'); // abmil elemen h5 judul form-nya
+        const csrfField = CUForm.querySelector('input[name="_token"]'); // ambil elemen input csrf
+        const btnSubmit = document.querySelector('.modal-content .modal-footer .btn.btn-success'); // ambil elemen button submit-nya
+
+        /* Select input untuk diisi ketika update */
+        const InputNamaPemesanElement = document.querySelector('.modal-content .modal-body input#nama-pemesan'); // ambil elemen input
+        const InputEmailPemesanElement = document.querySelector('.modal-content .modal-body input#email-pemesan'); // ambil elemen input
+        const InputNamaPesananElement = document.querySelector('.modal-content .modal-body input#nama-pesanan'); // ambil elemen input
+        const SelectJenisPembayaranElement = document.querySelector('.modal-content .modal-body select#jenis-pembayaran'); // ambil elemen select
+        const InputTeleponPemesanElement = document.querySelector('.modal-content .modal-body input#telepon-pemesan'); // ambil elemen input
+        const InputTanggalElement = document.querySelector('.modal-content .modal-body input#tanggal'); // ambil elemen input
+        const InputAlamatElement = document.querySelector('.modal-content .modal-body input#alamat'); // ambil elemen input
+        const InputBiayaAwalElement = document.querySelector('.modal-content .modal-body input#biaya-awal'); // ambil elemen input
+        const InputBiayaSeluruhElement = document.querySelector('.modal-content .modal-body input#biaya-seluruh'); // ambil elemen input
+        const InputUangMukaElement = document.querySelector('.modal-content .modal-body input#uang-muka'); // ambil elemen input
+        const InputMateriKerjaElement = document.querySelector('.modal-content .modal-body input#materi-kerja'); // ambil elemen input
+        const InputAdditionalElement = document.querySelector('.modal-content .modal-body input#additional'); // ambil elemen input
+        const InputBonusElement = document.querySelector('.modal-content .modal-body input#bonus'); // ambil elemen input
+
+        CUModal.addEventListener('show.bs.modal', (event) => {
+            const button = event.relatedTarget; // ambil elemen button yang berelasi
+            const btnID = button.getAttribute('id'); // ambil attribute id
+            const route = button.getAttribute('data-bs-route'); // ambil attribute data-bs-route
+            console.log(btnID);
+            console.log(route);
+            if (btnID === 'btnCreateModal') {
+                CUForm.action = route;
+                titleModal.textContent = 'Tambah Pesanan';
+            }
+
+            if (btnID === 'btnUpdateModal') {
+                // Extract info from data-bs-* attributes
+                const rawData = button.getAttribute('data-bs-pesanan');
+                const parseData = JSON.parse(rawData);
+                // The modal's content.
+                CUForm.action = route;
+                const createField = document.createElement('input');
+                createField.type = 'hidden';
+                createField.name = '_method';
+                createField.value = 'PUT';
+                csrfField.insertAdjacentElement('beforebegin', createField);
+                titleModal.textContent = 'Ubah Pesanan';
+                btnSubmit.textContent = 'Ubah'; // Ubah text tombol submit
+
+                InputNamaPemesanElement.value = parseData.nama_pemesan;
+                InputEmailPemesanElement.value = parseData.email_pemesan;
+                InputNamaPesananElement.value = parseData.nama_pesanan;
+                SelectJenisPembayaranElement.value = parseData.jenis_pembayaran;
+                InputTeleponPemesanElement.value = parseData.telepon_pemesan;
+                InputTanggalElement.value = parseData.tanggal_akad_dan_resepsi;
+                InputAlamatElement.value = parseData.alamat_akad_dan_resepsi;
+                InputBiayaAwalElement.value = parseData.total_biaya_awal;
+                InputBiayaSeluruhElement.value = parseData.total_biaya_seluruh;
+                InputUangMukaElement.value = parseData.uang_muka;
+                tinymce.get('materi-kerja').setContent(parseData.materi_kerja);
+                tinymce.get('additional').setContent(parseData.additional);
+                tinymce.get('bonus').setContent(parseData.bonus);
+            }
+        });
+
+        CUModal.addEventListener('hidden.bs.modal', (event) => {
+            const methodField = CUForm.querySelector('input[name="_method"]');
+            if (methodField !== null) {
+                methodField.remove();
+            }
+            CUForm.action = '#';
+            InputNamaPemesanElement.value = '';
+            InputEmailPemesanElement.value = '';
+            InputNamaPesananElement.value = '';
+            SelectJenisPembayaranElement.value = '';
+            InputTeleponPemesanElement.value = '';
+            InputTanggalElement.value = '';
+            InputAlamatElement.value = '';
+            InputBiayaAwalElement.value = null;
+            InputBiayaSeluruhElement.value = null;
+            InputUangMukaElement.value = null;
+            tinymce.activeEditor.setContent('');
+            btnSubmit.textContent = 'Tambah'; // Ubah text tombol submit
+        });
+
+        /**
+         * Hapus Pesanan
+         */
+        const deleteModal = document.getElementById('DeleteModal');
+        deleteModal.addEventListener('show.bs.modal', (event) => {
+            const button = event.relatedTarget;
+            const route = button.getAttribute('data-bs-route');
+            deleteModal.querySelector('.modal-content .modal-footer form').setAttribute('action', route);
         });
     </script>
 @endpush
