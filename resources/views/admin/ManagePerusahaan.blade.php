@@ -47,8 +47,7 @@
                                                         <input name="oldfoto_owner" type="hidden" value="{{ $owners->foto_owner ?? null }}">
                                                         <label class="form-label" for="nama_owner">Nama Owner</label>
                                                         <input class="form-control" id="nama_owner" name="nama_owner" placeholder="Masukkan nama owner" type="text" value="{{ $owners->nama_owner ?? null }}">
-                                                        <label class="form-label" for="kata_sambutan">Kata
-                                                            Sambutan</label>
+                                                        <label class="form-label" for="kata_sambutan">Kata Sambutan/Motto</label>
                                                         <textarea class="form-control" id="kata_sambutan" name="kata_sambutan" oninput="autoResizeTextarea(this)" rows="3">{{ $owners->kata_sambutan ?? null }}</textarea>
                                                         <label class="form-label" for="foto_owner">Foto Owner</label>
                                                         <input class="form-control" id="foto_owner" name="foto_owner" type="file">
@@ -88,7 +87,7 @@
                                                     @if (!empty($owners->kata_sambutan))
                                                     {{ $owners->kata_sambutan }}
                                                     @else
-                                                    <p class="bg-warning rounded p-3 border text-white mt-3">-- Kata Sambutan Kosong --</p>
+                                                    <p class="bg-warning rounded p-3 border text-white mt-3">-- Kata Sambutan/Motto Kosong --</p>
                                                     @endif
                                                 </p>
                                                 @else
@@ -305,6 +304,73 @@
                                         </div>
                                     </div>
 
+                                    {{-- visi misi --}}
+                                    <div class="row mt-3">
+                                        <div class="col-md-7">
+                                            <div class="bg-body h-100 container mb-3 rounded border p-3 shadow">
+                                                <h4 class="text-center">Visi&Misi</h4>
+                                                @if (session('success_visimisis'))
+                                                <div class="alert alert-success text-center" id="success-alert">
+                                                    {{ session('success_visimisis') }}
+                                                </div>
+                                                @endif
+                                                @if ($errors->has('visi') || $errors->has('misi'))
+                                                <div class="m-3 pt-1">
+                                                    <div class="alert alert-danger">
+                                                        <ul style="list-style:none;">
+                                                            @foreach ($errors->all() as $message)
+                                                            <li>{{ $message }}</li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                @endif
+                                                <form action="{{ route('manage-perusahaan.updateorcreatevisimisi') }}" class="formstyle" enctype="multipart/form-data" id="formAlamat" method="POST">
+                                                    <div class="flex-item form">
+                                                        @csrf
+                                                        <label class="form-label" for="visi">Visi</label>
+                                                        <input name="id_visimisi" type="hidden" value="{{ $visi_misis->id ?? null }}">
+                                                        <textarea class="form-control" id="visi" name="visi" oninput="autoResizeTextarea(this)" rows="3">{{ $visi_misis->visi?? null }}</textarea>
+                                                        <label class="form-label" for="misi">Misi</label>
+                                                        {{-- <textarea class="form-control" id="misi" name="misi" oninput="autoResizeTextarea(this)" rows="3">{{ $visi_misis->misi?? null }}</textarea> --}}
+                                                        <textarea id="misi" name="misi">{{ $visi_misis->misi?? null }}</textarea>
+                                                    </div>
+                                                    <div class="flex-item button">
+                                                        <div class="d-grid d-md-flex justify-content-md-center gap-2">
+                                                            <button class="btn btn-success" type="submit">Upload</button>
+                                                            @if (!empty($visi_misis) && ($visi_misis->visi || $visi_misis->misi))
+                                                            <button class="btn btn-danger" data-bs-route="{{ route('manage-perusahaan.deletevisimisi', $visi_misis->id) }}" id="btnDelete" type="submit">Hapus</i></button>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="h-100 rounded border p-3 shadow">
+                                                <div class="my-4">
+                                                    @if (!empty($visi_misis) && ($visi_misis->visi || $visi_misis->misi))
+                                                    <div class=" mb-3">
+                                                        <div class="mb-4 mt-3">
+                                                            <h4 class="text-center">Visi</h4>
+                                                        </div>
+                                                        {!! $visi_misis->visi ?? '<p class="bg-warning rounded p-3 border text-white text-center mt-3">-- Visi Kosong --</p>' !!}
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <div class="mb-4 mt-3">
+                                                            <h4 class="text-center">Misi</h4>
+                                                        </div>
+                                                        {!! $visi_misis->misi ?? ' <p class="bg-warning rounded p-3 border text-white text-center mt-3">-- Misi Kosong --</p>' !!}
+                                                    </div>
+                                                    @else
+                                                    <p class="bg-warning rounded p-3 border text-white ms-3 text-center">-- Data Alamat Kosong --</p>
+                                                    @endif
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <!-- telephone dan whatsapp perusahaan -->
                                     <div class="row mt-3">
                                         <div class="col-md-7">
@@ -394,7 +460,7 @@
                                             <div class="h-100 rounded border p-3 shadow">
                                                 <h4 class="text-center">Kontak Perusahaan</h4>
                                                 <div class="my-4">
-                                                    <div class="p4 rounded border p-3 shadow">
+                                                    <div class="rounded border p-3 shadow">
                                                         <div class="d-flex" style="min-height: 30px; align-items: center;">
                                                             <i class="bi bi-telephone-plus-fill me-1" style="font-size: 2rem; height: 32px; width: 32px;"></i>
                                                             <span class="ms-3">Telephone</span>
@@ -418,7 +484,7 @@
                                                         </ol>
                                                     </div>
                                                 </div>
-                                                <div class="p4 rounded border p-3 shadow">
+                                                <div class="rounded border p-3 shadow">
                                                     <div class="mb-4">
                                                         <div class="d-flex" style="min-height: 30px; align-items: center;">
                                                             <i class="bi bi-whatsapp me-1" style="font-size: 2rem; height: 32px; width: 32px;"></i>
@@ -444,6 +510,17 @@
                                                             @endif
                                                             @endforeach
                                                             @endif
+                                                        </ol>
+                                                    </div>
+                                                </div>
+                                                <div class="rounded border p-3 shadow mt-4">
+                                                    <div class="mb-4">
+                                                        <div class="d-flex" style="min-height: 30px; align-items: center;">
+                                                            <i class="bi bi-envelope me-1" style="font-size: 2rem; height: 32px; width: 32px;"></i>
+                                                            <span class="ms-3">Email</span>
+                                                        </div>
+                                                        <ol style="margin-left: 2.3rem; padding-left: 2.1rem;">
+                                                            <li>{{ $contacts->email }}</li>
                                                         </ol>
                                                     </div>
                                                 </div>
@@ -993,15 +1070,12 @@
 {{-- script untuk textarea form penawaran --}}
 <script>
     tinymce.init({
-        selector: 'textarea#penawaran'
-        , plugins: [
-            'lists', 'wordcount'
-        ]
-        , menubar: 'edit insert format'
-        , toolbar: 'bullist numlist'
-        , content_style: 'body { font-family:Suwannaphum, serif; font-size:16px }'
+        selector: 'textarea#penawaran, textarea#misi',
+        plugins: ['lists', 'wordcount'],
+        menubar: 'edit insert format',
+        toolbar: 'bullist numlist',
+        content_style: 'body { font-family:Suwannaphum, serif; font-size:16px }'
     });
-
 </script>
 {{-- script untuk tooltip icon help info --}}
 <script>

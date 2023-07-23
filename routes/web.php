@@ -86,6 +86,8 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
             Route::delete('manage-perusahaan/deleteowner/{id}', 'deleteowner')->name('manage-perusahaan.deleteowner');
             Route::post('manage-perusahaan/updateorcreateaddress', 'updateorcreateaddress')->name('manage-perusahaan.updateorcreateaddress');
             Route::delete('manage-perusahaan/deleteaddress/{id}', 'deleteaddress')->name('manage-perusahaan.deleteaddress');
+            Route::post('manage-perusahaan/updateorcreatevisimisi', 'updateorcreatevisimisi')->name('manage-perusahaan.updateorcreatevisimisi');
+            Route::delete('manage-perusahaan/deletevisimisi/{id}', 'deletevisimisi')->name('manage-perusahaan.deletevisimisi');
             Route::post('manage-perusahaan/updateorcreatesosmed', 'updateorcreatesosmed')->name('manage-perusahaan.updateorcreatesosmed');
             Route::delete('manage-perusahaan/deletesosmed/{id}', 'deletesosmed')->name('manage-perusahaan.deletesosmed');
             Route::post('manage-perusahaan/updateorcreatecontact', 'updateorcreatecontact')->name('manage-perusahaan.updateorcreatecontact');

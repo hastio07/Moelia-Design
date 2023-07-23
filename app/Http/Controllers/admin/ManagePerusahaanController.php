@@ -12,6 +12,7 @@ use App\Models\Certificate;
 use App\Models\Owner;
 use App\Models\Sosmed;
 use App\Models\VideoPromosi;
+use App\Models\VisiMisi;
 use App\Models\WorkingHour;
 use App\Rules\YouTubeUrl;
 use Illuminate\Http\Request;
@@ -28,6 +29,7 @@ class ManagePerusahaanController extends Controller
             'owners' => Owner::first(),
             'companies' => Company::first(),
             'videopromosi' => Videopromosi::first(),
+            'visi_misis' => VisiMisi::first(),
             'addresses' => Address::first(),
             'contacts' => Contact::first(),
             'sosmeds' => Sosmed::first(),
@@ -230,6 +232,40 @@ class ManagePerusahaanController extends Controller
         return redirect()->route('manage-perusahaan.index')->with('success_promosi', 'Data berhasil dihapus!');
     }
 
+    public function updateorcreatevisimisi(Request $request)
+    {
+        $rules = [
+            'visi' => 'nullable|string',
+            'misi' => 'nullable|string',
+        ];
+        $massages = [
+            'string' => ':attribute harus berupa teks.',
+        ];
+        //Validasi
+        $validator = Validator::make($request->all(), $rules, $massages);
+        //Jika gagal
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput(); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
+        }
+        $validatedData = $validator->validated();
+        // dd($validatedData);
+        $id = (int) $request->input('id_visimisi');
+        // dd($id);
+        // update atau create record dengan data yang diberikan
+        VisiMisi::updateOrCreate(['id' => $id], $validatedData);
+        return redirect()->route('manage-perusahaan.index')->with('success_visimisis', 'Data berhasil disimpan');
+    }
+    public function deletevisimisi($id)
+    {
+        $data = [
+            'visi' => null,
+            'misi' => null,
+        ];
+
+        VisiMisi::findOrFail($id)->update($data);
+        return redirect()->route('manage-perusahaan.index')->with('success_visimisis', 'Data berhasil dihapus!');
+    }
+
     public function updateorcreateaddress(Request $request)
     {
         $rules = [
@@ -243,7 +279,7 @@ class ManagePerusahaanController extends Controller
         $validator = Validator::make($request->all(), $rules, $massages);
         //Jika gagal
         if ($validator->fails()) {
-            return dd(back()->withErrors($validator)->withInput()); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
+            return back()->withErrors($validator)->withInput(); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
         }
         $validatedData = $validator->validated();
         // dd($validatedData);
