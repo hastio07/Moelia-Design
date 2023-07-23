@@ -5,3 +5,9 @@
     background-color: #a39300b0;
     color: #fff;
 }
+.line {
+    width: 100px;
+    height: 2px;
+    background-color: burlywood;
+    margin: auto;
+}
