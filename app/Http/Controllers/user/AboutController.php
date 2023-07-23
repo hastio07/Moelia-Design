@@ -32,7 +32,7 @@ class AboutController extends Controller
         //sosial media
         $sosmed = Sosmed::get();
         //visi & misi
-        $visi_misis = VisiMisi::get();
+        $visi_misis = VisiMisi::first();
         //sertifikat
         $certificates = Certificate::first();
 
