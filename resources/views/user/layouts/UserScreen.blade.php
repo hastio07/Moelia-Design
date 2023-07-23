@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <meta content="{{ csrf_token() }}" name="csrf-token">
+
+    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.sb_client_key') }}"></script>
     <!-- bootstrap -->
     <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css" rel="stylesheet">
@@ -56,7 +60,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-lg-0 mx-auto mb-2">
+                    <ul class="navbar-nav mb-lg-0 mx-auto mb-2 me-auto">
                         <li class="nav-item">
                             <a @class(['nav-link', 'active' => Route::is('home')]) aria-current="page" href="/">Home</a>
                         </li>

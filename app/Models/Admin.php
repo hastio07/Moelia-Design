@@ -54,4 +54,11 @@ class Admin extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+    /**
+     * Relasi database table admins ke table manage_pesanan (one-to-many (invers))
+     */
+    public function pesanan()
+    {
+        return $this->belongsTo(ManagePesanan::class);
+    }
 }

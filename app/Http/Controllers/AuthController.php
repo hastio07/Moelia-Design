@@ -130,7 +130,7 @@ class AuthController extends Controller
             'nama_depan' => 'required|string|max:255',
             'nama_belakang' => 'required|string|max:255',
             'email' => ['required', 'string', 'email:dns', new UniqueEmail, 'max:255'],
-            'phone' => 'required|numeric|max:99999999999999|regex:/^(?:\+62)?\d{9,12}$/',
+            'phone' => 'required|numeric|max:99999999999999|regex:/^(?:\+62)?\d{9,13}$/',
             'password' => ['required', 'min:5', 'max:255', 'confirmed', RulesPassword::min(5)->letters()->mixedCase()->symbols()],
         ];
         $massages = [

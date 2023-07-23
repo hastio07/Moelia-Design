@@ -16,6 +16,7 @@ use App\Http\Controllers\user\AboutController;
 use App\Http\Controllers\user\CalculatorController;
 use App\Http\Controllers\user\FotoController;
 use App\Http\Controllers\user\HomeController;
+use App\Http\Controllers\user\PembayaranUserController;
 use App\Http\Controllers\user\ProdukController;
 use App\Http\Controllers\user\ProfileUserController;
 use App\Http\Controllers\user\VideoController;
@@ -47,9 +48,12 @@ Route::middleware(['no-redirect-if-authenticated:admins,web', 'prevent-back-hist
             return view('user.struk');
         });
 
-        Route::get('/pembayaran', function () {
-            return view('user.pembayaran');
+        Route::controller(PembayaranUserController::class)->group(function () {
+            Route::get('/pembayaran', 'index')->name('user-pembayaran.index');
+            Route::post('/pembayaran/refresh-dp-token/{data}', 'refreshDPMidtransToken')->name('user-pembayaran.refreshDPMidtransToken');
+            Route::post('/pembayaran/cancel/{order_id}', 'cancelTranscation')->name('user-pembayaran.cancelTranscation');
         });
+
     });
     Route::resource('/wedding-calculator', CalculatorController::class);
     Route::get('/produk/search', [ProdukController::class, 'search'])->name('produk.search');
@@ -64,7 +68,7 @@ Route::middleware(['no-redirect-if-authenticated:admins,web', 'prevent-back-hist
 
     Route::get('/email', function () {
         $token = Str::random(60);
-        $user = new \App\Models\User (); // Ganti dengan model pengguna yang sesuai
+        $user = new \App\Models\User(); // Ganti dengan model pengguna yang sesuai
         $user->email = 'test@example.com'; // Ganti dengan alamat email pengguna yang sesuai
         $notification = new SendResetPasswordLink($token);
         $message = $notification->toMail($user);
@@ -113,6 +117,10 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
         Route::resource('manage-jadwal', ManageJadwalController::class)->except(['create', 'show', 'edit']);
         Route::controller(ManagePesananProsesController::class)->group(function () {
             Route::get('manage-pesanan-proses', 'index')->name('manage-pesanan-proses.index');
+            Route::post('manage-pesanan-proses/create', 'create')->name('manage-pesanan-proses.create');
+            Route::put('manage-pesanan-proses/{id}', 'update')->name('manage-pesanan-proses.update');
+            Route::delete('manage-pesanan-proses/{id}', 'destroy')->name('manage-pesanan-proses.destroy');
+            Route::get('manage-pesanan-proses/detail-pesanan/{data}', 'detail')->name('manage-pesanan-proses.detail');
         });
         Route::controller(ManageGalleryController::class)->group(function () {
             Route::get('manage-gallery', 'index')->name('manage-gallery.index');
@@ -180,9 +188,6 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
         });
         Route::get('/cetak-kontrak', function () {
             return view('admin.cetakkontrak');
-        });
-        Route::get('/detail-pesanan', function () {
-            return view('admin.DetailPesanan');
         });
     });
 });
