@@ -55,19 +55,18 @@
         <div class="container-fluid container-team mt-3 py-5">
             <div class="container">
                 <div class="row g-5 align-items-center" data-aos="fade-down">
-                    <div class="col-md-6 wow fadeIn">
+                    <div class="col-md-6">
                         @if (!empty($owners->foto_owner))
-                        <!-- <img alt="{{ $owners->nama_owner }}" class="img-fluid rounded" src="/storage/{{ $owners->foto_owner }}"> -->
                         <img alt="{{ $owners->nama_owner }}" class="img-fluid w-100 rounded" src="/storage/{{ $owners->foto_owner }}">
                         @endif
                     </div>
-                    <div class="col-md-6 wow fadeIn">
+                    <div class="col-md-6 text-center">
                         @if (!empty($owners->nama_owner))
                         <h4 class="fw-bold mb-3">{{ $owners->nama_owner }}</h4>
                         <p class="mb-1">CEO & Founder</p>
                         @endif
                         @if (!empty($owners->kata_sambutan))
-                        <p class="mb-4 mt-3" style="text-align: justify; text-indent: 30px;">{{ $owners->kata_sambutan }}</p>
+                        <p class="mb-4 mt-3">{{ $owners->kata_sambutan }}</p>
                         @endif
                     </div>
                 </div>
@@ -138,6 +137,7 @@
     <!-- end konten -->
 
     {{-- content sertifikat legalitas --}}
+
     @if (!empty($certificates) && ($certificates->foto_sertifikat || $certificates->pengantar))
     <div class="container mt-3 rounded border">
         <div class="row">
@@ -158,6 +158,7 @@
         </div>
     </div>
     @endif
+
     {{-- end content --}}
 
     <!-- content jam operasional -->

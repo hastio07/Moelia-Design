@@ -11,6 +11,8 @@ use App\Models\Owner;
 use App\Models\Sosmed;
 use App\Models\WorkingHour;
 use App\Models\Certificate;
+use App\Models\VisiMisi;
+
 class AboutController extends Controller
 {
     public function index()
@@ -29,9 +31,11 @@ class AboutController extends Controller
         $workinghour = WorkingHour::get();
         //sosial media
         $sosmed = Sosmed::get();
+        //visi & misi
+        $visi_misis = VisiMisi::get();
         //sertifikat
         $certificates = Certificate::first();
 
-        return view('user.aboutus', compact('offers', 'addresses', 'contacts', 'owners', 'employe', 'workinghour', 'sosmed', 'certificates'));
+        return view('user.aboutus', compact('offers', 'addresses', 'contacts', 'owners', 'employe', 'workinghour', 'sosmed', 'certificates', 'visi_misis'));
     }
 }
