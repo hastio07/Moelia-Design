@@ -69,9 +69,11 @@
                             @if ($bayar_dp->snap_token == null || $bayar_dp->status == 'expire')
                                 <button class="btn btn-info" id="request-bayar-dp">Minta tautan bayar DP Baru</button>
                             @else
-                                @if ($bayar_dp->status == 'pending')
+                                @if ($bayar_dp->status == 'unpaid' )
                                     <button class="btn btn-info" id="bayar-dp">Bayar</button>
+                                    @if($bayar_dp->status == 'pending' )
                                     <button class="btn btn-info" id="cancel-bayar-dp">Cancel</button>
+                                    @endif
                                 @endif
                             @endif
                         </div>
