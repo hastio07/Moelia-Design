@@ -5,12 +5,12 @@
 @endpush
 @section('content')
     <section class="manage-akun">
-        <div class="content-wrapper">
+        <div class="content-wrapper container">
             <div class="row same-height">
                 <div>
-                    <div class="card container">
+                    <div class="card">
                         <div class="card-header">
-                            <h4 class="text-center">Tambah Akun</h4>
+                            <h4 class="text-center">Tambah Akun Admin</h4>
                         </div>
                         @if (session()->has('success_add_account'))
                             <div class="alert alert-success">{{ session()->get('success_add_account') }}</div>
@@ -94,10 +94,9 @@
                         </div>
                     </div>
                 </div>
-                <div>
-                    <div class="card container">
+                    <div class="card">
                         <div class="card-header">
-                            <h4>List Produk</h4>
+                            <h4>Daftar Akun Admin</h4>
                         </div>
                         <div class="card-body">
                             <table class="display table" id="table-admins">
@@ -123,7 +122,44 @@
                             </table>
                         </div>
                     </div>
-                </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Daftar Akun Masyarakat</h4>
+                        </div>
+                        <div class="card-body">
+                            <table class="display table" id="table-user">
+                                <thead>
+                                    <tr>
+                                        <th>Nama Admin</th>
+                                        <th>E-Mail</th>
+                                        <th>No. Handphone</th>
+                                        <th>Role Akun</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Hastio Wahyu</td>
+                                        <td>hastio@gmail.com</td>
+                                        <td>081258666661</td>
+                                        <td>Masyarakat</td>
+                                        <td>
+                                            <button class="btn btn-danger">Hapus</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Nama Admin</th>
+                                        <th>E-Mail</th>
+                                        <th>No. Handphone</th>
+                                        <th>Role Akun</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
             </div>
         </div>
     </section>
