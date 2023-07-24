@@ -1,13 +1,9 @@
 @extends('user.layouts.UserScreen')
 @section('title', 'Produk')
 
-@push('styles')
-    <link href="{{ asset('templates') }}/assets/css-modif/user/UserProfile.css" rel="stylesheet">
-@endpush
-
 @section('konten')
-    <div class="d-flex justify-content-center align-items-center container" style="margin-top: 70px; height:90vh;">
-        <div class="row d-flex justify-content-center align-items-center p-4 shadow">
+    <div class="d-flex justify-content-center align-items-center container">
+        <div class="row d-flex justify-content-center align-items-center p-4 shadow mt-5 profile" style="margin: top 100px;">
             <div class="col-md-5">
                 <div class="content rounded-5 border-5 d-flex align-items-center mt-3 p-3 shadow">
                     <div class="people-wraper me-3">
