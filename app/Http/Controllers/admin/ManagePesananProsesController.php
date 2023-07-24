@@ -73,7 +73,7 @@ class ManagePesananProsesController extends Controller
                 ->make(true);
         }
 
-        return view('admin.managePesananProses');
+        return view('admin.ManagePesananProses');
     }
 
     // Metode untuk memeriksa kevalidan token
