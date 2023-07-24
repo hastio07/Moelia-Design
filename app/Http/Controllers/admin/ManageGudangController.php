@@ -58,7 +58,7 @@ class ManageGudangController extends Controller
             return $this->renderDataTables($barang);
         }
         $get_category_barang = CategoryBarang::latest()->get();
-        return view('admin.managegudang', compact('get_category_barang'));
+        return view('admin.ManageGudang', compact('get_category_barang'));
     }
 
     public function store(Request $request)

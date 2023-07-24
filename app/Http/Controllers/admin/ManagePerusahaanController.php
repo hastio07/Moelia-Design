@@ -39,7 +39,7 @@ class ManagePerusahaanController extends Controller
             'workinghours' => WorkingHour::whereIn('day', $days)->orderBy('day')->get(),
         ];
 
-        return view('admin.manageperusahaan', $data);
+        return view('admin.ManagePerusahaan', $data);
     }
     public function updateorcreateowner(Request $request)
     {

@@ -72,7 +72,7 @@ class ManagePegawaiController extends Controller
         }
         $get_jabatan = CategoryJabatan::latest()->get();
 
-        return view('admin.managepegawai', compact('get_jabatan'));
+        return view('admin.ManagePegawai', compact('get_jabatan'));
     }
 
     public function store(Request $request)

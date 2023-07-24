@@ -23,7 +23,7 @@ class DashboardAdminsController extends Controller
         $jumlahLayanan = Service :: count();
         $jadwal = Jadwal::get();
 
-        return view('admin.dashboard', compact('jumlahProduk','jumlahPegawai','jumlahPhoto','jumlahVideo','jumlahJadwal','jumlahLayanan', 'jadwal'));
+        return view('admin.Dashboard', compact('jumlahProduk','jumlahPegawai','jumlahPhoto','jumlahVideo','jumlahJadwal','jumlahLayanan', 'jadwal'));
 
     }
 }

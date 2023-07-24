@@ -59,7 +59,7 @@ class ManageLayananController extends Controller
             return $this->renderDataTables($service);
         }
 
-        return view('admin.managelayanan');
+        return view('admin.ManageLayanan');
     }
 
     public function store(Request $request)

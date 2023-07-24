@@ -19,7 +19,7 @@ class StrukController extends Controller
                 'rekening_debet' => '**** 1362',
             ],
         ];
-        return view('user.struk', compact('data'));
+        return view('user.Struk', compact('data'));
     }
 
     public function cetakStruk()

@@ -12,7 +12,7 @@ class ProfileAdminController extends Controller
 {
     public function index()
     {
-        return view('admin.profileadmin');
+        return view('admin.ProfileAdmin');
     }
 
     public function savedata(Request $request)

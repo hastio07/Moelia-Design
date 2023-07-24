@@ -68,7 +68,7 @@ class ManageProdukController extends Controller
                 }
             })->rawColumns(['gambar', 'album_produk', 'aksi'])->make(true);
         }
-        return view('admin.manageproduk', compact('get_category_product'));
+        return view('admin.ManageProduk', compact('get_category_product'));
     }
 
     public function store(Request $request)
