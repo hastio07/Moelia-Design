@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\user;
+
+use App\Http\Controllers\Controller;
 
 class StrukController extends Controller
 {
