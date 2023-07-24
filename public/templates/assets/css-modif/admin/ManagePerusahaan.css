@@ -3,10 +3,6 @@
     margin-bottom: 50px;
 }
 
-.card .card-body p {
-    margin-left: 10px;
-    margin-top: -7px
-}
 
 .img-owner {
     width: 80%;
@@ -46,11 +42,6 @@
 form.formstyle {
     width: 100%;
     align-items: center;
-}
-
-.flex-item.form {
-    flex-grow: 1;
-    margin-right: 20px;
 }
 
 .flex-item.button {

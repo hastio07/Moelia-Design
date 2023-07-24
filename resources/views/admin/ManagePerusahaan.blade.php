@@ -40,7 +40,7 @@
                                                         </div>
                                                     @endif
                                                     <form action="{{ route('manage-perusahaan.updateorcreateowner') }}" class="formstyle" enctype="multipart/form-data" id="formOwner" method="POST">
-                                                        <div class="flex-item form">
+                                                        <div class="flex-item">
                                                             @csrf
                                                             <input name="id_owner" type="hidden" value="{{ $owners->id ?? null }}">
                                                             <input name="oldfoto_owner" type="hidden" value="{{ $owners->foto_owner ?? null }}">
@@ -117,7 +117,7 @@
                                                         </div>
                                                     @endif
                                                     <form action="{{ route('manage-perusahaan.updateorcreatecompany') }}" class="formstyle" enctype="multipart/form-data" id="formCompany" method="POST">
-                                                        <div class="flex-item form">
+                                                        <div class="flex-item">
                                                             @csrf
                                                             <input name="id_perusahaan" readonly type="hidden" value="{{ $companies->id ?? null }}">
                                                             <input name="oldlogo_perusahaan" type="hidden" value="{{ $companies->logo_perusahaan ?? null }}">
@@ -243,7 +243,7 @@
                                                         </div>
                                                     @endif
                                                     <form action="{{ route('manage-perusahaan.updateorcreateaddress') }}" class="formstyle" enctype="multipart/form-data" id="formAlamat" method="POST">
-                                                        <div class="flex-item form">
+                                                        <div class="flex-item">
                                                             @csrf
                                                             <label class="form-label" for="alamat_perusahaan">Alamat</label>
                                                             <input name="id_alamat" type="hidden" value="{{ $addresses->id ?? null }}">
@@ -288,7 +288,7 @@
                                                                 {!! $addresses->link_gmap ?? ' <p class="bg-warning rounded p-3 border text-white r text-center mt-3">-- Link Google Maps Kosong --</p>' !!}
                                                             </div>
                                                         @else
-                                                            <p class="bg-warning ms-3 rounded border p-3 text-center text-white">-- Data Alamat Kosong --</p>
+                                                            <p class="bg-warning rounded border p-3 text-center text-white">-- Data Alamat Kosong --</p>
                                                         @endif
                                                     </div>
 
@@ -318,7 +318,7 @@
                                                         </div>
                                                     @endif
                                                     <form action="{{ route('manage-perusahaan.updateorcreatevisimisi') }}" class="formstyle" enctype="multipart/form-data" id="formAlamat" method="POST">
-                                                        <div class="flex-item form">
+                                                        <div class="flex-item">
                                                             @csrf
                                                             <label class="form-label" for="visi">Visi</label>
                                                             <input name="id_visimisi" type="hidden" value="{{ $visi_misis->id ?? null }}">
@@ -355,7 +355,7 @@
                                                                 {!! $visi_misis->misi ?? ' <p class="bg-warning rounded p-3 border text-white text-center mt-3">-- Misi Kosong --</p>' !!}
                                                             </div>
                                                         @else
-                                                            <p class="bg-warning ms-3 rounded border p-3 text-center text-white">-- Data Alamat Kosong --</p>
+                                                            <p class="bg-warning rounded border p-3 text-center text-white">-- Data Alamat Kosong --</p>
                                                         @endif
                                                     </div>
                                                 </div>
@@ -386,7 +386,7 @@
                                                         </div>
                                                     @endif
                                                     <form action="{{ route('manage-perusahaan.updateorcreatecontact') }}" class="formstyle" enctype="multipart/form-data" id="formContact" method="POST">
-                                                        <div class="flex-item form">
+                                                        <div class="flex-item">
                                                             @csrf
                                                             <input name="id_contact" readonly type="hidden" value="{{ $contacts->id ?? null }}">
                                                             <label class="form-label fw-bold" for="telephone1">Telephone 1</label>

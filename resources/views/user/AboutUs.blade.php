@@ -6,16 +6,7 @@
 @endpush
 
 @section('konten')
-    <section>
-        <!-- konten  bradcrumbs -->
-        <div class="first-content align-self-center text-center">
-            <h1>Tentang Kami</h1>
-            <div class="d-flex justify-content-center">
-                {{ Breadcrumbs::render('aboutus') }}
-            </div>
-        </div>
-        <!-- end konten -->
-
+    <section style="padding-top:100px";>
         <!-- konten apa yang didapatkan?-->
         <div class="second-contents container" data-aos="fade-down">
             <div class="row same-height mt-3 p-3">
