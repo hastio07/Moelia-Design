@@ -12,7 +12,7 @@ class ProdukController extends Controller
     public function index()
     {
         $products = Product::with('category_products')->latest()->paginate($perPage = 4, $columns = ['*']);
-        return view('user.produk', compact('products'));
+        return view('user.Produk', compact('products'));
     }
 
     public function show($id)
