@@ -36,6 +36,6 @@ class AboutController extends Controller
         //sertifikat
         $certificates = Certificate::first();
 
-        return view('user.aboutus', compact('offers', 'addresses', 'contacts', 'owners', 'employe', 'workinghour', 'sosmed', 'certificates', 'visi_misis'));
+        return view('user.AboutUs', compact('offers', 'addresses', 'contacts', 'owners', 'employe', 'workinghour', 'sosmed', 'certificates', 'visi_misis'));
     }
 }

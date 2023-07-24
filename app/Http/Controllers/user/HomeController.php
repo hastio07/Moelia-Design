@@ -23,6 +23,6 @@ class HomeController extends Controller
         $abouts = About::first();
         $videopromosi = VideoPromosi::first();
 
-        return view('user.home', compact('galleries', 'photos', 'products', 'services', 'companies', 'abouts', 'videopromosi'));
+        return view('user.Home', compact('galleries', 'photos', 'products', 'services', 'companies', 'abouts', 'videopromosi'));
     }
 }

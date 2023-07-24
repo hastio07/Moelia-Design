@@ -2,11 +2,11 @@
 @section('title', 'Produk')
 
 @push('styles')
-    <link href="{{ asset('templates') }}/assets/css-modif/user/UserProduk.css" rel="stylesheet">
+    <link href="{{ asset('templates') }}/assets/css-modif/user/UserProfile.css" rel="stylesheet">
 @endpush
 
 @section('konten')
-    <div class="d-flex justify-content-center align-items-center container" style="margin-top: 120px; height:90vh;">
+    <div class="d-flex justify-content-center align-items-center container" style="margin-top: 70px; height:100%;">
         <div class="row d-flex justify-content-center align-items-center p-4 shadow">
             <div class="col-md-5">
                 <div class="content rounded-5 border-5 d-flex align-items-center mt-3 p-3 shadow">
@@ -35,7 +35,7 @@
                     <p class="text-muted">{{ $user->phone }}</p>
                 </div>
             </div>
-            <div class="col-md-7 mt-3">
+            <div class="col-md-7">
                 <div class="content rounded-5 border-5 p-3 shadow">
                     @if (session('success'))
                         <div class="alert alert-success text-center" id="success-alert">

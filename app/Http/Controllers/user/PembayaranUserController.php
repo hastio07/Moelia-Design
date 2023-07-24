@@ -13,7 +13,7 @@ class PembayaranUserController extends Controller
         $bayar_dp = ManagePesanan::where('email_pemesan', auth()->user()->email)
             ->where('jenis_pembayaran', 'dp')
             ->first();
-        return view('user.pembayaran', compact('bayar_dp'));
+        return view('user.Pembayaran', compact('bayar_dp'));
     }
 
     // Metode untuk merefresh token dengan permintaan ke server Midtrans
