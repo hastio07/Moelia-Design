@@ -11,7 +11,7 @@
 }
 
 .buttons button {
-    background-color: #a39300;
+    background-color: #a39300 !important;
     border: 0px;
     color: #fff;
 }
