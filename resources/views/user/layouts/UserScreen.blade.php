@@ -50,7 +50,7 @@
             <div class="container">
                 <a class="navbar-brand" href="/">
                     @if (!empty($companies) && $companies->logo_perusahaan)
-                        <img alt="{{ $companies->nama_perusahaan ?? 'logo' }}" class="d-inline-block rounded-circle me-3 align-text-top" src="/storage/{{ $companies->logo_perusahaan ?? '#' }}" width="30">
+                        <img alt="{{ $companies->nama_perusahaan ?? 'logo' }}" class="d-inline-block rounded-circle me-3 align-text-top" src="{ asset('storage') }}/{{ $companies->logo_perusahaan ?? '#' }}" width="30">
                     @else
                         <h5 class="me-3">logo</h5>
                     @endif
