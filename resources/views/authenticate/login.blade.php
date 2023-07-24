@@ -63,7 +63,7 @@
                                         Forgot Password?
                                     </a>
                                 </div>
-                                <button class="btn btn-danger ms-auto text-capitalize" type="submit">
+                                <button class="btn ms-auto text-capitalize" type="submit">
                                     Login <i class="bi bi-box-arrow-right"></i>
                                 </button>
                             </div>
