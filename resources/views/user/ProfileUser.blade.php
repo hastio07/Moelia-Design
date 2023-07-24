@@ -3,7 +3,7 @@
 
 @section('konten')
     <div class="d-flex justify-content-center align-items-center container">
-        <div class="row d-flex justify-content-center align-items-center p-4 shadow mt-5 profile" style="margin: top 100px;">
+        <div class="row d-flex justify-content-center align-items-center p-4 shadow"  style="margin-top: 110px;">
             <div class="col-md-5">
                 <div class="content rounded-5 border-5 d-flex align-items-center mt-3 p-3 shadow">
                     <div class="people-wraper me-3">
