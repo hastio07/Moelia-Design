@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATHCPANEL=/home/moen2112/Moelia-Design
+    - /bin/cp -r * $DEPLOYPATHCPANEL
