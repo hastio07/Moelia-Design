@@ -6,7 +6,7 @@
 @endpush
 
 @section('konten')
-    <div class="d-flex justify-content-center align-items-center container" style="margin-top: 70px; height:100vh;">
+    <div class="d-flex justify-content-center align-items-center container" style="margin-top: 70px; height:90vh;">
         <div class="row d-flex justify-content-center align-items-center p-4 shadow">
             <div class="col-md-5">
                 <div class="content rounded-5 border-5 d-flex align-items-center mt-3 p-3 shadow">
