@@ -59,7 +59,7 @@
                                         Forgot Password?
                                     </a>
                                 </div>
-                                <button class="btn ms-auto text-capitalize" type="submit">
+                                <button class="btn ms-auto text-capitalize" type="submit" style="background-color: red;">
                                     Login <i class="bi bi-box-arrow-right"></i>
                                 </button>
                             </div>
