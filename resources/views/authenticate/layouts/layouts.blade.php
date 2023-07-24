@@ -11,7 +11,7 @@
     <link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" rel="stylesheet" />
     <title>WO</title>
 
-    <link href="{{ asset('templates') }}/assets/css-modif/auth/login.css" rel="stylesheet">
+    <link href="{{ asset('templates') }}/assets/css-modif/auth/Login.css" rel="stylesheet">
     <link href="{{ asset('templates') }}/vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ asset('templates') }}/assets/css/style.css" rel="stylesheet">
     <link href="{{ asset('templates') }}/assets/css/bootstrap-override.css" rel="stylesheet">

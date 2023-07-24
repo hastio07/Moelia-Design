@@ -1,9 +1,5 @@
 @extends('authenticate.layouts.layouts')
 
-@push('styles')
-    <link href="{{ asset('templates') }}/assets/css-modif/auth/Login.css" rel="stylesheet">
-@endpush
-
 @section('content')
     <section class="h-100 container">
         <div class="row justify-content-sm-center h-100 align-items-center">
