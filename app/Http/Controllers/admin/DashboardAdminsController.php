@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Jadwal;
-use App\Models\Product;
 use App\Models\Employee;
+use App\Models\Jadwal;
 use App\Models\Photo;
-use App\Models\Video;
+use App\Models\Product;
 use App\Models\Service;
+use App\Models\Video;
 
 class DashboardAdminsController extends Controller
 {
@@ -20,10 +20,10 @@ class DashboardAdminsController extends Controller
         $jumlahPhoto = Photo::count();
         $jumlahVideo = Video::count();
         $jumlahJadwal = Jadwal::count();
-        $jumlahLayanan = Service :: count();
+        $jumlahLayanan = Service::count();
         $jadwal = Jadwal::get();
 
-        return view('admin.Dashboard', compact('jumlahProduk','jumlahPegawai','jumlahPhoto','jumlahVideo','jumlahJadwal','jumlahLayanan', 'jadwal'));
+        return view('admin.Dashboard', compact('jumlahProduk', 'jumlahPegawai', 'jumlahPhoto', 'jumlahVideo', 'jumlahJadwal', 'jumlahLayanan', 'jadwal'));
 
     }
 }
