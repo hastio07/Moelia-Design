@@ -37,7 +37,7 @@ class CheckRoles
                  *  super_admin === super_user && 2 !== 3 -> false and true = false
                  */
                 //Cek kempemilikan halaman
-                if ($owner === $roleFromRolesDB->level && auth($guardName)->user()->role_id === $roleFromRolesDB->id) {
+                if ($owner === $roleFromRolesDB->level) {
                     //Boleh masuk ke halaman tersebut
                     return $next($request);
                 }
