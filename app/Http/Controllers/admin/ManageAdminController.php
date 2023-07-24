@@ -74,7 +74,7 @@ class ManageAdminController extends Controller
             return $this->renderDataTables($akun);
         }
 
-        return view('admin.ManagAadmin', compact('hashids'));
+        return view('admin.ManageAdmin', compact('hashids'));
     }
 
     /**
