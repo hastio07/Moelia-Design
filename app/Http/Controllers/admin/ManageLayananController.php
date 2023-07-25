@@ -98,7 +98,7 @@ class ManageLayananController extends Controller
 
             // kompres gambar dan simpan ke folder penyimpanan
             $thumbImage = ImageResize::make(storage_path('app/public/' . $oriPath));
-            $thumbPath = storage_path() . '/../public_html/storage/compressed/' . $fileName;
+            $thumbPath = storage_path('app/public/compressed/' . $fileName);
             $thumbImage->save($thumbPath, 20);
             $data['gambar'] = $fileName;
         }
