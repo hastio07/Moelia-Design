@@ -37,8 +37,8 @@
 <body>
     <Header>
         <!-- icon wa -->
-        @if (!empty($contact) && $contact->telephone1_number)
-            <a href="https://wa.me/+62{{ $contact->telephone1_number }}?text=Selamat Datang DiMoelia Design">
+        @if (!empty($contact) && $contact->whatsapp1_number)
+            <a href="https://wa.me/+62{{ $contact->whatsapp1_number }}?text=Selamat Datang DiMoelia Design">
                 <div class="floating-icon">
                     <i class="bi bi-whatsapp"></i>
                 </div>
