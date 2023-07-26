@@ -1,5 +1,5 @@
 ---
 deployment:
     tasks:
-        - export DEPLOYPATHCPANEL=/home/moen2112/repositories/moelia-design
-        - /bin/cp -r * $DEPLOYPATHCPANEL
+        - export DEPLOYPATH=/home/moen2112/repositories/moelia-design
+        - /bin/cp -r * $DEPLOYPATH
