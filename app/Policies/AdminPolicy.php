@@ -11,6 +11,6 @@ class AdminPolicy
 
     public function view(Admin $admin)
     {
-        return $admin->role_id === 1;
+        return $admin->role_id == 1;
     }
 }

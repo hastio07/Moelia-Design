@@ -48,9 +48,10 @@ class ManageAdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $this->authorize('view', [Auth::user()]);
+        $me = $request->user();
+        $this->authorize('view', $me);
 
         $hashids = new Hashids(env('HASHIDS_KEY'), 20);
         if (request()->ajax()) {
