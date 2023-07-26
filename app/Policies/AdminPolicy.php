@@ -9,7 +9,7 @@ class AdminPolicy
 {
     use HandlesAuthorization;
 
-    public function akses_manage_admin(Admin $admin)
+    public function view(Admin $admin)
     {
         return $admin->role_id === 1;
     }

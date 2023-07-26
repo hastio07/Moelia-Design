@@ -35,7 +35,7 @@
             <div class="toggle-mobile action-toggle"><i class="fas fa-bars"></i></div>
 
             <div class="header-wrapper">
-                <div class="header-left text-capitalize fs-6 ms-5 text-success mt-1 pt-2">
+                <div class="header-left text-capitalize fs-6 text-success ms-5 mt-1 pt-2">
                     <p id="informasi-hari"></p>
                     <p>,</p>
                     <p id="tanggal-hari-ini"></p>
@@ -150,7 +150,7 @@
                             <span>Dashboard</span>
                         </a>
                     </li>
-                    @can('akses_manage_admin', App\Models\Admin::class)
+                    @can('view', [auth()->user()])
                         <li class="{{ Route::is('manage-admin.*') ? 'active' : '' }}">
                             <a class="link" href="{{ route('manage-admin.index') }}">
                                 <i class="ti-id-badge"></i>

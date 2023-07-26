@@ -7,6 +7,7 @@ use App\Models\Admin;
 // use App\Models\Role;
 use Hashids\Hashids;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 // use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
@@ -49,8 +50,7 @@ class ManageAdminController extends Controller
      */
     public function index()
     {
-
-        $this->authorize('akses_manage_admin', Admin::class);
+        $this->authorize('view', [Auth::user()]);
 
         $hashids = new Hashids(env('HASHIDS_KEY'), 20);
         if (request()->ajax()) {
