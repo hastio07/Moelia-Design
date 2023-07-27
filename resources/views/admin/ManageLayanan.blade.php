@@ -7,9 +7,6 @@
     <section class="container">
         <div class="content-wrapper">
             <div class="card">
-                <div class="card-header">
-                    <h4>List Layanan</h4>
-                </div>
                 <div class="card-body">
                     @if ($errors->any())
                         <div class="pt-3">

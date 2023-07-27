@@ -8,9 +8,6 @@
         <div class="content-wrapper">
             <div class="row same-height">
                 <div class="card">
-                    <div class="card-header">
-                        <h4>Rincian Jadwal Kegiatan</h4>
-                    </div>
                     @if ($errors->any())
                         <div class="pt-3">
                             <div class="alert alert-danger text-capitalize">

@@ -6,9 +6,6 @@
         <div class="row same-height">
             <div class="col-sm-9">
                 <div class="card">
-                    <div class="card-header">
-                        <h4>Daftar Barang</h4>
-                    </div>
                     @if (session()->has('success_add_barang'))
                         <div class="alert alert-success m-3">{{ session()->get('success_add_barang') }}</div>
                     @elseif (session()->has('error_add_barang'))

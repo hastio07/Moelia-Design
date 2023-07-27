@@ -12,9 +12,6 @@
         </form> --}}
         <div class="row same-height">
             <div class="card">
-                <div class="card-header">
-                    <h4>Rincian Jadwal Kegiatan</h4>
-                </div>
                 <div class="card-body">
                     <div class="btn-modal d-flex mb-2 mt-3 gap-3">
                         <button class="btn icon-left btn-success d-flex" data-bs-route="{{ route('manage-pesanan-proses.create') }}" data-bs-target="#CUModal" data-bs-toggle="modal" id="btnCreateModal" type="button "><i class="bi bi-plus-lg"></i>

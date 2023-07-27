@@ -7,7 +7,6 @@
     <section class="manage-akun">
         <div class="content-wrapper container">
             <div class="row same-height">
-                <div>
                     <div class="card">
                         <div class="card-header">
                             <h4 class="text-center">Tambah Akun Admin</h4>
@@ -93,7 +92,6 @@
                             </form>
                         </div>
                     </div>
-                </div>
                 <div class="card">
                     <div class="card-header">
                         <h4>Daftar Akun Admin</h4>

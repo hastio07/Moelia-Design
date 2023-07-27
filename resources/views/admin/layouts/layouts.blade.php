@@ -154,7 +154,7 @@
                         <li class="{{ Route::is('manage-admin.*') ? 'active' : '' }}">
                             <a class="link" href="{{ route('manage-admin.index') }}">
                                 <i class="ti-id-badge"></i>
-                                <span>Manage Admin</span>
+                                <span>Manage Akun</span>
                             </a>
                         </li>
                     @endcan
