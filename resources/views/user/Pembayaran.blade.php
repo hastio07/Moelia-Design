@@ -120,7 +120,7 @@
                         <div class="history-payment mt-3 rounded p-3 shadow">
                             <h5 class="fw-bold text-center">Riwayat Pembayaran</h5>
                             <div class="first-payment mt-4">
-                                <h6 class="fw-bold">Tahap 1</h6>
+                                <h6 class="fw-bold">Tahap 1 (DP)</h6>
                                 <div class="row mt-2">
                                     <div class="col-6">Tgl Pembayaran:</div>
                                     <div class="col-6">22/04/2024</div>
@@ -132,7 +132,7 @@
                             </div>
                             <hr>
                             <div class="second-payment mt-3">
-                                <h6 class="fw-bold">Tahap 2</h6>
+                                <h6 class="fw-bold">Tahap 2 (Pelunasan)</h6>
                                 <div class="row mt-2">
                                     <div class="col-6">Tgl Pembayaran:</div>
                                     <div class="col-6">30/05/2024</div>
