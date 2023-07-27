@@ -94,72 +94,72 @@
                         </div>
                     </div>
                 </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Daftar Akun Admin</h4>
-                        </div>
-                        <div class="card-body">
-                            <table class="display table" id="table-admins">
-                                <thead>
-                                    <tr>
-                                        <th>Nama Admin</th>
-                                        <th>E-Mail</th>
-                                        <th>No. Handphone</th>
-                                        <th>Role Akun</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Nama Admin</th>
-                                        <th>E-Mail</th>
-                                        <th>No. Handphone</th>
-                                        <th>Role Akun</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Daftar Akun Admin</h4>
                     </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Daftar Akun Masyarakat</h4>
-                        </div>
-                        <div class="card-body">
-                            <table class="display table" id="table-user">
-                                <thead>
-                                    <tr>
-                                        <th>Nama Admin</th>
-                                        <th>E-Mail</th>
-                                        <th>No. Handphone</th>
-                                        <th>Role Akun</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Hastio Wahyu</td>
-                                        <td>hastio@gmail.com</td>
-                                        <td>081258666661</td>
-                                        <td>Masyarakat</td>
-                                        <td>
-                                            <button class="btn btn-danger">Hapus</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Nama Admin</th>
-                                        <th>E-Mail</th>
-                                        <th>No. Handphone</th>
-                                        <th>Role Akun</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
+                    <div class="card-body">
+                        <table class="display table" id="table-admins">
+                            <thead>
+                                <tr>
+                                    <th>Nama Admin</th>
+                                    <th>E-Mail</th>
+                                    <th>No. Handphone</th>
+                                    <th>Role Akun</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Nama Admin</th>
+                                    <th>E-Mail</th>
+                                    <th>No. Handphone</th>
+                                    <th>Role Akun</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </tfoot>
+                        </table>
                     </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Daftar Akun Masyarakat</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="display table" id="table-users">
+                            <thead>
+                                <tr>
+                                    <th>Nama User</th>
+                                    <th>E-Mail</th>
+                                    <th>No. Handphone</th>
+                                    <th>Role Akun</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Hastio Wahyu</td>
+                                    <td>hastio@gmail.com</td>
+                                    <td>081258666661</td>
+                                    <td>Masyarakat</td>
+                                    <td>
+                                        <button class="btn btn-danger">Hapus</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Nama User</th>
+                                    <th>E-Mail</th>
+                                    <th>No. Handphone</th>
+                                    <th>Role Akun</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -175,7 +175,7 @@
                 responsive: true,
                 ordering: true,
                 ajax: {
-                    url: '{{ url()->current() }}',
+                    url: "{{ route('manage-admin.renderDataTableAdmins') }}",
                 },
                 columnDefs: [{
                     orderable: false,
@@ -183,8 +183,8 @@
                     targets: 4
                 }],
                 columns: [{
-                        data: 'Nama Admin',
-                        name: 'Nama Admin'
+                        data: 'nama_admin',
+                        name: 'nama_admin'
                     },
                     {
                         data: 'email',
@@ -244,6 +244,46 @@
                     })
                 }
             });
+        });
+    </script>
+
+    <script>
+        $('#table-users').DataTable({
+            processing: true,
+            searching: true,
+            serverSide: true,
+            responsive: true,
+            ordering: true,
+            ajax: {
+                url: "{{ route('manage-admin.renderDataTableUsers') }}",
+            },
+            columnDefs: [{
+                orderable: false,
+                searchable: false,
+                targets: 3
+            }],
+            columns: [{
+                    data: 'nama_user',
+                    name: 'nama_user'
+                },
+                {
+                    data: 'email',
+                    name: 'email'
+                },
+                {
+                    data: 'phone',
+                    name: 'phone'
+                },
+                {
+                    data: 'role_id',
+                    name: 'role_id',
+                },
+                {
+                    data: 'aksi',
+                    name: 'aksi'
+                },
+            ],
+            order: [],
         });
     </script>
 @endpush

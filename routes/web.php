@@ -41,7 +41,7 @@ Route::middleware(['no-redirect-if-authenticated:admins,web', 'prevent-back-hist
     Route::middleware(['auth:web'])->group(function () {
         Route::controller(ProfileUserController::class)->group(function () {
             Route::get('/profile', 'index')->name('user-profile.index');
-            Route::put('/profile/user/update', 'update')->name('user-profile.update');
+            Route::put('/profile/{user}', 'update')->name('user-profile.update');
         });
 
         Route::get('/cetak-struk', function () {
@@ -81,7 +81,16 @@ Route::middleware(['no-redirect-if-authenticated:admins,web', 'prevent-back-hist
 Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
     Route::middleware(['role:super_admin,admin'])->group(function () {
         Route::get('dashboard', [DashboardAdminsController::class, 'index'])->name('dashboard');
-        Route::resource('manage-admin', ManageAdminController::class)->except('create'); // Pakai Policy
+        Route::controller(ManageAdminController::class)->group(function () {
+            Route::get('manage-admin', 'index')->name('manage-admin.index');
+            Route::post('manage-admin', 'store')->name('manage-admin.store');
+            Route::put('manage-admin/{manage-admin}', 'update')->name('manage-admin.update');
+            Route::put('manage-admin/{manage-admin}/edit', 'edit')->name('manage-admin.edit');
+            Route::delete('manage-admin/{manage-admin}', 'destroy')->name('manage-admin.destroy');
+            Route::delete('manage-admin/user/{id_user}', 'destroyUser')->name('manage-admin.destroyUser');
+            Route::get('manage-admin/render-tb-admins', 'renderDataTableAdmins')->name('manage-admin.renderDataTableAdmins');
+            Route::get('manage-admin/render-tb-users', 'renderDataTableUsers')->name('manage-admin.renderDataTableUsers');
+        });
         Route::controller(ManagePerusahaanController::class)->group(function () {
             Route::get('manage-perusahaan', 'index')->name('manage-perusahaan.index');
             Route::post('manage-perusahaan/updateorcreatecompany', 'updateorcreatecompany')->name('manage-perusahaan.updateorcreatecompany');

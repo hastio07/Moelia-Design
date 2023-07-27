@@ -19,10 +19,9 @@ class ProfileUserController extends Controller
         return view('user.ProfileUser', compact('user'));
     }
 
-    public function update(Request $request)
+    public function update(Request $request, User $user)
     {
-        $user = User::findOrFail($request->input('id'));
-
+        // $user = User::findOrFail($request->input('id'));
         $rules = [
             'nama_depan' => 'required|string|max:255',
             'nama_belakang' => 'required|string|max:255',

@@ -3,7 +3,7 @@
 
 @section('konten')
     <div class="d-flex justify-content-center align-items-center container">
-        <div class="row d-flex justify-content-center align-items-center p-4 shadow"  style="margin-top: 110px;">
+        <div class="row d-flex justify-content-center align-items-center p-4 shadow" style="margin-top: 110px;">
             <div class="col-md-5">
                 <div class="content rounded-5 border-5 d-flex align-items-center mt-3 p-3 shadow">
                     <div class="people-wraper me-3">
@@ -53,7 +53,7 @@
                         </div>
                     @endif
                     <h6 class="fw-bold">Account Settings</h6>
-                    <form action="{{ route('user-profile.update') }}" method="POST">
+                    <form action="{{ route('user-profile.update', auth()->user()->id) }}" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="row">
@@ -80,7 +80,7 @@
                                 </div>
                             </div>
                         </div>
-                        <input hidden name="id" type="text" value="{{ $user->id }}">
+                        {{-- <input hidden name="id" type="text" value="{{ $user->id }}"> --}}
                         <button class="btn btn-warning mt-3" type="submit">Submit</button>
                     </form>
                 </div>
