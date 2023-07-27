@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use App\Models\Jadwal;
+use App\Models\ManagePesanan;
 use App\Models\Photo;
 use App\Models\Product;
 use App\Models\Service;
@@ -21,9 +22,10 @@ class DashboardAdminsController extends Controller
         $jumlahVideo = Video::count();
         $jumlahJadwal = Jadwal::count();
         $jumlahLayanan = Service::count();
+        $managePesanan = ManagePesanan::count();
         $jadwal = Jadwal::get();
 
-        return view('admin.Dashboard', compact('jumlahProduk', 'jumlahPegawai', 'jumlahPhoto', 'jumlahVideo', 'jumlahJadwal', 'jumlahLayanan', 'jadwal'));
+        return view('admin.Dashboard', compact('jumlahProduk', 'jumlahPegawai', 'jumlahPhoto', 'jumlahVideo', 'jumlahJadwal', 'jumlahLayanan', 'jadwal', 'managePesanan'));
 
     }
 }

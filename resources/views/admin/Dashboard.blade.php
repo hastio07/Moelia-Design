@@ -22,7 +22,7 @@
                                             <div class="row align-items-center d-flex mb-2">
                                                 <div class="col-8">
                                                     <h2 class="d-flex align-items-center mb-0">
-                                                        -
+                                                        {{ $managePesanan }}
                                                     </h2>
                                                 </div>
                                             </div>
