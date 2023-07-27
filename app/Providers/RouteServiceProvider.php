@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\User;
+use Hashids\Hashids;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -37,6 +39,8 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
         });
+
+        $this->configureModelBindingHashIds();
     }
 
     /**
@@ -72,6 +76,26 @@ class RouteServiceProvider extends ServiceProvider
         //         RateLimiter::hit($key, $delay);
         //     }
         // });
+    }
+    protected function configureModelBindingHashIds()
+    {
+        // Model binding untuk User berdasarkan hash
+        Route::bind('id_user', function ($value) {
+            // Ubah kembali hash menjadi ID aslinya menggunakan Hashids
+            $hashids = new Hashids(env('HASHIDS_KEY'), 20); // Sesuaikan dengan panjang hash yang Anda gunakan
+            $ids = $hashids->decode($value);
+
+            // Jika hash tidak valid atau tidak dapat di-decode, lempar exception 404
+            if (empty($ids)) {
+                abort(404);
+            }
+
+            // Ambil ID aslinya
+            $id = $ids[0];
+
+            // Cari data User berdasarkan ID
+            return User::findOrFail($id);
+        });
 
     }
 }

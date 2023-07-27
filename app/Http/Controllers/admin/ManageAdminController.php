@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
+use App\Models\User;
 // use App\Models\Role;
 use Hashids\Hashids;
 use Illuminate\Http\Request;
@@ -14,35 +15,6 @@ use Yajra\DataTables\Facades\DataTables;
 
 class ManageAdminController extends Controller
 {
-    private function renderDataTables($data)
-    {
-        $hashids = new Hashids(env('HASHIDS_KEY'), 20);
-
-        return DataTables::eloquent($data)
-            ->addColumn('Nama Admin', function ($value) {
-                return $value->nama_depan . ' ' . $value->nama_belakang;
-            })
-            ->editColumn('role_id', function ($value) {
-                return $value->role->level;
-            })
-            ->addColumn('aksi', function ($value) use ($hashids) {
-                return ' <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                <button class="btn btn-warning" data-route="' . route('manage-admin.edit', $hashids->encode($value->id)) . '" id="edit-button"><i class="bi bi-pencil-square"></i></button>
-                <button class="btn btn-danger" data-route="' . route('manage-admin.destroy', $hashids->encode($value->id)) . '" id="delete-button"><i class="bi bi-trash"></i></button>
-            </div>';
-            })->filter(function ($query) {
-            if (request()->has('search') && !empty(request()->get('search')['value'])) {
-                $searchValue = request()->get('search')['value'];
-                $query->where(function ($query) use ($searchValue) {
-                    $query->where('nama_depan', 'LIKE', "%$searchValue%")
-                        ->orWhere('nama_belakang', 'LIKE', "%$searchValue%");
-                })->orWhere('email', 'LIKE', "%$searchValue%")->orWhere('phone_number', 'LIKE', "%$searchValue%")
-                    ->orWhereHas('role', function ($query) use ($searchValue) {
-                        $query->where('level', 'LIKE', "%$searchValue%");
-                    });
-            }
-        })->rawColumns(['aksi'])->make(true);
-    }
     /**
      * Display a listing of the resource.
      *
@@ -53,27 +25,7 @@ class ManageAdminController extends Controller
         $me = $request->user();
         $this->authorize('view', $me);
 
-        $hashids = new Hashids(env('HASHIDS_KEY'), 20);
-        if (request()->ajax()) {
-
-            $akun = Admin::with('role')->where('role_id', '=', 2);
-
-            if (request()->has('order') && !empty(request()->input('order'))) {
-                $order = request()->input('order')[0];
-                $columnIndex = $order['column'];
-                $columnName = request()->input('columns')[$columnIndex]['data'];
-                $columnDirection = $order['dir'];
-                if ($columnName === 'Nama Admin') {
-                    $akun->orderByRaw("CONCAT(nama_depan, ' ', nama_belakang) $columnDirection");
-                } else {
-                    $akun->orderBy($columnName, $columnDirection);
-                }
-            } else {
-                $akun->latest('updated_at');
-            }
-
-            return $this->renderDataTables($akun);
-        }
+        $hashids = new Hashids(env('HASHIDS_KEY'), env('HASHIDS_HASH_LENGTH'));
 
         return view('admin.ManageAdmin', compact('hashids'));
     }
@@ -137,7 +89,7 @@ class ManageAdminController extends Controller
         /**
          * Fungsi tampilkan data admin berdasarkan id
          */
-        $hashids = new Hashids(env('HASHIDS_KEY'), 20);
+        $hashids = new Hashids(env('HASHIDS_KEY'), env('HASHIDS_HASH_LENGTH'));
         $decryptID = $hashids->decode($id);
 
         $adminedit = Admin::findOrFail($decryptID[0]); //cari user berdasarkan id pada model app/Models/Admin
@@ -165,7 +117,7 @@ class ManageAdminController extends Controller
         /**
          * Fungsi simpan perubahan data ke model app/Models/User
          */
-        $hashids = new Hashids(env('HASHIDS_KEY'), 20);
+        $hashids = new Hashids(env('HASHIDS_KEY'), env('HASHIDS_HASH_LENGTH'));
         $decryptID = $hashids->decode($id);
         // $admin = Admin::findOrFail($decryptID[0]);
 
@@ -222,14 +174,99 @@ class ManageAdminController extends Controller
     public function destroy($id)
     {
         //
-        $hashids = new Hashids(env('HASHIDS_KEY'), 20);
+        $hashids = new Hashids(env('HASHIDS_KEY'), env('HASHIDS_HASH_LENGTH'));
         $decryptID = $hashids->decode($id); //decrypt menjadi string
-        // $admin = Admin::findOrFail($decryptID); //cari user berdasarkan id pada model app/Models/Admin
-        // $admin->delete();
-        // Admin::where('id', $decryptID[0])->delete();
         $admin = Admin::findOrFail($decryptID[0]); //cari user berdasarkan id pada model app/Models/Admin
         $admin->delete();
 
         return redirect()->route('manage-admin.index')->with('massage', 'data berhasil dihapus');
+    }
+
+    public function destroyUser(User $data)
+    {
+        $data->delete();
+        return redirect()->route('manage-admin.index')->with('massage', 'data berhasil dihapus');
+    }
+
+    public function renderDataTableAdmins()
+    {
+        if (request()->ajax()) {
+
+            $akunAdmin = Admin::with('role')->where('role_id', '=', 2);
+
+            if (request()->has('order') && !empty(request()->input('order'))) {
+                $order = request()->input('order')[0];
+                $columnIndex = $order['column'];
+                $columnName = request()->input('columns')[$columnIndex]['data'];
+                $columnDirection = $order['dir'];
+                if ($columnName === 'Nama Admin') {
+                    $akunAdmin->orderByRaw("CONCAT(nama_depan, ' ', nama_belakang) $columnDirection");
+                } else {
+                    $akunAdmin->orderBy($columnName, $columnDirection);
+                }
+            } else {
+                $akunAdmin->latest('updated_at');
+            }
+
+            $hashids = new Hashids(env('HASHIDS_KEY'), env('HASHIDS_HASH_LENGTH'));
+
+            return DataTables::eloquent($akunAdmin)
+                ->addColumn('nama_admin', function ($value) {
+                    return $value->nama_depan . ' ' . $value->nama_belakang;
+                })
+                ->editColumn('role_id', function ($value) {
+                    return $value->role->level;
+                })
+                ->addColumn('aksi', function ($value) use ($hashids) {
+                    return '<div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                                <button class="btn btn-warning" data-route="' . route('manage-admin.edit', $hashids->encode($value->id)) . '" id="edit-button"><i class="bi bi-pencil-square"></i></button>
+                                <button class="btn btn-danger" data-route="' . route('manage-admin.destroy', $hashids->encode($value->id)) . '" id="delete-button"><i class="bi bi-trash"></i></button>
+                        </div>';
+                })->filter(function ($query) {
+                if (request()->has('search') && !empty(request()->get('search')['value'])) {
+                    $searchValue = request()->get('search')['value'];
+                    $query->where(function ($query) use ($searchValue) {
+                        $query->where('nama_depan', 'LIKE', "%$searchValue%")
+                            ->orWhere('nama_belakang', 'LIKE', "%$searchValue%");
+                    })->orWhere('email', 'LIKE', "%$searchValue%")->orWhere('phone_number', 'LIKE', "%$searchValue%")
+                        ->orWhereHas('role', function ($query) use ($searchValue) {
+                            $query->where('level', 'LIKE', "%$searchValue%");
+                        });
+                }
+            })->rawColumns(['nama_admin', 'aksi'])->make(true);
+        }
+    }
+
+    public function renderDataTableUsers()
+    {
+        if (request()->ajax()) {
+            $akunUser = User::with('role');
+
+            $hashids = new Hashids(env('HASHIDS_KEY'), env('HASHIDS_HASH_LENGTH'));
+
+            return DataTables::eloquent($akunUser)
+                ->addColumn('nama_user', function ($value) {
+                    return $value->nama_depan . ' ' . $value->nama_belakang;
+                })
+                ->editColumn('role_id', function ($value) {
+                    return $value->role->level;
+                })
+                ->addColumn('aksi', function ($value) use ($hashids) {
+                    return '<div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                                <button class="btn btn-danger" data-route="' . route('manage-admin.destroyUser', $hashids->encode($value->id)) . '" id="delete-button"><i class="bi bi-trash"></i></button>
+                        </div>';
+                })->filter(function ($query) {
+                if (request()->has('search') && !empty(request()->get('search')['value'])) {
+                    $searchValue = request()->get('search')['value'];
+                    $query->where(function ($query) use ($searchValue) {
+                        $query->where('nama_depan', 'LIKE', "%$searchValue%")
+                            ->orWhere('nama_belakang', 'LIKE', "%$searchValue%");
+                    })->orWhere('email', 'LIKE', "%$searchValue%")->orWhere('phone', 'LIKE', "%$searchValue%")
+                        ->orWhereHas('role', function ($query) use ($searchValue) {
+                            $query->where('level', 'LIKE', "%$searchValue%");
+                        });
+                }
+            })->rawColumns(['nama_user', 'aksi'])->make(true);
+        }
     }
 }
