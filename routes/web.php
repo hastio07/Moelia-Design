@@ -41,7 +41,7 @@ Route::middleware(['no-redirect-if-authenticated:admins,web', 'prevent-back-hist
     Route::middleware(['auth:web'])->group(function () {
         Route::controller(ProfileUserController::class)->group(function () {
             Route::get('/profile', 'index')->name('user-profile.index');
-            Route::put('/profile/user/update', 'update')->name('user-profile.update');
+            Route::put('/profile/{user}', 'update')->name('user-profile.update');
         });
 
         Route::get('/cetak-struk', function () {
