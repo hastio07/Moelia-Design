@@ -64,26 +64,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- <tr>
-                                <td class="fw-bolder"><a href="{{ route('manage-pesanan-proses.detail', 1) }}">Muhammad & aisyah</a></td>
-                                <td>08125865551</td>
-                                <td>Jumat/30-01-2023</td>
-                                <td>Bagas Raya</td>
-                                <td>Rp.150.000.000</td>
-                                <td>Rp.180.000.000;- </td>
-                                <td>Rp.18.000.000;- </td>
-                                <td class="text-success">
-                                    <div class="spinner-grow spinner-grow-sm text-success" role="status"></div>
-                                    Dibayar
-                                </td>
-                                <td>
-                                    <div class="d-grid d-md-flex justify-content-md-center gap-2">
-                                        <button class="btn btn-danger" data-bs-target="#smallModaljadwal" data-bs-toggle="modal" type="button"><i class="bi bi-trash"></i></button>
-                                        <button class="btn btn-warning" data-bs-target="#UpdateModaljadwal" data-bs-toggle="modal" type="button"><i class="bi bi-pencil-square"></i></button>
-                                        <button class="btn btn-secondary" data-bs-target="#UpdateModaljadwal" data-bs-toggle="modal" type="button"><i class="bi bi-check2"></i></button>
-                                    </div>
-                                </td>
-                            </tr> --}}
                         </tbody>
                         <tfoot>
                             <tr class="text center">
@@ -281,7 +261,7 @@
                     responsive: true,
                     //  serverSide: true, //aktifkan server-side
                     ajax: {
-                        url: '{{ route('manage-pesanan-proses.index') }}',
+                        url: "{{ route('manage-pesanan-proses.index') }}",
                         type: 'GET',
                         data: {
                             start_date: start_date,
