@@ -44,10 +44,6 @@ Route::middleware(['no-redirect-if-authenticated:admins,web', 'prevent-back-hist
             Route::put('/profile/{user}', 'update')->name('user-profile.update');
         });
 
-        Route::get('/cetak-struk', function () {
-            return view('user.struk');
-        });
-
         Route::controller(PembayaranUserController::class)->group(function () {
             Route::get('/pembayaran', 'index')->name('user-pembayaran.index');
             Route::post('/pembayaran/refresh-dp-token/{data}', 'refreshDPMidtransToken')->name('user-pembayaran.refreshDPMidtransToken');
@@ -61,11 +57,6 @@ Route::middleware(['no-redirect-if-authenticated:admins,web', 'prevent-back-hist
     Route::resource('/produk', ProdukController::class)->except(['create', 'store', 'edit', 'update', 'destroy']);
     Route::get('/foto', [FotoController::class, 'index'])->name('foto');
     Route::get('/vidio', [VideoController::class, 'index'])->name('vidio');
-
-    Route::get('/maintenance', function () {
-        return view('user.maintenance');
-    });
-
     Route::get('/email', function () {
         $token = Str::random(60);
         $user = new \App\Models\User(); // Ganti dengan model pengguna yang sesuai
@@ -196,7 +187,7 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
 
         });
         Route::get('/cetak-kontrak', function () {
-            return view('admin.cetakkontrak');
+            return view('admin.CetakKontrak');
         });
     });
 });
