@@ -4,6 +4,7 @@ namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
 use App\Models\ManagePesanan;
+use App\Models\Contact;
 use Illuminate\Support\Facades\Http;
 
 class PembayaranUserController extends Controller
@@ -13,7 +14,8 @@ class PembayaranUserController extends Controller
         $bayar_dp = ManagePesanan::where('email_pemesan', auth()->user()->email)
             ->where('jenis_pembayaran', 'dp')
             ->first();
-        return view('user.Pembayaran', compact('bayar_dp'));
+        $contact = Contact::first();
+        return view('user.Pembayaran', compact('bayar_dp','contact'));
     }
 
     // Metode untuk merefresh token dengan permintaan ke server Midtrans

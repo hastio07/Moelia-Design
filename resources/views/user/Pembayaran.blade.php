@@ -213,7 +213,7 @@
                                 </ol>
                             </div>
                             <div class="text-center">
-                                <a class="btn btn-primary mt-3" href="#">Request Perubahan<i class="bi bi-pencil-square ms-2"></i></a>
+                                <a class="btn btn-primary mt-3" href="https://wa.me/+62{{ $contact->whatsapp1_number }}?text=Silahkan sebutkan nama dan perubahan yang ingin diajukan dibawah ini:">Request Perubahan<i class="bi bi-pencil-square ms-2"></i></a>
                                 <a class="btn btn-primary mt-2" href="/cetak-kontrak">Lihat Surat Kontrak <i class="bi bi-journal-text"></i></a>
                             </div>
                         </div>
