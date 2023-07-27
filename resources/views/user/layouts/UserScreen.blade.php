@@ -95,7 +95,7 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/wedding-calculator">Wedding Calculator</a>
+                            <a @class(['nav-link', 'active' => Route::is('wedding-calculator.index')]) aria-current="page" href="/wedding-calculator">Wedding Calculator</a>
                         </li>
                         <li class="nav-item">
                             <a @class(['nav-link', 'active' => Route::is('aboutus')]) href="/aboutus">Tentang Kami</a>
