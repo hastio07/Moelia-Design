@@ -222,7 +222,6 @@
                                         @endif
                                     @endforeach
                                 </div>
-
                             </ul>
                         </div>
                     </div>

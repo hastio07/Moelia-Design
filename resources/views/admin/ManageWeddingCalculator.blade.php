@@ -48,9 +48,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- <td>Paket Allin 1</td>
-                            <td>135.000.000</td>
-                            <td><button class="btn btn-danger"><i class="bi bi-trash3-fill"></i></button> <button class="btn btn-warning"><i class="bi bi-pencil-square"></i></button></td> --}}
                         </tbody>
                         <tfoot>
                             <tr>

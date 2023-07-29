@@ -70,7 +70,6 @@
                                             </div>
                                         @endforeach
                                     @endforeach
-
                                     {!! $photos->links('pagination::bootstrap-5') !!}
                                 @endif
                             </div>

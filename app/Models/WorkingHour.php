@@ -19,10 +19,7 @@ class WorkingHour extends Model
         'time_from' => 'datetime',
         'time_to' => 'datetime',
     ];
-    // public function getStatusFormatAttribute()
-    // {
-    //     return $this->status === 0 ? false : true;
-    // }
+    
     public function getTimeFromFormatAttribute()
     {
         if (isset($this->time_from)) {

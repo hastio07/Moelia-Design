@@ -36,6 +36,7 @@
                         <div class="pay-virtual rounded p-3 shadow">
                             <div class="nominal mb-4">
                                 <h5 class="fw-bold text-center">Pembayaran Tahap 1</h5>
+                                <h5 class="fw-bold text-center">Uang Muka (DP)</h5>
                                 <div class="row mt-4">
                                     <div class="col-6">
                                         <p class="fw-bold"> Uang Muka(DP) </p>
@@ -81,6 +82,7 @@
                         <div class="pay-virtual mt-3 rounded p-3 shadow">
                             <div class="nominal mb-4">
                                 <h5 class="fw-bold text-center">Pembayaran Tahap 2</h5>
+                                <h5 class="fw-bold text-center">Pelunasan</h5>
                                 <div class="row mt-3 pt-3">
                                     <div class="col-6">
                                         <p class="fw-bold">Biaya Seluruh</p>
@@ -115,7 +117,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-info">Bayar</button>
+                            <button class="btn btn-info" disabled>Bayar</button>
                         </div>
                         <div class="history-payment mt-3 rounded p-3 shadow">
                             <h5 class="fw-bold text-center">Riwayat Pembayaran</h5>
@@ -123,11 +125,11 @@
                                 <h6 class="fw-bold">Tahap 1 (DP)</h6>
                                 <div class="row mt-2">
                                     <div class="col-6">Tgl Pembayaran:</div>
-                                    <div class="col-6">22/04/2024</div>
+                                    <!-- <div class="col-6">22/04/2024</div> -->
                                 </div>
                                 <div class="row mt-2">
                                     <div class="col-6">Waktu Pembayaran:</div>
-                                    <div class="col-6">13:05:31 WIB</div>
+                                    <!-- <div class="col-6">13:05:31 WIB</div> -->
                                 </div>
                             </div>
                             <hr>
@@ -135,11 +137,11 @@
                                 <h6 class="fw-bold">Tahap 2 (Pelunasan)</h6>
                                 <div class="row mt-2">
                                     <div class="col-6">Tgl Pembayaran:</div>
-                                    <div class="col-6">30/05/2024</div>
+                                    <!-- <div class="col-6">30/05/2024</div> -->
                                 </div>
                                 <div class="row mt-2">
                                     <div class="col-6">Waktu Pembayaran:</div>
-                                    <div class="col-6">18:07:55 WIB</div>
+                                    <!-- <div class="col-6">18:07:55 WIB</div> -->
                                 </div>
                             </div>
                         </div>

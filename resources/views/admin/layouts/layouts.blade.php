@@ -121,9 +121,6 @@
                     </div>
                 </div>
             </div>
-            <!-- <marquee behavior="" direction="right">
-                <h6 class="text-success">Selamat Datang {{ auth()->user()->nama_depan . ' ' . auth()->user()->nama_belakang }}!</h6>
-            </marquee> -->
         </header>
         <nav class="main-sidebar ps-menu">
             <div class="sidebar-toggle action-toggle">
@@ -210,12 +207,6 @@
                         <a class="link" href="/manage-pegawai">
                             <i class="ti-user"></i>
                             <span>Manage Pegawai</span>
-                        </a>
-                    </li>
-                    <li class="{{ Route::is('pembayaran.*') ? 'active' : '' }}">
-                        <a class="link" href="">
-                            <i class="ti-money"></i>
-                            <span>Pembayaran</span>
                         </a>
                     </li>
                     <li class="{{ Route::is('manage-gudang.*') ? 'active' : '' }}">

@@ -223,7 +223,6 @@
         let namaBarang = CUModal.querySelector('.modal-content .modal-body input#nama');
         let kategoriBarang = CUModal.querySelector('.modal-content .modal-body select#kategori');
         let stokBarang = CUModal.querySelector('.modal-content .modal-body input#stok');
-
         let btnSubmit = document.querySelector('.modal-content .modal-footer .btn.btn-success');
         let csrfField = CUForm.querySelector('input[name="_token"]');
 

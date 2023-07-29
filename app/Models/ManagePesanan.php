@@ -16,22 +16,6 @@ class ManagePesanan extends Model
 
     protected $primaryKey = 'id';
     protected $table = 'manage_pesanan';
-    // protected $fillable = [
-    //     'created_by',
-    //     'nama_pemesan',
-    //     'email_pemesan',
-    //     'telepon_pemesan',
-    //     'nama_pesanan',
-    //     'tanggal_akad_dan_resepsi',
-    //     'alamat_akad_dan_resepsi',
-    //     'total_biaya_awal',
-    //     'total_biaya_seluruh',
-    //     'uang_muka',
-    //     'materi_kerja',
-    //     'additional',
-    //     'bonus',
-    //     'status',
-    // ];
     protected $guarded = [];
     public function setTanggalAkadDanResepsiAttribute($value)
     {
