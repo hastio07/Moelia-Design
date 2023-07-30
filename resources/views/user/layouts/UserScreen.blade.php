@@ -8,7 +8,6 @@
 
     <meta content="{{ csrf_token() }}" name="csrf-token">
 
-    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.sb_client_key') }}"></script>
     <!-- bootstrap -->
     <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css" rel="stylesheet">
@@ -95,7 +94,10 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a @class(['nav-link', 'active' => Route::is('wedding-calculator.index')]) aria-current="page" href="/wedding-calculator">Wedding Calculator</a>
+                            <a @class([
+                                'nav-link',
+                                'active' => Route::is('wedding-calculator.index'),
+                            ]) aria-current="page" href="/wedding-calculator">Wedding Calculator</a>
                         </li>
                         <li class="nav-item">
                             <a @class(['nav-link', 'active' => Route::is('aboutus')]) href="/aboutus">Tentang Kami</a>

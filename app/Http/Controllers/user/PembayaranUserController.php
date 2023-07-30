@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
-use App\Models\ManagePesanan;
 use App\Models\Contact;
+use App\Models\ManagePesanan;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
 
 class PembayaranUserController extends Controller
@@ -15,11 +16,15 @@ class PembayaranUserController extends Controller
             ->where('jenis_pembayaran', 'dp')
             ->first();
         $contact = Contact::first();
-        return view('user.Pembayaran', compact('bayar_dp','contact'));
+        $bayar_fp = ManagePesanan::where('email_pemesan', auth()->user()->email)
+            ->where('jenis_pembayaran', 'fp')
+            ->first();
+
+        return view('user.Pembayaran', compact('bayar_dp', 'contact', 'bayar_fp'));
     }
 
     // Metode untuk merefresh token dengan permintaan ke server Midtrans
-    public function refreshDPMidtransToken(ManagePesanan $data)
+    public function refreshMidtransToken(ManagePesanan $data)
     {
         // Implementasikan permintaan ke server Midtrans untuk mendapatkan token baru
         // Gunakan API Midtrans untuk melakukan permintaan token baru
@@ -72,16 +77,20 @@ class PembayaranUserController extends Controller
         );
 
         $newSnapToken = \Midtrans\Snap::getSnapToken($params);
-        $data->update(['midtrans_token' => $newSnapToken]);
+        $data->update([
+            'snap_token' => $newSnapToken,
+            'snap_token_created_at' => Carbon::now(),
+            'status' => 'unpaid']);
 
         return redirect()->route('user-pembayaran.index');
     }
 
-    public function cancelTranscation($order_id)
+    public function cancel($id_order)
     {
+        dd($id_order);
         // Note: transaksi bisa di-cancel jika transaksi pending dan belum masuk ke fase expired atau belum selesai masa berlakunya
         $serverKey = config('midtrans.sb_server_key');
-        $response = Http::withBasicAuth($serverKey, '')->post("https: //api.sandbox.midtrans.com/v2/$order_id/cancel");
+        $response = Http::withBasicAuth($serverKey, '')->post("https: //api.sandbox.midtrans.com/v2/$id_order/cancel");
         if ($response->successful()) {
             $data = $response->json();
 

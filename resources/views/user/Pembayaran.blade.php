@@ -59,21 +59,21 @@
                                         <p class="fw-bold">Status</p>
                                     </div>
                                     <div class="col-6">
-                                        @if ($bayar_dp->status === 'unpaid' || $bayar_dp->status === 'pending')
+                                        @if (($bayar_dp->status === 'unpaid' || $bayar_dp->status === 'pending' || $bayar_dp->status === 'cancel' || $bayar_dp->status === 'expire') && $bayar_dp->tanggal_konfirmasi == null)
                                             <p class="fw-bold text-danger">Belum Lunas</p>
-                                        @elseif($bayar_dp->status === 'paid')
+                                        @elseif($bayar_dp->status === 'paid' && $bayar_dp->tanggal_konfirmasi != null)
                                             <p class="fw-bold text-success">Lunas</p>
                                         @endif
                                     </div>
                                 </div>
                             </div>
-                            @if ($bayar_dp->snap_token == null || $bayar_dp->status == 'expire')
-                                <button class="btn btn-info" id="request-bayar-dp">Minta tautan bayar DP Baru</button>
+                            @if ($bayar_dp->snap_token == null || $bayar_dp->status === 'cancel' || $bayar_dp->status === 'expire')
+                                <a class="btn btn-info" href="{{ route('user-pembayaran.refreshMidtransToken', $bayar_dp->id_hash_format) }}" id="request-link-bayar">Minta tautan bayar Baru</a>
                             @else
-                                @if ($bayar_dp->status == 'unpaid' )
-                                    <button class="btn btn-info" id="bayar-dp">Bayar</button>
-                                    @if($bayar_dp->status == 'pending' )
-                                    <button class="btn btn-info" id="cancel-bayar-dp">Cancel</button>
+                                @if (($bayar_dp->status === 'unpaid' || $bayar_dp->waktu_pembayaran == null) && $bayar_dp->snap_token != null)
+                                    <button class="btn btn-info" data-bs-token="{{ $bayar_dp->snap_token }}" id="bayar">Bayar</button>
+                                    @if ($bayar_dp->status === 'pending')
+                                        <a class="btn btn-info" href="{{ route('user-pembayaran.cancel', $bayar_dp->order_id) }}" id="cancel-link-bayar">Cancel</a>
                                     @endif
                                 @endif
                             @endif
@@ -88,7 +88,7 @@
                                         <p class="fw-bold">Biaya Seluruh</p>
                                     </div>
                                     <div class="col-6">
-                                        <p> RP. 180.000.000,00</p>
+                                        <p>{{ $bayar_dp->formatRupiah('total_biaya_seluruh') }}</p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -96,7 +96,7 @@
                                         <p class="fw-bold">Uang Muka (DP)</p>
                                     </div>
                                     <div class="col-6">
-                                        <p> RP. 18.000.000,00</p>
+                                        <p>{{ $bayar_dp->formatRupiah('uang_muka') }}</p>
                                     </div>
                                 </div>
                                 <hr>
@@ -105,7 +105,7 @@
                                         <p class="fw-bold">Total</p>
                                     </div>
                                     <div class="col-6">
-                                        <p> RP. 172.000.000,00</p>
+                                        <p>{{ $bayar_fp->formatRupiah('total_biaya_seluruh') }}</p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -113,11 +113,26 @@
                                         <p class="fw-bold">Status</p>
                                     </div>
                                     <div class="col-6">
-                                        <p class="fw-bold text-danger">Belum Lunas</p>
+                                        @if (($bayar_fp->status === 'unpaid' || $bayar_fp->status === 'pending' || $bayar_fp->status === 'cancel' || $bayar_fp->status === 'expire') && $bayar_fp->tanggal_konfirmasi == null)
+                                            <p class="fw-bold text-danger">Belum Lunas</p>
+                                        @elseif($bayar_dp->status === 'paid' && $bayar_fp->tanggal_konfirmasi != null)
+                                            <p class="fw-bold text-success">Lunas</p>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-info" disabled>Bayar</button>
+                            @if ($bayar_dp->status === 'paid')
+                                @if ($bayar_fp->snap_token == null || $bayar_fp->status === 'cancel' || $bayar_fp->status === 'expire')
+                                    <a class="btn btn-info" href="{{ route('user-pembayaran.refreshMidtransToken', $bayar_fp->id_hash_format) }}" id="request-link-bayar">Minta tautan bayar Baru</a>
+                                @else
+                                    @if (($bayar_fp->status === 'unpaid' || $bayar_fp->waktu_pembayaran == null) && $bayar_fp->snap_token != null)
+                                        <button class="btn btn-info" data-bs-token="{{ $bayar_fp->snap_token }}" id="bayar">Bayar</button>
+                                        @if ($bayar_dp->status === 'pending')
+                                            <a class="btn btn-info" href="{{ route('user-pembayaran.cancel', $bayar_fp->order_id) }}" id="cancel-link-bayar">Cancel</a>
+                                        @endif
+                                    @endif
+                                @endif
+                            @endif
                         </div>
                         <div class="history-payment mt-3 rounded p-3 shadow">
                             <h5 class="fw-bold text-center">Riwayat Pembayaran</h5>
@@ -215,7 +230,9 @@
                                 </ol>
                             </div>
                             <div class="text-center">
-                                <a class="btn btn-primary mt-3" href="https://wa.me/+62{{ $contact->whatsapp1_number }}?text=Silahkan sebutkan nama dan perubahan yang ingin diajukan dibawah ini:">Request Perubahan<i class="bi bi-pencil-square ms-2"></i></a>
+                                @if (!empty($contact->whatsapp1_number))
+                                    <a class="btn btn-primary mt-3" href="https://wa.me/+62{{ $contact->whatsapp1_number }}?text=Silahkan sebutkan nama dan perubahan yang ingin diajukan dibawah ini:">Request Perubahan<i class="bi bi-pencil-square ms-2"></i></a>
+                                @endif
                                 <a class="btn btn-primary mt-2" href="/cetak-kontrak">Lihat Surat Kontrak <i class="bi bi-journal-text"></i></a>
                             </div>
                         </div>
@@ -251,106 +268,98 @@
                 xhr.send();
             }
         </script>
-
-        @if ($bayar_dp->midtrans_token == null)
+        @if (($bayar_dp->snap_token === null || $bayar_fp->snap_token === null) && ($bayar_dp->status === 'cancel' || $bayar_dp->status === 'expire' || $bayar_fp->status === 'cancel' || $bayar_fp->status === 'expire'))
             <script>
-                const btnRequestPembayaranDp = document.getElementById('request-bayar-dp');
-                btnRequestPembayaranDp.addEventListener('click', (e) => {
-                    // Ganti {data} dengan data yang ingin Anda kirimkan dalam URL
-                    const data = "{{ $bayar_dp->id }}";
+                // Cari elemen <a> dengan id 'request-link-bayar'
+                const linkElement = document.getElementById('request-link-bayar');
 
-                    // URL untuk melakukan POST
-                    const url = `http://127.0.0.1:8000/pembayaran/refresh-dp-token/${data}`;
+                linkElement.addEventListener('click', (e) => {
+                    e.preventDefault(); // Mencegah link berpindah ke halaman baru
 
-                    // Mendapatkan nilai CSRF token dari meta tag
-                    const csrfToken = $('meta[name="csrf-token"]').attr('content');
+                    // Ambil URL dari atribut 'href' pada elemen <a>
+                    const url = linkElement.getAttribute('href');
 
-                    // Konfigurasi untuk request POST
-                    const requestOptions = {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json', // Sesuaikan dengan jenis konten yang ingin Anda kirimkan
-                            'X-CSRF-TOKEN': csrfToken, // Menyertakan CSRF token di headers
-                        },
-                    };
+                    // Buat form sementara secara dinamis
+                    const form = document.createElement('form');
+                    form.action = url;
+                    form.method = 'POST';
 
-                    // Lakukan request POST menggunakan fetch()
-                    fetch(url, requestOptions)
-                        .then(response => response.json()) // Handle response dari server jika ingin mengambil data JSON
-                        .then(data => {
-                            // Lakukan sesuatu dengan data response dari server (opsional)
-                            window.location.reload();
-                        })
-                        .catch(error => {
-                            // Tangani jika terjadi kesalahan selama permintaan (opsional)
-                            console.error('Error:', error);
-                        });
-                });
-            </script>
-            <script>
-                const btnCancelPembayaranDp = document.getElementById('cancel-bayar-dp');
-                btnCancelPembayaranDp.addEventListener('click', (e) => {
-                    // Ganti {data} dengan data yang ingin Anda kirimkan dalam URL
-                    const data = "{{ $bayar_dp->id }}";
+                    // Tambahkan CSRF token ke dalam form
+                    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                    const csrfInput = document.createElement('input');
+                    csrfInput.type = 'hidden';
+                    csrfInput.name = '_token';
+                    csrfInput.value = csrfToken;
 
-                    // URL untuk melakukan POST
-                    const url = `http://127.0.0.1:8000/pembayaran/cancel/${data}`;
+                    // Tambahkan elemen input CSRF token ke dalam form
+                    form.appendChild(csrfInput);
 
-                    // Mendapatkan nilai CSRF token dari meta tag
-                    const csrfToken = $('meta[name="csrf-token"]').attr('content');
+                    // Tambahkan form ke dalam body dokumen
+                    document.body.appendChild(form);
 
-                    // Konfigurasi untuk request POST
-                    const requestOptions = {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json', // Sesuaikan dengan jenis konten yang ingin Anda kirimkan
-                            'X-CSRF-TOKEN': csrfToken, // Menyertakan CSRF token di headers
-                        },
-                    };
-
-                    // Lakukan request POST menggunakan fetch()
-                    fetch(url, requestOptions)
-                        .then(response => response.json()) // Handle response dari server jika ingin mengambil data JSON
-                        .then(data => {
-                            // Lakukan sesuatu dengan data response dari server (opsional)
-                            window.location.reload();
-                        })
-                        .catch(error => {
-                            // Tangani jika terjadi kesalahan selama permintaan (opsional)
-                            console.error('Error:', error);
-                        });
+                    // Kirimkan permintaan POST
+                    form.submit();
                 });
             </script>
         @endif
 
-        <script>
-            // For example trigger on button clicked, or any time you need
-            const payButton = document.getElementById('bayar-dp');
-            payButton.addEventListener('click', function() {
-                // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
-                window.snap.pay('{{ $bayar_dp->snap_token }}', {
-                    onSuccess: function(result) {
-                        /* You may add your own implementation here */
-                        alert("payment success!");
-                        window.location.reload();
-                        console.log(result);
-                    },
-                    onPending: function(result) {
-                        /* You may add your own implementation here */
-                        alert("wating your payment!");
-                        console.log(result);
-                    },
-                    onError: function(result) {
-                        /* You may add your own implementation here */
-                        alert("payment failed!");
-                        console.log(result);
-                    },
-                    onClose: function() {
-                        /* You may add your own implementation here */
-                        alert('you closed the popup without finishing the payment');
-                    }
-                })
-            });
-        </script>
+        @if (($bayar_dp->snap_token !== null || $bayar_fp->snap_token !== null) && ($bayar_dp->status === 'pending' || $bayar_fp->status === 'pending'))
+            <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.sb_client_key') }}"></script>
+            <script>
+                // Cari elemen <a> dengan id 'cancel-link-bayar'
+                const linkCancelElement = document.getElementById('cancel-link-bayar');
+
+                linkCancelElement.addEventListener('click', (e) => {
+                    e.preventDefault(); // Mencegah link berpindah ke halaman baru
+
+                    // Ambil URL dari atribut 'href' pada elemen <a>
+                    const url = linkCancelElement.getAttribute('href');
+
+                    // Buat form sementara secara dinamis
+                    const form = document.createElement('form');
+                    form.action = url;
+                    form.method = 'POST';
+
+                    // Tambahkan CSRF token ke dalam form
+                    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                    const csrfInput = document.createElement('input');
+                    csrfInput.type = 'hidden';
+                    csrfInput.name = '_token';
+                    csrfInput.value = csrfToken;
+
+                    // Tambahkan elemen input CSRF token ke dalam form
+                    form.appendChild(csrfInput);
+
+                    // Tambahkan form ke dalam body dokumen
+                    document.body.appendChild(form);
+
+                    // Kirimkan permintaan POST
+                    form.submit();
+                });
+            </script>
+
+            <script>
+                const payButton = document.getElementById('bayar');
+                payButton.addEventListener('click', function(e) {
+                    const button = e.target;
+                    const token = button.getAttribute('data-bs-token');
+                    window.snap.pay(token, {
+                        onSuccess: function(result) {
+                            alert("Pembayaran sukses!");
+                            location.reload();
+                        },
+                        onPending: function(result) {
+                            alert("Menunggu pembayaran anda!");
+                        },
+                        onError: function(result) {
+                            alert("pembayaran gagal!");
+                        },
+                        onClose: function() {
+                            alert('Anda menutup popup tanpa menyelesaikan pembayaran.');
+                        }
+                    })
+                });
+            </script>
+        @endif
     @endpush
 @endsection

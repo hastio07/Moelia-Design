@@ -57,6 +57,7 @@
                                 <th>Total Biaya Seluruh</th>
                                 <th>DP1</th>
                                 <th>Status Pembayaran(DP)</th>
+                                <th>Status Konfirmasi</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
@@ -72,6 +73,7 @@
                                 <th>Total Biaya Seluruh</th>
                                 <th>DP1</th>
                                 <th>Status Pembayaran(DP)</th>
+                                <th>Status Konfirmasi</th>
                                 <th class="text-center">Aksi</th>
                             </tr>
                         </tfoot>
@@ -104,18 +106,6 @@
                                 <div class="form-inpt mt-1">
                                     <label class="form-label" for="nama-pesanan">Nama Pesanan<span class="text-danger">*</span></label>
                                     <input class="form-control" id="nama-pesanan" name="nama-pesanan" required type="text" value="{{ old('nama-pesanan') }}">
-                                </div>
-                                <div class="form-inpt mt-1">
-                                    <label class="form-label" for="jenis-pembayaran">Jenis Pembayaran<span class="text-danger">*</span></label>
-                                    <select id="jenis-pembayaran" name="jenis-pembayaran">
-                                        <option disabled selected value="">-- pilih --</option>
-                                        <option @selected(old('jenis-pembayaran') == 'dp') value="dp">
-                                            Uang Muka
-                                        </option>
-                                        <option @selected(old('jenis-pembayaran') == 'fp') value="fp">
-                                            Penuh
-                                        </option>
-                                    </select>
                                 </div>
                                 <div class="form-inpt mt-1">
                                     <label class="form-label" for="telepon-pemesan">Telepon/HP<span class="text-danger">*</span></label>
@@ -270,12 +260,12 @@
                         targets: 0,
                         className: "fw-bolder"
                     }, {
-                        targets: 7,
+                        targets: 8,
                         className: "text-success"
                     }, {
                         orderable: false,
                         searchable: false,
-                        targets: 8
+                        targets: 9
                     }],
                     columns: [{
                             data: 'nama_pemesan',
@@ -308,6 +298,10 @@
                         {
                             data: 'status',
                             name: 'status'
+                        },
+                        {
+                            data: 'status_konfirmasi',
+                            name: 'status_konfirmasi'
                         },
                         {
                             data: 'aksi',
@@ -378,30 +372,28 @@
         const CUModal = document.getElementById('CUModal'); // abmil elemen div modal-nya
         const CUForm = CUModal.querySelector('.modal-content form#CUForm'); // ambil elemen form-nya
         const titleModal = CUModal.querySelector('.modal-content .modal-header h5#cuModalLabel.modal-title'); // abmil elemen h5 judul form-nya
-        const csrfField = CUForm.querySelector('input[name="_token"]'); // ambil elemen input csrf
-        const btnSubmit = document.querySelector('.modal-content .modal-footer .btn.btn-success'); // ambil elemen button submit-nya
+        const csrfField = CUForm.querySelector('#CUForm input[name="_token"]'); // ambil elemen input csrf
+        const btnSubmit = document.querySelector('#CUForm div.modal-footer button.btn.icon-left.btn-success.mb-2'); // ambil elemen button submit-nya
 
         /* Select input untuk diisi ketika update */
         const InputNamaPemesanElement = document.querySelector('.modal-content .modal-body input#nama-pemesan'); // ambil elemen input
         const InputEmailPemesanElement = document.querySelector('.modal-content .modal-body input#email-pemesan'); // ambil elemen input
         const InputNamaPesananElement = document.querySelector('.modal-content .modal-body input#nama-pesanan'); // ambil elemen input
-        const SelectJenisPembayaranElement = document.querySelector('.modal-content .modal-body select#jenis-pembayaran'); // ambil elemen select
         const InputTeleponPemesanElement = document.querySelector('.modal-content .modal-body input#telepon-pemesan'); // ambil elemen input
         const InputTanggalElement = document.querySelector('.modal-content .modal-body input#tanggal'); // ambil elemen input
-        const InputAlamatElement = document.querySelector('.modal-content .modal-body input#alamat'); // ambil elemen input
+        const InputAlamatElement = document.querySelector('.modal-content .modal-body textarea#alamat'); // ambil elemen input
         const InputBiayaAwalElement = document.querySelector('.modal-content .modal-body input#biaya-awal'); // ambil elemen input
+        const InputBiayaAdditionalElement = document.querySelector('.modal-content .modal-body input#biaya-additional'); // ambil elemen input
         const InputBiayaSeluruhElement = document.querySelector('.modal-content .modal-body input#biaya-seluruh'); // ambil elemen input
         const InputUangMukaElement = document.querySelector('.modal-content .modal-body input#uang-muka'); // ambil elemen input
-        const InputMateriKerjaElement = document.querySelector('.modal-content .modal-body input#materi-kerja'); // ambil elemen input
-        const InputAdditionalElement = document.querySelector('.modal-content .modal-body input#additional'); // ambil elemen input
-        const InputBonusElement = document.querySelector('.modal-content .modal-body input#bonus'); // ambil elemen input
+        const InputMateriKerjaElement = document.querySelector('.modal-content .modal-body textarea#materi-kerja'); // ambil elemen input
+        const InputAdditionalElement = document.querySelector('.modal-content .modal-body textarea#additional'); // ambil elemen input
+        const InputBonusElement = document.querySelector('.modal-content .modal-body textarea#bonus'); // ambil elemen input
 
         CUModal.addEventListener('show.bs.modal', (event) => {
             const button = event.relatedTarget; // ambil elemen button yang berelasi
             const btnID = button.getAttribute('id'); // ambil attribute id
             const route = button.getAttribute('data-bs-route'); // ambil attribute data-bs-route
-            console.log(btnID);
-            console.log(route);
             if (btnID === 'btnCreateModal') {
                 CUForm.action = route;
                 titleModal.textContent = 'Tambah Pesanan';
@@ -424,11 +416,11 @@
                 InputNamaPemesanElement.value = parseData.nama_pemesan;
                 InputEmailPemesanElement.value = parseData.email_pemesan;
                 InputNamaPesananElement.value = parseData.nama_pesanan;
-                SelectJenisPembayaranElement.value = parseData.jenis_pembayaran;
                 InputTeleponPemesanElement.value = parseData.telepon_pemesan;
                 InputTanggalElement.value = parseData.tanggal_akad_dan_resepsi;
                 InputAlamatElement.value = parseData.alamat_akad_dan_resepsi;
                 InputBiayaAwalElement.value = parseData.total_biaya_awal;
+                InputBiayaAdditionalElement.value = parseData.total_biaya_additional;
                 InputBiayaSeluruhElement.value = parseData.total_biaya_seluruh;
                 InputUangMukaElement.value = parseData.uang_muka;
                 tinymce.get('materi-kerja').setContent(parseData.materi_kerja);
@@ -446,11 +438,11 @@
             InputNamaPemesanElement.value = '';
             InputEmailPemesanElement.value = '';
             InputNamaPesananElement.value = '';
-            SelectJenisPembayaranElement.value = '';
             InputTeleponPemesanElement.value = '';
             InputTanggalElement.value = '';
             InputAlamatElement.value = '';
             InputBiayaAwalElement.value = null;
+            InputBiayaAdditionalElement.value = null;
             InputBiayaSeluruhElement.value = null;
             InputUangMukaElement.value = null;
             tinymce.activeEditor.setContent('');

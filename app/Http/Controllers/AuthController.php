@@ -35,7 +35,7 @@ class AuthController extends Controller
     public function authenticate(Request $request)
     {
         $rules = [
-            'email' => ['required', 'string', 'email'],
+            'email' => ['required', 'string', 'email:rfc,dns'],
             'password' => ['required', 'string', 'min:5'],
         ];
         $massages = [
@@ -129,7 +129,7 @@ class AuthController extends Controller
         $rules = [
             'nama_depan' => 'required|string|max:255',
             'nama_belakang' => 'required|string|max:255',
-            'email' => ['required', 'string', 'email:dns', new UniqueEmail, 'max:255'],
+            'email' => ['required', 'string', 'email:rfc,dns', new UniqueEmail, 'max:255'],
             'phone' => 'required|numeric|max:99999999999999|regex:/^(?:\+62)?\d{9,13}$/',
             'password' => ['required', 'min:5', 'max:255', 'confirmed', RulesPassword::min(5)->letters()->mixedCase()->symbols()],
         ];

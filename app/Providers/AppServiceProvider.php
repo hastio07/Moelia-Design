@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\ManagePesanan;
+use App\Observers\ManagePesananObserver;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,5 +28,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Paginator::useBootstrap();
+
+        ManagePesanan::observe(ManagePesananObserver::class);
     }
 }

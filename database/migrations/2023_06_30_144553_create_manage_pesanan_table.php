@@ -34,7 +34,9 @@ return new class extends Migration
             $table->string('snap_token')->nullable();
             $table->timestamp('snap_token_created_at')->nullable();
             $table->enum('jenis_pembayaran', ['dp', 'fp']);
-            $table->enum('status', ['expire', 'pending', 'unpaid', 'paid'])->default('unpaid');
+            $table->enum('status', ['expire', 'pending', 'unpaid', 'paid', 'cancel'])->default('unpaid');
+            $table->timestamp('waktu_pembayaran')->nullable();
+            $table->dateTime('tanggal_konfirmasi')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -7,91 +7,91 @@
     <section class="manage-akun">
         <div class="content-wrapper container">
             <div class="row same-height">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="text-center">Tambah Akun Admin</h4>
-                        </div>
-                        @if (session()->has('success_add_account'))
-                            <div class="alert alert-success">{{ session()->get('success_add_account') }}</div>
-                        @elseif (session()->has('failed_add_account'))
-                            <div class="alert alert-danger">{{ session()->get('failed_add_account') }}</div>
-                        @endif
-                        @if ($errors->any())
-                            <div class="pt-3">
-                                <div class="alert alert-danger text-capitalize">
-                                    <p>Lengkapi Data!</p>
-                                    <ul class="pt=10" style="list-style:none;">
-                                        @foreach ($errors->all() as $item)
-                                            <li>{{ $item }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="text-center">Tambah Akun Admin</h4>
+                    </div>
+                    @if (session()->has('success_add_account'))
+                        <div class="alert alert-success">{{ session()->get('success_add_account') }}</div>
+                    @elseif (session()->has('failed_add_account'))
+                        <div class="alert alert-danger">{{ session()->get('failed_add_account') }}</div>
+                    @endif
+                    @if ($errors->any())
+                        <div class="pt-3">
+                            <div class="alert alert-danger text-capitalize">
+                                <p>Lengkapi Data!</p>
+                                <ul class="pt=10" style="list-style:none;">
+                                    @foreach ($errors->all() as $item)
+                                        <li>{{ $item }}</li>
+                                    @endforeach
+                                </ul>
                             </div>
-                        @endif
-                        <div class="card-body">
-                            <form action="{{ Route::is('manage-admin.edit') ? route('manage-admin.update', $hashids->encode($adminedit->id)) : route('manage-admin.store') }}" enctype='multipart/form-data' method="post">
-                                @if (Route::is('manage-admin.edit'))
-                                    @method('put')
-                                @endif
-                                @csrf
-                                <div class="login-form">
-                                    <!-- Nama Input-->
+                        </div>
+                    @endif
+                    <div class="card-body">
+                        <form action="{{ Route::is('manage-admin.edit') ? route('manage-admin.update', $hashids->encode($adminedit->id)) : route('manage-admin.store') }}" enctype='multipart/form-data' method="post">
+                            @if (Route::is('manage-admin.edit'))
+                                @method('put')
+                            @endif
+                            @csrf
+                            <div class="login-form">
+                                <!-- Nama Input-->
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="form-label" for="nama_depan">Nama Depan</label>
+                                        <input class="form-control bg-transparent" id="nama_depan" name="nama_depan" placeholder="Masukkan nama depan" required type="text" value="{{ old('nama_depan', isset($adminedit) ? $adminedit->nama_depan : '') }}">
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label" for="nama_belakang">Nama Belakang</label>
+                                        <input class="form-control bg-transparent" id="nama_belakang" name="nama_belakang" placeholder="Masukkan nama belakang" required type="text" value="{{ old('nama_belakang', isset($adminedit) ? $adminedit->nama_belakang : '') }}">
+                                    </div>
+                                </div>
+                                <!-- Email Input-->
+                                <label class="form-label" for="email">Email</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text bg-transparent"><i class="bi bi-envelope"></i></span>
+                                    <input class="form-control bg-transparent" id="email" name="email" placeholder="Masukkan email" required type="email" value="{{ old('email', isset($adminedit) ? $adminedit->email : '') }}">
+                                </div>
+                                <!-- No. Hp-->
+                                <label class="form-label" for="nomor_telepon">Nomor Handphone</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text bg-transparent"><i class="bi bi-phone"></i></span>
+                                    <input class="form-control bg-transparent" id="nomor_telepon" name="phone_number" placeholder="Masukkan nomor handphone" required type="tel" value="{{ old('phone_number', isset($adminedit) ? $adminedit->phone_number : '') }}">
+                                </div>
+                                <!-- Pilih Role  -->
+                                <labe class="form-label" for="role_select">Pilih Role</labe>
+                                <select class="form-select form-select-sm" id="role_select" name="role_id" required>
+                                    <option disabled selected value="">-- Pilih Role --</option>
+                                    <option {{ isset($adminedit) && $adminedit->role_id == 2 ? 'selected' : '' }} value="2">Admin
+                                    </option>
+                                </select>
+                                @if (!Route::is('manage-admin.edit'))
+                                    <!-- Password Input-->
                                     <div class="row">
                                         <div class="col">
-                                            <label class="form-label" for="nama_depan">Nama Depan</label>
-                                            <input class="form-control bg-transparent" id="nama_depan" name="nama_depan" placeholder="Masukkan nama depan" required type="text" value="{{ old('nama_depan', isset($adminedit) ? $adminedit->nama_depan : '') }}">
+                                            <label class="form-label" for="password">Password</label>
+                                            <input class="form-control bg-transparent" id="password" name="password" placeholder="Masukkan password" required type="password">
                                         </div>
                                         <div class="col">
-                                            <label class="form-label" for="nama_belakang">Nama Belakang</label>
-                                            <input class="form-control bg-transparent" id="nama_belakang" name="nama_belakang" placeholder="Masukkan nama belakang" required type="text" value="{{ old('nama_belakang', isset($adminedit) ? $adminedit->nama_belakang : '') }}">
+                                            <label class="form-label" for="password_confirmation">Ulangi
+                                                Password</label>
+                                            <input class="form-control bg-transparent" id="password_confirmation" name="password_confirmation" placeholder="Masukkan ulang password" required type="password">
                                         </div>
                                     </div>
-                                    <!-- Email Input-->
-                                    <label class="form-label" for="email">Email</label>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text bg-transparent"><i class="bi bi-envelope"></i></span>
-                                        <input class="form-control bg-transparent" id="email" name="email" placeholder="Masukkan email" required type="email" value="{{ old('email', isset($adminedit) ? $adminedit->email : '') }}">
+                                @endif
+                                @if (Route::is('manage-admin.edit'))
+                                    <div class="btn-add row justify-content-center align-content-center mt-3">
+                                        <button class="btn icon-left btn-success mb-2" type="submit"><i class="ti-check"></i>update</i></button>
                                     </div>
-                                    <!-- No. Hp-->
-                                    <label class="form-label" for="nomor_telepon">Nomor Handphone</label>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text bg-transparent"><i class="bi bi-phone"></i></span>
-                                        <input class="form-control bg-transparent" id="nomor_telepon" name="phone_number" placeholder="Masukkan nomor handphone" required type="tel" value="{{ old('phone_number', isset($adminedit) ? $adminedit->phone_number : '') }}">
+                                @else
+                                    <div class="btn-add row justify-content-center align-content-center mt-3">
+                                        <button class="btn icon-left btn-success mb-2" type="submit"><i class="ti-check"></i>Simpan</i></button>
                                     </div>
-                                    <!-- Pilih Role  -->
-                                    <labe class="form-label" for="role_select">Pilih Role</labe>
-                                    <select class="form-select form-select-sm" id="role_select" name="role_id" required>
-                                        <option disabled selected value="">-- Pilih Role --</option>
-                                        <option {{ isset($adminedit) && $adminedit->role_id == 2 ? 'selected' : '' }} value="2">Admin
-                                        </option>
-                                    </select>
-                                    @if (!Route::is('manage-admin.edit'))
-                                        <!-- Password Input-->
-                                        <div class="row">
-                                            <div class="col">
-                                                <label class="form-label" for="password">Password</label>
-                                                <input class="form-control bg-transparent" id="password" name="password" placeholder="Masukkan password" required type="password">
-                                            </div>
-                                            <div class="col">
-                                                <label class="form-label" for="password_confirmation">Ulangi
-                                                    Password</label>
-                                                <input class="form-control bg-transparent" id="password_confirmation" name="password_confirmation" placeholder="Masukkan ulang password" required type="password">
-                                            </div>
-                                        </div>
-                                    @endif
-                                    @if (Route::is('manage-admin.edit'))
-                                        <div class="btn-add row justify-content-center align-content-center mt-3">
-                                            <button class="btn icon-left btn-success mb-2" type="submit"><i class="ti-check"></i>update</i></button>
-                                        </div>
-                                    @else
-                                        <div class="btn-add row justify-content-center align-content-center mt-3">
-                                            <button class="btn icon-left btn-success mb-2" type="submit"><i class="ti-check"></i>Simpan</i></button>
-                                        </div>
-                                    @endif
-                                </div>
-                            </form>
-                        </div>
+                                @endif
+                            </div>
+                        </form>
                     </div>
+                </div>
                 <div class="card">
                     <div class="card-header">
                         <h4>Daftar Akun Admin</h4>
@@ -124,6 +124,9 @@
                     <div class="card-header">
                         <h4>Daftar Akun Masyarakat</h4>
                     </div>
+                    @if (session()->has('msg-tb-user'))
+                        <div class="alert alert-success">{{ session()->get('msg-tb-user') }}</div>
+                    @endif
                     <div class="card-body">
                         <table class="display table" id="table-users">
                             <thead>

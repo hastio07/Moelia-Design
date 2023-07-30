@@ -20,6 +20,7 @@ use App\Http\Controllers\user\PembayaranUserController;
 use App\Http\Controllers\user\ProdukController;
 use App\Http\Controllers\user\ProfileUserController;
 use App\Http\Controllers\user\VideoController;
+use App\Models\Admin;
 use App\Notifications\ResetPassword\SendResetPasswordLink;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
@@ -46,8 +47,8 @@ Route::middleware(['no-redirect-if-authenticated:admins,web', 'prevent-back-hist
 
         Route::controller(PembayaranUserController::class)->group(function () {
             Route::get('/pembayaran', 'index')->name('user-pembayaran.index');
-            Route::post('/pembayaran/refresh-dp-token/{data}', 'refreshDPMidtransToken')->name('user-pembayaran.refreshDPMidtransToken');
-            Route::post('/pembayaran/cancel/{order_id}', 'cancelTranscation')->name('user-pembayaran.cancelTranscation');
+            Route::post('/pembayaran/refresh-token/{id_pesanan}', 'refreshMidtransToken')->name('user-pembayaran.refreshMidtransToken');
+            Route::post('pembayaran/{id_order}/cancel', 'cancel')->name('user-pembayaran.cancel');
         });
 
     });
@@ -65,6 +66,11 @@ Route::middleware(['no-redirect-if-authenticated:admins,web', 'prevent-back-hist
         $message = $notification->toMail($user);
 
         return $message->render();
+    });
+
+    Route::get('test', function () {
+        $data = Admin::find(1);
+        return $data;
     });
 });
 
@@ -119,7 +125,8 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
             Route::get('manage-pesanan-proses', 'index')->name('manage-pesanan-proses.index');
             Route::post('manage-pesanan-proses/create', 'create')->name('manage-pesanan-proses.create');
             Route::put('manage-pesanan-proses/{id}', 'update')->name('manage-pesanan-proses.update');
-            Route::delete('manage-pesanan-proses/{id}', 'destroy')->name('manage-pesanan-proses.destroy');
+            Route::delete('manage-pesanan-proses/{order_id}', 'destroy')->name('manage-pesanan-proses.destroy');
+            Route::put('manage-pesanan-proses/konfirmasi/{data}', 'konfirmasi')->name('manage-pesanan-proses.konfirmasi');
             Route::get('manage-pesanan-proses/detail-pesanan/{data}', 'detail')->name('manage-pesanan-proses.detail');
         });
         Route::controller(ManageGalleryController::class)->group(function () {
