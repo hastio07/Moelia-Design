@@ -25,13 +25,13 @@ class ManagePesananProsesController extends Controller
                 //Jika tanggal awal(start_date) hingga tanggal akhir(end_date) adalah sama maka
                 if ($request->start_date === $request->end_date) {
                     //kita filter tanggalnya sesuai dengan request start_date
-                    $list_pesanan = ManagePesanan::where('status', 'unpaid')->orWhere('status', 'expire')->orWhere('status', 'cancel')->orWhere('status', 'pending')->whereDate('created_at', '=', $request->start_date);
+                    $list_pesanan = ManagePesanan::where('status', 'unpaid')->orWhere('tanggal_konfirmasi', null)->orWhere('status', 'expire')->orWhere('status', 'cancel')->orWhere('status', 'pending')->whereDate('created_at', '=', $request->start_date);
                 } else {
                     //kita filter dari tanggal awal ke akhir
-                    $list_pesanan = ManagePesanan::where('status', 'unpaid')->orWhere('status', 'expire')->orWhere('status', 'cancel')->orWhere('status', 'pending')->whereBetween('created_at', array($request->start_date, $request->end_date));
+                    $list_pesanan = ManagePesanan::where('status', 'unpaid')->orWhere('tanggal_konfirmasi', null)->orWhere('status', 'expire')->orWhere('status', 'cancel')->orWhere('status', 'pending')->whereBetween('created_at', array($request->start_date, $request->end_date));
                 }
             }
-            $list_pesanan = ManagePesanan::where('status', 'unpaid')->orWhere('status', 'expire')->orWhere('status', 'cancel')->orWhere('status', 'pending');
+            $list_pesanan = ManagePesanan::where('status', 'unpaid')->orWhere('tanggal_konfirmasi', null)->orWhere('status', 'expire')->orWhere('status', 'cancel')->orWhere('status', 'pending');
             return datatables()->of($list_pesanan)
                 ->editColumn('nama_pemesan', function ($value) {
                     return '<a href="' . route('manage-pesanan-proses.detail', $value->id) . '">' . $value->nama_pemesan . '</a>';
@@ -304,15 +304,15 @@ class ManagePesananProsesController extends Controller
                     'email' => $validatedData['email-pemesan'],
                     'phone' => $validatedData['telepon-pemesan'],
                     'address' => $validatedData['alamat'],
-                    'city' => '',
-                    'postal_code' => '',
+                    // 'city' => '',
+                    // 'postal_code' => '',
                     'country_code' => 'IDN',
                 ),
             ),
-            'page_expiry' => array(
-                'duration' => 24,
-                'unit' => 'hours',
-            ),
+            // 'page_expiry' => array(
+            //     'duration' => 24,
+            //     'unit' => 'hours',
+            // ),
         );
 
         $snapToken = \Midtrans\Snap::getSnapToken($params);
@@ -369,7 +369,8 @@ class ManagePesananProsesController extends Controller
                 # 3. Update Token Pembayaran Full Payment (fp)
                 if ($ManagePesanan->jenis_pembayaran === 'dp') {
                     // Jika yang dibayar jenis dp maka update/buat untuk token fp
-                    $this->createTokenFp($ManagePesanan->email_pemesan);
+                    $email = $ManagePesanan->email_pemesan;
+                    $this->createTokenFp($email);
                 }
             } else if ($transaction == 'pending') {
                 // TODO set payment status in merchant's database to 'Pending'
@@ -384,11 +385,11 @@ class ManagePesananProsesController extends Controller
                 $ManagePesanan->update(['status' => 'cancel']);
             }
         } else {
-            return response()->json(['status' => 'gagal']);
+            return response()->json(['status' => 'gagal', 'punya_midtrans' => $request->signature_key, 'signature_key' => $hashed]);
         }
     }
 
-    private function createTokenFp($email_pemesan)
+    protected function createTokenFp($email_pemesan)
     {
         $dataOrder = ManagePesanan::where('email_pemesan', $email_pemesan)->where('jenis_pembayaran', 'fp')->first();
 
@@ -419,23 +420,23 @@ class ManagePesananProsesController extends Controller
             'customer_details' => array(
                 'first_name' => $firstName,
                 'last_name' => $lastName,
-                'email' => $dataOrder->email_pemesan->email,
+                'email' => $dataOrder->email_pemesan,
                 'phone' => $dataOrder->telepon_pemesan,
                 'billing_address' => array(
                     'first_name' => $firstName,
                     'last_name' => $lastName,
-                    'email' => $dataOrder->email_pemesan->email,
+                    'email' => $dataOrder->email_pemesan,
                     'phone' => $dataOrder->telepon_pemesan,
                     'address' => $dataOrder->alamat_akad_dan_resepsi,
-                    'city' => '',
-                    'postal_code' => '',
+                    // 'city' => '',
+                    // 'postal_code' => '',
                     'country_code' => 'IDN',
                 ),
             ),
-            'page_expiry' => array(
-                'duration' => 24,
-                'unit' => 'hours',
-            ),
+            // 'page_expiry' => array(
+            //     'duration' => 24,
+            //     'unit' => 'hours',
+            // ),
         );
 
         $snapToken = \Midtrans\Snap::getSnapToken($params);

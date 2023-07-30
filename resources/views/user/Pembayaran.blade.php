@@ -143,7 +143,7 @@
                                         @if (!empty($bayar_fp))
                                             @if (($bayar_fp->status === 'unpaid' || $bayar_fp->status === 'pending' || $bayar_fp->status === 'cancel' || $bayar_fp->status === 'expire') && $bayar_fp->tanggal_konfirmasi == null)
                                                 <p class="fw-bold text-danger">Belum Lunas</p>
-                                            @elseif($bayar_dp->status === 'paid' && $bayar_fp->tanggal_konfirmasi != null)
+                                            @elseif($bayar_fp->status === 'paid' && $bayar_fp->tanggal_konfirmasi != null)
                                                 <p class="fw-bold text-success">Lunas</p>
                                             @endif
                                         @else
@@ -302,7 +302,7 @@
             }
         </script>
         @if (!empty($bayar_dp) || !empty($bayar_fp))
-            @if ((is_null($bayar_dp->snap_token) || is_null($bayar_fp->snap_token)) && ($bayar_dp->status === 'cancel' || $bayar_dp->status === 'expire' || $bayar_fp->status === 'cancel' || $bayar_fp->status === 'expire'))
+            @if ((is_null($bayar_dp->snap_token) || is_null($bayar_fp->snap_token)) && ($bayar_dp->status === 'cancel' || $bayar_dp->status === 'unpaid' || $bayar_dp->status === 'expire' || $bayar_fp->status === 'cancel' || $bayar_fp->status === 'unpaid' || $bayar_fp->status === 'expire') && ($bayar_dp->waktu_pembayaran == null || $bayar_fp->waktu_pembayaran == null))
                 <script>
                     // Cari elemen <a> dengan id 'request-link-bayar'
                     const linkElement = document.getElementById('request-link-bayar');
@@ -369,7 +369,7 @@
                 </script> --}}
             @endif
 
-            @if (($bayar_dp->snap_token !== null || $bayar_fp->snap_token !== null) && ($bayar_dp->status === 'unpaid' || $bayar_fp->status === 'unpaid'))
+            @if (($bayar_dp->snap_token !== null || $bayar_fp->snap_token !== null) && ($bayar_dp->waktu_pembayaran == null || $bayar_fp->waktu_pembayaran == null))
                 <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.sb_client_key') }}"></script>
 
                 @if ($bayar_dp->status === 'pending' || $bayar_fp->status === 'pending')

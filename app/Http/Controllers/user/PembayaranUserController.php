@@ -7,6 +7,7 @@ use App\Models\Contact;
 use App\Models\ManagePesanan;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 
 class PembayaranUserController extends Controller
 {
@@ -53,9 +54,11 @@ class PembayaranUserController extends Controller
             $gross_amount = $data->total_biaya_seluruh;
         }
 
+        $new_order_id = Str::uuid();
+
         $params = array(
             'transaction_details' => array(
-                'order_id' => $data->order_id,
+                'order_id' => $new_order_id,
                 'gross_amount' => $gross_amount,
             ),
             'customer_details' => array(
@@ -69,8 +72,8 @@ class PembayaranUserController extends Controller
                     'email' => $data->email_pemesan,
                     'phone' => $data->telepon_pemesan,
                     'address' => $data->alamat_akad_dan_resepsi,
-                    'city' => '',
-                    'postal_code' => '',
+                    // 'city' => '',
+                    // 'postal_code' => '',
                     'country_code' => 'IDN',
                 ),
             ),
@@ -78,6 +81,7 @@ class PembayaranUserController extends Controller
 
         $newSnapToken = \Midtrans\Snap::getSnapToken($params);
         $data->update([
+            'order_id' => $new_order_id,
             'snap_token' => $newSnapToken,
             'snap_token_created_at' => Carbon::now(),
             'status' => 'unpaid']);

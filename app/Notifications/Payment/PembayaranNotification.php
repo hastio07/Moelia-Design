@@ -18,7 +18,7 @@ class PembayaranNotification extends Notification
     private $pembayaran;
     public function __construct($pembayaran)
     {
-        $this->pembayaran = $pembayaran;
+        $this->pembayaran = json_decode($pembayaran);
     }
 
     /**
@@ -59,7 +59,7 @@ class PembayaranNotification extends Notification
             'user_email' => $this->pembayaran->email_pemesan->email, // pengirim notif
             'pembayaran_id' => $this->pembayaran->id,
             'title' => 'Pembayaran Tagihan',
-            'messages' => $this->pembayaran->email_pemesan->nama_depan . ' ' . $this->pembayaran->email_pemesan->nama_belakang . ' melakukan pembayaran' . $this->pembayaran->jenis_pembayaran === 'dp' ? ' Uang Muka' : '' . '.',
+            'messages' => $this->pembayaran->email_pemesan->nama_depan . ' ' . $this->pembayaran->email_pemesan->nama_belakang . ' melakukan pembayaran' . ($this->pembayaran->jenis_pembayaran === 'dp' ? ' Uang Muka' : '') . '.',
             'url' => route('manage-pesanan-proses.detail', $this->pembayaran->id),
         ];
     }
