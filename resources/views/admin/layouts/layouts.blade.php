@@ -57,40 +57,19 @@
                             </li>
                             <li class="menu-content ps-menu">
                                 @foreach (auth()->user()->unreadNotifications as $notification)
-                                    {{-- <a href="#">
-                                    <div class="message-icon text-danger">
-                                        <i class="fas fa-exclamation-triangle"></i>
+                                <a href="{{ url($notification->data['url']) }}">
+                                    <div class="message-icon text-info">
+                                        <i class="fas fa-info"></i>
                                     </div>
                                     <div class="message-content read">
                                         <div class="body">
-                                            There's incoming event, don't miss it!!
+                                            {{ $notification->data['messages'] }}
                                         </div>
-                                        <div class="time">Just now</div>
+                                        <div class="time">{{ $notification->created_at->diffForHumans() }}</div>
                                     </div>
-                                </a> --}}
-                                    <a href="{{ url($notification->data['url']) }}">
-                                        <div class="message-icon text-info">
-                                            <i class="fas fa-info"></i>
-                                        </div>
-                                        <div class="message-content read">
-                                            <div class="body">
-                                                {{ $notification->data['messages'] }}
-                                            </div>
-                                            <div class="time">{{ $notification->created_at->diffForHumans() }}</div>
-                                        </div>
-                                    </a>
-                                    {{-- <a href="#">
-                                    <div class="message-icon text-success">
-                                        <i class="fas fa-check"></i>
-                                    </div>
-                                    <div class="message-content">
-                                        <div class="body">
-                                            Successfully register new user
-                                        </div>
-                                        <div class="time">8 hours ago</div>
-                                    </div>
-                                </a> --}}
+                                </a>
                                 @endforeach
+                                <a href="/daftar-notifikasi" class="text-center italic" style="font-size:small;">Lihat Semua Pesan <i class=" ms-1 mt-1 bi bi-arrow-right text-primary"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -150,12 +129,12 @@
                         </a>
                     </li>
                     @can('view', [auth()->user()])
-                        <li class="{{ Route::is('manage-admin.*') ? 'active' : '' }}">
-                            <a class="link" href="{{ route('manage-admin.index') }}">
-                                <i class="ti-id-badge"></i>
-                                <span>Manage Akun</span>
-                            </a>
-                        </li>
+                    <li class="{{ Route::is('manage-admin.*') ? 'active' : '' }}">
+                        <a class="link" href="{{ route('manage-admin.index') }}">
+                            <i class="ti-id-badge"></i>
+                            <span>Manage Akun</span>
+                        </a>
+                    </li>
                     @endcan
                     <li class="{{ Route::is('manage-perusahaan.*') ? 'active' : '' }}">
                         <a class="link" href="{{ route('manage-perusahaan.index') }}">
@@ -255,13 +234,14 @@
 
     <script>
         Main.init()
+
     </script>
     <script>
         var today = new Date();
         var options = {
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric'
+            day: 'numeric'
+            , month: 'long'
+            , year: 'numeric'
         };
         var formatter = new Intl.DateTimeFormat('id-ID', options);
         var formattedDate = formatter.format(today);
@@ -271,6 +251,7 @@
         var dayIndex = today.getDay();
         var dayName = days[dayIndex];
         document.getElementById('informasi-hari').innerHTML = dayName;
+
     </script>
     @stack('scripts')
 </body>
