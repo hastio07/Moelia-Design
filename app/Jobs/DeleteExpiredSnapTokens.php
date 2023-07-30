@@ -35,11 +35,12 @@ class DeleteExpiredSnapTokens implements ShouldQueue
             ->where('snap_token_created_at', '<', now()->subHours(24))
             ->get();
 
-        // Hapus snap token untuk setiap data yang telah kadaluarsa
+        // Hapus snap token untuk setiap data yang telah kedaluwarsa
         foreach ($expiredSnapTokens as $data) {
             $data->update([
                 'snap_token' => null,
                 'snap_token_created_at' => null,
+                'status' => 'unpaid',
             ]);
         }
 

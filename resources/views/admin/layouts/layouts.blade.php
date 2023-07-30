@@ -49,14 +49,15 @@
                     <div class="notification dropdown">
                         <a aria-expanded="false" data-bs-toggle="dropdown" href="#">
                             <i class="far fa-bell"></i>
-                            <span class="badge">12</span>
+                            <span class="badge">{{ auth()->user()->unreadNotifications->count() }}</span>
                         </a>
                         <ul class="dropdown-menu medium">
                             <li class="menu-header">
                                 <a class="dropdown-item" href="#">Notification</a>
                             </li>
                             <li class="menu-content ps-menu">
-                                <a href="#">
+                                @foreach (auth()->user()->unreadNotifications as $notification)
+                                    {{-- <a href="#">
                                     <div class="message-icon text-danger">
                                         <i class="fas fa-exclamation-triangle"></i>
                                     </div>
@@ -66,19 +67,19 @@
                                         </div>
                                         <div class="time">Just now</div>
                                     </div>
-                                </a>
-                                <a href="#">
-                                    <div class="message-icon text-info">
-                                        <i class="fas fa-info"></i>
-                                    </div>
-                                    <div class="message-content read">
-                                        <div class="body">
-                                            Your licence will expired soon
+                                </a> --}}
+                                    <a href="{{ url($notification->data['url']) }}">
+                                        <div class="message-icon text-info">
+                                            <i class="fas fa-info"></i>
                                         </div>
-                                        <div class="time">3 hours ago</div>
-                                    </div>
-                                </a>
-                                <a href="#">
+                                        <div class="message-content read">
+                                            <div class="body">
+                                                {{ $notification->data['messages'] }}
+                                            </div>
+                                            <div class="time">{{ $notification->created_at->diffForHumans() }}</div>
+                                        </div>
+                                    </a>
+                                    {{-- <a href="#">
                                     <div class="message-icon text-success">
                                         <i class="fas fa-check"></i>
                                     </div>
@@ -88,7 +89,8 @@
                                         </div>
                                         <div class="time">8 hours ago</div>
                                     </div>
-                                </a>
+                                </a> --}}
+                                @endforeach
                             </li>
                         </ul>
                     </div>

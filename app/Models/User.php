@@ -55,10 +55,10 @@ class User extends Authenticatable
     }
 
     /**
-     * Relasi database table users ke table manage_pesanan (one-to-many (invers))
+     * Relasi database table users ke table manage_pesanan (one-to-many)
      */
     public function pesanan()
     {
-        return $this->belongsTo(ManagePesanan::class, 'email_pemesan', 'email');
+        return $this->hasMany(ManagePesanan::class, 'email_pemesan', 'email');
     }
 }

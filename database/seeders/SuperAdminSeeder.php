@@ -18,7 +18,7 @@ class SuperAdminSeeder extends Seeder
             'role_id' => 1,
             'nama_depan' => 'Super',
             'nama_belakang' => 'Admin',
-            'email' => 'superadmin@moeliadesign.my.id',
+            'email' => 'superadmin@moeliadesign.com',
             'phone_number' => fake()->phoneNumber(),
             'password' => bcrypt('@Superadmin'),
         ]);

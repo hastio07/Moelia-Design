@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\ManagePesanan;
 use App\Models\User;
 use Hashids\Hashids;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -82,7 +83,7 @@ class RouteServiceProvider extends ServiceProvider
         // Model binding untuk User berdasarkan hash
         Route::bind('id_user', function ($value) {
             // Ubah kembali hash menjadi ID aslinya menggunakan Hashids
-            $hashids = new Hashids(env('HASHIDS_KEY'), 20); // Sesuaikan dengan panjang hash yang Anda gunakan
+            $hashids = new Hashids(env('HASHIDS_KEY'), env('HASHIDS_HAS_LENGTH')); // Sesuaikan dengan panjang hash yang Anda gunakan
             $ids = $hashids->decode($value);
 
             // Jika hash tidak valid atau tidak dapat di-decode, lempar exception 404
@@ -95,6 +96,23 @@ class RouteServiceProvider extends ServiceProvider
 
             // Cari data User berdasarkan ID
             return User::findOrFail($id);
+        });
+
+        Route::bind('id_pesanan', function ($value) {
+            // Ubah kembali hash menjadi ID aslinya menggunakan Hashids
+            $hashids = new Hashids(env('HASHIDS_KEY'), env('HASHIDS_HAS_LENGTH')); // Sesuaikan dengan panjang hash yang Anda gunakan
+            $ids = $hashids->decode($value);
+
+            // Jika hash tidak valid atau tidak dapat di-decode, lempar exception 404
+            if (empty($ids)) {
+                abort(404);
+            }
+
+            // Ambil ID aslinya
+            $id = $ids[0];
+
+            // Cari data User berdasarkan ID
+            return ManagePesanan::findOrFail($id);
         });
 
     }

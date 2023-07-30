@@ -18,7 +18,7 @@ class SuperUserSeeder extends Seeder
             'role_id' => 3,
             'nama_depan' => 'Hastio',
             'nama_belakang' => 'Wahyu',
-            'email' => 'hastio@moeliadesign.my.id',
+            'email' => 'hastio@moeliadesign.com',
             'phone' => fake()->phoneNumber(),
             'password' => bcrypt('@hast1o'),
         ]);
