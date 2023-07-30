@@ -203,6 +203,9 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
         Route::get('/cetak-kontrak', function () {
             return view('admin.CetakKontrak');
         });
+           Route::get('/daftar-notifikasi', function () {
+            return view('admin.DaftarNotifikasi');
+        });
     });
 });
 /** Akhir kode **/
