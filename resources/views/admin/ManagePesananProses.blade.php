@@ -6,10 +6,6 @@
 @endpush
 @section('content')
     <div class="content-wrapper">
-        {{-- <form action="{{ route('manage-pesanan-proses.create') }}" method="post">
-            @csrf
-            <button type="submit">Test</button>
-        </form> --}}
         <div class="row same-height">
             <div class="card">
                 <div class="card-body">
