@@ -350,10 +350,10 @@ class ManagePesananProsesController extends Controller
         $serverKey = config('midtrans.sb_server_key');
         $hashed = hash('sha512', $request->order_id . $request->status_code . $request->gross_amount . $serverKey);
 
-        if ($hashed == $request->signature_key) {
+        if ($hashed === $request->signature_key) {
             $transaction = $request->transaction_status;
-            $ManagePesanan = ManagePesanan::firstWhere('order_id', $request->order_id);
-            if ($transaction == 'capture' or $transaction == 'settlement') {
+            $ManagePesanan = ManagePesanan::where('order_id', $request->order_id)->first();
+            if ($transaction == 'capture' || $transaction == 'settlement') {
                 # 1. Update status dan waktu bayar by order_id
                 if ($request->settlement_time) {
                     // Jika ada properti settlement_time
@@ -383,6 +383,8 @@ class ManagePesananProsesController extends Controller
                 // TODO set payment status in merchant's database to 'Cancel'
                 $ManagePesanan->update(['status' => 'cancel']);
             }
+        } else {
+            return response()->json(['status' => 'gagal']);
         }
     }
 
@@ -417,12 +419,12 @@ class ManagePesananProsesController extends Controller
             'customer_details' => array(
                 'first_name' => $firstName,
                 'last_name' => $lastName,
-                'email' => $dataOrder->email_pemesan,
+                'email' => $dataOrder->email_pemesan->email,
                 'phone' => $dataOrder->telepon_pemesan,
                 'billing_address' => array(
                     'first_name' => $firstName,
                     'last_name' => $lastName,
-                    'email' => $dataOrder->email_pemesan,
+                    'email' => $dataOrder->email_pemesan->email,
                     'phone' => $dataOrder->telepon_pemesan,
                     'address' => $dataOrder->alamat_akad_dan_resepsi,
                     'city' => '',

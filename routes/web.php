@@ -21,7 +21,9 @@ use App\Http\Controllers\user\ProdukController;
 use App\Http\Controllers\user\ProfileUserController;
 use App\Http\Controllers\user\VideoController;
 use App\Models\Admin;
+use App\Models\ManagePesanan;
 use App\Notifications\ResetPassword\SendResetPasswordLink;
+use Hashids\Hashids;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
@@ -47,7 +49,7 @@ Route::middleware(['no-redirect-if-authenticated:admins,web', 'prevent-back-hist
 
         Route::controller(PembayaranUserController::class)->group(function () {
             Route::get('/pembayaran', 'index')->name('user-pembayaran.index');
-            Route::post('/pembayaran/refresh-token/{id_pesanan}', 'refreshMidtransToken')->name('user-pembayaran.refreshMidtransToken');
+            Route::post('pembayaran/refresh-token/{id_pesanan}', 'refreshMidtransToken')->name('user-pembayaran.refreshMidtransToken');
             Route::post('pembayaran/{id_order}/cancel', 'cancel')->name('user-pembayaran.cancel');
         });
 
@@ -69,7 +71,12 @@ Route::middleware(['no-redirect-if-authenticated:admins,web', 'prevent-back-hist
     });
 
     Route::get('test', function () {
-        $data = Admin::find(1);
+        $hashids = new Hashids(env('HASHIDS_KEY'), env('HASHIDS_HAS_LENGTH')); // Sesuaikan dengan panjang hash yang Anda gunakan
+        $ids = $hashids->decode('jR');
+        // Ambil ID aslinya
+        $id = $ids[0];
+
+        $data = ManagePesanan::findOrFail($id);
         return $data;
     });
 });

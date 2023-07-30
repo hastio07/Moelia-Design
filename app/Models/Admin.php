@@ -55,6 +55,6 @@ class Admin extends Authenticatable
      */
     public function pesanan()
     {
-        return $this->belongsTo(ManagePesanan::class);
+        return $this->hasMany(ManagePesanan::class, 'created_by', 'id');
     }
 }

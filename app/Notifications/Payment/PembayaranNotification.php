@@ -56,10 +56,10 @@ class PembayaranNotification extends Notification
     {
         return [
             'order_id' => $this->pembayaran->order_id,
-            'user_email' => $this->pembayaran->email_pemesan, // pengirim notif
+            'user_email' => $this->pembayaran->email_pemesan->email, // pengirim notif
             'pembayaran_id' => $this->pembayaran->id,
             'title' => 'Pembayaran Tagihan',
-            'messages' => $this->pembayaran->emailPemesan->nama_depan . ' ' . $this->pembayaran->emailPemesan->nama_belakang . ' Melakukan pembayaran ' . $this->pembayaran->jenis_pembayaran === 'dp' ? 'Uang Muka' : '' . '.',
+            'messages' => $this->pembayaran->email_pemesan->nama_depan . ' ' . $this->pembayaran->email_pemesan->nama_belakang . ' melakukan pembayaran' . $this->pembayaran->jenis_pembayaran === 'dp' ? ' Uang Muka' : '' . '.',
             'url' => route('manage-pesanan-proses.detail', $this->pembayaran->id),
         ];
     }

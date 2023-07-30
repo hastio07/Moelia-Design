@@ -18,6 +18,7 @@ class ManagePesanan extends Model
     protected $primaryKey = 'id';
     protected $table = 'manage_pesanan';
     protected $append = ['status_konfirmasi'];
+    protected $with = ['createdBy', 'emailPemesan'];
     protected $guarded = [];
 
     public function getIdHashFormatAttribute()
@@ -46,9 +47,9 @@ class ManagePesanan extends Model
     /**
      * Relasi database table manage_pesanan ke table admins (one-to-many)
      */
-    public function admin()
+    public function createdBy()
     {
-        return $this->hasMany(Admin::class);
+        return $this->belongsTo(Admin::class, 'created_by', 'id');
     }
     /**
      *  Relasi database table manage_pesanan ke table users (one-to-many (invers))
