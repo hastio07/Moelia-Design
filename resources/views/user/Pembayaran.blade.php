@@ -177,16 +177,26 @@
                                 <div class="col-6">Tgl Pembayaran:</div>
                                 <div class="col-6">
                                     @if($bayar_dp->jenis_pembayaran === 'dp' && $bayar_dp->waktu_pembayaran)
-                                    Waktu Pembayaran: {{ $bayar_dp->waktu_pembayaran }}
+                                    {{ date('d F Y', strtotime($bayar_dp->waktu_pembayaran)) }}
                                     @else
-                                    Pembayaran belum dilakukan atau menggunakan metode pembayaran lain.
+                                    <p class="fw-bold text-danger">-</p>
                                     @endif
                                 </div>
-
                             </div>
                             <div class="row mt-2">
                                 <div class="col-6">Waktu Pembayaran:</div>
-                                {{-- <div class="col-6">{!! $bayar_dp->waktu_pembayaran ?? '<p class="text-dark fw-bold">-</p>' !!}</div> --}}
+                                <div class="col-6">
+                                    @if($bayar_dp->jenis_pembayaran === 'dp' && $bayar_dp->waktu_pembayaran)
+                                    <?php
+                                    // Konversi waktu menjadi WIB
+                                    $waktu_pembayaran = new DateTime($bayar_dp->waktu_pembayaran, new DateTimeZone('UTC'));
+                                    $waktu_pembayaran->setTimezone(new DateTimeZone('Asia/Jakarta'));
+                                    ?>
+                                    {{ $waktu_pembayaran->format('H:i') }} WIB
+                                    @else
+                                    <p class="fw-bold text-danger">-</p>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                         <hr>
@@ -196,15 +206,26 @@
                                 <div class="col-6">Tgl Pembayaran:</div>
                                 <div class="col-6">
                                     @if($bayar_dp->jenis_pembayaran === 'fp' && $bayar_dp->waktu_pembayaran)
-                                    Waktu Pembayaran: {{ $bayar_dp->waktu_pembayaran }}
+                                    {{ date('d F Y', strtotime($bayar_dp->waktu_pembayaran)) }}
                                     @else
-                                    Pembayaran belum dilakukan atau menggunakan metode pembayaran lain.
+                                    <p class="fw-bold text-danger">-</p>
                                     @endif
                                 </div>
                             </div>
                             <div class="row mt-2">
                                 <div class="col-6">Waktu Pembayaran:</div>
-                                <div class="col-6">{!! $bayar_dp->waktu_pembayaran ?? '<p class="text-dark fw-bold">-</p>' !!}</div>
+                                <div class="col-6">
+                                    @if($bayar_dp->jenis_pembayaran === 'fp' && $bayar_dp->waktu_pembayaran)
+                                    <?php
+                                    // Konversi waktu menjadi WIB
+                                    $waktu_pembayaran = new DateTime($bayar_dp->waktu_pembayaran, new DateTimeZone('UTC'));
+                                    $waktu_pembayaran->setTimezone(new DateTimeZone('Asia/Jakarta'));
+                                    ?>
+                                    {{ $waktu_pembayaran->format('H:i') }} WIB
+                                    @else
+                                    <p class="fw-bold text-danger">-</p>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </div>
