@@ -177,7 +177,7 @@
                                 <div class="col-6">Tgl Pembayaran:</div>
                                 <div class="col-6">
                                     @if($bayar_dp->jenis_pembayaran === 'dp' && $bayar_dp->waktu_pembayaran)
-                                    {{ date('d F Y', strtotime($bayar_dp->waktu_pembayaran)) }}
+                                    {{ \Carbon\Carbon::parse($bayar_dp->waktu_pembayaran)->formatLocalized('%d %B %Y') }}
                                     @else
                                     <p class="fw-bold text-danger">-</p>
                                     @endif
@@ -187,12 +187,7 @@
                                 <div class="col-6">Waktu Pembayaran:</div>
                                 <div class="col-6">
                                     @if($bayar_dp->jenis_pembayaran === 'dp' && $bayar_dp->waktu_pembayaran)
-                                    <?php
-                                    // Konversi waktu menjadi WIB
-                                    $waktu_pembayaran = new DateTime($bayar_dp->waktu_pembayaran, new DateTimeZone('UTC'));
-                                    $waktu_pembayaran->setTimezone(new DateTimeZone('Asia/Jakarta'));
-                                    ?>
-                                    {{ $waktu_pembayaran->format('H:i') }} WIB
+                                    {{ \Carbon\Carbon::parse($bayar_dp->waktu_pembayaran)->setTimezone('Asia/Jakarta')->format('H:i') }} WIB
                                     @else
                                     <p class="fw-bold text-danger">-</p>
                                     @endif
@@ -206,7 +201,7 @@
                                 <div class="col-6">Tgl Pembayaran:</div>
                                 <div class="col-6">
                                     @if($bayar_dp->jenis_pembayaran === 'fp' && $bayar_dp->waktu_pembayaran)
-                                    {{ date('d F Y', strtotime($bayar_dp->waktu_pembayaran)) }}
+                                    {{ \Carbon\Carbon::parse($bayar_dp->waktu_pembayaran)->formatLocalized('%d %B %Y') }}
                                     @else
                                     <p class="fw-bold text-danger">-</p>
                                     @endif
@@ -216,12 +211,7 @@
                                 <div class="col-6">Waktu Pembayaran:</div>
                                 <div class="col-6">
                                     @if($bayar_dp->jenis_pembayaran === 'fp' && $bayar_dp->waktu_pembayaran)
-                                    <?php
-                                    // Konversi waktu menjadi WIB
-                                    $waktu_pembayaran = new DateTime($bayar_dp->waktu_pembayaran, new DateTimeZone('UTC'));
-                                    $waktu_pembayaran->setTimezone(new DateTimeZone('Asia/Jakarta'));
-                                    ?>
-                                    {{ $waktu_pembayaran->format('H:i') }} WIB
+                                    {{ \Carbon\Carbon::parse($bayar_dp->waktu_pembayaran)->setTimezone('Asia/Jakarta')->format('H:i') }} WIB
                                     @else
                                     <p class="fw-bold text-danger">-</p>
                                     @endif
