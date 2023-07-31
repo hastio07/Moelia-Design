@@ -45,7 +45,7 @@ class ManageAdminController extends Controller
             'nama_belakang' => 'required|string|min:5|max:255',
             'role_id' => 'required|integer|min:1|in:2',
             'phone_number' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/',
-            'email' => 'required|email:dns|unique:admins,email',
+            'email' => 'required|email:rfc,dns|unique:admins,email',
             'password' => 'required|min:5|max:255|confirmed',
         ];
         $massages = [
@@ -126,7 +126,7 @@ class ManageAdminController extends Controller
             'nama_belakang' => 'required|string|min:5|max:255',
             'role_id' => 'required|integer|min:1|in:2',
             'phone_number' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/',
-            'email' => 'required|email:dns|unique:admins,email,' . $decryptID[0],
+            'email' => 'required|email:rfc,dns|unique:admins,email,' . $decryptID[0],
             // 'password' => 'required|min:5|max:255|confirmed',
         ];
         $messages = [
@@ -140,7 +140,7 @@ class ManageAdminController extends Controller
             'unique' => ':attribute sudah digunakan.',
         ];
         // if ($request->input('email') != $admin->email) {
-        //     $rules['email'] = 'required|email:dns|unique:admins,email';
+        //     $rules['email'] = 'required|email:rfc,dns|unique:admins,email';
         // }
         $validator = Validator::make($request->all(), $rules, $messages); // fungsi untuk Validasi request
         /**

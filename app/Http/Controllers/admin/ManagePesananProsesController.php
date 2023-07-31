@@ -34,7 +34,7 @@ class ManagePesananProsesController extends Controller
             $list_pesanan = ManagePesanan::where('status', 'unpaid')->orWhere('tanggal_konfirmasi', null)->orWhere('status', 'expire')->orWhere('status', 'cancel')->orWhere('status', 'pending');
             return datatables()->of($list_pesanan)
                 ->editColumn('nama_pemesan', function ($value) {
-                    return '<a href="' . route('manage-pesanan-proses.detail', $value->id) . '">' . $value->nama_pemesan . '</a>';
+                    return '<a href="' . route('manage-pesanan-proses.detail', $value->id_hash_format) . '">' . $value->nama_pemesan . '</a>';
                 })
                 ->editColumn('telepon_pemesan', function ($value) {
                     return $value->telepon_pemesan;
@@ -150,7 +150,7 @@ class ManagePesananProsesController extends Controller
     {
         $rules = [
             'nama-pemesan' => 'required|string|max:255',
-            'email-pemesan' => ['required', 'string', 'email:dns', new CekEmailUser, 'max:255'],
+            'email-pemesan' => ['required', 'string', 'email:rfc,dns', new CekEmailUser, 'max:255'],
             'telepon-pemesan' => 'required|numeric|max:99999999999999|regex:/^(?:\+62)?\d{9,13}$/',
             'nama-pesanan' => 'required|string|max:255',
             'tanggal' => 'required|date',
@@ -324,8 +324,147 @@ class ManagePesananProsesController extends Controller
         return redirect()->route('manage-pesanan-proses.index')->with('success_add_pesanan', 'Pesanan berhasil disimpan');
     }
 
-    public function update(Request $request, ManagePesanan $id)
+    public function update(Request $request, ManagePesanan $ManagePesanan)
     {
+        $rules = [
+            'nama-pemesan' => 'required|string|max:255',
+            'email-pemesan' => ['required', 'string', 'email:rfc,dns', new CekEmailUser, 'max:255'],
+            'telepon-pemesan' => 'required|numeric|max:99999999999999|regex:/^(?:\+62)?\d{9,13}$/',
+            'nama-pesanan' => 'required|string|max:255',
+            'tanggal' => 'required|date',
+            'alamat' => 'required|string',
+            'biaya-awal' => 'required|numeric|max:9999999999|integer',
+            'biaya-additional' => 'required|numeric|max:9999999999|integer',
+            'biaya-seluruh' => 'required|numeric|max:9999999999|integer',
+            'uang-muka' => 'required|numeric|max:9999999999|integer',
+            'materi-kerja' => 'required|string',
+            'additional' => 'required|string',
+            'bonus' => 'required|string',
+        ];
+        $massages = [
+            'date' => 'kolom :attribute bukan tanggal yang valid.',
+            'email' => 'kolom :attribute harus berupa alamat surel yang valid.',
+            'integer' => 'kolom :attribute harus berupa angka.',
+            'max' => 'kolom :attribute melebihi panjang maksimum yang diizinkan',
+            'numeric' => 'kolom :attribute harus dalam format numerik.',
+            'regex' => 'format kolom :attribute tidak valid',
+            'required' => 'kolom :attribute wajib diisi.',
+            'string' => 'kolom :attribute hanya boleh berupa karakter teks.',
+        ];
+
+        $customAttributes = [
+            'nama-pemesan' => 'Nama Pemesan',
+            'email-pemesan' => 'E-mail Pemesan',
+            'telepon-pemesan' => 'Telepon Pemesan',
+            'nama-pesanan' => 'Nama Pesanan',
+            'tanggal' => 'Tanggal',
+            'alamat' => 'Alamat',
+            'biaya-awal' => 'Total biaya awal',
+            'biaya-additional' => 'Total biaya additional',
+            'biaya-seluruh' => 'Total biaya seluruh',
+            'uang-muka' => 'DP',
+            'materi-kerja' => 'Materi Kerja',
+            'additional' => 'Additional',
+            'bonus' => 'Bonus',
+        ];
+        //Validasi
+        $validator = Validator::make($request->all(), $rules, $massages, $customAttributes);
+
+        //Jika gagal
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput()->with('error_add_pesanan', 'Gagal menambahkan pesanan'); // jika ini di eksekusi maka dibawah tidak akan di eksekusi
+        }
+
+        $validatedData = $validator->validated();
+
+        if ($ManagePesanan->jenis_pembayaran === 'fp') {
+            $cal = $validatedData['biaya-seluruh'] - $validatedData['uang-muka'];
+            $sum = 0;
+        } else {
+            $cal = $validatedData['biaya-seluruh'];
+            $sum = $validatedData['uang-muka'];
+        }
+        $data = [
+            'created_by' => Auth::user()->id,
+            'order_id' => Str::uuid(),
+            'nama_pemesan' => $validatedData['nama-pemesan'],
+            'email_pemesan' => $validatedData['email-pemesan'],
+            'telepon_pemesan' => $validatedData['telepon-pemesan'],
+            'nama_pesanan' => $validatedData['nama-pesanan'],
+            'jenis_pembayaran' => 'dp',
+            'tanggal_akad_dan_resepsi' => $validatedData['tanggal'],
+            'alamat_akad_dan_resepsi' => $validatedData['alamat'],
+            'total_biaya_awal' => $validatedData['biaya-awal'],
+            'total_biaya_additional' => $validatedData['biaya-additional'],
+            'total_biaya_seluruh' => $cal,
+            'uang_muka' => $sum,
+            'materi_kerja' => $validatedData['materi-kerja'],
+            'additional' => $validatedData['additional'],
+            'bonus' => $validatedData['bonus'],
+        ];
+        //Simpan pesanan
+        $ManagePesanan->update($data);
+
+        //SAMPLE REQUEST START HERE
+        // Set your Merchant Server Key
+        \Midtrans\Config::$serverKey = config('midtrans.sb_server_key');
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        \Midtrans\Config::$isProduction = false;
+        // Set sanitization on (default)
+        \Midtrans\Config::$isSanitized = true;
+        // Set 3DS transaction for credit card to true
+        \Midtrans\Config::$is3ds = true;
+
+        $fullName = $validatedData['nama-pemesan'];
+        // Memecah nama lengkap menjadi array berdasarkan spasi
+        $nameParts = explode(' ', $fullName);
+        // Mendapatkan nama depan (first name)
+        $firstName = $nameParts[0];
+        // Menggabungkan sisanya menjadi nama belakang (last name)
+        // Jika nama belakang lebih dari satu kata, gabungkan dengan spasi
+        $lastName = implode(' ', array_slice($nameParts, 1));
+
+        if ($ManagePesanan->jenis_pembayaran === 'fp') {
+            $gross_amount = $ManagePesanan->total_biaya_seluruh;
+        } else {
+            $gross_amount = $ManagePesanan->uang_muka;
+        }
+
+        $params = array(
+            'transaction_details' => array(
+                'order_id' => $ManagePesanan->order_id,
+                'gross_amount' => $gross_amount,
+            ),
+            'customer_details' => array(
+                'first_name' => $firstName,
+                'last_name' => $lastName,
+                'email' => $validatedData['email-pemesan'],
+                'phone' => $validatedData['telepon-pemesan'],
+                'billing_address' => array(
+                    'first_name' => $firstName,
+                    'last_name' => $lastName,
+                    'email' => $validatedData['email-pemesan'],
+                    'phone' => $validatedData['telepon-pemesan'],
+                    'address' => $validatedData['alamat'],
+                    // 'city' => '',
+                    // 'postal_code' => '',
+                    'country_code' => 'IDN',
+                ),
+            ),
+            // 'page_expiry' => array(
+            //     'duration' => 24,
+            //     'unit' => 'hours',
+            // ),
+        );
+
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+        $ManagePesanan->update([
+            'snap_token' => $snapToken,
+            'snap_token_created_at' => Carbon::now(),
+            'status' => 'unpaid',
+        ]);
+
+        return redirect()->route('manage-pesanan-proses.index')->with('success_add_pesanan', 'Pesanan berhasil disimpan');
 
     }
     public function destroy(ManagePesanan $order_id)
@@ -340,8 +479,9 @@ class ManagePesananProsesController extends Controller
         return redirect()->route('manage-pesanan-proses.index')->with('error_delete_pesanan', 'Pesanan ini gagal dihapus karena sudah dibayar');
     }
 
-    public function detail(ManagePesanan $data)
+    public function detail(ManagePesanan $data, Request $request)
     {
+        auth()->user()->unreadNotifications->where('id', $request->get('ntf'))->first()?->markAsRead();
         return view('admin.DetailPesanan', compact('data'));
     }
 

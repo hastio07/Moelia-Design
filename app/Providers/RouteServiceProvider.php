@@ -115,5 +115,22 @@ class RouteServiceProvider extends ServiceProvider
             return ManagePesanan::findOrFail($id);
         });
 
+        Route::bind('id_detail_pesanan', function ($value) {
+            // Ubah kembali hash menjadi ID aslinya menggunakan Hashids
+            $hashids = new Hashids(env('HASHIDS_KEY'), env('HASHIDS_HAS_LENGTH')); // Sesuaikan dengan panjang hash yang Anda gunakan
+            $ids = $hashids->decode($value);
+
+            // Jika hash tidak valid atau tidak dapat di-decode, lempar exception 404
+            if (empty($ids)) {
+                abort(404);
+            }
+
+            // Ambil ID aslinya
+            $id = $ids[0];
+
+            // Cari data User berdasarkan ID
+            return ManagePesanan::findOrFail($id);
+        });
+
     }
 }

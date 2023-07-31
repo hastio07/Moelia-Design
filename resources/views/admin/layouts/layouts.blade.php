@@ -57,19 +57,20 @@
                             </li>
                             <li class="menu-content ps-menu">
                                 @foreach (auth()->user()->unreadNotifications as $notification)
-                                <a href="{{ url($notification->data['url']) }}">
-                                    <div class="message-icon text-info">
-                                        <i class="fas fa-info"></i>
-                                    </div>
-                                    <div class="message-content read">
-                                        <div class="body">
-                                            {{ $notification->data['messages'] }}
+                                    {{-- <a href="{{ url($notification->data['url'] . '?ntf=' . $notification->id) }}"> --}}
+                                    <a href="{{ route('manage-pesanan-proses.detail', ['id_detail_pesanan' => $notification->data['pembayaran_id'], 'ntf' => $notification->id]) }}">
+                                        <div class="message-icon text-info">
+                                            <i class="fas fa-info"></i>
                                         </div>
-                                        <div class="time">{{ $notification->created_at->diffForHumans() }}</div>
-                                    </div>
-                                </a>
+                                        <div class="message-content read">
+                                            <div class="body">
+                                                {{ $notification->data['messages'] }}
+                                            </div>
+                                            <div class="time">{{ $notification->created_at->diffForHumans() }}</div>
+                                        </div>
+                                    </a>
                                 @endforeach
-                                <a href="/daftar-notifikasi" class="text-center italic" style="font-size:small;">Lihat Semua Pesan <i class=" ms-1 mt-1 bi bi-arrow-right text-primary"></i></a>
+                                <a class="text-center italic" href="/daftar-notifikasi" style="font-size:small;">Lihat Semua Pesan <i class="bi bi-arrow-right text-primary ms-1 mt-1"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -129,12 +130,12 @@
                         </a>
                     </li>
                     @can('view', [auth()->user()])
-                    <li class="{{ Route::is('manage-admin.*') ? 'active' : '' }}">
-                        <a class="link" href="{{ route('manage-admin.index') }}">
-                            <i class="ti-id-badge"></i>
-                            <span>Manage Akun</span>
-                        </a>
-                    </li>
+                        <li class="{{ Route::is('manage-admin.*') ? 'active' : '' }}">
+                            <a class="link" href="{{ route('manage-admin.index') }}">
+                                <i class="ti-id-badge"></i>
+                                <span>Manage Akun</span>
+                            </a>
+                        </li>
                     @endcan
                     <li class="{{ Route::is('manage-perusahaan.*') ? 'active' : '' }}">
                         <a class="link" href="{{ route('manage-perusahaan.index') }}">
@@ -234,14 +235,13 @@
 
     <script>
         Main.init()
-
     </script>
     <script>
         var today = new Date();
         var options = {
-            day: 'numeric'
-            , month: 'long'
-            , year: 'numeric'
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
         };
         var formatter = new Intl.DateTimeFormat('id-ID', options);
         var formattedDate = formatter.format(today);
@@ -251,7 +251,6 @@
         var dayIndex = today.getDay();
         var dayName = days[dayIndex];
         document.getElementById('informasi-hari').innerHTML = dayName;
-
     </script>
     @stack('scripts')
 </body>
