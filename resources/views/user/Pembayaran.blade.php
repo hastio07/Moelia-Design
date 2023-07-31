@@ -10,6 +10,9 @@
     <div class="breadcrumbs align-self-center text-center">
         <h1>Pembayaran</h1>
         <div class="d-flex justify-content-center">
+            {{-- {{ Breadcrumbs::render('') }} --}}
+        </div>
+        <div class="d-flex justify-content-center">
         </div>
     </div>
     <div class="content-payment container">
@@ -172,11 +175,11 @@
                             <h6 class="fw-bold">Tahap 1 (DP)</h6>
                             <div class="row mt-2">
                                 <div class="col-6">Tgl Pembayaran:</div>
-                                <!-- <div class="col-6">22/04/2024</div> -->
+                                <div class="col-6">{!! $bayar_dp->waktu_pembayaran ?? '<p class="text-dark fw-bold">-</p>' !!}</div>
                             </div>
                             <div class="row mt-2">
                                 <div class="col-6">Waktu Pembayaran:</div>
-                                <!-- <div class="col-6">13:05:31 WIB</div> -->
+                                <div class="col-6">{!! $bayar_dp->waktu_pembayaran ?? '<p class="text-dark fw-bold">-</p>' !!}</div>
                             </div>
                         </div>
                         <hr>
@@ -184,11 +187,11 @@
                             <h6 class="fw-bold">Tahap 2 (Pelunasan)</h6>
                             <div class="row mt-2">
                                 <div class="col-6">Tgl Pembayaran:</div>
-                                <!-- <div class="col-6">30/05/2024</div> -->
+                                <div class="col-6"> {!! $bayar_dp->waktu_pembayaran ?? '<p class="text-dark fw-bold">-</p>' !!}</div>
                             </div>
                             <div class="row mt-2">
                                 <div class="col-6">Waktu Pembayaran:</div>
-                                <!-- <div class="col-6">18:07:55 WIB</div> -->
+                                <div class="col-6">{!! $bayar_dp->waktu_pembayaran ?? '<p class="text-dark fw-bold">-</p>' !!}</div>
                             </div>
                         </div>
                     </div>
@@ -266,45 +269,23 @@
                             @if (empty($bayar_dp->materi_kerja) || is_null($bayar_dp->materi_kerja))
                             <p>-</p>
                             @else
-                            <p class="text-capitalize">{{ $bayar_dp->materi_kerja }}</p>
+                            <p class="text-capitalize"> {!! $bayar_dp->materi_kerja !!}</p>
                             @endif
-                            <ol class="list-group list-group-numbered">
-                                <li class="list-group-item">4 meja penerima tamu</li>
-                                <li class="list-group-item">Buku tamu</li>
-                                <li class="list-group-item">Dekorasi Meja area akad</li>
-                                <li class="list-group-item">6 kursi akad</li>
-                                <li class="list-group-item">2 Kotak angpao (Gembok disiapkan tuan rumah)</li>
-                                <li class="list-group-item">Dekorasi Galeri Depan</li>
-                                <li class="list-group-item">Dekorasi Gazebo dengan lampu chandilier</li>
-                                <li class="list-group-item">Standing jalan dengan rangkaian bunga segar</li>
-                                <li class="list-group-item">Karpet jalan pengantin motif ilustrasi</li>
-                                <li class="list-group-item">Taman puade dengan rangkaian bunga segar</li>
-                                <li class="list-group-item">Dekorasi Puade dengan tema yang disepakati (Ready stock Moelia)</li>
-                            </ol>
                         </div>
                         <div class="feeoptional mt-3 rounded p-3 shadow">
                             <h6 class="fw-bold">Bonus <i class="bi bi-award-fill"></i></i></h6>
                             @if (empty($bayar_dp->bonus) || is_null($bayar_dp->bonus))
                             <p>-</p>
                             @else
-                            <p class="text-capitalize">{{ $bayar_dp->bonus }}</p>
+                            <p class="text-capitalize">{!! $bayar_dp->bonus !!}</p>
                             @endif
                             <hr>
-                            <h6 class="fw-bold">Optional <i class="bi bi-list-columns-reverse"></i></h6>
-                            <ol class="list-group list-group-numbered">
-                                <li class="list-group-item">Venue by Al-Furqon</li>
-                                <li class="list-group-item">Decoration by Moelia Design</li>
-                                <li class="list-group-item">Catering 1000 pax by Moelia Catering</li>
-                                <li class="list-group-item">MUA (Makeup Artist)</li>
-                                <li class="list-group-item">Wedding Organizer</li>
-                                <li class="list-group-item">Attire akad & resepsi:</li>
-                                <li class="list-group-item">2 Beskap ayah + kain + peci</li>
-                                <li class="list-group-item">2 kain ibu + selendang</li>
-                                <li class="list-group-item">Musik</li>
-                                <li class="list-group-item">Photography</li>
-                                <li class="list-group-item">Master of Ceremony</li>
-                                <li class="list-group-item">Tarian</li>
-                            </ol>
+                            <h6 class="fw-bold">Additional <i class="bi bi-list-columns-reverse"></i></h6>
+                            @if (empty($bayar_dp->additional) || is_null($bayar_dp->additional))
+                            <p>-</p>
+                            @else
+                            <p class="text-capitalize">{!! $bayar_dp->additional !!}</p>
+                            @endif
                         </div>
                         <div class="text-center">
                             @if (!empty($contact->whatsapp1_number))
