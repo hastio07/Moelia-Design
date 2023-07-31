@@ -103,7 +103,9 @@
                                 <li>Chat admin menggunakan button whatsapp</li>
                                 <li>Kirimkan hasil simulasi dan tunggu admin untuk membalas</li>
                             </ol>
-                            <a class="btn btn-primary mt-3" href="https://wa.me/+62{{ $contact->whatsapp1_number }}?text=Harap Kirimkan Hasil Screenshoot anda!">Konsultasikan <i class="bi bi-whatsapp ms-1"></i></a>
+                            @if (!empty($contact) && $contact->whatsapp1_number)
+                                <a class="btn btn-primary mt-3" href="https://wa.me/+62{{ $contact->whatsapp1_number }}?text=Harap Kirimkan Hasil Screenshoot anda!">Konsultasikan <i class="bi bi-whatsapp ms-1"></i></a>
+                            @endif
                         </div>
                     </div>
                 </div>
