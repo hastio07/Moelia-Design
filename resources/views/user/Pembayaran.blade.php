@@ -176,6 +176,9 @@
                             <div class="row mt-2">
                                 <div class="col-6">Tgl Pembayaran:</div>
                                 <div class="col-6">
+                                    @php
+                                    setlocale(LC_TIME, 'id_ID'); // Set locale menjadi bahasa Indonesia
+                                    @endphp
                                     @if($bayar_dp->jenis_pembayaran === 'dp' && $bayar_dp->waktu_pembayaran)
                                     {{ \Carbon\Carbon::parse($bayar_dp->waktu_pembayaran)->formatLocalized('%d %B %Y') }}
                                     @else
@@ -200,6 +203,9 @@
                             <div class="row mt-2">
                                 <div class="col-6">Tgl Pembayaran:</div>
                                 <div class="col-6">
+                                    @php
+                                    setlocale(LC_TIME, 'id_ID'); // Set locale menjadi bahasa Indonesia
+                                    @endphp
                                     @if($bayar_dp->jenis_pembayaran === 'fp' && $bayar_dp->waktu_pembayaran)
                                     {{ \Carbon\Carbon::parse($bayar_dp->waktu_pembayaran)->formatLocalized('%d %B %Y') }}
                                     @else
