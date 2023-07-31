@@ -176,19 +176,17 @@
                             <div class="row mt-2">
                                 <div class="col-6">Tgl Pembayaran:</div>
                                 <div class="col-6">
-                                    {!! $bayar_dp->waktu_pembayaran !!}
                                     @if($bayar_dp->jenis_pembayaran === 'dp' && $bayar_dp->waktu_pembayaran)
                                     Waktu Pembayaran: {{ $bayar_dp->waktu_pembayaran }}
                                     @else
                                     Pembayaran belum dilakukan atau menggunakan metode pembayaran lain.
                                     @endif
-
                                 </div>
 
                             </div>
                             <div class="row mt-2">
                                 <div class="col-6">Waktu Pembayaran:</div>
-                                <div class="col-6">{!! $bayar_dp->waktu_pembayaran ?? '<p class="text-dark fw-bold">-</p>' !!}</div>
+                                {{-- <div class="col-6">{!! $bayar_dp->waktu_pembayaran ?? '<p class="text-dark fw-bold">-</p>' !!}</div> --}}
                             </div>
                         </div>
                         <hr>
@@ -196,7 +194,13 @@
                             <h6 class="fw-bold">Tahap 2 (Pelunasan)</h6>
                             <div class="row mt-2">
                                 <div class="col-6">Tgl Pembayaran:</div>
-                                <div class="col-6"> {!! $bayar_dp->waktu_pembayaran ?? '<p class="text-dark fw-bold">-</p>' !!}</div>
+                                <div class="col-6">
+                                    @if($bayar_dp->jenis_pembayaran === 'fp' && $bayar_dp->waktu_pembayaran)
+                                    Waktu Pembayaran: {{ $bayar_dp->waktu_pembayaran }}
+                                    @else
+                                    Pembayaran belum dilakukan atau menggunakan metode pembayaran lain.
+                                    @endif
+                                </div>
                             </div>
                             <div class="row mt-2">
                                 <div class="col-6">Waktu Pembayaran:</div>
