@@ -4,7 +4,7 @@
 <div class="container">
     <div class="bg-danger rounded p-3 mb-3 text-white">
         <p class="fw-bold mb-0">Info <i class="bi bi-info-circle"></i></p>
-        <p class="mb-0">Data yang terdapat didalam tabel dibawahadalah data yang sudah selesai dari proeses pembayaran <a href="/pesanan-selesai" class="btn btn-light text-decoration-none">Pesanan Selesai</a></p>
+        <p class="mb-0">Data yang terdapat didalam tabel dibawahadalah data yang sudah selesai dari proeses pembayaran</p>
     </div>
     <div class="card p-2">
         <table class="display table" id="table-pesanan">
