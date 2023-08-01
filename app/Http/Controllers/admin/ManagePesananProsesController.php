@@ -76,7 +76,7 @@ class ManagePesananProsesController extends Controller
                         <div class="d-grid d-md-flex justify-content-md-center gap-2">
                             ' . ($value->jenis_pembayaran === 'dp' && ($value->status === 'unpaid' || $value->status === 'expire' || $value->status === 'cancel') ? '
                             <button class="btn btn-danger" data-bs-route="' . route('manage-pesanan-proses.destroy', $value->id) . '" data-bs-target="#DeleteModal" data-bs-toggle="modal" id="btnDeleteModal" type="button"><i class="bi bi-trash"></i></button>
-                            ' : '') . ($value->status === 'unpaid' && $value->tanggal_konfirmasi == null && $value->jenis_pembayaran !== 'fp' ? '
+                            ' : '') . ($value->status === 'unpaid' && $value->tanggal_konfirmasi == null ? '
                             <button class="btn btn-warning" data-bs-pesanan="' . $json . '" data-bs-route="' . route('manage-pesanan-proses.update', $value->id) . '" data-bs-target="#CUModal" data-bs-toggle="modal" id="btnUpdateModal" type="button"><i class="bi bi-pencil-square"></i></button>
                             ' : '') . ($value->status === 'paid' && $value->tanggal_konfirmasi == null ? '
                             <form action="' . route('manage-pesanan-proses.konfirmasi', $value->id) . '" method="post">
@@ -379,9 +379,11 @@ class ManagePesananProsesController extends Controller
 
         if ($ManagePesanan->jenis_pembayaran === 'fp') {
             $cal = $validatedData['biaya-seluruh'] - $validatedData['uang-muka'];
+            $jenis_pembayaran = 'fp';
             $sum = 0;
         } else {
             $cal = $validatedData['biaya-seluruh'];
+            $jenis_pembayaran = 'dp';
             $sum = $validatedData['uang-muka'];
         }
         $data = [
@@ -391,7 +393,7 @@ class ManagePesananProsesController extends Controller
             'email_pemesan' => $validatedData['email-pemesan'],
             'telepon_pemesan' => $validatedData['telepon-pemesan'],
             'nama_pesanan' => $validatedData['nama-pesanan'],
-            'jenis_pembayaran' => 'dp',
+            'jenis_pembayaran' => $jenis_pembayaran,
             'tanggal_akad_dan_resepsi' => $validatedData['tanggal'],
             'alamat_akad_dan_resepsi' => $validatedData['alamat'],
             'total_biaya_awal' => $validatedData['biaya-awal'],

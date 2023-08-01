@@ -166,8 +166,8 @@
                                     <span>Pesanan Diproses</span>
                                 </a>
                             </li>
-                            <li>
-                                <a class="link" href="/pesanan-selesai">
+                            <li class="{{ Route::is('manage-pesanan-selesai.*') ? 'active' : '' }}">
+                                <a class="link" href="{{route('manage-pesanan-selesai.index')}}">
                                     <span>Pesanan Selesai</span>
                                 </a>
                             </li>

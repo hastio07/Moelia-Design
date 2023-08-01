@@ -9,6 +9,7 @@ use App\Http\Controllers\admin\ManageLayananController;
 use App\Http\Controllers\admin\ManagePegawaiController;
 use App\Http\Controllers\admin\ManagePerusahaanController;
 use App\Http\Controllers\admin\ManagePesananProsesController;
+use App\Http\Controllers\admin\ManagePesananSelesaiController;
 use App\Http\Controllers\admin\ManageProdukController;
 use App\Http\Controllers\admin\ManageWeddingCalculatorController;
 use App\Http\Controllers\admin\ProfileAdminController;
@@ -140,6 +141,11 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
             Route::put('manage-pesanan-proses/konfirmasi/{data}', 'konfirmasi')->name('manage-pesanan-proses.konfirmasi');
             Route::get('manage-pesanan-proses/detail-pesanan/{id_detail_pesanan}', 'detail')->name('manage-pesanan-proses.detail');
         });
+        Route::controller(ManagePesananSelesaiController::class)->group(function () {
+            Route::get('manage-pesanan-selesai', 'index')->name('manage-pesanan-selesai.index');
+            Route::get('manage-pesanan-selesai/detail-pesanan/{id_detail_pesanan}', 'detail')->name('manage-pesanan-selesai.detail');
+            Route::delete('manage-pesanan-selesai/{order_id}', 'destroy')->name('manage-pesanan-selesai.destroy');
+        });
         Route::controller(ManageGalleryController::class)->group(function () {
             Route::get('manage-gallery', 'index')->name('manage-gallery.index');
             Route::get('manage-gallery/photo-tab', 'phototab')->name('manage-gallery.phototab');
@@ -209,9 +215,6 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
         });
         Route::get('/daftar-notifikasi', function () {
             return view('admin.DaftarNotifikasi');
-        });
-        Route::get('/pesanan-selesai', function () {
-            return view('admin.ManagePesananSelesai');
         });
     });
 });
