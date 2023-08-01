@@ -1,5 +1,5 @@
 @extends('admin.layouts.layouts')
-@section('title', 'Pesanan')
+@section('title', 'Pesanan-Proses')
 @push('styles')
     <link href="{{ asset('templates') }}/vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
     <link href="{{ asset('templates') }}/assets/css-modif/admin/ManagePesanan.css" rel="stylesheet">
@@ -9,6 +9,10 @@
         <div class="row same-height">
             <div class="card">
                 <div class="card-body">
+                    <div class="bg-danger rounded p-3 text-white">
+                        <p class="fw-bold mb-0">Info <i class="bi bi-info-circle"></i></p>
+                        <p class="mb-0">Pesanan yang sudah dikonfimasi akan hilang dari tabel pesanan proses, untuk melihatnya dapat melihat dimenu <a href="/pesanan-selesai" class="btn btn-light text-decoration-none">Pesanan Selesai</a></p>
+                    </div>
                     <div class="btn-modal d-flex mb-2 mt-3 gap-3">
                         <button class="btn icon-left btn-success d-flex" data-bs-route="{{ route('manage-pesanan-proses.create') }}" data-bs-target="#CUModal" data-bs-toggle="modal" id="btnCreateModal" type="button "><i class="bi bi-plus-lg"></i>
                             Pesanan
