@@ -21,9 +21,7 @@ use App\Http\Controllers\user\ProdukController;
 use App\Http\Controllers\user\ProfileUserController;
 use App\Http\Controllers\user\VideoController;
 use App\Models\Admin;
-use App\Models\ManagePesanan;
 use App\Notifications\ResetPassword\SendResetPasswordLink;
-use Hashids\Hashids;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
@@ -70,15 +68,21 @@ Route::middleware(['no-redirect-if-authenticated:admins,web', 'prevent-back-hist
         return $message->render();
     });
 
-    Route::get('test', function () {
-        $hashids = new Hashids(env('HASHIDS_KEY'), env('HASHIDS_HAS_LENGTH')); // Sesuaikan dengan panjang hash yang Anda gunakan
-        $ids = $hashids->decode('jR');
-        // Ambil ID aslinya
-        $id = $ids[0];
+    // Route::get('test', function () {
+    //     $hashids = new Hashids(env('HASHIDS_KEY'), env('HASHIDS_HAS_LENGTH')); // Sesuaikan dengan panjang hash yang Anda gunakan
+    //     // $ids = $hashids->decode('jR');
+    //     // // Ambil ID aslinya
+    //     // $id = $ids[0];
 
-        $data = ManagePesanan::findOrFail($id);
-        return $data;
-    });
+    //     $data = ManagePesanan::where('order_id', 'c0a2424d-06d1-4e5f-8985-ca692de1dc37')->first();
+    //     $decode = json_decode($data, true); // untuk menghasilkan array assosiatif
+    //     $decode['id_hash_format'] = $data->id_hash_format;
+
+    //     // $admins = Admin::get();
+    //     // Notification::send($admins, new PembayaranNotification($data));
+
+    //     return $decode;
+    // });
 });
 
 /** Awal kode untuk rute super_admin & admin**/
@@ -134,7 +138,7 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
             Route::put('manage-pesanan-proses/{id}', 'update')->name('manage-pesanan-proses.update');
             Route::delete('manage-pesanan-proses/{order_id}', 'destroy')->name('manage-pesanan-proses.destroy');
             Route::put('manage-pesanan-proses/konfirmasi/{data}', 'konfirmasi')->name('manage-pesanan-proses.konfirmasi');
-            Route::get('manage-pesanan-proses/detail-pesanan/{data}', 'detail')->name('manage-pesanan-proses.detail');
+            Route::get('manage-pesanan-proses/detail-pesanan/{id_detail_pesanan}', 'detail')->name('manage-pesanan-proses.detail');
         });
         Route::controller(ManageGalleryController::class)->group(function () {
             Route::get('manage-gallery', 'index')->name('manage-gallery.index');
@@ -203,7 +207,7 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
         Route::get('/cetak-kontrak', function () {
             return view('admin.CetakKontrak');
         });
-           Route::get('/daftar-notifikasi', function () {
+        Route::get('/daftar-notifikasi', function () {
             return view('admin.DaftarNotifikasi');
         });
     });

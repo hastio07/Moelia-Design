@@ -80,7 +80,7 @@ class ProfileAdminController extends Controller
                     'nama_depan' => 'sometimes|required|string|min:5,nama_depan|max:255',
                     'nama_belakang' => 'sometimes|required|string|min:5|max:255',
                     'phone_number' => 'sometimes|required|regex:/^([0-9\s\-\+\(\)]*)$/',
-                    'email' => 'sometimes|required|email:dns|unique:admins,email,' . $userID,
+                    'email' => 'sometimes|required|email:rfc,dns|unique:admins,email,' . $userID,
                 ];
                 //Buat pesan kesalahan
                 $massages = [

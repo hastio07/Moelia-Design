@@ -95,9 +95,9 @@
                                     <input class="form-control" id="nama-pemesan" name="nama-pemesan" required type="text" value="{{ old('nama-pemesan') }}">
                                 </div>
                                 <div class="form-inpt mt-1">
-                                    <p class="p-3 mb-0 bg-danger text-white rounded mt-3">Pastikan bahwa email yang dimasukan sudah terdaftar sebagai user. Daftar akun dapat dilihat di <a href="/manage-admin" class="">Manage Akun</a> pada daftar akun masyarakat</p>
+                                    <p class="bg-danger mb-0 mt-3 rounded p-3 text-white">Pastikan bahwa email yang dimasukan sudah terdaftar sebagai user. Daftar akun dapat dilihat di <a class="" href="/manage-admin">Manage Akun</a> pada daftar akun masyarakat</p>
                                     <label class="form-label" for="email-pemesan">Email Pemesan<span class="text-danger">*</span></label>
-                                    <input class="form-control" id="email-pemesan" name="email-pemesan"required type="email" value="{{ old('email-pemesan') }}">
+                                    <input class="form-control" id="email-pemesan" name="email-pemesan" required type="email" value="{{ old('email-pemesan') }}">
                                 </div>
                                 <div class="form-inpt mt-1">
                                     <label class="form-label" for="nama-pesanan">Nama Pesanan<span class="text-danger">*</span></label>
@@ -410,7 +410,7 @@
                 btnSubmit.textContent = 'Ubah'; // Ubah text tombol submit
 
                 InputNamaPemesanElement.value = parseData.nama_pemesan;
-                InputEmailPemesanElement.value = parseData.email_pemesan;
+                InputEmailPemesanElement.value = parseData.email_pemesan.email;
                 InputNamaPesananElement.value = parseData.nama_pesanan;
                 InputTeleponPemesanElement.value = parseData.telepon_pemesan;
                 InputTanggalElement.value = parseData.tanggal_akad_dan_resepsi;
