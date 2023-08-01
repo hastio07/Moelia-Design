@@ -1,7 +1,6 @@
 @extends('admin.layouts.layouts')
-@section('title', 'Detail Pesanan')
+@section('title', 'Detail Notifikasi')
 @section('content')
-
     <div class="container">
         <div class="card p-3">
             <h4 class="text-center">Daftar Notifikasi <i class="bi bi-bell-fill"></i></h4>
@@ -28,7 +27,6 @@
                     </a>
                 @endforeach
             @endif
-
         </div>
     </div>
 

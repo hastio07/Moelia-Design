@@ -57,7 +57,6 @@
                             </li>
                             <li class="menu-content ps-menu">
                                 @foreach (auth()->user()->unreadNotifications as $notification)
-                                    {{-- <a href="{{ url($notification->data['url'] . '?ntf=' . $notification->id) }}"> --}}
                                     <a href="{{ route('manage-pesanan-proses.detail', ['id_detail_pesanan' => $notification->data['pembayaran_id'], 'ntf' => $notification->id]) }}">
                                         <div class="message-icon text-info">
                                             <i class="fas fa-info"></i>
