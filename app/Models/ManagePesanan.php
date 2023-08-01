@@ -29,7 +29,7 @@ class ManagePesanan extends Model
 
     public function getStatusKonfirmasiAttribute()
     {
-        return $this->tanggal_konfirmasi === null ? 'Belum dikonfirmasi' : '<i class="bi bi-check2-square"></i>';
+        return $this->tanggal_konfirmasi === null ? 'Belum Dikonfirmasi' : 'Dikonfirmasi';
     }
 
     public function setTanggalAkadDanResepsiAttribute($value)
