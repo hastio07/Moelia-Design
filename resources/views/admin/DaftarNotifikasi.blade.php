@@ -14,7 +14,7 @@
                 @foreach (auth()->user()->unreadNotifications as $notification)
                     <a class="text-decoration-none" href="{{ route('manage-pesanan-proses.detail', ['id_detail_pesanan' => $notification->data['pembayaran_id'], 'ntf' => $notification->id]) }}">
                         <div class="notifikasi mb-3 mt-3 rounded border px-3 py-2 shadow">
-                            <h6 class="fw-bold text-dark">Arman Maulana</h6>
+                            <h6 class="fw-bold text-dark">{{$notification->data['title']}}</h6>
                             <div class="row">
                                 <div class="col-md-6 d-flex align-items-center my-2">
                                     <i class="bi bi-exclamation-circle text-warning fs-4 me-3"></i>
