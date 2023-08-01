@@ -10,7 +10,7 @@
                     <p>Saat Ini Tidak Ada Notifikasi!</p>
                 </div>
             @else
-                @foreach (auth()->user()->unreadNotifications as $notification)
+                @foreach (auth()->user()->notifications as $notification)
                     <a class="text-decoration-none" href="{{ route('manage-pesanan-proses.detail', ['id_detail_pesanan' => $notification->data['pembayaran_id'], 'ntf' => $notification->id]) }}">
                         <div class="notifikasi mb-3 mt-3 rounded border px-3 py-2 shadow">
                             <h6 class="fw-bold text-dark">{{$notification->data['title']}}</h6>
