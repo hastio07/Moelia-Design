@@ -27,7 +27,7 @@ class ManagePesananSelesaiController extends Controller
                     return $value->status_konfirmasi;
                 })->editColumn('status', function ($value) {
                     if ($value->status === 'paid') {
-                        return '<div class="spinner-grow spinner-grow-sm text-success" role="status"></div> Dibayar';
+                        return '<i class="bi bi-check2-square text-success"></i> Dibayar';
                     }
                 })->addColumn('aksi', function ($value) {
                     return '<button class="btn btn-danger" data-bs-route="' . route('manage-pesanan-selesai.destroy', $value->id) . '" data-bs-target="#DeleteModal" data-bs-toggle="modal" id="btnDeleteModal" type="button"><i class="bi bi-trash"></i></button>';
