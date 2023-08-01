@@ -11,7 +11,7 @@
                 <div class="card-body">
                     <div class="bg-danger rounded p-3 text-white">
                         <p class="fw-bold mb-0">Info <i class="bi bi-info-circle"></i></p>
-                        <p class="mb-0">Pesanan yang sudah dikonfimasi akan hilang dari tabel pesanan proses, untuk melihatnya dapat melihat dimenu <a href="/pesanan-selesai" class="btn btn-light text-decoration-none">Pesanan Selesai</a></p>
+                        <p class="mb-0">Pesanan yang sudah dikonfimasi akan hilang dari tabel pesanan proses, untuk melihatnya dapat melihat dimenu <a class="btn btn-light text-decoration-none" href="{{route('manage-pesanan-selesai.index')}}">Pesanan Selesai</a></p>
                     </div>
                     <div class="btn-modal d-flex mb-2 mt-3 gap-3">
                         <button class="btn icon-left btn-success d-flex" data-bs-route="{{ route('manage-pesanan-proses.create') }}" data-bs-target="#CUModal" data-bs-toggle="modal" id="btnCreateModal" type="button "><i class="bi bi-plus-lg"></i>
@@ -197,10 +197,10 @@
                     <div class="modal-body">
                         <div class="col-md-12">
                             {{-- DATE RANGE PICKER --}}
-                            <div class="input-group input-daterange datepicker date mb-3" data-date-format="dd-mm-yyyy">
-                                <input class="form-control" id="start_date" name="start_date" readonly="" required="" type="text" value="">
+                            <div class="input-group input-daterange datepicker date mb-3" data-date-format="yyyy-mm-dd">
+                                <input class="form-control" id="start_date" name="start_date" readonly="" required="" type="text">
                                 <span class="bg-primary text-light justify-content-center align-items-center d-flex px-3">to</span>
-                                <input class="form-control" id="end_date" name="end_date" readonly="" required="" type="text" value="">
+                                <input class="form-control" id="end_date" name="end_date" readonly="" required="" type="text">
                             </div>
                             {{-- DATE RANGE PICKER --}}
                         </div>
@@ -319,7 +319,7 @@
                 const start_date = document.getElementById('start_date').value;
                 const end_date = document.getElementById('end_date').value;
                 if (start_date != '' && end_date != '') {
-                    document.getElementById('table-pesanan').DataTable().destroy();
+                    $('#table-pesanan').DataTable().destroy();
                     load_data(start_date, end_date);
                 } else {
                     alert('Both Date is required');
@@ -330,7 +330,7 @@
             document.getElementById('refresh').addEventListener('click', function() {
                 document.getElementById('start_date').value = '';
                 document.getElementById('end_date').value = '';
-                document.getElementById('table-pesanan').DataTable().destroy();
+                $('#table-pesanan').DataTable().destroy();
                 load_data();
             });
         })
