@@ -206,8 +206,8 @@
                                     @php
                                     setlocale(LC_TIME, 'id_ID');
                                     @endphp
-                                    @if($bayar_dp->jenis_pembayaran === 'fp' && $bayar_dp->waktu_pembayaran)
-                                    {{ \Carbon\Carbon::parse($bayar_dp->waktu_pembayaran)->formatLocalized('%d %B %Y') }}
+                                    @if($bayar_fp->jenis_pembayaran === 'fp' && $bayar_fp->waktu_pembayaran)
+                                    {{ \Carbon\Carbon::parse($bayar_fp->waktu_pembayaran)->formatLocalized('%d %B %Y') }}
                                     @else
                                     <p class="fw-bold text-danger">-</p>
                                     @endif
@@ -216,8 +216,8 @@
                             <div class="row mt-2">
                                 <div class="col-6">Waktu Pembayaran:</div>
                                 <div class="col-6">
-                                    @if($bayar_dp->jenis_pembayaran === 'fp' && $bayar_dp->waktu_pembayaran)
-                                    {{ \Carbon\Carbon::parse($bayar_dp->waktu_pembayaran)->setTimezone('Asia/Jakarta')->format('H:i') }} WIB
+                                    @if($bayar_fp->jenis_pembayaran === 'fp' && $bayar_fp->waktu_pembayaran)
+                                    {{ \Carbon\Carbon::parse($bayar_fp->waktu_pembayaran)->setTimezone('Asia/Jakarta')->format('H:i') }} WIB
                                     @else
                                     <p class="fw-bold text-danger">-</p>
                                     @endif
