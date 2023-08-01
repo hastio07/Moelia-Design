@@ -167,7 +167,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="link" href="/PesananSelesai">
+                                <a class="link" href="/pesanan-selesai">
                                     <span>Pesanan Selesai</span>
                                 </a>
                             </li>
@@ -204,7 +204,6 @@
                         </a>
                     </li>
                 </ul>
-
             </div>
         </nav>
         <div class="main-content">

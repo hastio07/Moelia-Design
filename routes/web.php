@@ -210,6 +210,9 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
         Route::get('/daftar-notifikasi', function () {
             return view('admin.DaftarNotifikasi');
         });
+        Route::get('/pesanan-selesai', function () {
+            return view('admin.ManagePesananSelesai');
+        });
     });
 });
 /** Akhir kode **/
