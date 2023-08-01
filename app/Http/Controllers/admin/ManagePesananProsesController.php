@@ -19,19 +19,36 @@ class ManagePesananProsesController extends Controller
 {
     public function index(Request $request)
     {
+
         if ($request->ajax()) {
             //Jika request start_date ada value(datanya) maka
             if (!empty($request->start_date)) {
                 //Jika tanggal awal(start_date) hingga tanggal akhir(end_date) adalah sama maka
                 if ($request->start_date === $request->end_date) {
                     //kita filter tanggalnya sesuai dengan request start_date
-                    $list_pesanan = ManagePesanan::where('status', 'unpaid')->orWhere('tanggal_konfirmasi', null)->orWhere('status', 'expire')->orWhere('status', 'cancel')->orWhere('status', 'pending')->whereDate('created_at', '=', $request->start_date);
+                    $list_pesanan = ManagePesanan::where(function ($query) {
+                                        $query->where('status', 'unpaid')
+                                            ->orWhere('status', 'expire')
+                                            ->orWhere('status', 'cancel')
+                                            ->orWhere('status', 'pending');
+                                    })->whereNull('waktu_pembayaran')->whereNull('tanggal_konfirmasi')->whereDate('created_at', $request->start_date);
                 } else {
                     //kita filter dari tanggal awal ke akhir
-                    $list_pesanan = ManagePesanan::where('status', 'unpaid')->orWhere('tanggal_konfirmasi', null)->orWhere('status', 'expire')->orWhere('status', 'cancel')->orWhere('status', 'pending')->whereBetween('created_at', array($request->start_date, $request->end_date));
+                    $list_pesanan = ManagePesanan::where(function ($query) {
+                                        $query->where('status', 'unpaid')
+                                            ->orWhere('status', 'expire')
+                                            ->orWhere('status', 'cancel')
+                                            ->orWhere('status', 'pending');
+                                    })->whereNull('waktu_pembayaran')->whereNull('tanggal_konfirmasi')->whereBetween('created_at', array($request->start_date, $request->end_date));
                 }
+            } else {
+                $list_pesanan = ManagePesanan::where(function ($query) {
+                                    $query->where('status', 'unpaid')
+                                        ->orWhere('status', 'expire')
+                                        ->orWhere('status', 'cancel')
+                                        ->orWhere('status', 'pending');
+                                })->whereNull('waktu_pembayaran')->whereNull('tanggal_konfirmasi');
             }
-            $list_pesanan = ManagePesanan::where('status', 'unpaid')->orWhere('tanggal_konfirmasi', null)->orWhere('status', 'expire')->orWhere('status', 'cancel')->orWhere('status', 'pending');
             return datatables()->of($list_pesanan)
                 ->editColumn('nama_pemesan', function ($value) {
                     return '<a href="' . route('manage-pesanan-proses.detail', $value->id_hash_format) . '">' . $value->nama_pemesan . '</a>';
