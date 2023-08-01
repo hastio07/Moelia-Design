@@ -105,10 +105,10 @@
                                     <p class="fw-bold">Biaya Seluruh</p>
                                 </div>
                                 <div class="col-6">
-                                    @if (empty($bayar_fp->total_biaya_seluruh) || is_null($bayar_fp->total_biaya_seluruh))
+                                    @if (empty($bayar_dp->total_biaya_seluruh) || is_null($bayar_dp->total_biaya_seluruh))
                                     <p>-</p>
                                     @else
-                                    <p>{{ $bayar_fp->formatRupiah('total_biaya_seluruh') }}</p>
+                                    <p>{{ $bayar_dp->formatRupiah('total_biaya_seluruh') }}</p>
                                     @endif
                                 </div>
                             </div>
@@ -117,10 +117,10 @@
                                     <p class="fw-bold">Uang Muka (DP)</p>
                                 </div>
                                 <div class="col-6">
-                                    @if (empty($bayar_fp->uang_muka) || is_null($bayar_fp->uang_muka))
+                                    @if (empty($bayar_dp->uang_muka) || is_null($bayar_dp->uang_muka))
                                     <p>-</p>
                                     @else
-                                    <p>{{ $bayar_fp->formatRupiah('uang_muka') }}</p>
+                                    <p>{{ $bayar_dp->formatRupiah('uang_muka') }}</p>
                                     @endif
                                 </div>
                             </div>
@@ -204,7 +204,7 @@
                                 <div class="col-6">Tgl Pembayaran:</div>
                                 <div class="col-6">
                                     @php
-                                    setlocale(LC_TIME, 'id_ID'); // Set locale menjadi bahasa Indonesia
+                                    setlocale(LC_TIME, 'id_ID');
                                     @endphp
                                     @if($bayar_dp->jenis_pembayaran === 'fp' && $bayar_dp->waktu_pembayaran)
                                     {{ \Carbon\Carbon::parse($bayar_dp->waktu_pembayaran)->formatLocalized('%d %B %Y') }}
