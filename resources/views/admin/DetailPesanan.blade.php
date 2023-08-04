@@ -62,16 +62,7 @@
                         <p class="fw-bold text-danger">-</p>
                         @endif
                         <p>Status <span class="text-success">{{ $data->status_format }}</span></p>
-                        <hr> 
-
-                        {{-- <h6 class="fw-bold">Riwayat Pelunasan<i class="bi bi-arrow-clockwise"></i></h6>
-                        @if($data->jenis_pembayaran === 'fp' && $data->waktu_pembayaran)
-                        <p>Tgl. Bayar: {{ \Carbon\Carbon::parse($data->waktu_pembayaran)->translatedFormat('d F Y') }}</p>
-                        @else
-                        <p class="fw-bold text-danger">-</p>
-                        @endif --}}
-
-                        <p>Status <span class="text-success">{{ $data->status_format }}</span></p>
+                        <hr>
                     </div>
                 </div>
             </div>
