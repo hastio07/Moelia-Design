@@ -86,7 +86,7 @@
             <h6 class="fw-bold">TOTAL BIAYA SELURUH : {{ $ManagePesanan->total_biaya_seluruh }}</h6>
             <h6 class="fw-bold">Uang Muka(DP) : {{ $ManagePesanan->uang_muka }}</h6>
             <div class="row mt-5">
-                <p>Bandar Lampung, {{ \Carbon\Carbon::parse($ManagePesanan->created_at)->formatLocalized('%d %B %Y') }}</p>
+                <p>Bandar Lampung, {{ \Carbon\Carbon::parse($ManagePesanan->created_at)->translatedFormat('d F Y')}}</p>
                 <div class="col">
                     <p>Pemasan</p>
                     <br>
