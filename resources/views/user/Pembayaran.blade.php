@@ -176,11 +176,9 @@
                             <div class="row mt-2">
                                 <div class="col-6">Tgl Pembayaran:</div>
                                 <div class="col-6">
-                                    @php
-                                    setlocale(LC_TIME, 'id_ID'); // Set locale menjadi bahasa Indonesia
-                                    @endphp
                                     @if($bayar_dp->jenis_pembayaran === 'dp' && $bayar_dp->waktu_pembayaran)
-                                    {{ \Carbon\Carbon::parse($bayar_dp->waktu_pembayaran)->formatLocalized('%d %B %Y') }}
+                                    {{-- <li>Hari/Tgl:  {{ \Carbon\Carbon::parse($bayar_dp->waktu_pembayaran)->translatedFormat('l, d F Y') }}</li> --}}
+                                    {{ \Carbon\Carbon::parse($bayar_dp->waktu_pembayaran)->translatedFormat('d B Y') }}
                                     @else
                                     <p class="fw-bold text-danger">-</p>
                                     @endif
@@ -203,11 +201,8 @@
                             <div class="row mt-2">
                                 <div class="col-6">Tgl Pembayaran:</div>
                                 <div class="col-6">
-                                    @php
-                                    setlocale(LC_TIME, 'id_ID');
-                                    @endphp
                                     @if($bayar_fp->jenis_pembayaran === 'fp' && $bayar_fp->waktu_pembayaran)
-                                    {{ \Carbon\Carbon::parse($bayar_fp->waktu_pembayaran)->formatLocalized('%d %B %Y') }}
+                                    {{ \Carbon\Carbon::parse($bayar_fp->waktu_pembayaran)->translatedFormat('d B Y') }}
                                     @else
                                     <p class="fw-bold text-danger">-</p>
                                     @endif
@@ -248,7 +243,7 @@
                             @if (empty($bayar_dp->tanggal_akad_dan_resepsi) || is_null($bayar_dp->tanggal_akad_dan_resepsi))
                             <p>-</p>
                             @else
-                            <p class="text-capitalize">{{ date('d F Y', strtotime($bayar_dp->tanggal_akad_dan_resepsi)) }}</p>
+                            <p class="text-capitalize">{{ \Carbon\Carbon::parse($bayar_dp->tanggal_akad_dan_resepsi)->translatedFormat('d F Y') }}</p>
                             @endif
                             <hr>
                             <h6 class="fw-bold">Alamat Akad & Resepsi <i class="bi bi-geo-alt-fill"></i></h6>
