@@ -54,7 +54,7 @@
                                             Link reset password ini akan kedaluwarsa dalam 60 menit
                                         </p>
                                         <p style="text-align: left; margin-top: 0; color: #74787e; font-size: 16px; line-height: 1.5em;">
-                                            Jika Anda tidak meminta pengaturan ulang password, tidak perlu melakukan tindakan lebih lanjut.
+                                            Jika Anda tidak meminta pengaturan ulang kata sandi, tidak perlu melakukan tindakan lebih lanjut.
                                         </p>
                                         <p style="text-align: left; margin-top: 0; color: #74787e; font-size: 16px; line-height: 1.5em;">
                                             Terima kasih telah menggunakan MoeliaDesign.
@@ -92,7 +92,7 @@
                                     <td style="font-family: Arial, 'Helvetica Neue', Helvetica,sans-serif;color: #aeaeae; padding: 35px 35px 0 35px;text-align: center;">
                                         <p style="text-align: left;margin-top: 0;color: #74787e;font-size: 12px;line-height: 1.5em;">
                                             ©2023
-                                            <a href="#" rel="nofollow noopener noreferrer" style="color: #ff291b" target="_blank">MoeliaDesign</a>.
+                                            <a href="https://moeliadesign.com" rel="nofollow noopener noreferrer" style="color: #ff291b" target="_blank">MoeliaDesign</a>.
                                             <span style="color: #99acc2"> Made with &hearts;</span>.
                                         </p>
                                     </td>
@@ -103,25 +103,25 @@
                                         <table align="center" border="0" cellpadding="0" cellspacing="0">
                                             <tr>
                                                 <td>
-                                                    <a href="{{ $sosmeds->l_facebook }}" style="text-decoration: none" target="_blank">
+                                                    <a href="{{ $sosmeds->l_facebook ?? '#' }}" style="text-decoration: none" target="_blank">
                                                         <i class="bi bi-facebook" style="color:blue;font-size:18px;"></i>
                                                     </a>
                                                 </td>
                                                 <td style="width: 6px" width="6">&nbsp;</td>
                                                 <td>
-                                                    <a href="{{ $sosmeds->l_twitter }}" style="text-decoration: none" target="_blank">
+                                                    <a href="{{ $sosmeds->l_twitter ?? '#' }}" style="text-decoration: none" target="_blank">
                                                         <i class="bi bi-twitter" style="color:lightblue;font-size:18px;"></i>
                                                     </a>
                                                 </td>
                                                 <td style="width: 6px" width="6">&nbsp;</td>
                                                 <td>
-                                                    <a href="{{ $sosmeds->l_youtube }}" style="text-decoration: none" target="_blank">
+                                                    <a href="{{ $sosmeds->l_youtube ?? '#' }}" style="text-decoration: none" target="_blank">
                                                         <i class="bi bi-youtube" style="color:red;font-size:18px;"></i>
                                                     </a>
                                                 </td>
                                                 <td style="width: 6px" width="6">&nbsp;</td>
                                                 <td>
-                                                    <a href="{{ $sosmeds->l_tiktok }}" style="text-decoration: none" target="_blank">
+                                                    <a href="{{ $sosmeds->l_tiktok ?? '#' }}" style="text-decoration: none" target="_blank">
                                                         <i class="bi bi-tiktok" style="color:black;font-size:18px;"></i>
                                                     </a>
                                                 </td>

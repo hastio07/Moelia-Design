@@ -85,6 +85,9 @@ Route::middleware(['no-redirect-if-authenticated:admins,web', 'prevent-back-hist
 
     //     return $decode;
     // });
+    // Route::get('/test', function () {
+    //     abort(500, 'This is a test error.');
+    // });
 });
 Route::middleware(['auth:admins,web', 'prevent-back-history'])->group(function () {
     Route::get('/cetak-kontrak/{email}', [CetakKontrakController::class, 'index'])->name('CetakKontrak');
@@ -132,6 +135,7 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
             Route::post('manage-produk', 'store')->name('manage-produk.store');
             Route::put('manage-produk/{id}', 'update')->name('manage-produk.update');
             Route::delete('manage-produk/{id}', 'destroy')->name('manage-produk.destroy');
+            Route::delete('manage-produk/{id}/{index}', 'destroyAlbum')->name('manage-produk.destroyAlbum');
             Route::post('manage-produk/kategori', 'createcategory')->name('manage-produk.createcategory');
             Route::delete('manage-produk/kategori/{id}', 'destroycategory')->name('manage-produk.destroycategory');
         });
