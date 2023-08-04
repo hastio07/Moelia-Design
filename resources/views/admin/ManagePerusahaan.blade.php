@@ -348,8 +348,8 @@
                                                                 </div>
                                                                 {!! $visi_misis->visi ?? '<p class="bg-warning rounded p-3 border text-white text-center mt-3">-- Visi Kosong --</p>' !!}
                                                             </div>
-                                                            <div class="mb-3">
-                                                                <div class="mb-4 mt-3 ms-3">
+                                                            <div class="mb-3 ps-4">
+                                                                <div class="mb-4 mt-3">
                                                                     <h4 class="text-center">Misi</h4>
                                                                 </div>
                                                                 {!! $visi_misis->misi ?? ' <p class="bg-warning rounded p-3 border text-white text-center mt-3">-- Misi Kosong --</p>' !!}
