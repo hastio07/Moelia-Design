@@ -349,13 +349,13 @@
                                                                 {!! $visi_misis->visi ?? '<p class="bg-warning rounded p-3 border text-white text-center mt-3">-- Visi Kosong --</p>' !!}
                                                             </div>
                                                             <div class="mb-3">
-                                                                <div class="mb-4 mt-3">
+                                                                <div class="mb-4 mt-3 ms-3">
                                                                     <h4 class="text-center">Misi</h4>
                                                                 </div>
                                                                 {!! $visi_misis->misi ?? ' <p class="bg-warning rounded p-3 border text-white text-center mt-3">-- Misi Kosong --</p>' !!}
                                                             </div>
                                                         @else
-                                                            <p class="bg-warning rounded border p-3 text-center text-white">-- Data Alamat Kosong --</p>
+                                                            <p class="bg-warning rounded border p-3 text-center text-white">-- Data Visi & Misi Kosong --</p>
                                                         @endif
                                                     </div>
                                                 </div>
