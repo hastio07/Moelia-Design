@@ -31,8 +31,8 @@ Breadcrumbs::for('vidio', function (BreadcrumbTrail $trail) {
     $trail->push('Vidio', route('vidio'));
 });
 
-// Home / About Us
-Breadcrumbs::for('aboutus', function (BreadcrumbTrail $trail) {
+//home / Pembayaran
+Breadcrumbs::for('pembayaran', function (BreadcrumbTrail $trail) {
     $trail->parent('home');
-    $trail->push('About Us', route('aboutus'));
+    $trail->push('Pembayaran', route('user-pembayaran.index'));
 });
