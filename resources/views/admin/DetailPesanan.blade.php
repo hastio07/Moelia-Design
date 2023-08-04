@@ -38,7 +38,7 @@
             </div>
             <div class="col-md-4">
                 <div class="details-right mt-2">
-                     <h6 class="fw-bold">Nama Paket <i class="bi bi-box-seam"></i></h6>
+                    <h6 class="fw-bold">Nama Paket <i class="bi bi-box-seam"></i></h6>
                     {{ $data->nama_pesanan }}
                     <hr>
                     <h6 class="fw-bold">Materi Kerja <i class="bi bi-journal-text"></i></h6>
@@ -56,11 +56,20 @@
                     <hr>
                     <div class="shadow rounded p-3">
                         <h6 class="fw-bold">Riwayat Pembayaran DP<i class="bi bi-arrow-clockwise"></i></h6>
-                        <p>Tgl. Bayar: 12/10/2023</p>
+                        @if($data->jenis_pembayaran === 'dp' && $data->waktu_pembayaran)
+                        <p>Tgl. Bayar: {{ \Carbon\Carbon::parse($data->waktu_pemayaran)->translatedFormat('d F Y') }}</p>
+                        @else
+                        <p class="fw-bold text-danger">-</p>
+                        @endif
                         <p>Status <span class="text-success">{{ $data->status_format }}</span></p>
                         <hr>
                         <h6 class="fw-bold">Riwayat Pelunasan<i class="bi bi-arrow-clockwise"></i></h6>
-                        <p>Tgl. Bayar: 12/11/2023</p>
+                        @if($data->jenis_pembayaran === 'fp' && $data->waktu_pembayaran)
+                        <p>Tgl. Bayar: {{ \Carbon\Carbon::parse($data->waktu_pemayaran)->translatedFormat('d F Y') }}</p>
+                        @else
+                        <p class="fw-bold text-danger">-</p>
+                        @endif
+
                         <p>Status <span class="text-success">{{ $data->status_format }}</span></p>
                     </div>
                 </div>
