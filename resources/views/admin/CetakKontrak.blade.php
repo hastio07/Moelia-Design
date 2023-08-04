@@ -88,7 +88,7 @@
             <div class="row mt-5">
                 <p>Bandar Lampung, {{ \Carbon\Carbon::parse($ManagePesanan->created_at)->translatedFormat('d F Y')}}</p>
                 <div class="col">
-                    <p>Pemasan</p>
+                    <p>Pemesan</p>
                     <br>
                     <br>
                     <br>
