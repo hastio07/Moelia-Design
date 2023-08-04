@@ -66,7 +66,7 @@
                 </div>
             </div>
             <div class="mt-4 text-center">
-                <a class="btn btn-success" href="/cetak-kontrak">Lihat Surat Kontrak <i class="bi bi-search"></i></a>
+                <a class="btn btn-success" href="/cetak-kontrak/{{$data->email_pemesan}}">Lihat Surat Kontrak <i class="bi bi-search"></i></a>
             </div>
         </div>
     </div>
