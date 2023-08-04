@@ -10,6 +10,7 @@ use App\Models\Photo;
 use App\Models\Product;
 use App\Models\Service;
 use App\Models\Video;
+use Illuminate\Support\Facades\DB;
 
 class DashboardAdminsController extends Controller
 {
@@ -22,10 +23,23 @@ class DashboardAdminsController extends Controller
         $jumlahVideo = Video::count();
         $jumlahJadwal = Jadwal::count();
         $jumlahLayanan = Service::count();
-        $managePesanan = ManagePesanan::count();
+
+        //untuk menjumlahkan pesanan baru/proses
+        $results = ManagePesanan::select('email_pemesan', DB::raw('COUNT(DISTINCT email_pemesan) as count'))->groupBy('email_pemesan')->get();
+        $managePesanan = $results->count();
+
+        //untuk menjumlahkan pesanan selesai
+        $resultsII = ManagePesanan::select('email_pemesan', DB::raw('COUNT(*) as count'))
+            ->whereNotNull('waktu_pembayaran')
+            ->whereNotNull('tanggal_konfirmasi')
+            ->groupBy('email_pemesan')
+            ->get();
+        $managePesananSelesai = $resultsII->count();
+
         $jadwal = Jadwal::get();
 
-        return view('admin.Dashboard', compact('jumlahProduk', 'jumlahPegawai', 'jumlahPhoto', 'jumlahVideo', 'jumlahJadwal', 'jumlahLayanan', 'jadwal', 'managePesanan'));
+
+        return view('admin.Dashboard', compact('jumlahProduk', 'jumlahPegawai', 'jumlahPhoto', 'jumlahVideo', 'jumlahJadwal', 'jumlahLayanan', 'jadwal', 'managePesanan','managePesananSelesai'));
 
     }
 }
