@@ -6,6 +6,7 @@ use App\Models\Sosmed;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Support\Facades\Lang;
 
 class SendResetPasswordLink extends ResetPassword
 {
@@ -36,7 +37,7 @@ class SendResetPasswordLink extends ResetPassword
             'email' => $notifiable->getEmailForPasswordReset(),
         ]));
 
-        return (new MailMessage)->action('Reset Password', $url)->view('mail.send-reset-password-link', [
+        return (new MailMessage)->subject(Lang::get('Reset Password Notification'))->action('Reset Password', $url)->view('mail.send-reset-password-link', [
             'sosmeds' => Sosmed::first(),
         ]);
     }

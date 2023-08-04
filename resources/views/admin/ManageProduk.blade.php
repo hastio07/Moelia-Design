@@ -101,7 +101,7 @@
                                     <button class="btn btn-success" type="submit">Tambah</button>
                                 </form>
                                 <div class="list-kategori mt-4">
-                                    <table class="caption-top mt-3 table border">
+                                    <table class="mt-3 table caption-top border">
                                         <caption class="fw-bold text-center">List Kategori</caption>
                                         <tbody>
                                             @foreach ($get_category_product as $value)
@@ -230,41 +230,34 @@
 
         const albumProdukInput = document.querySelector('#album-produk');
         const previewContainer = document.querySelector('#preview-container');
-        const maxPhotos = 10;
-        const minPhotos = 3;
-
-        albumProdukInput.addEventListener('change', (e) => {
-            // Hapus semua child nodes di dalam previewContainer
-
-
-            if (window.File && window.FileReader && window.FileList && window.Blob) {
-                const files = e.currentTarget.files;
-                if (files.length >= minPhotos && files.length <= maxPhotos) {
-                    previewContainer.innerHTML = '';
-                    for (let i = 0; i < files.length; i++) {
-                        if (!files[i].type.match("image")) continue;
-                        const picReader = new FileReader();
-                        picReader.addEventListener("load", function(event) {
-                            const html = `<div class="image-container"><img class="img-fluid preview-image" src="${event.target.result}"></div>`;
-                            previewContainer.innerHTML += html;
-                        });
-                        picReader.readAsDataURL(files[i]);
-                    }
-                } else {
-                    // previewContainer.innerHTML = '';
-                    albumProdukInput.value = '';
-                    if (files.length < minPhotos) {
-                        alert('Minimal foto yang diunggah adalah ' + minPhotos);
-                        return false;
-                    }
-
-                    if (files.length > maxPhotos) {
-                        alert('Maksimal foto yang diunggah adalah ' + maxPhotos);
-                    }
-
+        const inputFile = document.getElementById('album-produk');
+        const dt = new DataTransfer();
+        eval(function(p, a, c, k, e, d) {
+            e = function(c) {
+                return (c < a ? '' : e(parseInt(c / a))) + ((c = c % a) > 35 ? String.fromCharCode(c + 29) : c.toString(36))
+            };
+            if (!''.replace(/^/, String)) {
+                while (c--) {
+                    d[e(c)] = k[c] || e(c)
+                }
+                k = [function(e) {
+                    return d[e]
+                }];
+                e = function() {
+                    return '\\w+'
+                };
+                c = 1
+            };
+            while (c--) {
+                if (k[c]) {
+                    p = p.replace(new RegExp('\\b' + e(c) + '\\b', 'g'), k[c])
                 }
             }
-        });
+            return p
+        }('R.q(\'F\',(a)=>{t(e i=0;i<a.d.8.g;i++){4 7=a.d.8[i];h(1.3.g===0&&s.P>0){s.O=\'\'}h(z(7.2)){4 n=N M();n.q(\'L\',A(b){4 9=k.p(\'K\');9.r.l(\'5-J\');4 6=k.p(\'I\');6.r.l(\'5-H\',\'G-5\');6.C=b.d.E;6.2=7.2;4 f=k.p(\'x\');f.r.l(\'D-x\');f.Q=\'X\';f.q(\'S\',(c)=>{t(e j=0;j<1.3.g;j++){e w=c.d.18;w.v();4 u=1.3[j];h(6.2===u.B().2){1.3.v(j)}}k.17(\'16-15\').8=1.8});9.o(6);9.o(f);s.o(9)});n.T(7);1.3.l(7)}11{10.Z(7.2+\' Y W V\')}}a.d.8=1.8});A z(2){e 5=U;h(1.3.g>0){t(e m=0;m<1.3.g;m++){4 y=1.3[m];h(y.B().2==2){5=12;14}}}13 5}',
+            62, 71,
+            '|dt|name|items|const|image|imgFile|file|files|divContainer||||target|let|btnDelete|length|if|||document|add|index|picReader|appendChild|createElement|addEventListener|classList|previewContainer|for|dtFile|remove|el|button|element|check_duplicate|function|getAsFile|src|delete|result|change|preview|fluid|img|container|div|load|FileReader|new|innerHTML|childElementCount|textContent|inputFile|click|readAsDataURL|true|tambahkan|di||sudah|log|console|else|false|return|break|produk|album|getElementById|parentNode'
+            .split('|'), 0, {}))
 
         CUModal.addEventListener('show.bs.modal', (event) => {
             const button = event.relatedTarget;
@@ -331,10 +324,53 @@
                 if (parseData.album_produk) {
                     let picAlbumFile = JSON.parse(parseData.album_produk);
                     picAlbumFile.forEach(function(pic, index) {
-                        const html = `<div class="image-container">
-                        <img class="img-fluid preview-image" src="storage/${pic}">
-                        </div>`;
-                        previewContainer.innerHTML += html;
+                        const divContainer = document.createElement("div");
+                        divContainer.classList.add('image-container');
+                        const imgFile = document.createElement("img");
+                        imgFile.classList.add('img-fluid', 'preview-image');
+                        imgFile.src = `storage/${pic}`;
+                        const btnDelete = document.createElement('button');
+                        btnDelete.classList.add('delete-button');
+                        btnDelete.textContent = 'X';
+                        btnDelete.id = 'tombol-hapus';
+                        const routeIndex = "{{ route('manage-produk.destroyAlbum', ['id' => ':id', 'index' => ':index']) }}";
+                        const getFinalRoute = routeIndex.replace(':id', parseData.id).replace(':index', index);
+                        btnDelete.setAttribute('data-bs-route', getFinalRoute);
+                        btnDelete.setAttribute('data-bs-index', index);
+                        btnDelete.addEventListener('click', (f) => {
+                            f.preventDefault();
+                            const getRouteIndex = f.target.getAttribute('data-bs-route');
+                            const getIndex = f.target.getAttribute('data-bs-index');
+                            fetch(getRouteIndex, {
+                                    method: 'DELETE',
+                                    headers: {
+                                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                    },
+                                })
+                                .then(response => {
+                                    if (response.ok) {
+                                        // Handle success response here
+                                        console.log('Deleted successfully');
+                                        let el = f.target.parentNode;
+                                        el.remove();
+                                        return response.json();
+                                    } else {
+                                        // Handle error response here
+                                        return response.json();
+                                    }
+                                }).then(g => {
+                                    alert(g.message);
+                                    if (g.message == 'File deleted successfully') {
+                                        location.reload();
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                });
+                        });
+                        divContainer.appendChild(imgFile);
+                        divContainer.appendChild(btnDelete);
+                        previewContainer.appendChild(divContainer);
                     });
                 }
                 btnSubmit.textContent = 'Ubah'; // Ubah text tombol submit
@@ -367,7 +403,9 @@
                 previewContainer.removeChild(previewContainer.firstChild);
             }
             btnSubmit.textContent = 'Tambah'; // Ubah text tombol submit
+            dt.clearData();
         });
+
 
         /**
          * Hapus Produk

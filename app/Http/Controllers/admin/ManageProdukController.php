@@ -200,22 +200,30 @@ class ManageProdukController extends Controller
 
             // Jika sebelumnya di db kolom album_produk sudah ada isinya
             if (!is_null($product->album_produk)) {
-                $gambar = json_decode($product->album_produk, true);
-                // Menghapus gambar sebelumnya dari storage
-                foreach ($gambar as $index => $value) {
-                    Storage::delete($value);
+                $existingAlbum = json_decode($product->album_produk, true);
+
+                $newThumbnails = [];
+                foreach ($request->file('albumproduk') as $file) {
+                    $newPathAlbumProduk = $file->store('album-produk');
+                    $newThumbnails[] = $newPathAlbumProduk;
                 }
-                // Mengosongkan gambar sebelumnya dari kolom album_produk
-                $product->album_produk = null;
-                $product->save();
+
+                // Menambahkan thumbnail baru ke album yang sudah ada
+                $updatedAlbum = array_merge($existingAlbum, $newThumbnails);
+                $updatedAlbumJson = json_encode($updatedAlbum, JSON_UNESCAPED_SLASHES);
+                $data['album_produk'] = $updatedAlbumJson;
+
+            } else {
+                // Jika album_produk sebelumnya null, langsung membuat album baru
+                $thumbnails = [];
+                foreach ($request->file('albumproduk') as $file) {
+                    $newPathAlbumProduk = $file->store('album-produk');
+                    $thumbnails[] = $newPathAlbumProduk;
+                }
+                $thumbnailsJson = json_encode($thumbnails, JSON_UNESCAPED_SLASHES);
+                $data['album_produk'] = $thumbnailsJson;
             }
-            $thumbnails = [];
-            foreach ($request->file('albumproduk') as $file) {
-                $oriPathsAlbumProduk = $file->store('album-produk');
-                $thumbnails[] = $oriPathsAlbumProduk;
-            }
-            $thumbnailsJson = json_encode($thumbnails, JSON_UNESCAPED_SLASHES);
-            $data['album_produk'] = $thumbnailsJson;
+
         }
         //Simpan produk
         $product->update($data);
@@ -238,6 +246,28 @@ class ManageProdukController extends Controller
         }
         $getProduct->delete();
         return redirect()->route('manage-produk.index')->with('success_delete_product', 'Data berhasil dihapus');
+    }
+
+    public function destroyAlbum($id, $index)
+    {
+        // dd(['id' => $id, 'index' => $index]);
+        $getProduct = Product::findOrFail($id);
+        if ($getProduct && !is_null($getProduct->album_produk)) {
+            $album_produk = json_decode($getProduct->album_produk, true);
+            if (isset($album_produk[$index])) {
+                // Menghapus file dari storage
+                Storage::delete($album_produk[$index]);
+                // Menghapus elemen gambar dari array
+                unset($album_produk[$index]);
+                // Mengupdate kolom album_produk pada model Picture
+                $getProduct->album_produk = array_values($album_produk);
+                // Menyimpan perubahan pada model
+                $getProduct->save();
+                return response()->json(['message' => 'File deleted successfully'], 200);
+            }
+
+        }
+        return response()->json(['message' => 'File not found'], 404);
     }
 
     public function createcategory(Request $request)
