@@ -177,7 +177,6 @@
                                 <div class="col-6">Tgl Pembayaran:</div>
                                 <div class="col-6">
                                     @if($bayar_dp->jenis_pembayaran === 'dp' && $bayar_dp->waktu_pembayaran)
-                                    {{-- <li>Hari/Tgl:  {{ \Carbon\Carbon::parse($bayar_dp->waktu_pembayaran)->translatedFormat('l, d F Y') }}</li> --}}
                                     {{ \Carbon\Carbon::parse($bayar_dp->waktu_pembayaran)->translatedFormat('d F Y') }}
                                     @else
                                     <p class="fw-bold text-danger">-</p>

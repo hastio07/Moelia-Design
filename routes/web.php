@@ -13,6 +13,7 @@ use App\Http\Controllers\admin\ManagePesananSelesaiController;
 use App\Http\Controllers\admin\ManageProdukController;
 use App\Http\Controllers\admin\ManageWeddingCalculatorController;
 use App\Http\Controllers\admin\ProfileAdminController;
+use App\Http\Controllers\admin\CetakKontrakController;
 use App\Http\Controllers\user\AboutController;
 use App\Http\Controllers\user\CalculatorController;
 use App\Http\Controllers\user\FotoController;
@@ -85,7 +86,9 @@ Route::middleware(['no-redirect-if-authenticated:admins,web', 'prevent-back-hist
     //     return $decode;
     // });
 });
-
+Route::middleware(['auth:admins,web', 'prevent-back-history'])->group(function () {
+    Route::get('/cetak-kontrak/{email}', [CetakKontrakController::class, 'index'])->name('CetakKontrak');
+});
 /** Awal kode untuk rute super_admin & admin**/
 Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
     Route::middleware(['role:super_admin,admin'])->group(function () {
@@ -209,9 +212,6 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
             Route::delete('manage-wedding-calculator/del-category-custom-venue/{id}', 'delCategoryCustomVenue')->name('manage-wedding-calculator.delCategoryCustomVenue');
             Route::delete('manage-wedding-calculator/del-category-additional-venue/{id}', 'delCategoryAdditionalVenue')->name('manage-wedding-calculator.delCategoryAdditionalVenue');
 
-        });
-        Route::get('/cetak-kontrak', function () {
-            return view('admin.CetakKontrak');
         });
         Route::get('/daftar-notifikasi', function () {
             return view('admin.DaftarNotifikasi');
