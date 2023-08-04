@@ -10,7 +10,7 @@
     <div class="breadcrumbs align-self-center text-center">
         <h1>Pembayaran</h1>
         <div class="d-flex justify-content-center">
-            {{-- {{ Breadcrumbs::render('') }} --}}
+            {{ Breadcrumbs::render('pembayaran') }}
         </div>
         <div class="d-flex justify-content-center">
         </div>
@@ -315,7 +315,7 @@
                             @if (!empty($contact->whatsapp1_number))
                             <a class="btn btn-primary mt-3" href="https://wa.me/+62{{ $contact->whatsapp1_number }}?text=Silahkan sebutkan nama dan perubahan yang ingin diajukan dibawah ini:">Request Perubahan<i class="bi bi-pencil-square ms-2"></i></a>
                             @endif
-                            <a class="btn btn-primary mt-2" href="/cetak-kontrak">Lihat Surat Kontrak <i class="bi bi-journal-text"></i></a>
+                            <a class="btn btn-primary mt-2" href="{{route('CetakKontrak',auth()->user()->email)}}">Lihat Surat Kontrak <i class="bi bi-journal-text"></i></a>
                         </div>
                     </div>
                 </div>
