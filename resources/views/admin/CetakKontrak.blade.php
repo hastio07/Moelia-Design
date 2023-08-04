@@ -58,7 +58,7 @@
             <div class="mt-3">
                 <h6 class="fw-bold">Data Pemesan:</h6>
                 <ul>
-                    <li>Nama Pemesan :</li>
+                    <li>Nama Pemesan : </li>
                     <li>Telp/HP.</li>
                 </ul>
             </div>
