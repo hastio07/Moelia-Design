@@ -285,6 +285,37 @@
                 },
             ],
             order: [],
+            drawCallback: function(settings) {
+                let buttonDelete = document.querySelectorAll('#delete-button');
+                buttonDelete.forEach((btn) => {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault(); // Menghentikan aksi default dari tombol
+                        let route = btn.getAttribute('data-route'); // Mengambil nilai data-route dari atribut data pada tombol
+
+                        // Membuat elemen form baru
+                        let form = document.createElement('form');
+                        form.action = route;
+                        form.method = 'POST';
+                        // Menambahkan input _token dengan nilai token CSRF
+                        csrfField = document.createElement('input');
+                        csrfField.type = 'hidden';
+                        csrfField.name = '_token';
+                        csrfField.value = '{{ csrf_token() }}';
+                        form.appendChild(csrfField);
+                        // Menambahkan input _method dengan nilai 'DELETE'
+                        const createField = document.createElement('input');
+                        createField.type = 'hidden';
+                        createField.name = '_method';
+                        createField.value = 'DELETE';
+                        csrfField.insertAdjacentElement('beforebegin', createField);
+                        // Menambahkan form ke dalam dokumen
+                        document.body.appendChild(form);
+
+                        // Mengirimkan form secara otomatis
+                        form.submit();
+                    })
+                })
+            }
         });
     </script>
 @endpush
