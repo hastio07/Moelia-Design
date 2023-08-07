@@ -25,21 +25,27 @@ class DashboardAdminsController extends Controller
         $jumlahLayanan = Service::count();
 
         //untuk menjumlahkan pesanan baru/proses
-        $results = ManagePesanan::select('email_pemesan', DB::raw('COUNT(DISTINCT email_pemesan) as count'))->groupBy('email_pemesan')->get();
-        $managePesanan = $results->count();
+        $sql1 = ManagePesanan::select('email_pemesan', DB::raw('COUNT(DISTINCT email_pemesan) as count'))->groupBy('email_pemesan')->get();
+        $managePesanan = $sql1->count();
 
         //untuk menjumlahkan pesanan selesai
-        $resultsII = ManagePesanan::select('email_pemesan', DB::raw('COUNT(*) as count'))
+        $sql2 = ManagePesanan::select('email_pemesan', DB::raw('COUNT(DISTINCT email_pemesan) as email_count'))
+            ->where(function ($query) {
+                $query->where('jenis_pembayaran', '=', 'dp')
+                    ->orWhere('jenis_pembayaran', '=', 'fp');
+            })
+            ->where('status', '=', 'paid')
             ->whereNotNull('waktu_pembayaran')
             ->whereNotNull('tanggal_konfirmasi')
             ->groupBy('email_pemesan')
+            ->havingRaw('COUNT(jenis_pembayaran) = 2')
             ->get();
-        $managePesananSelesai = $resultsII->count();
+
+        $managePesananSelesai = $sql2->count();
 
         $jadwal = Jadwal::get();
 
-
-        return view('admin.Dashboard', compact('jumlahProduk', 'jumlahPegawai', 'jumlahPhoto', 'jumlahVideo', 'jumlahJadwal', 'jumlahLayanan', 'jadwal', 'managePesanan','managePesananSelesai'));
+        return view('admin.Dashboard', compact('jumlahProduk', 'jumlahPegawai', 'jumlahPhoto', 'jumlahVideo', 'jumlahJadwal', 'jumlahLayanan', 'jadwal', 'managePesanan', 'managePesananSelesai'));
 
     }
 }
