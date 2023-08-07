@@ -214,7 +214,7 @@
                             window.location.href = route; // Mengganti URL di browser dengan nilai data-route
                         })
                     })
-                    let buttonDelete = document.querySelectorAll('#delete-button');
+                    let buttonDelete = document.querySelectorAll('#delete-button-admin');
                     buttonDelete.forEach((btn) => {
                         btn.addEventListener('click', function(e) {
                             e.preventDefault(); // Menghentikan aksi default dari tombol

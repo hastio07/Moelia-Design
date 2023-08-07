@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\CetakKontrakController;
 use App\Http\Controllers\admin\DashboardAdminsController;
 use App\Http\Controllers\admin\ManageAdminController;
 use App\Http\Controllers\admin\ManageGalleryController;
@@ -13,7 +14,6 @@ use App\Http\Controllers\admin\ManagePesananSelesaiController;
 use App\Http\Controllers\admin\ManageProdukController;
 use App\Http\Controllers\admin\ManageWeddingCalculatorController;
 use App\Http\Controllers\admin\ProfileAdminController;
-use App\Http\Controllers\admin\CetakKontrakController;
 use App\Http\Controllers\user\AboutController;
 use App\Http\Controllers\user\CalculatorController;
 use App\Http\Controllers\user\FotoController;
@@ -99,9 +99,9 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
         Route::controller(ManageAdminController::class)->group(function () {
             Route::get('manage-admin', 'index')->name('manage-admin.index');
             Route::post('manage-admin', 'store')->name('manage-admin.store');
-            Route::put('manage-admin/{manage-admin}', 'update')->name('manage-admin.update');
-            Route::put('manage-admin/{manage-admin}/edit', 'edit')->name('manage-admin.edit');
-            Route::delete('manage-admin/{manage-admin}', 'destroy')->name('manage-admin.destroy');
+            Route::put('manage-admin/{id}', 'update')->name('manage-admin.update');
+            Route::get('manage-admin/{id}/edit', 'edit')->name('manage-admin.edit');
+            Route::delete('manage-admin/{id}', 'destroy')->name('manage-admin.destroy');
             Route::delete('manage-admin/user/{id_user}', 'destroyUser')->name('manage-admin.destroyUser');
             Route::get('manage-admin/render-tb-admins', 'renderDataTableAdmins')->name('manage-admin.renderDataTableAdmins');
             Route::get('manage-admin/render-tb-users', 'renderDataTableUsers')->name('manage-admin.renderDataTableUsers');
