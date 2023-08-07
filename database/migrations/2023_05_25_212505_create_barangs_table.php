@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_barang');
             $table->foreignId('kategori_id')->constrained('category_barangs', 'id')->restrictOnDelete()->cascadeOnUpdate();
-            $table->string('stok');
+            $table->integer('stok', false, true);
             $table->timestamps();
         });
     }

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('created_by')->constrained('admins', 'id')->restrictOnDelete()->restrictOnUpdate();
             $table->foreignId('kategori_id')->constrained('category_custom_venues', 'id')->restrictOnDelete()->cascadeOnUpdate();
             $table->string('nama_paket');
-            $table->string('harga');
+            $table->decimal('harga', 10, 0, true);
             $table->timestamps();
         });
     }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('created_by')->constrained('admins', 'id')->restrictOnDelete()->restrictOnUpdate();
             $table->string('nama_paket');
-            $table->string('harga');
+            $table->decimal('harga', 10, 0, true);
             $table->timestamps();
         });
     }
