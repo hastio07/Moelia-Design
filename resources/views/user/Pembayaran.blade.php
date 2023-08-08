@@ -176,7 +176,7 @@
                             <div class="row mt-2">
                                 <div class="col-6">Tgl Pembayaran:</div>
                                 <div class="col-6">
-                                    @if($bayar_dp->jenis_pembayaran === 'dp' && $bayar_dp->waktu_pembayaran)
+                                    @if($bayar_dp && $bayar_dp->jenis_pembayaran === 'dp' && $bayar_dp->waktu_pembayaran)
                                     {{ \Carbon\Carbon::parse($bayar_dp->waktu_pembayaran)->translatedFormat('d F Y') }}
                                     @else
                                     <p class="fw-bold text-danger">-</p>
@@ -186,7 +186,7 @@
                             <div class="row mt-2">
                                 <div class="col-6">Waktu Pembayaran:</div>
                                 <div class="col-6">
-                                    @if($bayar_dp->jenis_pembayaran === 'dp' && $bayar_dp->waktu_pembayaran)
+                                    @if($bayar_dp && $bayar_dp->jenis_pembayaran === 'dp' && $bayar_dp->waktu_pembayaran)
                                     {{ \Carbon\Carbon::parse($bayar_dp->waktu_pembayaran)->setTimezone('Asia/Jakarta')->format('H:i') }} WIB
                                     @else
                                     <p class="fw-bold text-danger">-</p>
@@ -200,7 +200,7 @@
                             <div class="row mt-2">
                                 <div class="col-6">Tgl Pembayaran:</div>
                                 <div class="col-6">
-                                    @if($bayar_fp->jenis_pembayaran === 'fp' && $bayar_fp->waktu_pembayaran)
+                                    @if($bayar_fp && $bayar_fp->jenis_pembayaran === 'fp' && $bayar_fp->waktu_pembayaran)
                                     {{ \Carbon\Carbon::parse($bayar_fp->waktu_pembayaran)->translatedFormat('d F Y') }}
                                     @else
                                     <p class="fw-bold text-danger">-</p>
@@ -210,7 +210,7 @@
                             <div class="row mt-2">
                                 <div class="col-6">Waktu Pembayaran:</div>
                                 <div class="col-6">
-                                    @if($bayar_fp->jenis_pembayaran === 'fp' && $bayar_fp->waktu_pembayaran)
+                                    @if($bayar_fp && $bayar_fp->jenis_pembayaran === 'fp' && $bayar_fp->waktu_pembayaran)
                                     {{ \Carbon\Carbon::parse($bayar_fp->waktu_pembayaran)->setTimezone('Asia/Jakarta')->format('H:i') }} WIB
                                     @else
                                     <p class="fw-bold text-danger">-</p>
