@@ -94,10 +94,10 @@ class ManageAdminController extends Controller
 
         $adminedit = Admin::findOrFail($decryptID[0]); //cari user berdasarkan id pada model app/Models/Admin
 
-        if (request()->ajax()) {
-            $data = $this->getDataForDataTables();
-            return $this->renderDataTables($data);
-        }
+        // if (request()->ajax()) {
+        //     $data = $this->getDataForDataTables();
+        //     return $this->renderDataTables($data);
+        // }
 
         // $get_admins = Admin::with('role')->where('role_id', '=', 2)->latest('created_at')->get();
         return view('admin.ManageAdmin', compact('adminedit', 'hashids'));
@@ -225,7 +225,7 @@ class ManageAdminController extends Controller
                 ->addColumn('aksi', function ($value) use ($hashids) {
                     return '<div class="d-grid gap-2 d-md-flex justify-content-md-center">
                                 <button class="btn btn-warning" data-route="' . route('manage-admin.edit', $hashids->encode($value->id)) . '" id="edit-button"><i class="bi bi-pencil-square"></i></button>
-                                <button class="btn btn-danger" data-route="' . route('manage-admin.destroy', $hashids->encode($value->id)) . '" id="delete-button"><i class="bi bi-trash"></i></button>
+                                <button class="btn btn-danger" data-route="' . route('manage-admin.destroy', $hashids->encode($value->id)) . '" id="delete-button-admin"><i class="bi bi-trash"></i></button>
                         </div>';
                 })->filter(function ($query) {
                 if (request()->has('search') && !empty(request()->get('search')['value'])) {

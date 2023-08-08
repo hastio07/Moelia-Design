@@ -24,6 +24,15 @@ class ManageWeddingCalculatorController extends Controller
     {
         if (request()->ajax()) {
             $paketAllIn = CalAllIn::query();
+            if (request()->has('order') && !empty(request()->input('order'))) {
+                $order = request()->input('order')[0];
+                $columnIndex = $order['column'];
+                $columnName = request()->input('columns')[$columnIndex]['data'];
+                $columnDirection = $order['dir'];
+                $paketAllIn->orderBy($columnName, $columnDirection);
+            } else {
+                $paketAllIn->latest('updated_at');
+            }
             return DataTables::eloquent($paketAllIn)->editColumn('harga', function ($value) {
                 return $value->formatRupiah('harga');
             })->addColumn('aksi', function ($value) {
@@ -47,6 +56,16 @@ class ManageWeddingCalculatorController extends Controller
     {
         if (request()->ajax()) {
             $paketCustomVenue = CalCustomVenue::with('categorycustomvenue');
+            if (request()->has('order') && !empty(request()->input('order'))) {
+                $order = request()->input('order')[0];
+                $columnIndex = $order['column'];
+                $columnName = request()->input('columns')[$columnIndex]['data'];
+                $columnDirection = $order['dir'];
+                $paketCustomVenue->orderBy($columnName, $columnDirection);
+            } else {
+                $paketCustomVenue->latest('updated_at');
+            }
+
             return DataTables::eloquent($paketCustomVenue)->editColumn('kategori_id', function ($value) {
                 return $value->categorycustomvenue->nama;
             })->editColumn('harga', function ($value) {
@@ -71,8 +90,18 @@ class ManageWeddingCalculatorController extends Controller
     }
     public function getAdditionalVenue()
     {
+
         if (request()->ajax()) {
             $paketAdditionalVenue = CalAdditionalVenue::with('categoryadditionalvenue');
+            if (request()->has('order') && !empty(request()->input('order'))) {
+                $order = request()->input('order')[0];
+                $columnIndex = $order['column'];
+                $columnName = request()->input('columns')[$columnIndex]['data'];
+                $columnDirection = $order['dir'];
+                $paketAdditionalVenue->orderBy($columnName, $columnDirection);
+            } else {
+                $paketAdditionalVenue->latest('updated_at');
+            }
             return DataTables::eloquent($paketAdditionalVenue)->editColumn('kategori_id', function ($value) {
                 return $value->categoryadditionalvenue->nama;
             })->editColumn('harga', function ($value) {

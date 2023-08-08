@@ -229,12 +229,12 @@
                 columnDefs: [{
                         orderable: false,
                         searchable: false,
-                        targets: 5
+                        targets: 6
                     },
                     {
                         orderable: false,
                         searchable: false,
-                        targets: 6
+                        targets: 7
                     }
                 ],
                 columns: [{
@@ -259,7 +259,7 @@
                     },
                     {
                         data: 'show_data',
-                        name: 'show-data'
+                        name: 'show_data'
                     },
                     {
                         data: 'foto',
