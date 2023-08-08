@@ -14,10 +14,10 @@
                         </div>
                         <img alt="Phone image" class="img-fluid mb-3" src="{{ asset('templates') }}/assets/images/reset.jpg">
                         @if (session()->has('status'))
-                            <div class="alert alert-danger">{{ session('status') }}</div>
+                            <div class="alert alert-success">{{ session('status') }}</div>
                         @endif
                         @error('email')
-                            <div class="alert alert-danger">
+                            <div class="alert alert-success">
                                 {{ $message }}
                             </div>
                         @enderror
