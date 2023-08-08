@@ -18,7 +18,7 @@ class ManageProdukController extends Controller
     public function index()
     {
         //
-        $get_category_product = CategoryProduct::latest()->get();
+        $get_category_product = CategoryProduct::orderBy('nama_kategori', 'asc')->get();
         if (request()->ajax()) {
             $get_products = Product::with('category_products');
             if (request()->has('order') && !empty(request()->input('order'))) {
@@ -26,7 +26,12 @@ class ManageProdukController extends Controller
                 $columnIndex = $order['column'];
                 $columnName = request()->input('columns')[$columnIndex]['data'];
                 $columnDirection = $order['dir'];
-                $get_products->orderBy($columnName, $columnDirection);
+                if ($columnName === 'kategori_id') {
+                    $get_products->select('products.*')->join('category_products', 'products.kategori_id', '=', 'category_products.id')
+                        ->orderBy('category_products.nama_kategori', $columnDirection); // Select only columns from main table
+                } else {
+                    $get_products->orderBy($columnName, $columnDirection);
+                }
             } else {
                 $get_products->latest('updated_at');
             }

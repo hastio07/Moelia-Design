@@ -61,7 +61,13 @@ class ManageWeddingCalculatorController extends Controller
                 $columnIndex = $order['column'];
                 $columnName = request()->input('columns')[$columnIndex]['data'];
                 $columnDirection = $order['dir'];
-                $paketCustomVenue->orderBy($columnName, $columnDirection);
+                if ($columnName === 'kategori_id') {
+                    $paketCustomVenue->select('cal_custom_venues.*')->join('category_custom_venues', 'cal_custom_venues.kategori_id', '=', 'category_custom_venues.id')
+                        ->orderBy('category_custom_venues.nama', $columnDirection); // Select only columns from main table
+                } else {
+                    $paketCustomVenue->orderBy($columnName, $columnDirection);
+                }
+
             } else {
                 $paketCustomVenue->latest('updated_at');
             }
@@ -98,7 +104,12 @@ class ManageWeddingCalculatorController extends Controller
                 $columnIndex = $order['column'];
                 $columnName = request()->input('columns')[$columnIndex]['data'];
                 $columnDirection = $order['dir'];
-                $paketAdditionalVenue->orderBy($columnName, $columnDirection);
+                if ($columnName === 'kategori_id') {
+                    $paketAdditionalVenue->select('cal_additional_venues.*')->join('category_additional_venues', 'cal_additional_venues.kategori_id', '=', 'category_additional_venues.id')
+                        ->orderBy('category_additional_venues.nama', $columnDirection); // Select only columns from main table
+                } else {
+                    $paketAdditionalVenue->orderBy($columnName, $columnDirection);
+                }
             } else {
                 $paketAdditionalVenue->latest('updated_at');
             }
@@ -570,14 +581,14 @@ class ManageWeddingCalculatorController extends Controller
 
     public function dataCategoryCustomVenue()
     {
-        $categories = CategoryCustomVenue::all();
+        $categories = CategoryCustomVenue::orderBy('nama', 'asc')->get();
 
         return response()->json($categories);
     }
 
     public function dataCategoryAdditionalVenue()
     {
-        $categories = CategoryAdditionalVenue::all();
+        $categories = CategoryAdditionalVenue::orderBy('nama', 'asc')->get();
 
         return response()->json($categories);
     }
