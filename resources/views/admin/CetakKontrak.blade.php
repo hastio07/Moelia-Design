@@ -58,41 +58,49 @@
             <div class="mt-3">
                 <h6 class="fw-bold">Data Pemesan: </h6>
                 <ul>
-                    <li>Nama Pemesan : {{ $ManagePesanan->nama_pemesan }}</li>
-                    <li>Telp/HP. : {{ $ManagePesanan->telepon_pemesan}}</li>
+                    <li>Nama Pemesan : {{ $ManagePesanan->nama_pemesan ?? '-' }}</li>
+                    <li>Telp/HP. : {{ $ManagePesanan->telepon_pemesan  ?? '-'}}</li>
                 </ul>
             </div>
             <div class="mt-3">
                 <h6 class="fw-bold">Akad & Resepsi:</h6>
                 <ul>
-                    <li>Hari/Tgl:  {{ \Carbon\Carbon::parse($ManagePesanan->tanggal_akad_dan_resepsi)->translatedFormat('l, d F Y') }}</li>
-                    <li>Tempat/Gedung: {{ $ManagePesanan->alamat_akad_dan_resepsi }}</li>
+                    @if ($ManagePesanan)
+                    <li>Hari/Tgl: {{ \Carbon\Carbon::parse($ManagePesanan->tanggal_akad_dan_resepsi)->translatedFormat('l, d F Y') }}</li>
+                    @else
+                    -
+                    @endif
+                    <li>Tempat/Gedung: {{ $ManagePesanan->alamat_akad_dan_resepsi ?? '-'}}</li>
                 </ul>
             </div>
             <div class="mt-3">
                 <h6 class="fw-bold">Materi Kerja</h6>
-                {!! $ManagePesanan->materi_kerja !!}
+                {!! $ManagePesanan->materi_kerja ?? '-'!!}
             </div>
             <div class="mt-3">
                 <h6 class="fw-bold">Additional</h6>
-                {!! $ManagePesanan->additional !!}
+                {!! $ManagePesanan->additional ?? '-'!!}
             </div>
             <br>
             <P class="fw-bold">Bonus :</P>
-            {!! $ManagePesanan->bonus !!}
-            <h6 class="fw-bold">TOTAL BIAYA AWAL : {{ $ManagePesanan->total_biaya_awal }}</h6>
-            <h6 class="fw-bold">Additional : {{ $ManagePesanan->total_biaya_additional }}</h6>
-            <h6 class="fw-bold">TOTAL BIAYA SELURUH : {{ $ManagePesanan->total_biaya_seluruh }}</h6>
-            <h6 class="fw-bold">Uang Muka(DP) : {{ $ManagePesanan->uang_muka }}</h6>
+            {!! $ManagePesanan->bonus ?? '-'!!}
+            <h6 class="fw-bold">TOTAL BIAYA AWAL : {{ $ManagePesanan->total_biaya_awal  ?? '-'}}</h6>
+            <h6 class="fw-bold">Additional : {{ $ManagePesanan->total_biaya_additional  ?? '-'}}</h6>
+            <h6 class="fw-bold">TOTAL BIAYA SELURUH : {{ $ManagePesanan->total_biaya_seluruh  ?? '-'}}</h6>
+            <h6 class="fw-bold">Uang Muka(DP) : {{ $ManagePesanan->uang_muka  ?? '-'}}</h6>
             <div class="row mt-5">
+                @if ($ManagePesanan)
                 <p>Bandar Lampung, {{ \Carbon\Carbon::parse($ManagePesanan->created_at)->translatedFormat('d F Y')}}</p>
+                @else
+                -
+                @endif
                 <div class="col">
                     <p>Pemesan</p>
                     <br>
                     <br>
                     <br>
                     <br>
-                    <p class="fw-bold">{{ $ManagePesanan->nama_pemesan }}</p>
+                    <p class="fw-bold">{{ $ManagePesanan->nama_pemesan  ?? '-'}}</p>
                 </div>
                 <div class="col">
                     <p>Moelia Design</p>
