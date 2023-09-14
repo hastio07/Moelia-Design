@@ -185,7 +185,7 @@ class ManageAdminController extends Controller
     public function destroyUser(User $data)
     {
         # Cek apakah ada pesanan yang menggunakan email user ini
-        $isUserOrder = $data->pesanan()->get();
+        $isUserOrder = $data->pesanan()->withTrashed()->get();
         if ($isUserOrder->count() > 0) {
             return redirect()->route('manage-admin.index')->with('msg-tb-user', 'User ' . $data->nama_depan . ' ' . $data->nama_belakang . ' tidak berhasil dihapus karena sudah pernah memiliki riwayat pesanan');
         }
