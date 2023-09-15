@@ -11,11 +11,6 @@ use Yajra\DataTables\Facades\DataTables;
 
 class ManageJadwalController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         if (request()->ajax()) {
@@ -26,7 +21,7 @@ class ManageJadwalController extends Controller
                 $order = request()->input('order')[0];
                 $columnIndex = $order['column'];
                 $columnName = request()->input('columns')[$columnIndex]['data'];
-                $columnDirection = $order['dir'];
+                $columnDirection = $order['dir']; //mengurutkan data tersebut asc atau desc
 
                 if ($columnName == 'tanggal') {
                     $jadwal->orderByRaw('DATE_FORMAT(waktu, "%Y-%m-%d") ' . $columnDirection);
@@ -67,12 +62,6 @@ class ManageJadwalController extends Controller
         return view('admin.ManageJadwal');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $rules = [
@@ -113,13 +102,6 @@ class ManageJadwalController extends Controller
         return redirect()->route('manage-jadwal.index')->with('success', 'Data Berhasil Ditambahkan!');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $rules = [
@@ -162,12 +144,6 @@ class ManageJadwalController extends Controller
         return redirect()->route('manage-jadwal.index')->with('success', 'Data Berhasil Diperbarui!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $jadwal = Jadwal::findOrFail($id);

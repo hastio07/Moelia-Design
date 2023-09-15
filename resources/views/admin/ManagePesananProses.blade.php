@@ -55,7 +55,7 @@
                                 <th>Tempat/Gedung</th>
                                 <th>Total Biaya Awal</th>
                                 <th>Total Biaya Seluruh</th>
-                                <th>DP1</th>
+                                <th>DP</th>
                                 <th>Status Pembayaran(DP)</th>
                                 <th>Status Konfirmasi</th>
                                 <th class="text-center">Aksi</th>
@@ -71,7 +71,7 @@
                                 <th>Tempat/Gedung</th>
                                 <th>Total Biaya Awal</th>
                                 <th>Total Biaya Seluruh</th>
-                                <th>DP1</th>
+                                <th>DP</th>
                                 <th>Status Pembayaran(DP)</th>
                                 <th>Status Konfirmasi</th>
                                 <th class="text-center">Aksi</th>

@@ -191,6 +191,7 @@ Route::middleware(['auth:admins', 'prevent-back-history'])->group(function () {
             Route::get('manage-wedding-calculator/get-all-in', 'getAllIn')->name('manage-wedding-calculator.getAllIn');
             Route::get('manage-wedding-calculator/get-custom-venue', 'getCustomVenue')->name('manage-wedding-calculator.getCustomVenue');
             Route::get('manage-wedding-calculator/get-additional-venue', 'getAdditionalVenue')->name('manage-wedding-calculator.getAdditionalVenue');
+            
             # Rute create paket all-in, custom venue, additional venue
             Route::post('manage-wedding-calculator/cat-all-in', 'catAllIn')->name('manage-wedding-calculator.catAllIn');
             Route::post('manage-wedding-calculator/cat-custom-venue', 'catCustomVenue')->name('manage-wedding-calculator.catCustomVenue');

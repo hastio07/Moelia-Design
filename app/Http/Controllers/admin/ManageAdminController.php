@@ -5,21 +5,14 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\User;
-// use App\Models\Role;
 use Hashids\Hashids;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-// use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
 class ManageAdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         $me = $request->user();
@@ -30,15 +23,8 @@ class ManageAdminController extends Controller
         return view('admin.ManageAdmin', compact('hashids'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
 
         $rules = [
             'nama_depan' => 'required|string|min:5,nama_depan|max:255',
@@ -62,7 +48,6 @@ class ManageAdminController extends Controller
         if ($validator->fails()) {
             return back()->with('failed_add_account', 'gagal menambahkan akun')->withErrors($validator)->withInput();
         }
-        // dd($request->all());
         $data_admin = [
             'nama_depan' => $request->input('nama_depan'),
             'nama_belakang' => $request->input('nama_belakang'),
@@ -76,40 +61,15 @@ class ManageAdminController extends Controller
         return redirect()->route('manage-admin.index')->with('success_add_account', 'berhasil menambahkan akun');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
-
-        /**
-         * Fungsi tampilkan data admin berdasarkan id
-         */
         $hashids = new Hashids(env('HASHIDS_KEY'), env('HASHIDS_HASH_LENGTH'));
         $decryptID = $hashids->decode($id);
 
         $adminedit = Admin::findOrFail($decryptID[0]); //cari user berdasarkan id pada model app/Models/Admin
 
-        // if (request()->ajax()) {
-        //     $data = $this->getDataForDataTables();
-        //     return $this->renderDataTables($data);
-        // }
-
-        // $get_admins = Admin::with('role')->where('role_id', '=', 2)->latest('created_at')->get();
         return view('admin.ManageAdmin', compact('adminedit', 'hashids'));
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
@@ -139,9 +99,6 @@ class ManageAdminController extends Controller
             'required' => ':attribute wajib diisi.',
             'unique' => ':attribute sudah digunakan.',
         ];
-        // if ($request->input('email') != $admin->email) {
-        //     $rules['email'] = 'required|email:rfc,dns|unique:admins,email';
-        // }
         $validator = Validator::make($request->all(), $rules, $messages); // fungsi untuk Validasi request
         /**
          * Jika gagal maka tampilkan error dan request input sebelumnya
@@ -165,12 +122,6 @@ class ManageAdminController extends Controller
         return redirect()->route('manage-admin.index')->with('massage', 'data berhasil diubah');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //

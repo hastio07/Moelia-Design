@@ -173,9 +173,12 @@
                                 <div class="row">
                                     @php
                                         $groupedJadwal = $jadwal
+                                            //mengelompokan data menjadi 1 grup berdasarkan tanggal
                                             ->groupBy(function ($item) {
                                                 return \Carbon\Carbon::parse($item->waktu)->format('Y-m-d');
                                             })
+
+                                            //mengurutkan grup berdasarkan tanggal
                                             ->sortBy(function ($group, $date) {
                                                 return \Carbon\Carbon::parse($date);
                                             });
