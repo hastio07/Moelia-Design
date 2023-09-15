@@ -25,8 +25,17 @@ class DashboardAdminsController extends Controller
         $jumlahLayanan = Service::count();
 
         //untuk menjumlahkan pesanan baru/proses
-        $sql1 = ManagePesanan::select('email_pemesan', DB::raw('COUNT(DISTINCT email_pemesan) as count'))->groupBy('email_pemesan')->get();
-        $managePesanan = $sql1->count();
+        $sql1 = ManagePesanan::select('email_pemesan', DB::raw('COUNT(DISTINCT email_pemesan) as count'))
+            ->where(function ($query) {
+                $query->where('jenis_pembayaran', '=', 'dp')
+                    ->orWhere('jenis_pembayaran', '=', 'fp');
+            })
+            ->where('status', '=', 'unpaid')
+            ->whereNull('waktu_pembayaran')
+            ->whereNull('tanggal_konfirmasi')
+            ->groupBy('email_pemesan')
+            ->get();
+        $managePesananProses = $sql1->count();
 
         //untuk menjumlahkan pesanan selesai
         $sql2 = ManagePesanan::select('email_pemesan', DB::raw('COUNT(DISTINCT email_pemesan) as email_count'))
