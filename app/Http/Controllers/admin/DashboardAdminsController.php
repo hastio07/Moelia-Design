@@ -35,7 +35,7 @@ class DashboardAdminsController extends Controller
             ->whereNull('tanggal_konfirmasi')
             ->groupBy('email_pemesan')
             ->get();
-        $managePesananProses = $sql1->count();
+        $managePesanan = $sql1->count();
 
         //untuk menjumlahkan pesanan selesai
         $sql2 = ManagePesanan::select('email_pemesan', DB::raw('COUNT(DISTINCT email_pemesan) as email_count'))
