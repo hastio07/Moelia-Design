@@ -146,56 +146,96 @@
 </section>
 @push('scripts')
 <script>
-    $(document).ready(function() {
-        $('.toggle-select-allin, .toggle-select-custom, .toggle-select-additional').hide();
+$(document).ready(function() {
+    $('.toggle-select-allin, .toggle-select-custom, .toggle-select-additional').hide();
 
-        $('#flexSwitchCheckAllin').on('change', function() {
-            $('.toggle-select-allin').toggle();
-            $('.All-In .toggle-label-allin').toggle();
-            hitungTotal();
-        });
+    $('#flexSwitchCheckAllin').on('change', function() {
+        if ($(this).is(':checked')) {
+            // Matikan tombol switch Custom Pesanan dan Additional Vendor
+            $('#flexSwitchCheckCustom').prop('disabled', true);
+            $('#flexSwitchCheckAdditional').prop('disabled', true);
+        } else {
+            // Aktifkan kembali tombol switch Custom Pesanan dan Additional Vendor
+            $('#flexSwitchCheckCustom').prop('disabled', false);
+            $('#flexSwitchCheckAdditional').prop('disabled', false);
+        }
 
-        $('#flexSwitchCheckCustom').on('change', function() {
-            $('.toggle-select-custom').toggle();
-            $('.custom .toggle-label-custom').toggle();
-            hitungTotal();
-        });
+        $('.toggle-select-allin').toggle();
+        $('.All-In .toggle-label-allin').toggle();
+        hitungTotal();
+    });
 
-        $('#flexSwitchCheckAdditional').on('change', function() {
-            $('.toggle-select-additional').toggle();
-            $('.additional .toggle-label-additional').toggle();
-            hitungTotal();
-        });
+    $('#flexSwitchCheckCustom').on('change', function() {
+        if ($(this).is(':checked')) {
+            // Matikan tombol switch Paket All In
+            $('#flexSwitchCheckAllin').prop('disabled', true);
+        } else {
+            // Aktifkan kembali tombol switch Paket All In
+            $('#flexSwitchCheckAllin').prop('disabled', false);
+        }
 
-        $('select').on('change', function() {
-            hitungTotal();
-        });
+        $('.toggle-select-custom').toggle();
+        $('.custom .toggle-label-custom').toggle();
+        hitungTotal();
+    });
 
-        function hitungTotal() {
-            var total = 0;
+    $('#flexSwitchCheckAdditional').on('change', function() {
+        if ($(this).is(':checked')) {
+            // Matikan tombol switch Paket All In
+            $('#flexSwitchCheckAllin').prop('disabled', true);
+        } else {
+            // Aktifkan kembali tombol switch Paket All In
+            $('#flexSwitchCheckAllin').prop('disabled', false);
+        }
 
-            $('.toggle-select-allin, .toggle-select-custom, .toggle-select-additional').each(function() {
+        $('.toggle-select-additional').toggle();
+        $('.additional .toggle-label-additional').toggle();
+        hitungTotal();
+    });
+
+    $('select').on('change', function() {
+        hitungTotal();
+    });
+
+    function hitungTotal() {
+        var total = 0;
+
+        if ($('#flexSwitchCheckAllin').is(':checked')) {
+            var selectedValue = parseInt($('#selectMenuAllIn').val()) || 0;
+            total += selectedValue;
+        }
+
+        if ($('#flexSwitchCheckCustom').is(':checked')) {
+            $('.toggle-select-custom').each(function() {
                 var selectedValue = parseInt($(this).val()) || 0;
                 total += selectedValue;
             });
-
-            var formattedTotal = formatNumber(total);
-            $('.total-amount').text('Rp ' + formattedTotal);
-
-            var disclaimerText = "Biaya di atas hanya biaya perkiraan saja, harga masih bisa berubah sesuai kesepakatan antara vendor dan klien!";
-            $('.disclaimer-text').text(disclaimerText);
-
-            if (total > 0) {
-                $('.disclaimer-text').css('display', 'block');
-            } else {
-                $('.disclaimer-text').css('display', 'none');
-            }
         }
 
-        function formatNumber(number) {
-            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        if ($('#flexSwitchCheckAdditional').is(':checked')) {
+            $('.toggle-select-additional').each(function() {
+                var selectedValue = parseInt($(this).val()) || 0;
+                total += selectedValue;
+            });
         }
-    });
+
+        var formattedTotal = formatNumber(total);
+        $('.total-amount').text('Rp ' + formattedTotal);
+
+        var disclaimerText = "Biaya di atas hanya biaya perkiraan saja, harga masih bisa berubah sesuai kesepakatan antara vendor dan klien!";
+        $('.disclaimer-text').text(disclaimerText);
+
+        if (total > 0) {
+            $('.disclaimer-text').css('display', 'block');
+        } else {
+            $('.disclaimer-text').css('display', 'none');
+        }
+    }
+
+    function formatNumber(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+});
 
 </script>
 @endpush
