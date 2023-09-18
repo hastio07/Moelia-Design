@@ -48,7 +48,7 @@
                                                             <input class="form-control" id="nama_owner" name="nama_owner" placeholder="Masukkan nama owner" type="text" value="{{ $owners->nama_owner ?? null }}">
                                                             <label class="form-label" for="kata_sambutan">Kata Sambutan/Motto</label>
                                                             <textarea class="form-control" id="kata_sambutan" name="kata_sambutan" oninput="autoResizeTextarea(this)" rows="3">{{ $owners->kata_sambutan ?? null }}</textarea>
-                                                            <label class="form-label" for="foto_owner">Foto Owner</label>
+                                                            <label class="form-label" for="foto_owner">Foto Owner <span class="bg-danger rounded text-white px-2">* Ukuran Maksimal Foto 2MB</span></label>
                                                             <input class="form-control" id="foto_owner" name="foto_owner" type="file">
                                                         </div>
                                                         <div class="flex-item button">
@@ -124,7 +124,7 @@
                                                             <label class="form-label" for="nama_perusahaan">Nama
                                                                 Perusahaan</label>
                                                             <input class="form-control" id="nama_perusahaan" name="nama_perusahaan" placeholder="Masukkan nama perusahaan" type="text" value="{{ old('username', $companies->nama_perusahaan ?? null) }}">
-                                                            <label class="form-label" for="logo">Logo Perusahaan</label>
+                                                            <label class="form-label" for="logo">Logo Perusahaan <span class="bg-danger rounded text-white px-2">* Ukuran Maksimal Foto 2MB</span></label>
                                                             <input accept="image/jpg, image/png, image/jpeg" class="form-control" id="logo" name="logo_perusahaan" type="file">
                                                         </div>
                                                         <div class="flex-item button">
@@ -759,7 +759,7 @@
                                                         <input class="form-control" id="judul_siapa" name="judul_siapa" placeholder="Masukan Judul" type="text" value="{{ $abouts->judul ?? null }}">
                                                         <label class="form-label" for="katasambutan">Kata Sambutan</label>
                                                         <textarea class="form-control" id="katasambutan" name="katasambutan" oninput="autoResizeTextarea(this)" rows="3">{{ $abouts->katasambutan ?? null }}</textarea>
-                                                        <label class="form-label" for="fotobersama">Foto Bersama</label>
+                                                        <label class="form-label" for="fotobersama">Foto Bersama <span class="bg-danger rounded text-white px-2">* Ukuran Maksimal Foto 2MB</span></label>
                                                         <input accept="image/jpg, image/png, image/jpeg" class="form-control" id="fotobersama" name="fotobersama" type="file">
                                                         <div class="mt-2 text-center">
                                                             <button class="btn btn-success" type="submit">Upload</button>
@@ -827,7 +827,7 @@
                                                         @csrf
                                                         <input name="id_offer" readonly type="hidden" value="{{ $offers->id ?? null }}">
                                                         <input name="oldfoto_bersama" type="hidden" value="{{ $offers->foto_bersama ?? null }}">
-                                                        <label class="form-label" for="foto_bersama">Foto Konten</label>
+                                                        <label class="form-label" for="foto_bersama">Foto Konten <span class="bg-danger rounded text-white px-2">* Ukuran Maksimal Foto 2MB</span></label>
                                                         <input accept="image/jpg, image/png, image/jpeg" class="form-control mb-3" id="foto_bersama" name="foto_bersama" type="file">
                                                         <label class="form-label" for="Penawaran">Penawaran</label>
                                                         <textarea id="penawaran" name="penawaran">{{ $offers->penawaran ?? null }}</textarea>
@@ -890,7 +890,7 @@
                                                         <input name="oldfoto_sertifikat" type="hidden" value="{{ $certificates->foto_bersama ?? null }}">
                                                         <label class="form-label" for="foto_sertifikat">Foto Konten</label>
                                                         <input accept="image/jpg, image/png, image/jpeg" class="form-control mb-3" id="foto_sertifikat" name="foto_sertifikat" type="file">
-                                                        <label class="form-label" for="Pengantar">Penjelasan Sertifikat</label>
+                                                        <label class="form-label" for="Pengantar">Penjelasan Sertifikat <span class="bg-danger rounded text-white px-2">* Ukuran Maksimal Foto 2MB</span></label>
                                                         <textarea class="form-control" id="pengantar" name="pengantar">{{ $certificates->pengantar ?? null }}</textarea>
                                                         <div class="mt-2 text-center">
                                                             <button class="btn btn-success" type="submit">Upload</button>

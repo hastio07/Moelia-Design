@@ -172,7 +172,7 @@
                                     </div>
                                 </div>
                                 <div class="mt-3">
-                                    <label class="form-label" for="foto">Foto Pegawai</label>
+                                    <label class="form-label" for="foto">Foto Pegawai <span class="bg-danger rounded text-white px-2">* Ukuran Maksimal Foto 2MB</span></label>
                                     <input id="oldImage" name="oldImage" type="hidden">
                                     <input accept="image/jpg, image/png, image/jpeg" class="form-control" id="foto" name="foto" type="file">
                                     <output class="img-result" id="result"></output>

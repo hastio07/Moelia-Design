@@ -77,7 +77,7 @@
                                         <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3"></textarea>
                                     </div>
                                     <div class="form-inpt">
-                                        <label class="form-label" for="gambar">Upload Gambar</label>
+                                        <label class="form-label" for="gambar">Upload Gambar <span class="bg-danger rounded text-white px-2">* Ukuran Maksimal Foto 2MB</span></label>
                                         <input id="oldImage" name="oldImage" type="hidden">
                                         <input accept="image/jpg, image/png, image/jpeg" class="form-control" id="gambar" name="gambar" type="file">
                                         <output class="img-result" id="result">

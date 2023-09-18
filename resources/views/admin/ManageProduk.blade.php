@@ -162,13 +162,13 @@
                                     <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3">{{ old('deskripsi') }}</textarea>
                                 </div>
                                 <div class="form-inpt mt-3">
-                                    <label class="form-label" for="gambar">Cover Produk</label>
+                                    <label class="form-label" for="gambar">Cover Produk <span class="bg-danger rounded text-white px-2">* Ukuran Maksimal Foto 2MB</span></label>
                                     <input id="oldImage" name="oldImage" type="hidden">
                                     <input accept="image/jpg, image/png, image/jpeg" class="form-control" id="gambar" name="gambar" type="file">
                                     <output class="img-result border shadow" id="result"></output>
                                 </div>
                                 <div class="form-inpt">
-                                    <label class="form-label" for="album-produk">Album Produk</label>
+                                    <label class="form-label" for="album-produk">Album Produk <span class="bg-danger rounded text-white px-2">* Ukuran Maksimal Foto 2MB</span></label>
                                     <input accept="image/jpg, image/png, image/jpeg" class="form-control" id="album-produk" multiple name="albumproduk[]" type="file">
                                     <output id="preview-container"></output>
                                 </div>

@@ -42,7 +42,7 @@
                                     <input class="form-control" id="namagambar" name="namagambar" placeholder="Masukan Judul Gambar" required type="text" value="{{ old('namagambar') }}">
                                 </div>
                                 <div class="form-inpt">
-                                    <label class="form-label" for="gambar">Upload Gambar <span class="text-danger">*</span></label>
+                                    <label class="form-label" for="gambar">Upload Gambar <span class="text-danger">*</span> <span class="bg-danger rounded text-white px-2">Ukuran Maksimal Foto 2MB</span></label>
                                     <div class="d-flex">
                                         <input accept="image/jpg, image/png, image/jpeg" class="form-control me-3" id="gambar" multiple name="gambar[]" required type="file">
                                         <button class="btn btn-success" type="submit"><i class="bi bi-upload"></i></button>
