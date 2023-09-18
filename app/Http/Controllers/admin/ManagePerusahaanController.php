@@ -62,7 +62,8 @@ class ManagePerusahaanController extends Controller
             ],
         ];
         $massages = [
-            'max' => ':attribute harus diisi maksimal :max karakter.',
+            'nama_owner.max' => ':attribute harus diisi maksimal :max karakter.',
+            'foto_owner.max' => 'ukuran gambar maksimal 2MB',
             'string' => ':attribute harus berupa teks.',
             'required' => ':attribute wajib diisi.',
         ];
@@ -132,7 +133,8 @@ class ManagePerusahaanController extends Controller
             ],
         ];
         $massages = [
-            'max' => ':attribute harus diisi maksimal :max karakter.',
+            'nama_perusahaan.max' => ':attribute harus diisi maksimal :max karakter.',
+            'logo_perusahaan.max' => 'ukuran gambar maksimal 2MB',
             'string' => ':attribute harus berupa teks.',
             'required' => ':attribute wajib diisi.',
         ];
@@ -447,7 +449,7 @@ class ManagePerusahaanController extends Controller
             }],
         ];
         $massages = [
-            'max' => ':attribute harus diisi maksimal :max karakter.',
+            'fotobersama.max' => 'ukuran gambar maksimal 2MB',
             'string' => ':attribute harus berupa teks.',
         ];
         //Validasi
@@ -511,7 +513,7 @@ class ManagePerusahaanController extends Controller
             }],
         ];
         $massages = [
-            'max' => ':attribute harus diisi maksimal :max karakter.',
+            'foto_bersama.max' => 'ukuran gambar maksimal 2MB',
             'string' => ':attribute harus berupa teks.',
         ];
         //Validasi
@@ -576,7 +578,7 @@ class ManagePerusahaanController extends Controller
             }],
         ];
         $massages = [
-            'max' => ':attribute harus diisi maksimal :max karakter.',
+            'foto_sertifikat.max' => 'ukuran gambar maksimal 2MB',
             'string' => ':attribute harus berupa teks.',
         ];
         //Validasi

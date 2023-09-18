@@ -31,13 +31,13 @@ class ManageGalleryController extends Controller
         ];
         $massages = [
             'gambar.*.image' => 'File harus berupa gambar',
-            'gambar.*.max'=> 'Size gambar maksimal 2MB',
-            'gambar.*.mimetypes' =>'File gambar harus berekstensi : image/jpeg, image/jpg, image/png.',
+            'gambar.*.max' => 'Size gambar maksimal 2MB',
+            'gambar.*.mimetypes' => 'File gambar harus berekstensi : image/jpeg, image/jpg, image/png.',
             'string' => ':attribute harus berupa teks.',
             'required' => ':attribute wajib diisi.',
         ];
         //Validasi
-        $customAtribut=[
+        $customAtribut = [
             'gambar.*' => 'Gambar',
         ];
         $validator = Validator::make($request->all(), $rules, $massages, $customAtribut);

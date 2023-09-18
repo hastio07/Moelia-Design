@@ -89,6 +89,7 @@ class ManagePegawaiController extends Controller
         $massages = [
             'required' => ':attribute wajib diisi.',
             'max' => ':attribute melebihi panjang maksimum yang diizinkan',
+            'foto.max' => 'ukuran gambar maksimal 2MB',
             'regex' => 'format :attribute tidak valid',
             'string' => ':attribute hanya boleh berupa karakter teks.',
             'numeric' => ':attribute harus dalam format numerik.',
@@ -153,6 +154,7 @@ class ManagePegawaiController extends Controller
         $massages = [
             'required' => ':attribute wajib diisi.',
             'max' => ':attribute melebihi panjang maksimum yang diizinkan',
+            'foto.max' => 'ukuran gambar maksimal 2MB',
             'regex' => 'format :attribute tidak valid',
             'string' => ':attribute hanya boleh berupa karakter teks.',
             'numeric' => ':attribute harus dalam format numerik.',

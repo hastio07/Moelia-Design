@@ -108,6 +108,8 @@ class ManageProdukController extends Controller
         $massages = [
             'required' => ':attribute wajib diisi.',
             'max' => ':attribute melebihi panjang maksimum yang diizinkan',
+            'gambar.max' => 'ukuran gambar maksimal 2MB',
+            'albumproduk.*.max' => 'ukuran gambar maksimal 2MB',
             'string' => ':attribute hanya boleh berupa karakter teks.',
             'numeric' => ':attribute harus dalam format numerik.',
         ];
@@ -175,6 +177,8 @@ class ManageProdukController extends Controller
         $massages = [
             'required' => ':attribute wajib diisi.',
             'max' => ':attribute melebihi panjang maksimum yang diizinkan',
+            'gambar.max' => 'ukuran gambar maksimal 2MB',
+            'albumproduk.*.max' => 'ukuran gambar maksimal 2MB',
             'string' => ':attribute hanya boleh berupa karakter teks.',
             'numeric' => ':attribute harus dalam format numerik.',
         ];

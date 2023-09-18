@@ -71,6 +71,7 @@ class ManageLayananController extends Controller
         ];
         $massages = [
             'max' => ':attribute harus diisi maksimal :max karakter.',
+            'gambar.max' => 'ukuran gambar maksimal 2MB',
             'string' => ':attribute harus berupa teks.',
             'required' => ':attribute wajib diisi.',
         ];
@@ -118,6 +119,7 @@ class ManageLayananController extends Controller
         ];
         $massages = [
             'max' => ':attribute harus diisi maksimal :max karakter.',
+            'gambar.max' => 'ukuran gambar maksimal 2MB',
             'string' => ':attribute harus berupa teks.',
             'required' => ':attribute wajib diisi.',
         ];
