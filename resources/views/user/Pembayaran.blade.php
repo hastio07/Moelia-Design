@@ -162,7 +162,7 @@
                                         <a class="btn btn-info" href="{{ route('user-pembayaran.refreshMidtransToken', $bayar_fp->id_hash_format) }}" id="request-link-bayar">Minta tautan bayar Baru</a>
                                     @elseif(!is_null($bayar_fp->snap_token) && ($bayar_fp->status === 'unpaid' || $bayar_fp->status === 'pending' || is_null($bayar_fp->waktu_pembayaran)))
                                         <button class="btn btn-info" data-bs-token="{{ $bayar_fp->snap_token }}" id="bayar">Bayar</button>
-                                        @if ($bayar_dp->status === 'pending')
+                                        @if ($bayar_fp->status === 'pending')
                                             <a class="btn btn-info" href="{{ route('user-pembayaran.cancel', $bayar_fp->order_id) }}" id="cancel-link-bayar">Cancel</a>
                                         @endif
                                     @endif
