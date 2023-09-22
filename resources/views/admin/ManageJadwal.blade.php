@@ -21,7 +21,7 @@
                         </div>
                     @endif
                     @if (session()->has('success'))
-                        <div class="alert alert-success">
+                        <div class="alert alert-success mt-3">
                             {{ session()->get('success') }}
                         </div>
                     @endif
@@ -114,11 +114,13 @@
         $('.date').datepicker({
             autoclose: true,
             todayHighlight: true,
-            format: 'dd-mm-yyyy'
+            format: 'dd-mm-yyyy',
+            startDate: new Date()
         }).on('changeDate', function(e) {
             console.log(e.target.value);
         });
     </script>
+
     <script>
         $(document).ready(function() {
             $('#table-jadwal').DataTable({

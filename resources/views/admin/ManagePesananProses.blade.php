@@ -219,11 +219,18 @@
     <script>
         $(document).ready(function() {
             //Iniliasi datepicker pada class input
+            // $('.input-datecreate').datepicker({
+            //     autoclose: true,
+            //     todayHighlight: true,
+            //     format: 'dd-mm-yyyy',
+            //     language: 'id-ID'
+            // });
             $('.input-datecreate').datepicker({
                 autoclose: true,
                 todayHighlight: true,
                 format: 'dd-mm-yyyy',
-                language: 'id-ID'
+                language: 'id-ID',
+                startDate: new Date() // Mengatur startDate ke tanggal saat ini
             });
 
             $('.input-daterange').datepicker({
@@ -232,6 +239,7 @@
                 format: 'yyyy-mm-dd',
                 language: 'id-ID'
             });
+
 
             $.ajaxSetup({
                 headers: {
