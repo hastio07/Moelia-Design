@@ -86,11 +86,18 @@
                                     </div>
                                 </div>
                             </div>
-                            @if (!empty($bayar_dp))
+                            @if (!empty($bayar_dp) && is_null($bayar_dp->waktu_pembayaran))
                                 @if (is_null($bayar_dp->snap_token) || $bayar_dp->status === 'cancel' || $bayar_dp->status === 'expire')
                                     <a class="btn btn-info" href="{{ route('user-pembayaran.refreshMidtransToken', $bayar_dp->id_hash_format) }}" id="request-link-bayar">Minta tautan bayar Baru</a>
                                 @elseif(!is_null($bayar_dp->snap_token) && ($bayar_dp->status === 'unpaid' || $bayar_dp->status === 'pending' || is_null($bayar_dp->waktu_pembayaran)))
-                                    <button class="btn btn-info" data-bs-token="{{ $bayar_dp->snap_token }}" id="bayar">Bayar</button>
+                                    @if ($bayar_dp->selisih_waktu_snap_token_format >= 24)
+                                        {{-- Tampilkan pesan atau tindakan jika waktu telah melewati 24 jam --}}
+                                        <p>Waktu pembayaran telah melewati 24 jam.</p>
+                                        <a class="btn btn-info" href="{{ route('user-pembayaran.refreshMidtransToken', $bayar_dp->id_hash_format) }}" id="request-link-bayar">Minta tautan bayar Baru</a>
+                                    @else
+                                        {{-- Tampilkan pesan atau tindakan lain jika waktu belum melewati 24 jam --}}
+                                        <button class="btn btn-info" data-bs-token="{{ $bayar_dp->snap_token }}" id="bayar">Bayar</button>
+                                    @endif
                                     @if ($bayar_dp->status === 'pending')
                                         <a class="btn btn-info" href="{{ route('user-pembayaran.cancel', $bayar_dp->order_id) }}" id="cancel-link-bayar">Cancel</a>
                                     @endif
@@ -156,12 +163,20 @@
                                     </div>
                                 </div>
                             </div>
-                            @if (!empty($bayar_fp))
+                            @if (!empty($bayar_fp) && is_null($bayar_fp->waktu_pembayaran))
                                 @if ($bayar_dp->status === 'paid')
                                     @if (is_null($bayar_fp->snap_token) || $bayar_fp->status === 'cancel' || $bayar_fp->status === 'expire')
                                         <a class="btn btn-info" href="{{ route('user-pembayaran.refreshMidtransToken', $bayar_fp->id_hash_format) }}" id="request-link-bayar">Minta tautan bayar Baru</a>
                                     @elseif(!is_null($bayar_fp->snap_token) && ($bayar_fp->status === 'unpaid' || $bayar_fp->status === 'pending' || is_null($bayar_fp->waktu_pembayaran)))
-                                        <button class="btn btn-info" data-bs-token="{{ $bayar_fp->snap_token }}" id="bayar">Bayar</button>
+                                        @if ($bayar_fp->selisih_waktu_snap_token_format >= 24)
+                                            {{-- Tampilkan pesan atau tindakan jika waktu telah melewati 24 jam --}}
+                                            <p>Waktu pembayaran telah melewati 24 jam.</p>
+                                            <a class="btn btn-info" href="{{ route('user-pembayaran.refreshMidtransToken', $bayar_fp->id_hash_format) }}" id="request-link-bayar">Minta tautan bayar Baru</a>
+                                        @else
+                                            {{-- Tampilkan pesan atau tindakan lain jika waktu belum melewati 24 jam --}}
+                                            <button class="btn btn-info" data-bs-token="{{ $bayar_fp->snap_token }}" id="bayar">Bayar</button>
+                                        @endif
+
                                         @if ($bayar_fp->status === 'pending')
                                             <a class="btn btn-info" href="{{ route('user-pembayaran.cancel', $bayar_fp->order_id) }}" id="cancel-link-bayar">Cancel</a>
                                         @endif
@@ -323,7 +338,6 @@
                 </div>
             </div>
         </div>
-        </div>
     </section>
 
     @push('scripts')
@@ -351,131 +365,238 @@
             }
         </script>
         @if (!empty($bayar_dp) && !empty($bayar_fp))
-            @if ((is_null($bayar_dp->snap_token) || is_null($bayar_fp->snap_token)) && ($bayar_dp->status === 'cancel' || $bayar_dp->status === 'unpaid' || $bayar_dp->status === 'expire' || ($bayar_fp->status === 'cancel' || $bayar_fp->status === 'unpaid' || $bayar_fp->status === 'expire')) && (is_null($bayar_dp->waktu_pembayaran) || is_null($bayar_fp->waktu_pembayaran)))
-                <script>
-                    // Cari elemen <a> dengan id 'request-link-bayar'
-                    const linkElement = document.getElementById('request-link-bayar');
-
-                    linkElement.addEventListener('click', (e) => {
-                        e.preventDefault(); // Mencegah link berpindah ke halaman baru
-
-                        // Ambil URL dari atribut 'href' pada elemen <a>
-                        const url = linkElement.getAttribute('href');
-
-                        // Buat form sementara secara dinamis
-                        const form = document.createElement('form');
-                        form.action = url;
-                        form.method = 'POST';
-
-                        // Tambahkan CSRF token ke dalam form
-                        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-                        const csrfInput = document.createElement('input');
-                        csrfInput.type = 'hidden';
-                        csrfInput.name = '_token';
-                        csrfInput.value = csrfToken;
-
-                        // Tambahkan elemen input CSRF token ke dalam form
-                        form.appendChild(csrfInput);
-
-                        // Tambahkan form ke dalam body dokumen
-                        document.body.appendChild(form);
-
-                        // Kirimkan permintaan POST
-                        form.submit();
-                    });
-                </script>
-
-                {{-- <script>
-                    const btnRequestPembayaran = document.getElementById('request-link-bayar');
-                    btnRequestPembayaran.addEventListener('click', (e) => {
-                        // Ganti {data} dengan data yang ingin Anda kirimkan dalam URL
-                        const button = e.target;
-                        console.log(button);
-                        const url = button.getAttribute('data-bs-route');
-                        console.log(url);
-                        // Mendapatkan nilai CSRF token dari meta tag
-                        const csrfToken = $('meta[name="csrf-token"]').attr('content');
-                        // Konfigurasi untuk request POST
-                        const requestOptions = {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json', // Sesuaikan dengan jenis konten yang ingin Anda kirimkan
-                                'X-CSRF-TOKEN': csrfToken, // Menyertakan CSRF token di headers
-                            },
-                        };
-                        // Lakukan request POST menggunakan fetch()
-                        fetch(url, requestOptions)
-                            .then(response => response.json()) // Handle response dari server jika ingin mengambil data JSON
-                            .then(data => {
-                                // Lakukan sesuatu dengan data response dari server (opsional)
-                                location.reload();
-                            })
-                            .catch(error => {
-                                // Tangani jika terjadi kesalahan selama permintaan (opsional)
-                                console.error('Error:', error);
-                            });
-                    });
-                </script> --}}
-            @endif
-
-            @if ((!is_null($bayar_dp->snap_token) || !is_null($bayar_fp->snap_token)) && (is_null($bayar_dp->waktu_pembayaran) || is_null($bayar_fp->waktu_pembayaran)))
-                <script>
-                    const payButton = document.getElementById('bayar');
-                    payButton.addEventListener('click', function(e) {
-                        let button = e.target;
-                        let token = button.getAttribute('data-bs-token');
-                        snap.pay(token, {
-                            onSuccess: function(result) {
-                                alert("Pembayaran sukses!");
-                                location.reload();
-                            },
-                            onPending: function(result) {
-                                alert("Menunggu pembayaran anda!");
-                            },
-                            onError: function(result) {
-                                alert("pembayaran gagal!");
-                                console.log(result);
-                            },
-                            onClose: function() {
-                                alert('Anda menutup popup tanpa menyelesaikan pembayaran.');
-                            }
-                        })
-                    });
-                </script>
-
-                @if ($bayar_dp->status === 'pending' || $bayar_fp->status === 'pending')
+            {{-- script for dp --}}
+            @if (is_null($bayar_dp->waktu_pembayaran))
+                @if (is_null($bayar_dp->snap_token) || $bayar_dp->status === 'cancel' || $bayar_dp->status === 'expire')
                     <script>
-                        // Cari elemen <a> dengan id 'cancel-link-bayar'
-                        const linkCancelElement = document.getElementById('cancel-link-bayar');
-
-                        linkCancelElement.addEventListener('click', (e) => {
+                        // Cari elemen <a> dengan id 'request-link-bayar'
+                        const linkElement = document.getElementById('request-link-bayar');
+                        linkElement.addEventListener('click', (e) => {
                             e.preventDefault(); // Mencegah link berpindah ke halaman baru
-
                             // Ambil URL dari atribut 'href' pada elemen <a>
-                            const url = linkCancelElement.getAttribute('href');
-
+                            const url = linkElement.getAttribute('href');
                             // Buat form sementara secara dinamis
                             const form = document.createElement('form');
                             form.action = url;
                             form.method = 'POST';
-
                             // Tambahkan CSRF token ke dalam form
                             const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
                             const csrfInput = document.createElement('input');
                             csrfInput.type = 'hidden';
                             csrfInput.name = '_token';
                             csrfInput.value = csrfToken;
-
                             // Tambahkan elemen input CSRF token ke dalam form
                             form.appendChild(csrfInput);
-
                             // Tambahkan form ke dalam body dokumen
                             document.body.appendChild(form);
-
                             // Kirimkan permintaan POST
                             form.submit();
                         });
                     </script>
+                @elseif(!is_null($bayar_dp->snap_token) && ($bayar_dp->status === 'unpaid' || $bayar_dp->status === 'pending' || is_null($bayar_dp->waktu_pembayaran)))
+                    @if ($bayar_dp->selisih_waktu_snap_token_format >= 24)
+                        <script>
+                            // Cari elemen <a> dengan id 'request-link-bayar'
+                            const linkElement = document.getElementById('request-link-bayar');
+                            linkElement.addEventListener('click', (e) => {
+                                e.preventDefault(); // Mencegah link berpindah ke halaman baru
+                                // Ambil URL dari atribut 'href' pada elemen <a>
+                                const url = linkElement.getAttribute('href');
+                                // Buat form sementara secara dinamis
+                                const form = document.createElement('form');
+                                form.action = url;
+                                form.method = 'POST';
+                                // Tambahkan CSRF token ke dalam form
+                                const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                                const csrfInput = document.createElement('input');
+                                csrfInput.type = 'hidden';
+                                csrfInput.name = '_token';
+                                csrfInput.value = csrfToken;
+                                // Tambahkan elemen input CSRF token ke dalam form
+                                form.appendChild(csrfInput);
+                                // Tambahkan form ke dalam body dokumen
+                                document.body.appendChild(form);
+                                // Kirimkan permintaan POST
+                                form.submit();
+                            });
+                        </script>
+                    @else
+                        <script>
+                            const payButton = document.getElementById('bayar');
+                            payButton.addEventListener('click', function(e) {
+                                let button = e.target;
+                                let token = button.getAttribute('data-bs-token');
+                                snap.pay(token, {
+                                    onSuccess: function(result) {
+                                        alert("Pembayaran sukses!");
+                                        location.reload();
+                                    },
+                                    onPending: function(result) {
+                                        alert("Menunggu pembayaran anda!");
+                                    },
+                                    onError: function(result) {
+                                        alert("pembayaran gagal!");
+                                        console.log(result);
+                                    },
+                                    onClose: function() {
+                                        alert('Anda menutup popup tanpa menyelesaikan pembayaran.');
+                                    }
+                                })
+                            });
+                        </script>
+                    @endif
+
+                    @if ($bayar_dp->status === 'pending')
+                        <script>
+                            // Cari elemen <a> dengan id 'cancel-link-bayar'
+                            const linkCancelElement = document.getElementById('cancel-link-bayar');
+
+                            linkCancelElement.addEventListener('click', (e) => {
+                                e.preventDefault(); // Mencegah link berpindah ke halaman baru
+
+                                // Ambil URL dari atribut 'href' pada elemen <a>
+                                const url = linkCancelElement.getAttribute('href');
+
+                                // Buat form sementara secara dinamis
+                                const form = document.createElement('form');
+                                form.action = url;
+                                form.method = 'POST';
+
+                                // Tambahkan CSRF token ke dalam form
+                                const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                                const csrfInput = document.createElement('input');
+                                csrfInput.type = 'hidden';
+                                csrfInput.name = '_token';
+                                csrfInput.value = csrfToken;
+
+                                // Tambahkan elemen input CSRF token ke dalam form
+                                form.appendChild(csrfInput);
+
+                                // Tambahkan form ke dalam body dokumen
+                                document.body.appendChild(form);
+
+                                // Kirimkan permintaan POST
+                                form.submit();
+                            });
+                        </script>
+                    @endif
+                @endif
+            @endif
+            {{-- script for fp --}}
+            @if ($bayar_dp->status === 'paid' && !is_null($bayar_dp->waktu_pembayaran))
+                @if (is_null($bayar_fp->snap_token) || $bayar_fp->status === 'cancel' || $bayar_fp->status === 'expire')
+                    <script>
+                        // Cari elemen <a> dengan id 'request-link-bayar'
+                        const linkElement = document.getElementById('request-link-bayar');
+                        linkElement.addEventListener('click', (e) => {
+                            e.preventDefault(); // Mencegah link berpindah ke halaman baru
+                            // Ambil URL dari atribut 'href' pada elemen <a>
+                            const url = linkElement.getAttribute('href');
+                            // Buat form sementara secara dinamis
+                            const form = document.createElement('form');
+                            form.action = url;
+                            form.method = 'POST';
+                            // Tambahkan CSRF token ke dalam form
+                            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                            const csrfInput = document.createElement('input');
+                            csrfInput.type = 'hidden';
+                            csrfInput.name = '_token';
+                            csrfInput.value = csrfToken;
+                            // Tambahkan elemen input CSRF token ke dalam form
+                            form.appendChild(csrfInput);
+                            // Tambahkan form ke dalam body dokumen
+                            document.body.appendChild(form);
+                            // Kirimkan permintaan POST
+                            form.submit();
+                        });
+                    </script>
+                @elseif(!is_null($bayar_fp->snap_token) && ($bayar_fp->status === 'unpaid' || $bayar_fp->status === 'pending' || is_null($bayar_fp->waktu_pembayaran)))
+                    @if ($bayar_fp->selisih_waktu_snap_token_format >= 24)
+                        <script>
+                            // Cari elemen <a> dengan id 'request-link-bayar'
+                            const linkElement = document.getElementById('request-link-bayar');
+                            linkElement.addEventListener('click', (e) => {
+                                e.preventDefault(); // Mencegah link berpindah ke halaman baru
+                                // Ambil URL dari atribut 'href' pada elemen <a>
+                                const url = linkElement.getAttribute('href');
+                                // Buat form sementara secara dinamis
+                                const form = document.createElement('form');
+                                form.action = url;
+                                form.method = 'POST';
+                                // Tambahkan CSRF token ke dalam form
+                                const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                                const csrfInput = document.createElement('input');
+                                csrfInput.type = 'hidden';
+                                csrfInput.name = '_token';
+                                csrfInput.value = csrfToken;
+                                // Tambahkan elemen input CSRF token ke dalam form
+                                form.appendChild(csrfInput);
+                                // Tambahkan form ke dalam body dokumen
+                                document.body.appendChild(form);
+                                // Kirimkan permintaan POST
+                                form.submit();
+                            });
+                        </script>
+                    @else
+                        <script>
+                            const payButton = document.getElementById('bayar');
+                            payButton.addEventListener('click', function(e) {
+                                let button = e.target;
+                                let token = button.getAttribute('data-bs-token');
+                                snap.pay(token, {
+                                    onSuccess: function(result) {
+                                        alert("Pembayaran sukses!");
+                                        location.reload();
+                                    },
+                                    onPending: function(result) {
+                                        alert("Menunggu pembayaran anda!");
+                                    },
+                                    onError: function(result) {
+                                        alert("pembayaran gagal!");
+                                        console.log(result);
+                                    },
+                                    onClose: function() {
+                                        alert('Anda menutup popup tanpa menyelesaikan pembayaran.');
+                                    }
+                                })
+                            });
+                        </script>
+                    @endif
+
+                    @if ($bayar_fp->status === 'pending')
+                        <script>
+                            // Cari elemen <a> dengan id 'cancel-link-bayar'
+                            const linkCancelElement = document.getElementById('cancel-link-bayar');
+
+                            linkCancelElement.addEventListener('click', (e) => {
+                                e.preventDefault(); // Mencegah link berpindah ke halaman baru
+
+                                // Ambil URL dari atribut 'href' pada elemen <a>
+                                const url = linkCancelElement.getAttribute('href');
+
+                                // Buat form sementara secara dinamis
+                                const form = document.createElement('form');
+                                form.action = url;
+                                form.method = 'POST';
+
+                                // Tambahkan CSRF token ke dalam form
+                                const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                                const csrfInput = document.createElement('input');
+                                csrfInput.type = 'hidden';
+                                csrfInput.name = '_token';
+                                csrfInput.value = csrfToken;
+
+                                // Tambahkan elemen input CSRF token ke dalam form
+                                form.appendChild(csrfInput);
+
+                                // Tambahkan form ke dalam body dokumen
+                                document.body.appendChild(form);
+
+                                // Kirimkan permintaan POST
+                                form.submit();
+                            });
+                        </script>
+                    @endif
                 @endif
             @endif
         @endif
